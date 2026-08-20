@@ -1,1 +1,10 @@
-[]
+{
+  "name": "Shri Ram Nursery",
+  "short_name": "Nursery",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#2E7D32",
+  "background_color": "#FFFFFF",
+  "start_url": "./index.html",
+  "scope": "./"
+}
