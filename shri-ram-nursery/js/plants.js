@@ -1,1 +1,1 @@
-// Shri Ram Nursery plants placeholder.
+// Plant catalog behavior entry point for Shri Ram Nursery.

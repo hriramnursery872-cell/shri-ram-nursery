@@ -1,1 +1,1 @@
-// Shri Ram Nursery dashboard placeholder.
+// Dashboard behavior entry point for Shri Ram Nursery.

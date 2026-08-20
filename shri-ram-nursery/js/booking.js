@@ -1,1 +1,1 @@
-// Shri Ram Nursery booking placeholder.
+// Booking behavior entry point for Shri Ram Nursery.

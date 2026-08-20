@@ -1,1 +1,1 @@
-// Shri Ram Nursery admin placeholder.
+// Admin behavior entry point for Shri Ram Nursery.
