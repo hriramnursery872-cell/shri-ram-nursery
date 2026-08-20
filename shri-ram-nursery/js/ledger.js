@@ -1,4 +1,5 @@
 // Defines ledger operations for future sales and expense persistence.
+// TODO: Connect ledger persistence to the approved production data source.
 
 const LEDGER_STORAGE_KEY = "shri-ram-nursery-ledger";
 

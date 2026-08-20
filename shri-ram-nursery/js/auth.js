@@ -1,4 +1,5 @@
 // Defines the authentication boundary for future secure auth integration.
+// TODO: Connect these functions to the production authentication provider.
 
 /**
  * Starts an authentication flow.

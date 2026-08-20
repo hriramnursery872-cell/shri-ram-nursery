@@ -1,4 +1,5 @@
 // Provides the client-side stock storage boundary without creating stock data.
+// TODO: Replace localStorage persistence with the approved production data source.
 
 const STOCK_STORAGE_KEY = "shri-ram-nursery-stock";
 

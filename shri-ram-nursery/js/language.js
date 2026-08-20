@@ -1,4 +1,5 @@
 // Defines supported languages and persists the user's language preference.
+// TODO: Add production translation resources when copy is approved.
 
 const LANGUAGE_STORAGE_KEY = "shri-ram-nursery-language";
 
