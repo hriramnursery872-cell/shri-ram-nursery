@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title>Shri Ram Nursery</title>
+  <rect width="512" height="512" rx="96" fill="#2E7D32"/>
+  <path d="M256 400c0-124 28-210 112-282-8 116-56 195-112 282Z" fill="#FFFFFF"/>
+  <path d="M256 400c0-94-34-154-112-210 8 91 52 151 112 210Z" fill="#C8E6C9"/>
+  <path d="M256 400V204" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
+</svg>
