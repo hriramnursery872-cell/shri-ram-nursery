@@ -18,13 +18,44 @@
     <meta name="twitter:description" content="Shri Ram Nursery (Bhuna) Progressive Web App." />
   </head>
   <body>
-    <!-- Application content will be implemented without changing this foundation. -->
+    <header class="site-header">
+      <a class="brand" href="./index.html">Shri Ram Nursery <span>Bhuna</span></a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="./index.html" aria-current="page">Home</a>
+        <a href="./dashboard.html">Plants</a>
+        <a href="./booking.html">Booking</a>
+        <a href="./orders.html">Orders</a>
+      </nav>
+    </header>
+    <main class="page-shell">
+      <section class="hero-card">
+        <p class="eyebrow">Shri Ram Nursery · Bhuna</p>
+        <h1>Plants for every growing space.</h1>
+        <p class="lead">Enquire about available plants, nursery stock, and bookings directly with our team.</p>
+        <div class="action-row">
+          <a class="button button-primary" href="tel:+919416316534">📞 Call Now</a>
+          <a class="button button-whatsapp" href="https://wa.me/919416316534?text=Hello%20Shri%20Ram%20Nursery,%20I%20want%20to%20enquire%20about%20plants.">💬 WhatsApp</a>
+        </div>
+      </section>
+      <section class="content-section">
+        <div>
+          <p class="eyebrow">Explore</p>
+          <h2>Nursery services</h2>
+        </div>
+        <div class="link-grid">
+          <a class="link-card" href="./dashboard.html"><strong>View plants</strong><span>See the current nursery catalogue.</span></a>
+          <a class="link-card" href="./booking.html"><strong>Book an enquiry</strong><span>Contact the nursery about your requirements.</span></a>
+          <a class="link-card" href="./orders.html"><strong>Order support</strong><span>Speak with the nursery team about an order.</span></a>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">Shri Ram Nursery, Bhuna · <a href="tel:+919416316534">+91 94163 16534</a></footer>
     <script type="module" src="./js/auth.js"></script>
     <script type="module" src="./js/language.js"></script>
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          navigator.serviceWorker.register("./service-worker.js");
+          navigator.serviceWorker.register("./service-worker.js").catch(() => {});
         });
       }
     </script>

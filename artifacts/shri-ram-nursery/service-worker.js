@@ -10,6 +10,11 @@ const CACHE_ASSETS = [
   "./orders.html",
   "./admin.html",
   "./manifest.json",
+  "./data/plants.json",
+  "./data/stock.json",
+  "./data/orders.json",
+  "./data/ledger.json",
+  "./data/settings.json",
   "./css/style.css",
   "./css/dashboard.css",
   "./css/admin.css",
@@ -21,7 +26,9 @@ const CACHE_ASSETS = [
   "./js/stock.js",
   "./js/ledger.js",
   "./js/language.js",
-  "./assets/icon.svg"
+  "./assets/icon.svg",
+  "./assets/logo.png",
+  "./assets/upi-qr.png"
 ];
 
 self.addEventListener("install", (event) => {
