@@ -54,7 +54,7 @@ function preserveStaticFoundation() {
 export default defineConfig({
   base: basePath,
   root: projectRoot,
-  publicDir: false,
+  publicDir: path.resolve(projectRoot, 'public'),
   plugins: [preserveStaticFoundation()],
   build: {
     outDir: outputRoot,

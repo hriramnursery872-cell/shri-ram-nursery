@@ -1,6 +1,6 @@
 // Caches the Shri Ram Nursery application shell for offline use.
 
-const CACHE_NAME = "shri-ram-nursery-shell-v1";
+const CACHE_NAME = "shri-ram-nursery-shell-v2";
 const CACHE_ASSETS = [
   "./",
   "./index.html",
@@ -59,7 +59,7 @@ self.addEventListener("fetch", (event) => {
   }
 
   event.respondWith(
-    caches.match(event.request).then(
+    caches.match(event.request, { ignoreSearch: true }).then(
       (cachedResponse) => cachedResponse || fetch(event.request)
     )
   );

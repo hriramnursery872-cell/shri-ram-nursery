@@ -1,12 +1,107 @@
 <!doctype html>
-<html lang="en">
+<html lang="hi">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#2E7D32">
     <link rel="manifest" href="./manifest.json">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Shri Ram Nursery Plant</title>
+    <title>Shri Ram Nursery - पौधों की लिस्ट और कैटलॉग</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f6f4; color: #333; }
+      header { background: #2E7D32; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+      .container { padding: 20px; max-width: 900px; margin: auto; }
+      .category-title { color: #2e7d32; border-bottom: 2px solid #2e7d32; padding-bottom: 5px; margin-top: 25px; }
+      .plant-card { background: white; padding: 15px; margin-bottom: 12px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+      .plant-info { max-width: 600px; }
+      .plant-info h4 { margin: 0 0 5px 0; color: #1b5e20; font-size: 18px; }
+      .plant-info p { margin: 3px 0; font-size: 14px; color: #555; }
+      .plant-price { font-size: 18px; font-weight: bold; color: #d32f2f; background: #ffebee; padding: 5px 10px; border-radius: 5px; }
+      .back-btn { background: #555; color: white; padding: 8px 15px; border: none; border-radius: 4px; text-decoration: none; font-weight: bold; }
+    </style>
   </head>
-  <body></body>
+  <body>
+
+    <header>
+      <h2>🌿 पौधों का कैटलॉग</h2>
+      <a href="./index.html" class="back-btn">← होम पेज</a>
+    </header>
+
+    <div class="container">
+      <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <h3>श्री राम नर्सरी के चुनिंदा पौधे</h3>
+        <p>यहाँ सभी प्रकार के इंडोर, आउटडोर, फल, और फूल वाले पौधे उपलब्ध हैं। साथ में उनकी देखभाल के टिप्स भी दिए गए हैं।</p>
+      </div>
+
+      <!-- पौधों की लिस्ट यहाँ दिखेगी (जो एडमिन जोड़ेगा या डिफ़ॉल्ट होगी) -->
+      <div id="plantCatalogContainer">
+        
+        <h3 class="category-title">🌱 इंडोर प्लांट्स (Indoor Plants)</h3>
+        <div class="plant-card">
+          <div class="plant-info">
+            <h4>मनी प्लांट (Money Plant)</h4>
+            <p><b>देखभाल (Care):</b> हफ्ते में 1 बार पानी दें, कम रोशनी में भी चलता है।</p>
+          </div>
+          <div class="plant-price">₹ 150</div>
+        </div>
+        <div class="plant-card">
+          <div class="plant-info">
+            <h4>स्नेक प्लांट (Snake Plant)</h4>
+            <p><b>देखभाल (Care):</b> हवा साफ करता है, बहुत कम पानी की जरूरत।</p>
+          </div>
+          <div class="plant-price">₹ 200</div>
+        </div>
+
+        <h3 class="category-title">🌸 फूल वाले पौधे (Flowering Plants)</h3>
+        <div class="plant-card">
+          <div class="plant-info">
+            <h4>गुलाब (Rose - Desi/English)</h4>
+            <p><b>देखभाल (Care):</b> सीधी धूप में रखें, मिट्टी सूखने पर पानी दें।</p>
+          </div>
+          <div class="plant-price">₹ 120</div>
+        </div>
+        <div class="plant-card">
+          <div class="plant-info">
+            <h4>मोगरा (Jasmine)</h4>
+            <p><b>देखभाल (Care):</b> भरपूर धूप और गर्मियों में रोजाना पानी।</p>
+          </div>
+          <div class="plant-price">₹ 100</div>
+        </div>
+
+        <h3 class="category-title">🍋 फल वाले पौधे (Fruit Plants)</h3>
+        <div class="plant-card">
+          <div class="plant-info">
+            <h4>कागज़ी नींबू (Baramasi Lemon)</h4>
+            <p><b>देखभाल (Care):</b> गमले में भी खूब फल देता है, हर महीने खाद दें।</p>
+          </div>
+          <div class="plant-price">₹ 250</div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <script>
+      // एडमिन पैनल से जोड़े गए नए पौधों को लोड करने का लॉजिक
+      window.onload = function() {
+        const savedPlants = JSON.parse(localStorage.getItem('nurseryPlants')) || [];
+        if (savedPlants.length > 0) {
+          const container = document.getElementById('plantCatalogContainer');
+          
+          savedPlants.forEach(plant => {
+            const card = document.createElement('div');
+            card.className = 'plant-card';
+            card.innerHTML = `
+              <div class="plant-info">
+                <h4>${plant.name} <span style="font-size:12px; background:#e8f5e9; padding:2px 6px; border-radius:4px; color:#2e7d32;">[${plant.category}]</span></h4>
+                <p><b>देखभाल (Care):</b> ${plant.care || 'सामान्य देखभाल'}</p>
+              </div>
+              <div class="plant-price">₹ ${plant.price}</div>
+            `;
+            container.appendChild(card);
+          });
+        }
+      };
+    </script>
+  </body>
 </html>
