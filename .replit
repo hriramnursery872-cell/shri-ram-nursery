@@ -1,33 +1,18 @@
-modules = ["nodejs-24", "python-3.11"]
-
-[deployment]
-router = "application"
-deploymentTarget = "autoscale"
-
-[deployment.postBuild]
-args = ["pnpm", "store", "prune"]
-env = { "CI" = "true" }
-
-[workflows]
-runButton = "Project"
-
-[agent]
-stack = "PNPM_WORKSPACE"
-expertMode = true
-
-[postMerge]
-path = "scripts/post-merge.sh"
-timeoutMs = 20000
-
-[[ports]]
-localPort = 4173
+# मुख्य रन कमांड जो API सर्वर को पोर्ट 8080 के साथ शुरू करेगी
+run = "PORT=8080 node artifacts/api-server/dist/index.mjs"
+modules = ["nodejs-20"]
 
 [[ports]]
 localPort = 8080
 
-[[ports]]
-localPort = 8081
-externalPort = 8081
+[deployment]
+run = ["PORT=8080", "node", "artifacts/api-server/dist/index.mjs"]
+
+[deployment.healthCheck]
+path = "/"
+port = 8080
+interval = 5
+timeout = 2
 
 [nix]
 packages = ["psmisc"]
