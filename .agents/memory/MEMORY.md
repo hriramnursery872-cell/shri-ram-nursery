@@ -1,0 +1,1 @@
+- [Vanilla Vite artifact builds](vanilla-vite-artifact-builds.md) — multi-page static foundations need explicit HTML inputs and preserved runtime asset paths in production output.

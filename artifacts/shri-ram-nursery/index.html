@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shri Ram Nursery (Bhuna)</title>
+    <meta name="description" content="Shri Ram Nursery (Bhuna) Progressive Web App.">
+    <meta name="theme-color" content="#2E7D32">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Shri Ram Nursery (Bhuna)" />
+    <meta property="og:description" content="Shri Ram Nursery (Bhuna) Progressive Web App." />
+    <meta property="og:type" content="website" />
+    <link rel="manifest" href="./manifest.json">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Shri Ram Nursery (Bhuna)" />
+    <meta name="twitter:description" content="Shri Ram Nursery (Bhuna) Progressive Web App." />
+  </head>
+  <body>
+    <!-- Application content will be implemented without changing this foundation. -->
+    <script type="module" src="./js/auth.js"></script>
+    <script type="module" src="./js/language.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./service-worker.js");
+        });
+      }
+    </script>
+  </body>
+</html>

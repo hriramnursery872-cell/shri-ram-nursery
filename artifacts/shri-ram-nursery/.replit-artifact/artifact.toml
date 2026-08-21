@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Shri Ram Nursery (Bhuna)"
+description = "A production-ready vanilla HTML, CSS, and JavaScript Progressive Web App foundation for Shri Ram Nursery in Bhuna, using JSON data and local browser storage without demo records."
+version = "1.0.0"
+id = "artifacts/shri-ram-nursery"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18453
+
+[services.development]
+run = "pnpm --filter @workspace/shri-ram-nursery run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/shri-ram-nursery", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/shri-ram-nursery/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18453"
+BASE_PATH = "/"
