@@ -4,6 +4,7 @@ modules = ["nodejs-20"]
 
 [[ports]]
 localPort = 8080
+externalPort = 8080
 
 [deployment]
 run = ["PORT=8080", "node", "artifacts/api-server/dist/index.mjs"]
