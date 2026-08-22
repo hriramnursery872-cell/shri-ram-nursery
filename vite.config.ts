@@ -12,7 +12,7 @@ if (Number.isNaN(port) || port <= 0) {
 const basePath = process.env.BASE_PATH ?? '/';
 
 const projectRoot = path.resolve(import.meta.dirname);
-const outputRoot = path.resolve(projectRoot, 'dist/public');
+const outputRoot = path.resolve(projectRoot, 'dist');
 const staticFiles = [
   'manifest.json',
   'service-worker.js',
@@ -57,7 +57,7 @@ export default defineConfig({
   publicDir: path.resolve(projectRoot, 'public'),
   plugins: [preserveStaticFoundation()],
   build: {
-    outDir: outputRoot,
+    outDir: 'dist',
     emptyOutDir: true,
     rollupOptions: {
       input: Object.fromEntries(
