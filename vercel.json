@@ -1,1 +1,8 @@
-{"buildCommand": "pnpm --filter ./artifacts/shri-ram-nursery build", "outputDirectory": "artifacts/shri-ram-nursery/dist", "framework": "vite"}
+{
+  "buildCommand": "pnpm install && pnpm build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "env": {
+    "VITE_API_URL": "@vite-api-url"
+  }
+}
