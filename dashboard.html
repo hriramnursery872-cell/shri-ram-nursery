@@ -4,42 +4,117 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#2E7D32">
-    <link rel="manifest" href="/assets/manifest-BDijK-b8.json?v=2">
-    <title>Shri Ram Nursery Dashboard</title>
-    <script type="module" crossorigin src="/assets/language-BuqDpSVD.js"></script>
-    <script type="module" crossorigin src="/assets/dashboard-BQPKUNYy.js"></script>
-    <script type="module" crossorigin src="/assets/stock-l0sNRNKZ.js"></script>
-    <script type="module" crossorigin src="/assets/ledger-l0sNRNKZ.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/language-KCiEBgre.css">
-    <link rel="stylesheet" crossorigin href="/assets/admin-tn0RQdqM.css">
+    <title>Shri Ram Nursery - Plants Dashboard</title>
+    <!-- स्टैंडर्ड और हमेशा काम करने वाली स्टाइलशीट -->
+    <link rel="stylesheet" href="/css/style.css" onerror="this.onerror=null;this.href='./css/style.css';">
+    <style>
+      .catalog-container { max-width: 1200px; margin: 30px auto; padding: 0 20px; font-family: sans-serif; }
+      .plant-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-top: 30px; }
+      .plant-card { border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: transform 0.2s; position: relative; }
+      .plant-card:hover { transform: translateY(-5px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+      .plant-badge { position: absolute; top: 15px; right: 15px; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+      .badge-indoor { background: #e8f5e9; color: #2e7d32; }
+      .badge-fruit { background: #fff3e0; color: #ef6c00; }
+      .badge-decorative { background: #e1f5fe; color: #0277bd; }
+      .badge-flowering { background: #fce4ec; color: #c2185b; }
+      .plant-title { font-size: 20px; margin: 10px 0 5px 0; color: #333; }
+      .plant-price { font-size: 18px; font-weight: bold; color: #2e7d32; margin-bottom: 15px; }
+      .stock-status { font-weight: bold; font-size: 14px; margin-bottom: 15px; }
+      .btn-book { display: block; text-align: center; background: #2E7D32; color: white; padding: 10px; text-decoration: none; border-radius: 4px; font-weight: bold; }
+      .btn-book:hover { background: #1b5e20; }
+    </style>
   </head>
   <body>
+
     <header class="site-header">
       <a class="brand" href="./index.html">Shri Ram Nursery <span>Bhuna</span></a>
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="./index.html">Home</a>
-        <a href="./dashboard.html" aria-current="page">Plants</a>
+        <a href="./dashboard.html" aria-current="page" style="font-weight: bold; color: #2E7D32;">Plants</a>
         <a href="./booking.html">Booking</a>
         <a href="./orders.html">Orders</a>
       </nav>
     </header>
-    <main id="app" class="page-shell">
+
+    <main id="app" class="catalog-container">
       <section class="page-heading">
-        <p class="eyebrow">Nursery catalogue</p>
-        <h1>Available plants</h1>
-        <p class="lead">Current availability is loaded from the nursery data file.</p>
+        <p class="eyebrow" style="color: #2E7D32; font-weight: bold; margin: 0;">Nursery Catalogue</p>
+        <h1 style="margin-top: 5px;">Available Plants</h1>
+        <p class="lead">Current availability is loaded dynamically from the nursery records. Select any item to initiate a booking request.</p>
       </section>
-      <section id="plant-list" class="plant-grid" aria-live="polite"></section>
-      <section class="contact-strip">
+
+      <!-- यहाँ पर जावास्क्रिप्ट के जरिए पौधे लोड होंगे -->
+      <section id="plant-list" class="plant-grid" aria-live="polite">
+        <div style="text-align: center; grid-column: 1/-1; padding: 40px; color: #666;">🌿 Loading green inventory...</div>
+      </section>
+
+      <!-- नीचे का क्विक कांटेक्ट स्ट्रिप -->
+      <section class="contact-strip" style="background: #f9f9f9; padding: 30px; border-radius: 8px; margin-top: 5px; text-align: center;">
         <div>
-          <p class="eyebrow">Need help?</p>
-          <h2>Ask the nursery team</h2>
+          <p class="eyebrow" style="color: #2E7D32; font-weight: bold; margin: 0;">Need help?</p>
+          <h2 style="margin-top: 5px;">Ask the nursery team</h2>
         </div>
-        <div class="action-row">
-          <a class="button button-primary" href="tel:+919416316534">📞 Call Now</a>
-          <a class="button button-whatsapp" href="https://wa.me/919416316534?text=Hello%20Shri%20Ram%20Nursery,%20I%20want%20to%20enquire%20about%20plants.">💬 WhatsApp</a>
+        <div class="action-row" style="display: flex; gap: 15px; justify-content: center; margin-top: 15px;">
+          <a class="button button-primary" href="tel:+919416316534" style="background: #0288d1; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">📞 Call Now</a>
+          <a class="button button-whatsapp" id="dash-whatsapp-btn" href="#" target="_blank" style="background: #25d366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">💬 WhatsApp</a>
         </div>
       </section>
     </main>
+
+    <footer class="site-footer" style="text-align: center; padding: 20px; background: #2E7D32; color: white; margin-top: 5px;">
+      Shri Ram Nursery, Bhuna
+    </footer>
+
+    <!-- डायनामिक स्क्रिप्ट: सीधे पौधों के डेटाबेस (plants.js) को ग्रिड से जोड़ेगी -->
+    <script type="module">
+      import { getPlants, loadPlants } from './js/plants.js';
+
+      const plantListGrid = document.getElementById('plant-list');
+      const whatsappBtn = document.getElementById('dash-whatsapp-btn');
+
+      // व्हाट्सऐप का डिफ़ॉल्ट लिंक सेट करना
+      if (whatsappBtn) {
+        const textMessage = encodeURIComponent("Hello Shri Ram Nursery Bhuna, I am looking at your online plant dashboard and want to enquire about stock.");
+        whatsappBtn.href = `https://wa.me{textMessage}`;
+      }
+
+      // पौधों को फ्रंटएंड ग्रिड में दिखाने का मुख्य डायनामिक फंक्शन
+      async function renderDashboardPlants() {
+        // 1. पहले लोड करें (अगर लोकलस्टोरेज खाली है तो फ़ाइल से सिंक करेगा)
+        await loadPlants();
+        
+        // 2. लोकलस्टोरेज से फ्रेश डेटा निकालें
+        const plants = getPlants();
+        plantListGrid.innerHTML = '';
+
+        if (!plants || plants.length === 0) {
+          plantListGrid.innerHTML = `<div style="text-align: center; grid-column: 1/-1; padding: 40px; color: #888;">No plants found in the active catalogue. Use the Admin Portal to add new inventory! 🌿</div>`;
+          return;
+        }
+
+        // 3. एक-एक करके पौधे का कार्ड बनाएं
+        plants.forEach(plant => {
+          const card = document.createElement('div');
+          card.className = 'plant-card';
+          
+          // कैटेगरी के हिसाब से रंगीन बैज सेट करना
+          const categoryClass = (plant.category || 'Indoor').toLowerCase();
+          
+          card.innerHTML = `
+            <span class="plant-badge badge-${categoryClass}">${plant.category || 'Indoor'}</span>
+            <h3 class="plant-title">${plant.name}</h3>
+            <p class="plant-price">₹${plant.price}</p>
+            <div class="stock-status" style="color: ${plant.stock === 'In Stock' ? '#2e7d32' : '#d32f2f'};">
+              ${plant.stock === 'In Stock' ? '● In Stock (उपलब्ध है)' : '○ Out of Stock'}
+            </div>
+            <a href="./booking.html?plantId=${plant.id}&name=${encodeURIComponent(plant.name)}" class="btn-book">Book/Enquire Now 🌿</a>
+          `;
+          plantListGrid.appendChild(card);
+        });
+      }
+
+      // पेज लोड होते ही डेटा सिंक और रेंडर करो
+      window.addEventListener('DOMContentLoaded', renderDashboardPlants);
+    </script>
   </body>
 </html>

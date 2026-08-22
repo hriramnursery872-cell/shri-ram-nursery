@@ -4,15 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#2E7D32">
-    <link rel="manifest" href="/assets/manifest-BDijK-b8.json?v=2">
-    <title>Shri Ram Nursery Admin</title>
-    <script type="module" crossorigin src="/assets/language-BuqDpSVD.js"></script>
-    <script type="module" crossorigin src="/assets/stock-l0sNRNKZ.js"></script>
-    <script type="module" crossorigin src="/assets/ledger-l0sNRNKZ.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/language-KCiEBgre.css">
-    <link rel="stylesheet" crossorigin href="/assets/admin-tn0RQdqM.css">
+    <title>Shri Ram Nursery - Admin Dashboard</title>
+    <!-- बिल्कुल साफ और डायनामिक स्टाइलिंग -->
+    <link rel="stylesheet" href="/css/style.css" onerror="this.onerror=null;this.href='./css/style.css';">
+    <style>
+      .admin-container { max-width: 1200px; margin: 30px auto; padding: 0 20px; font-family: sans-serif; }
+      .form-group { margin-bottom: 15px; }
+      .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+      .form-group input, .form-group select { width: 100%; padding: 8px; box-sizing: border-box; }
+      .btn { background: #2E7D32; color: white; padding: 10px 15px; border: none; cursor: pointer; border-radius: 4px; }
+      .btn-danger { background: #d32f2f; }
+      .plant-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+      .plant-table th, .plant-table td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+      .plant-table th { background-color: #f4f4f4; }
+      .action-btns .btn { padding: 5px 10px; margin-right: 5px; font-size: 12px; }
+    </style>
   </head>
   <body>
+    
     <header class="site-header">
       <a class="brand" href="./index.html">Shri Ram Nursery <span>Bhuna</span></a>
       <nav class="site-nav" aria-label="Primary navigation">
@@ -20,15 +29,139 @@
         <a href="./dashboard.html">Plants</a>
         <a href="./booking.html">Booking</a>
         <a href="./orders.html">Orders</a>
+        <a href="./admin.html" style="font-weight: bold; color: #2E7D32;">Admin</a>
       </nav>
     </header>
-    <main class="page-shell">
+
+    <main class="admin-container">
       <section class="page-heading">
-        <p class="eyebrow">Administration</p>
-        <h1>Nursery operations</h1>
-        <p class="lead">Secure administration tools will use the configured authentication boundary.</p>
+        <p class="eyebrow" style="color: #2E7D32; margin: 0; font-weight: bold;">Control Panel</p>
+        <h1 style="margin-top: 5px;">Nursery Operations Dashboard</h1>
+        <p class="lead">Manage your live plant stock, upload new items, and handle customer demands instantly.</p>
+      </section>
+
+      <!-- नया पौधा जोड़ने का फॉर्म -->
+      <section id="add-plant-section" style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin-top: 20px;">
+        <h3>➕ Add New Plant to Catalog</h3>
+        <form id="plant-form">
+          <div class="form-group">
+            <label>Plant Name (पौधे का नाम):</label>
+            <input type="text" id="plant-name" required placeholder="e.g., Snake Plant / अमरूद हिसार सफेदा">
+          </div>
+          <div class="form-group">
+            <label>Category (कैटेगरी):</label>
+            <select id="plant-category">
+              <option value="Indoor">Indoor (इंडोर)</option>
+              <option value="Fruit">Fruit (फलदार)</option>
+              <option value="Decorative">Decorative (सजावटी)</option>
+              <option value="Flowering">Flowering (फूल वाले)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Price (कीमत ₹):</label>
+            <input type="number" id="plant-price" required placeholder="e.g., 150">
+          </div>
+          <div class="form-group">
+            <label>Stock Status (स्टॉक की स्थिति):</label>
+            <select id="plant-stock">
+              <option value="In Stock">In Stock (उपलब्ध है)</option>
+              <option value="Out of Stock">Out of Stock (खत्म है)</option>
+            </select>
+          </div>
+          <button type="submit" class="btn">Save & Update Catalog</button>
+        </form>
+      </section>
+
+      <!-- लाइव पौधों की लिस्ट और डिलीट करने की टेबल -->
+      <section style="margin-top: 40px;">
+        <h3>🌿 Current Live Inventory</h3>
+        <table class="plant-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-plants-list">
+            <!-- जावास्क्रिप्ट के जरिए यहाँ ऑटोमैटिक पौधे लोड होंगे -->
+          </tbody>
+        </table>
       </section>
     </main>
-    <footer class="site-footer">Shri Ram Nursery, Bhuna</footer>
+
+    <footer class="site-footer" style="text-align: center; margin-top: 5px; padding: 20px; background: #2E7D32; color: white;">
+      Shri Ram Nursery, Bhuna
+    </footer>
+
+    <!-- डायनामिक स्क्रिप्ट: बिना पुराने क्रैश एसेट्स के सीधे डेटाबेस/plants.js को कनेक्ट करेगी -->
+    <script type="module">
+      import { getPlants, savePlants } from './js/plants.js';
+
+      const plantForm = document.getElementById('plant-form');
+      const plantsTableBody = document.getElementById('admin-plants-list');
+
+      // टेबल में पौधों को दिखाने का फंक्शन
+      function renderAdminPlants() {
+        const plants = getPlants();
+        plantsTableBody.innerHTML = '';
+        
+        if (plants.length === 0) {
+          plantsTableBody.innerHTML = `<tr><td colspan="5" style="text-align:center;">No plants found in inventory.</td></tr>`;
+          return;
+        }
+
+        plants.forEach((plant, index) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <strong>${plant.name}</strong>
+            <td>${plant.category || 'General'}</td>
+            <td>₹${plant.price}</td>
+            <td style="color: ${plant.stock === 'In Stock' ? 'green' : 'red'}; font-weight: bold;">${plant.stock || 'In Stock'}</td>
+            <td class="action-btns">
+              <button class="btn btn-danger" data-index="${index}">Delete</button>
+            </td>
+          `;
+          plantsTableBody.appendChild(tr);
+        });
+
+        // डिलीट बटन को एक्टिवेट करना
+        document.querySelectorAll('.btn-danger').forEach(button => {
+          button.addEventListener('click', (e) => {
+            const index = e.target.getAttribute('data-index');
+            const currentPlants = getPlants();
+            currentPlants.splice(index, 1);
+            savePlants(currentPlants);
+            renderAdminPlants();
+          });
+        });
+      }
+
+      // नया पौधा सबमिट करने का लॉजिक
+      if(plantForm) {
+        plantForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const newPlant = {
+            id: Date.now().toString(),
+            name: document.getElementById('plant-name').value,
+            category: document.getElementById('plant-category').value,
+            price: document.getElementById('plant-price').value,
+            stock: document.getElementById('plant-stock').value
+          };
+
+          const currentPlants = getPlants();
+          currentPlants.push(newPlant);
+          savePlants(currentPlants);
+          plantForm.reset();
+          renderAdminPlants();
+          alert('Plant added successfully to your live website! ✅');
+        });
+      }
+
+      // पेज लोड होते ही लिस्ट दिखाओ
+      window.addEventListener('DOMContentLoaded', renderAdminPlants);
+    </script>
   </body>
 </html>
