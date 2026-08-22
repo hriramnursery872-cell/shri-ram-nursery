@@ -21,12 +21,21 @@
   <body>
     <header class="site-header">
       <a class="brand" href="./index.html">Shri Ram Nursery <span>Bhuna</span></a>
-      <nav class="site-nav" aria-label="Primary navigation">
-        <a href="./index.html" aria-current="page">Home</a>
-        <a href="./dashboard.html">Plants</a>
-        <a href="./booking.html">Booking</a>
-        <a href="./orders.html">Orders</a>
-      </nav>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="./index.html" aria-current="page">Home</a>
+          <a href="./dashboard.html">Plants</a>
+          <a href="./booking.html">Booking</a>
+          <a href="./orders.html">Orders</a>
+        </nav>
+        <!-- Language Dropdown Added Here -->
+        <div class="language-selector">
+          <select id="languageSelect" onchange="changeLanguage(this.value)" style="padding: 4px 8px; border-radius: 4px; border: 1px solid #ccc; background: #fff; font-size: 14px;">
+            <option value="en">English</option>
+            <option value="hi">हिंदी</option>
+          </select>
+        </div>
+      </div>
     </header>
     <main class="page-shell">
       <section class="hero-card">
@@ -50,7 +59,12 @@
         </div>
       </section>
     </main>
-    <footer class="site-footer">Shri Ram Nursery, Bhuna · <a href="tel:+919416316534">+91 94163 16534</a></footer>
+    <footer class="site-footer">
+      Shri Ram Nursery, Bhuna · <a href="tel:+919416316534">+91 94163 16534</a>
+      <span style="float: right;">
+        <a href="./admin.html" style="color: #2E7D32; text-decoration: underline; font-weight: 600;">🔒 Admin Portal</a>
+      </span>
+    </footer>
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {

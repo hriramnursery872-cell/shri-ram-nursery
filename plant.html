@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#2E7D32">
     <link rel="manifest" href="/assets/manifest-BDijK-b8.json?v=2">
-    <title>Shri Ram Nursery Plant</title>
+    <title>Shri Ram Nursery - Plant Details</title>
     <script type="module" crossorigin src="/assets/language-BuqDpSVD.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/language-KCiEBgre.css">
   </head>
@@ -21,15 +21,24 @@
     </header>
     <main class="page-shell">
       <section id="plant-page" class="page-heading">
-        <p class="eyebrow">Plant details</p>
-        <h1>Plant information</h1>
-        <p class="lead">Current availability is confirmed directly by the nursery team.</p>
+        <p class="eyebrow" id="plant-category">पौधे की जानकारी (Plant Details)</p>
+        <h1 id="plant-name">Plant information</h1>
+        <p class="lead" id="plant-desc">Current availability and special varieties are confirmed directly by the nursery team.</p>
+        
+        <!-- Care Tips & Special Info Box -->
+        <div style="background: #f1f8e9; border: 1px solid #c8e6c9; padding: 16px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="color: #2e7d32; margin-top: 0; font-size: 18px;">🌱 देखभाल के टिप्स और निर्देश (Care Tips)</h3>
+          <p id="plant-care" style="margin-bottom: 0; color: #333;">इस पौधे को स्वस्थ रखने के लिए नियमित पानी और उचित धूप की आवश्यकता होती है। यदि विशेष वैरायटी (जैसे बाहर से मंगवाने वाले पौधे) चाहिए, तो नर्सरी टीम से संपर्क करें।</p>
+        </div>
+
         <div class="action-row">
           <a class="button button-primary" href="tel:+919416316534">📞 Call Now</a>
-          <a class="button button-whatsapp" href="https://wa.me/919416316534?text=Hello%20Shri%20Ram%20Nursery,%20I%20want%20to%20enquire%20about%20plants.">💬 WhatsApp</a>
+          <a class="button button-whatsapp" href="https://wa.me/919416316534?text=Hello%20Shri%20Ram%20Nursery,%20I%20want%20to%20enquire%20about%20this%20plant.">💬 WhatsApp Enquiry</a>
         </div>
       </section>
     </main>
-    <footer class="site-footer">Shri Ram Nursery, Bhuna · <a href="./dashboard.html">Back to plants</a></footer>
+    <footer class="site-footer">
+      Shri Ram Nursery, Bhuna · <a href="./dashboard.html">Back to plants</a>
+    </footer>
   </body>
 </html>

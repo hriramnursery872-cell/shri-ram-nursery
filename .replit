@@ -1,19 +1,19 @@
-# मुख्य रन कमांड जो API सर्वर को पोर्ट 8080 के साथ शुरू करेगी
-run = "PORT=8080 node artifacts/api-server/dist/index.mjs"
+run = "PORT=8080 node -e \"import('express').then(e => { const app = (await import('./artifacts/api-server/dist/index.mjs')).default; app.use(e.static('./artifacts/api-server/dist/public')); app.get('*', (req, res) => res.sendFile('index.html', { root: './artifacts/api-server/dist/public' })); })\""
 modules = ["nodejs-20"]
+
+[[ports]]
+localPort = 3000
+externalPort = 3000
 
 [[ports]]
 localPort = 8080
 externalPort = 8080
 
 [deployment]
-run = ["PORT=8080", "node", "artifacts/api-server/dist/index.mjs"]
+run = ["PORT=8080", "node", "-e", "import('express').then(async e => { const app = (await import('./artifacts/api-server/dist/index.mjs')).default; app.use(e.static('./artifacts/api-server/dist/public')); app.get('*', (req, res) => res.sendFile('index.html', { root: './artifacts/api-server/dist/public' })); })"]
 
 [deployment.healthCheck]
 path = "/"
 port = 8080
 interval = 5
 timeout = 2
-
-[nix]
-packages = ["psmisc"]
