@@ -1,1 +1,1 @@
-{"buildCommand": "npx vite build", "outputDirectory": "dist", "framework": "vite"}
+{"buildCommand": "pnpm --filter ./artifacts/shri-ram-nursery build", "outputDirectory": "artifacts/shri-ram-nursery/dist", "framework": "vite"}
