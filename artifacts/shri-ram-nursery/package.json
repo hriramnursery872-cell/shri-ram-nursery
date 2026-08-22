@@ -9,6 +9,6 @@
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0"
   },
   "devDependencies": {
-    "vite": "catalog:"
+    "vite": "^5.4.1"
   }
 }
