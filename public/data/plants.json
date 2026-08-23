@@ -1,1 +1,242 @@
-[]
+[
+  {
+    "id": "plant_001",
+    "name": "Money Plant (गुलाब की बेल)",
+    "category": "Indoor",
+    "description": "Low maintenance indoor trailing plant that purifies air and grows in low light conditions. Perfect for beginners.",
+    "price": 150,
+    "stock": "In Stock",
+    "care": "Water once a week, keep in indirect light, mist occasionally",
+    "image": "/images/money-plant.jpg"
+  },
+  {
+    "id": "plant_002",
+    "name": "Snake Plant (सांपों की बेल)",
+    "category": "Indoor",
+    "description": "Hardy succulent that filters air toxins. Thrives on neglect with minimal water needs.",
+    "price": 200,
+    "stock": "In Stock",
+    "care": "Water every 2-3 weeks, tolerates low light, prefers dry soil",
+    "image": "/images/snake-plant.jpg"
+  },
+  {
+    "id": "plant_003",
+    "name": "Spider Plant (मकड़ी का पौधा)",
+    "category": "Indoor",
+    "description": "Produces cascading runners with baby plants. Non-toxic and very hardy for indoor spaces.",
+    "price": 120,
+    "stock": "In Stock",
+    "care": "Water regularly, bright indirect light, remove brown tips",
+    "image": "/images/spider-plant.jpg"
+  },
+  {
+    "id": "plant_004",
+    "name": "Pothos (पोथोस)",
+    "category": "Indoor",
+    "description": "Easy-to-grow vine plant that tolerates various light conditions and improves air quality.",
+    "price": 100,
+    "stock": "In Stock",
+    "care": "Water when soil is dry, can survive low light, trim for bushiness",
+    "image": "/images/pothos.jpg"
+  },
+  {
+    "id": "plant_005",
+    "name": "Peace Lily (शांति का फूल)",
+    "category": "Indoor",
+    "description": "Elegant plant with white flowers. Adapts well indoors and droops when thirsty.",
+    "price": 250,
+    "stock": "In Stock",
+    "care": "Water when top soil is dry, prefers low to medium light",
+    "image": "/images/peace-lily.jpg"
+  },
+  {
+    "id": "plant_006",
+    "name": "Rose (गुलाब)",
+    "category": "Flowering",
+    "description": "Beautiful flowering plant available in multiple colors. Requires full sunlight and regular care.",
+    "price": 120,
+    "stock": "In Stock",
+    "care": "Full sun 6+ hours, water in morning, remove dead flowers",
+    "image": "/images/rose.jpg"
+  },
+  {
+    "id": "plant_007",
+    "name": "Jasmine (चमेली/मोगरा)",
+    "category": "Flowering",
+    "description": "Fragrant flowering vine. Blooms profusely in sunlight with delicate white flowers.",
+    "price": 100,
+    "stock": "In Stock",
+    "care": "Needs full sun, daily watering in summer, prune after flowering",
+    "image": "/images/jasmine.jpg"
+  },
+  {
+    "id": "plant_008",
+    "name": "Hibiscus (गुड़हल)",
+    "category": "Flowering",
+    "description": "Tropical flowering plant with large vibrant flowers. Blooms year-round in warm climates.",
+    "price": 150,
+    "stock": "In Stock",
+    "care": "Full sun, water regularly, fertilize monthly, prune for shape",
+    "image": "/images/hibiscus.jpg"
+  },
+  {
+    "id": "plant_009",
+    "name": "Bougainvillea (बौगेनविलिया)",
+    "category": "Flowering",
+    "description": "Stunning colored bracts that last long. Very drought tolerant once established.",
+    "price": 180,
+    "stock": "In Stock",
+    "care": "Full sun required, water deeply but infrequently, minimal fertilizer",
+    "image": "/images/bougainvillea.jpg"
+  },
+  {
+    "id": "plant_010",
+    "name": "Marigold (गेंदे का फूल)",
+    "category": "Flowering",
+    "description": "Bright cheerful flowers perfect for gardens and pots. Annual bloomer.",
+    "price": 50,
+    "stock": "In Stock",
+    "care": "Full sun, water at soil level, deadhead spent flowers",
+    "image": "/images/marigold.jpg"
+  },
+  {
+    "id": "plant_011",
+    "name": "Lemon Plant (कागज़ी नींबू)",
+    "category": "Fruit",
+    "description": "Compact lemon tree that produces seedless lemons. Fruits even in containers.",
+    "price": 250,
+    "stock": "In Stock",
+    "care": "Full sun 6+ hours, water regularly, fertilize monthly, prune crowded branches",
+    "image": "/images/lemon-plant.jpg"
+  },
+  {
+    "id": "plant_012",
+    "name": "Orange Plant (संतरा)",
+    "category": "Fruit",
+    "description": "Dwarf citrus tree suitable for balconies and small gardens. Fruits in 2-3 years.",
+    "price": 300,
+    "stock": "In Stock",
+    "care": "Full sun, water deeply, apply fertilizer every 6 weeks",
+    "image": "/images/orange-plant.jpg"
+  },
+  {
+    "id": "plant_013",
+    "name": "Guava Plant (अमरूद)",
+    "category": "Fruit",
+    "description": "Hardy fruit tree that produces abundantly. Very nutritious white or pink fruits.",
+    "price": 200,
+    "stock": "In Stock",
+    "care": "Full sun, water weekly, prune after harvest, minimal pest issues",
+    "image": "/images/guava-plant.jpg"
+  },
+  {
+    "id": "plant_014",
+    "name": "Pomegranate (अनार)",
+    "category": "Fruit",
+    "description": "Deciduous tree bearing beautiful red fruits rich in antioxidants.",
+    "price": 220,
+    "stock": "In Stock",
+    "care": "Full sun essential, drought tolerant once established, prune in spring",
+    "image": "/images/pomegranate-plant.jpg"
+  },
+  {
+    "id": "plant_015",
+    "name": "Mango Plant (आम)",
+    "category": "Fruit",
+    "description": "King of fruits tree. Requires patience but rewards with abundant harvests.",
+    "price": 350,
+    "stock": "In Stock",
+    "care": "Full sun, deep watering during growing season, well-drained soil",
+    "image": "/images/mango-plant.jpg"
+  },
+  {
+    "id": "plant_016",
+    "name": "Mint Plant (पुदीना)",
+    "category": "Herb",
+    "description": "Aromatic herb used in cooking and tea. Very easy to grow and spreads quickly.",
+    "price": 50,
+    "stock": "In Stock",
+    "care": "Partial shade okay, water regularly, harvest leaves regularly",
+    "image": "/images/mint-plant.jpg"
+  },
+  {
+    "id": "plant_017",
+    "name": "Tulsi Plant (तुलसी)",
+    "category": "Herb",
+    "description": "Sacred plant with medicinal properties. Used for tea and spiritual purposes.",
+    "price": 75,
+    "stock": "In Stock",
+    "care": "Full sun 4-6 hours, water in morning, pinch flowers for bushiness",
+    "image": "/images/tulsi-plant.jpg"
+  },
+  {
+    "id": "plant_018",
+    "name": "Aloe Vera (एलोवेरा)",
+    "category": "Succulent",
+    "description": "Medicinal succulent gel used for burns and skin care. Very low maintenance.",
+    "price": 80,
+    "stock": "In Stock",
+    "care": "Bright light, water sparingly, well-draining soil essential",
+    "image": "/images/aloe-vera.jpg"
+  },
+  {
+    "id": "plant_019",
+    "name": "Cactus Mix (कैक्टस)",
+    "category": "Succulent",
+    "description": "Collection of colorful cacti. Drought-resistant and ideal for sunny locations.",
+    "price": 100,
+    "stock": "In Stock",
+    "care": "Full sun, minimal water (monthly in winter), sandy soil",
+    "image": "/images/cactus-mix.jpg"
+  },
+  {
+    "id": "plant_020",
+    "name": "ZZ Plant (जेड का पौधा)",
+    "category": "Indoor",
+    "description": "Tough glossy plant that tolerates neglect and low light remarkably well.",
+    "price": 200,
+    "stock": "In Stock",
+    "care": "Low to bright indirect light, water every 2-3 weeks, drought tolerant",
+    "image": "/images/zz-plant.jpg"
+  },
+  {
+    "id": "plant_021",
+    "name": "Rubber Plant (रबर का पौधा)",
+    "category": "Indoor",
+    "description": "Large leafed statement plant that improves indoor air quality significantly.",
+    "price": 300,
+    "stock": "In Stock",
+    "care": "Bright indirect light, water when top inch dry, wipe leaves monthly",
+    "image": "/images/rubber-plant.jpg"
+  },
+  {
+    "id": "plant_022",
+    "name": "Neem Plant (नीम)",
+    "category": "Medicinal",
+    "description": "Multi-purpose medicinal tree. Leaves, seeds, and oil have numerous health benefits.",
+    "price": 150,
+    "stock": "In Stock",
+    "care": "Full sun preferred, water regularly when young, drought tolerant when mature",
+    "image": "/images/neem-plant.jpg"
+  },
+  {
+    "id": "plant_023",
+    "name": "Peppermint (पेप्परमिंट)",
+    "category": "Herb",
+    "description": "Refreshing aromatic herb. Grows vigorously and used for tea and cooking.",
+    "price": 60,
+    "stock": "In Stock",
+    "care": "Partial shade, moist soil, trim regularly to prevent legginess",
+    "image": "/images/peppermint-plant.jpg"
+  },
+  {
+    "id": "plant_024",
+    "name": "Sunflower (सूरजमुखी)",
+    "category": "Flowering",
+    "description": "Tall annual with bright yellow flowers following the sun. Great for gardens.",
+    "price": 40,
+    "stock": "In Stock",
+    "care": "Full sun essential, water regularly, stake tall varieties",
+    "image": "/images/sunflower-plant.jpg"
+  }
+]
