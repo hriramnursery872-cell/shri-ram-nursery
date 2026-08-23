@@ -7,9 +7,11 @@
 
   <title>Shri Ram Nursery Bhuna - Plant Catalogue</title>
 
-  <link rel="stylesheet"
-        href="/css/style.css"
-        onerror="this.onerror=null;this.href='./css/style.css';">
+  <link
+    rel="stylesheet"
+    href="/css/style.css"
+    onerror="this.onerror=null;this.href='./css/style.css';"
+  >
 
   <style>
     * {
@@ -47,11 +49,9 @@
       line-height: 1.6;
     }
 
-    /* CATEGORY BUTTONS */
-
     .category-buttons {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 12px;
       margin: 25px 0 30px;
     }
@@ -75,8 +75,6 @@
       transform: translateY(-2px);
     }
 
-    /* PLANT GRID */
-
     .plant-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
@@ -90,7 +88,6 @@
       border: 1px solid #e0e0e0;
       box-shadow: 0 4px 14px rgba(0,0,0,.07);
       transition: .2s;
-      position: relative;
     }
 
     .plant-card:hover {
@@ -267,11 +264,13 @@
       background: #25d366;
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 900px) {
       .category-buttons {
         grid-template-columns: repeat(2, 1fr);
       }
+    }
 
+    @media (max-width: 700px) {
       .plant-grid {
         grid-template-columns: 1fr;
       }
@@ -308,75 +307,77 @@
     <h1>हमारे पौधे देखें</h1>
 
     <p>
-      फलदार, इंडोर, आउटडोर, फूलदार, डेकोरेटिव और
-      लैंडस्केपिंग पौधों की प्रीमियम नर्सरी कलेक्शन।
+      अपनी पसंद की category चुनें और उसके सभी पौधे,
+      फोटो, variety और देखभाल की जानकारी देखें।
     </p>
   </section>
-
-  <!-- CATEGORY FILTER -->
 
   <section class="category-buttons" aria-label="Plant Categories">
 
     <button class="category-btn active" data-category="Fruit">
-      🍋 फलदार पौधे
+      🍎 फलदार पौधे
     </button>
 
     <button class="category-btn" data-category="Indoor">
-      🪴 इंडोर प्लांट
+      🪴 इंडोर प्लांट्स
     </button>
 
     <button class="category-btn" data-category="Outdoor">
-      🌳 आउटडोर प्लांट
+      🌳 आउटडोर प्लांट्स
     </button>
 
     <button class="category-btn" data-category="Flowering">
-      🌸 फूलदार पौधे
+      🌺 फूलों के पौधे
     </button>
 
     <button class="category-btn" data-category="Decorative">
-      🌿 डेकोरेटिव पौधे
+      🌿 डेकोरेटिव
     </button>
 
     <button class="category-btn" data-category="Landscaping">
       🌴 लैंडस्केपिंग
     </button>
 
+    <button class="category-btn" data-category="Medicinal">
+      🌱 औषधीय एवं अन्य
+    </button>
+
   </section>
 
-  <!-- PLANT LIST -->
-
-  <section id="plant-list"
-           class="plant-grid"
-           aria-live="polite">
-
+  <section
+    id="plant-list"
+    class="plant-grid"
+    aria-live="polite"
+  >
     <div class="loading-state">
       🌿 पौधों की कलेक्शन लोड हो रही है...
     </div>
-
   </section>
-
-  <!-- CONTACT -->
 
   <section class="contact-strip">
 
     <h2>पौधे के बारे में जानकारी चाहिए?</h2>
 
     <p>
-      उपलब्ध वैरायटी और वर्तमान कीमत के लिए सीधे नर्सरी से संपर्क करें।
+      उपलब्ध variety और वर्तमान कीमत के लिए सीधे नर्सरी से संपर्क करें।
     </p>
 
     <div class="contact-buttons">
 
-      <a class="contact-btn call-btn"
-         href="tel:+919416316534">
+      <a
+        class="contact-btn call-btn"
+        href="tel:+919416316534"
+      >
         📞 Call Now
       </a>
 
-      <a class="contact-btn wa-main-btn"
-         id="main-whatsapp"
-         href="#"
-         target="_blank"
-         rel="noopener">
+      <a
+        class="contact-btn wa-main-btn"
+        id="main-whatsapp"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         💬 WhatsApp
       </a>
 
@@ -386,152 +387,74 @@
 
 </main>
 
-<footer class="site-footer"
-        style="text-align:center;padding:20px;background:#2E7D32;color:white;">
+<footer
+  class="site-footer"
+  style="text-align:center;padding:20px;background:#2E7D32;color:white;"
+>
   Shri Ram Nursery, Bhuna
 </footer>
 
-
 <script type="module">
 
-  import { getPlants, loadPlants } from "./js/plants.js";
+  import {
+    getPlants,
+    loadPlants,
+    getCategoryLabel,
+    likePlant as saveLike,
+    sharePlant as sharePlantFromEngine
+  } from "./js/plants.js";
 
-  const plantList = document.getElementById("plant-list");
+  const plantList =
+    document.getElementById("plant-list");
 
   let allPlants = [];
   let selectedCategory = "Fruit";
 
-
-  /* --------------------------------------------------
-     SAFE HTML
-  -------------------------------------------------- */
-
   function escapeHTML(value) {
-
     return String(value ?? "")
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
-
   }
-
-
-  /* --------------------------------------------------
-     IMAGE FALLBACK
-  -------------------------------------------------- */
 
   function imageFallback(image) {
-
     return image || "./images/plant-placeholder.jpg";
-
   }
 
-
-  /* --------------------------------------------------
-     WHATSAPP
-  -------------------------------------------------- */
-
   function whatsappURL(plantName) {
-
     const message =
       `Hello Shri Ram Nursery Bhuna, I am interested in ${plantName}. Please share its current availability and price.`;
 
     return `https://wa.me/919416316534?text=${encodeURIComponent(message)}`;
-
   }
-
-
-  /* --------------------------------------------------
-     SHARE
-  -------------------------------------------------- */
-
-  async function sharePlant(plant) {
-
-    const shareData = {
-      title: `${plant.name} - Shri Ram Nursery Bhuna`,
-      text:
-        `${plant.name} | ${plant.variety || ""} | Shri Ram Nursery Bhuna`,
-      url:
-        `${window.location.origin}/plant.html?plantId=${encodeURIComponent(plant.id)}`
-    };
-
-    try {
-
-      if (navigator.share) {
-
-        await navigator.share(shareData);
-
-      } else {
-
-        await navigator.clipboard.writeText(shareData.url);
-
-        alert("Plant link copied. अब आप इसे WhatsApp, Facebook या Instagram पर शेयर कर सकते हैं।");
-
-      }
-
-    } catch (error) {
-
-      console.log("Share cancelled:", error);
-
-    }
-
-  }
-
-
-  /* --------------------------------------------------
-     LIKE
-  -------------------------------------------------- */
-
-  function likePlant(id, button) {
-
-    const key = `plant-liked-${id}`;
-
-    const liked = localStorage.getItem(key) === "true";
-
-    if (liked) {
-
-      localStorage.removeItem(key);
-
-      button.classList.remove("liked");
-
-      button.innerText = "♡ Like";
-
-    } else {
-
-      localStorage.setItem(key, "true");
-
-      button.classList.add("liked");
-
-      button.innerText = "♥ Liked";
-
-    }
-
-  }
-
-
-  /* --------------------------------------------------
-     PLANT CARD
-  -------------------------------------------------- */
 
   function createPlantCard(plant) {
 
     const card = document.createElement("article");
-
     card.className = "plant-card";
 
     const image =
       imageFallback(plant.image);
 
     const category =
-      escapeHTML(plant.category_hi || plant.category || "पौधे");
+      escapeHTML(
+        plant.category_hi ||
+        plant.category ||
+        "पौधे"
+      );
 
     const name =
-      escapeHTML(plant.name || "Plant");
+      escapeHTML(
+        plant.name || "Plant"
+      );
 
     const variety =
-      escapeHTML(plant.variety || "Premium Nursery Variety");
+      escapeHTML(
+        plant.variety ||
+        "Premium Nursery Variety"
+      );
 
     const tips =
       escapeHTML(
@@ -546,7 +469,6 @@
       `./plant.html?plantId=${plantId}`;
 
     card.innerHTML = `
-
       <div class="plant-image-wrap">
 
         <img
@@ -591,7 +513,8 @@
 
           <a
             class="action-btn details-btn"
-            href="${detailsURL}">
+            href="${detailsURL}"
+          >
             🌿 Details
           </a>
 
@@ -599,7 +522,8 @@
             class="action-btn whatsapp-btn"
             href="${whatsappURL(name)}"
             target="_blank"
-            rel="noopener">
+            rel="noopener noreferrer"
+          >
             💬 WhatsApp
           </a>
 
@@ -610,21 +534,22 @@
           <button
             class="like-btn"
             type="button"
-            data-like-id="${escapeHTML(plant.id)}">
+            data-like-id="${escapeHTML(plant.id)}"
+          >
             ♡ Like
           </button>
 
           <button
             class="share-btn"
             type="button"
-            data-share-id="${escapeHTML(plant.id)}">
+            data-share-id="${escapeHTML(plant.id)}"
+          >
             ↗ Share
           </button>
 
         </div>
 
       </div>
-
     `;
 
     const likeButton =
@@ -636,42 +561,46 @@
     const likeKey =
       `plant-liked-${plant.id}`;
 
-    if (localStorage.getItem(likeKey) === "true") {
-
+    if (
+      localStorage.getItem(likeKey) === "true"
+    ) {
       likeButton.classList.add("liked");
-
       likeButton.innerText = "♥ Liked";
-
     }
 
-    likeButton.addEventListener("click", () => {
+    likeButton.addEventListener(
+      "click",
+      () => {
 
-      likePlant(
-        plant.id,
-        likeButton
-      );
+        const liked =
+          localStorage.getItem(likeKey) === "true";
 
-    });
+        if (liked) {
+          localStorage.removeItem(likeKey);
+          likeButton.classList.remove("liked");
+          likeButton.innerText = "♡ Like";
+        } else {
+          localStorage.setItem(likeKey, "true");
+          likeButton.classList.add("liked");
+          likeButton.innerText = "♥ Liked";
+          saveLike(plant.id);
+        }
+      }
+    );
 
-    shareButton.addEventListener("click", () => {
-
-      sharePlant(plant);
-
-    });
+    shareButton.addEventListener(
+      "click",
+      async () => {
+        await sharePlantFromEngine(plant);
+      }
+    );
 
     return card;
-
   }
-
-
-  /* --------------------------------------------------
-     RENDER CATEGORY
-  -------------------------------------------------- */
 
   function renderCategory(category) {
 
     selectedCategory = category;
-
     plantList.innerHTML = "";
 
     const filteredPlants =
@@ -679,13 +608,12 @@
         plant =>
           String(plant.category || "")
             .toLowerCase() ===
-          category.toLowerCase()
+          String(category).toLowerCase()
       );
 
     if (!filteredPlants.length) {
 
       plantList.innerHTML = `
-
         <div class="empty-state">
 
           🌱 इस category में अभी पौधे उपलब्ध नहीं हैं।
@@ -694,59 +622,48 @@
 
           <a
             href="tel:+919416316534"
-            style="color:#2e7d32;font-weight:bold;">
+            style="color:#2e7d32;font-weight:bold;"
+          >
             नर्सरी से पूछें
           </a>
 
         </div>
-
       `;
 
       return;
-
     }
 
-    filteredPlants.forEach(plant => {
-
-      plantList.appendChild(
-        createPlantCard(plant)
-      );
-
-    });
-
+    filteredPlants.forEach(
+      plant => {
+        plantList.appendChild(
+          createPlantCard(plant)
+        );
+      }
+    );
   }
-
-
-  /* --------------------------------------------------
-     CATEGORY BUTTONS
-  -------------------------------------------------- */
 
   document
     .querySelectorAll(".category-btn")
     .forEach(button => {
 
-      button.addEventListener("click", () => {
+      button.addEventListener(
+        "click",
+        () => {
 
-        document
-          .querySelectorAll(".category-btn")
-          .forEach(btn =>
-            btn.classList.remove("active")
+          document
+            .querySelectorAll(".category-btn")
+            .forEach(btn =>
+              btn.classList.remove("active")
+            );
+
+          button.classList.add("active");
+
+          renderCategory(
+            button.dataset.category
           );
-
-        button.classList.add("active");
-
-        renderCategory(
-          button.dataset.category
-        );
-
-      });
-
+        }
+      );
     });
-
-
-  /* --------------------------------------------------
-     LOAD CATALOG
-  -------------------------------------------------- */
 
   async function initializeCatalog() {
 
@@ -755,12 +672,6 @@
       await loadPlants();
 
       allPlants = getPlants();
-
-      if (!Array.isArray(allPlants)) {
-
-        allPlants = [];
-
-      }
 
       renderCategory(selectedCategory);
 
@@ -772,27 +683,14 @@
       );
 
       plantList.innerHTML = `
-
         <div class="empty-state">
-
           ❌ Catalogue अभी लोड नहीं हो पाया।
-
-          <br>
-
-          कृपया पेज refresh करें या नर्सरी से संपर्क करें।
-
+          <br><br>
+          कृपया page refresh करें या नर्सरी से संपर्क करें।
         </div>
-
       `;
-
     }
-
   }
-
-
-  /* --------------------------------------------------
-     MAIN WHATSAPP
-  -------------------------------------------------- */
 
   const mainWhatsapp =
     document.getElementById("main-whatsapp");
@@ -804,13 +702,7 @@
 
     mainWhatsapp.href =
       `https://wa.me/919416316534?text=${encodeURIComponent(message)}`;
-
   }
-
-
-  /* --------------------------------------------------
-     START
-  -------------------------------------------------- */
 
   if (
     document.readyState === "loading"
@@ -824,7 +716,6 @@
   } else {
 
     initializeCatalog();
-
   }
 
 </script>
