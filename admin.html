@@ -1,167 +1,2060 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#2E7D32">
-    <title>Shri Ram Nursery - Admin Dashboard</title>
-    <!-- बिल्कुल साफ और डायनामिक स्टाइलिंग -->
-    <link rel="stylesheet" href="/css/style.css" onerror="this.onerror=null;this.href='./css/style.css';">
-    <style>
-      .admin-container { max-width: 1200px; margin: 30px auto; padding: 0 20px; font-family: sans-serif; }
-      .form-group { margin-bottom: 15px; }
-      .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
-      .form-group input, .form-group select { width: 100%; padding: 8px; box-sizing: border-box; }
-      .btn { background: #2E7D32; color: white; padding: 10px 15px; border: none; cursor: pointer; border-radius: 4px; }
-      .btn-danger { background: #d32f2f; }
-      .plant-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-      .plant-table th, .plant-table td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-      .plant-table th { background-color: #f4f4f4; }
-      .action-btns .btn { padding: 5px 10px; margin-right: 5px; font-size: 12px; }
-    </style>
-  </head>
-  <body>
-    
-    <header class="site-header">
-      <a class="brand" href="./index.html">Shri Ram Nursery <span>Bhuna</span></a>
-      <nav class="site-nav" aria-label="Primary navigation">
-        <a href="./index.html">Home</a>
-        <a href="./dashboard.html">Plants</a>
-        <a href="./booking.html">Booking</a>
-        <a href="./orders.html">Orders</a>
-        <a href="./admin.html" style="font-weight: bold; color: #2E7D32;">Admin</a>
-      </nav>
-    </header>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <main class="admin-container">
-      <section class="page-heading">
-        <p class="eyebrow" style="color: #2E7D32; margin: 0; font-weight: bold;">Control Panel</p>
-        <h1 style="margin-top: 5px;">Nursery Operations Dashboard</h1>
-        <p class="lead">Manage your live plant stock, upload new items, and handle customer demands instantly.</p>
-      </section>
+  <meta name="theme-color" content="#2E7D32">
 
-      <!-- नया पौधा जोड़ने का फॉर्म -->
-      <section id="add-plant-section" style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin-top: 20px;">
-        <h3>➕ Add New Plant to Catalog</h3>
-        <form id="plant-form">
-          <div class="form-group">
-            <label>Plant Name (पौधे का नाम):</label>
-            <input type="text" id="plant-name" required placeholder="e.g., Snake Plant / अमरूद हिसार सफेदा">
-          </div>
-          <div class="form-group">
-            <label>Category (कैटेगरी):</label>
-            <select id="plant-category">
-              <option value="Indoor">Indoor (इंडोर)</option>
-              <option value="Fruit">Fruit (फलदार)</option>
-              <option value="Decorative">Decorative (सजावटी)</option>
-              <option value="Flowering">Flowering (फूल वाले)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Price (कीमत ₹):</label>
-            <input type="number" id="plant-price" required placeholder="e.g., 150">
-          </div>
-          <div class="form-group">
-            <label>Stock Status (स्टॉक की स्थिति):</label>
-            <select id="plant-stock">
-              <option value="In Stock">In Stock (उपलब्ध है)</option>
-              <option value="Out of Stock">Out of Stock (खत्म है)</option>
-            </select>
-          </div>
-          <button type="submit" class="btn">Save & Update Catalog</button>
-        </form>
-      </section>
+  <title>श्री राम नर्सरी (भुना) - Admin Panel</title>
 
-      <!-- लाइव पौधों की लिस्ट और डिलीट करने की टेबल -->
-      <section style="margin-top: 40px;">
-        <h3>🌿 Current Live Inventory</h3>
-        <table class="plant-table">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f7f3;
+      color: #202520;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    /* =========================
+       LOGIN
+    ========================= */
+
+    #admin-login {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background:
+        linear-gradient(rgba(20,70,25,.78), rgba(20,70,25,.78)),
+        linear-gradient(135deg, #1b5e20, #66bb6a);
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 430px;
+      background: white;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+
+    .login-logo {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 800;
+      color: #1b5e20;
+      margin-bottom: 8px;
+    }
+
+    .login-subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    .security-box {
+      background: #edf7ed;
+      border: 1px solid #c8e6c9;
+      color: #1b5e20;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      border: 1px solid #d2d8d2;
+      border-radius: 9px;
+      padding: 12px;
+      outline: none;
+      background: white;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #2e7d32;
+      box-shadow: 0 0 0 3px rgba(46,125,50,.10);
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 9px;
+      padding: 12px 18px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: #2e7d32;
+      color: white;
+      width: 100%;
+    }
+
+    .btn-primary:hover {
+      background: #1b5e20;
+    }
+
+    .login-error {
+      display: none;
+      margin-top: 15px;
+      padding: 11px;
+      background: #ffebee;
+      color: #c62828;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    /* =========================
+       ADMIN APP
+    ========================= */
+
+    #admin-app {
+      display: none;
+    }
+
+    .admin-header {
+      background: #1b5e20;
+      color: white;
+      padding: 15px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 15px rgba(0,0,0,.15);
+    }
+
+    .header-inner {
+      max-width: 1250px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .brand {
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .brand small {
+      display: block;
+      font-size: 12px;
+      opacity: .8;
+      margin-top: 3px;
+    }
+
+    .logout-btn {
+      background: #ffffff;
+      color: #1b5e20;
+      border: 0;
+      border-radius: 8px;
+      padding: 9px 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .admin-container {
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 25px 18px 50px;
+    }
+
+    .page-heading {
+      margin-bottom: 25px;
+    }
+
+    .page-heading h1 {
+      margin: 0 0 7px;
+      font-size: 28px;
+    }
+
+    .page-heading p {
+      margin: 0;
+      color: #687068;
+    }
+
+    /* =========================
+       SUMMARY CARDS
+    ========================= */
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .summary-card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      border: 1px solid #e2e7e2;
+      box-shadow: 0 4px 15px rgba(0,0,0,.05);
+    }
+
+    .summary-title {
+      color: #687068;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .summary-value {
+      color: #1b5e20;
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
+    .section {
+      background: white;
+      border-radius: 15px;
+      padding: 22px;
+      margin-bottom: 22px;
+      border: 1px solid #e2e7e2;
+      box-shadow: 0 4px 15px rgba(0,0,0,.04);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .section-note {
+      color: #727872;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    /* =========================
+       SALES GRID
+    ========================= */
+
+    .sales-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .payment-card {
+      border: 1px solid #e2e7e2;
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .payment-card h3 {
+      margin: 0 0 12px;
+      font-size: 16px;
+    }
+
+    .payment-number {
+      font-size: 27px;
+      font-weight: 800;
+      color: #1b5e20;
+    }
+
+    /* =========================
+       TABLE
+    ========================= */
+
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 700px;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid #e5e9e5;
+      padding: 12px 10px;
+      text-align: left;
+      vertical-align: middle;
+      font-size: 14px;
+    }
+
+    th {
+      background: #f2f7f2;
+      color: #315b34;
+      font-weight: 800;
+    }
+
+    tr:hover td {
+      background: #fafdfa;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .badge-green {
+      background: #e8f5e9;
+      color: #1b5e20;
+    }
+
+    .badge-orange {
+      background: #fff3e0;
+      color: #e65100;
+    }
+
+    .badge-blue {
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+
+    /* =========================
+       VARIETY
+    ========================= */
+
+    .variety-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .variety-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      background: #f7faf7;
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .variety-name {
+      font-weight: 700;
+    }
+
+    .variety-count {
+      background: #2e7d32;
+      color: white;
+      border-radius: 20px;
+      padding: 5px 10px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    /* =========================
+       ADD PLANT
+    ========================= */
+
+    .plant-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .save-plant-btn {
+      background: #2e7d32;
+      color: white;
+      width: auto;
+    }
+
+    /* =========================
+       PLANT LIST
+    ========================= */
+
+    .plant-image {
+      width: 55px;
+      height: 55px;
+      object-fit: cover;
+      border-radius: 9px;
+      background: #edf3ed;
+    }
+
+    .plant-name-cell {
+      font-weight: 800;
+    }
+
+    .delete-btn {
+      background: #ffebee;
+      color: #c62828;
+      border: 0;
+      padding: 7px 10px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    /* =========================
+       EMPTY
+    ========================= */
+
+    .empty {
+      text-align: center;
+      padding: 30px;
+      color: #777;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 900px) {
+      .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .sales-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .admin-container {
+        padding: 18px 12px 40px;
+      }
+
+      .header-inner {
+        align-items: flex-start;
+      }
+
+      .brand {
+        font-size: 17px;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 9px;
+      }
+
+      .summary-card {
+        padding: 14px;
+      }
+
+      .summary-value {
+        font-size: 22px;
+      }
+
+      .section {
+        padding: 15px;
+      }
+
+      .plant-form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     ADMIN LOGIN
+===================================================== -->
+
+<section id="admin-login">
+
+  <div class="login-card">
+
+    <div class="login-logo">
+      🌿 श्री राम नर्सरी (भुना)
+    </div>
+
+    <div class="login-subtitle">
+      सुरक्षित Admin Panel
+    </div>
+
+    <div class="security-box">
+      🔐 यह पैनल केवल अधिकृत मोबाइल नंबर और PIN से खुलेगा।
+    </div>
+
+    <div class="form-group">
+      <label for="login-phone">
+        📱 अधिकृत मोबाइल नंबर
+      </label>
+
+      <input
+        type="tel"
+        id="login-phone"
+        placeholder="अपना अधिकृत मोबाइल नंबर"
+        maxlength="10"
+        autocomplete="tel"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="login-pin">
+        🔑 Admin PIN
+      </label>
+
+      <input
+        type="password"
+        id="login-pin"
+        placeholder="Admin PIN डालें"
+        maxlength="8"
+        autocomplete="current-password"
+      >
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-primary"
+      id="login-btn"
+    >
+      🔐 Admin Panel खोलें
+    </button>
+
+    <div
+      id="login-error"
+      class="login-error"
+    ></div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     ADMIN APPLICATION
+===================================================== -->
+
+<div id="admin-app">
+
+  <header class="admin-header">
+
+    <div class="header-inner">
+
+      <div class="brand">
+        🌿 श्री राम नर्सरी (भुना)
+        <small>Nursery Management & Sales Dashboard</small>
+      </div>
+
+      <button
+        type="button"
+        class="logout-btn"
+        id="logout-btn"
+      >
+        Logout
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <main class="admin-container">
+
+    <div class="page-heading">
+
+      <h1>
+        📊 Admin Dashboard
+      </h1>
+
+      <p>
+        आज की बिक्री, पौधों की varieties, customer और payment का पूरा हिसाब।
+      </p>
+
+    </div>
+
+
+    <!-- =================================================
+         TODAY SUMMARY
+    ================================================= -->
+
+    <section class="summary-grid">
+
+      <div class="summary-card">
+        <div class="summary-title">
+          🌱 आज कुल पौधे बिके
+        </div>
+
+        <div
+          class="summary-value"
+          id="today-plants"
+        >
+          0
+        </div>
+      </div>
+
+
+      <div class="summary-card">
+        <div class="summary-title">
+          🧾 आज कुल Orders
+        </div>
+
+        <div
+          class="summary-value"
+          id="today-orders"
+        >
+          0
+        </div>
+      </div>
+
+
+      <div class="summary-card">
+        <div class="summary-title">
+          👥 आज के Customers
+        </div>
+
+        <div
+          class="summary-value"
+          id="today-customers"
+        >
+          0
+        </div>
+      </div>
+
+
+      <div class="summary-card">
+        <div class="summary-title">
+          💰 आज की कुल बिक्री
+        </div>
+
+        <div
+          class="summary-value"
+          id="today-sales"
+        >
+          ₹0
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         CASH / UPI
+    ================================================= -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div>
+          <h2>
+            💳 आज का Payment हिसाब
+          </h2>
+
+          <div class="section-note">
+            Cash और UPI payment अलग-अलग दिखाई जाएगी।
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="sales-grid">
+
+        <div class="payment-card">
+
+          <h3>
+            💵 Cash Payment
+          </h3>
+
+          <div
+            class="payment-number"
+            id="cash-sales"
+          >
+            ₹0
+          </div>
+
+          <div class="section-note">
+            Cash से हुई बिक्री
+          </div>
+
+        </div>
+
+
+        <div class="payment-card">
+
+          <h3>
+            📲 UPI Payment
+          </h3>
+
+          <div
+            class="payment-number"
+            id="upi-sales"
+          >
+            ₹0
+          </div>
+
+          <div class="section-note">
+            UPI से हुई बिक्री
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         VARIETY SALES
+    ================================================= -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div>
+          <h2>
+            🌿 आज कौन-कौन से पौधे बिके?
+          </h2>
+
+          <div class="section-note">
+            हर variety की बिक्री की संख्या।
+          </div>
+        </div>
+
+      </div>
+
+      <div
+        id="variety-sales"
+        class="variety-list"
+      ></div>
+
+    </section>
+
+
+    <!-- =================================================
+         CUSTOMER ORDERS
+    ================================================= -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div>
+          <h2>
+            👤 आज के Customer Orders
+          </h2>
+
+          <div class="section-note">
+            Customer का नाम, मोबाइल, पौधा और payment mode।
+          </div>
+        </div>
+
+      </div>
+
+      <div class="table-wrapper">
+
+        <table>
+
           <thead>
+
             <tr>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Price</th>
-              <th>Status</th>
-              <th>Actions</th>
+              <th>Customer</th>
+              <th>Mobile</th>
+              <th>Plant / Variety</th>
+              <th>Quantity</th>
+              <th>Payment</th>
+              <th>Total</th>
+              <th>Time</th>
             </tr>
+
           </thead>
-          <tbody id="admin-plants-list">
-            <!-- जावास्क्रिप्ट के जरिए यहाँ ऑटोमैटिक पौधे लोड होंगे -->
+
+          <tbody id="today-orders-list">
           </tbody>
+
         </table>
-      </section>
-    </main>
 
-    <footer class="site-footer" style="text-align: center; margin-top: 5px; padding: 20px; background: #2E7D32; color: white;">
-      Shri Ram Nursery, Bhuna
-    </footer>
+      </div>
 
-    <!-- डायनामिक स्क्रिप्ट: बिना पुराने क्रैश एसेट्स के सीधे डेटाबेस/plants.js को कनेक्ट करेगी -->
-    <script type="module">
-      import { getPlants, savePlants } from './js/plants.js';
+    </section>
 
-      const plantForm = document.getElementById('plant-form');
-      const plantsTableBody = document.getElementById('admin-plants-list');
 
-      // टेबल में पौधों को दिखाने का फंक्शन
-      function renderAdminPlants() {
-        const plants = getPlants();
-        plantsTableBody.innerHTML = '';
-        
-        if (plants.length === 0) {
-          plantsTableBody.innerHTML = `<tr><td colspan="5" style="text-align:center;">No plants found in inventory.</td></tr>`;
-          return;
+    <!-- =================================================
+         ADD PLANT
+    ================================================= -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div>
+
+          <h2>
+            ➕ नया पौधा Catalog में जोड़ें
+          </h2>
+
+          <div class="section-note">
+            Customer को price नहीं दिखेगा। केवल plant information दिखाई जाएगी।
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <form id="plant-form">
+
+        <div class="plant-form-grid">
+
+          <div class="form-group">
+
+            <label>
+              पौधे का नाम
+            </label>
+
+            <input
+              type="text"
+              id="plant-name"
+              required
+              placeholder="जैसे अमरूद हिसार सफेदा"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Variety
+            </label>
+
+            <input
+              type="text"
+              id="plant-variety"
+              placeholder="जैसे Hisar Safeda"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Category
+            </label>
+
+            <select id="plant-category">
+
+              <option value="Fruit">
+                🍊 फलदार पौधे
+              </option>
+
+              <option value="Indoor">
+                🪴 इंडोर प्लांट
+              </option>
+
+              <option value="Outdoor">
+                🌳 आउटडोर प्लांट
+              </option>
+
+              <option value="Flowering">
+                🌸 फूलदार पौधे
+              </option>
+
+              <option value="Decorative">
+                🌿 डेकोरेटिव पौधे
+              </option>
+
+              <option value="Other">
+                🌱 अन्य
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Plant Image URL
+            </label>
+
+            <input
+              type="url"
+              id="plant-image"
+              placeholder="https://..."
+            >
+
+          </div>
+
+
+          <div class="form-group full-width">
+
+            <label>
+              🌱 पौधे की देखभाल की Tips
+            </label>
+
+            <textarea
+              id="plant-tips"
+              rows="3"
+              placeholder="जैसे: 3-4 दिन में पानी दें। तेज दोपहर की धूप से बचाएं।"
+            ></textarea>
+
+          </div>
+
+
+          <div class="form-group full-width">
+
+            <label>
+              Availability
+            </label>
+
+            <select id="plant-stock">
+
+              <option value="In Stock">
+                🟢 उपलब्ध है
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="full-width">
+
+            <button
+              type="submit"
+              class="btn save-plant-btn"
+            >
+              🌱 Save Plant
+            </button>
+
+          </div>
+
+        </div>
+
+      </form>
+
+    </section>
+
+
+    <!-- =================================================
+         PLANT INVENTORY
+    ================================================= -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div>
+
+          <h2>
+            🌿 Plant Catalog
+          </h2>
+
+          <div class="section-note">
+            Customer-facing catalog में price और Out of Stock नहीं दिखाया जाएगा।
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="table-wrapper">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Photo</th>
+              <th>Name</th>
+              <th>Variety</th>
+              <th>Category</th>
+              <th>Availability</th>
+              <th>Action</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="admin-plants-list">
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<script type="module">
+
+  import {
+    getPlants,
+    savePlants
+  } from './js/plants.js';
+
+
+  /* =====================================================
+     ADMIN SECURITY SETTINGS
+     
+     IMPORTANT:
+     यहाँ अपना असली authorized number और PIN डालें।
+  ===================================================== */
+
+  const ADMIN_PHONE = "9999999999";
+  const ADMIN_PIN = "123456";
+
+
+  /* =====================================================
+     ELEMENTS
+  ===================================================== */
+
+  const loginScreen =
+    document.getElementById("admin-login");
+
+  const adminApp =
+    document.getElementById("admin-app");
+
+  const loginPhone =
+    document.getElementById("login-phone");
+
+  const loginPin =
+    document.getElementById("login-pin");
+
+  const loginBtn =
+    document.getElementById("login-btn");
+
+  const loginError =
+    document.getElementById("login-error");
+
+  const logoutBtn =
+    document.getElementById("logout-btn");
+
+
+  /* =====================================================
+     LOGIN
+  ===================================================== */
+
+  function showLoginError(message) {
+
+    loginError.textContent = message;
+    loginError.style.display = "block";
+
+  }
+
+
+  function openAdmin() {
+
+    loginScreen.style.display = "none";
+    adminApp.style.display = "block";
+
+    loadDashboard();
+    renderAdminPlants();
+
+  }
+
+
+  function closeAdmin() {
+
+    adminApp.style.display = "none";
+    loginScreen.style.display = "flex";
+
+    loginPhone.value = "";
+    loginPin.value = "";
+
+  }
+
+
+  loginBtn.addEventListener("click", () => {
+
+    const phone =
+      loginPhone.value.trim();
+
+    const pin =
+      loginPin.value.trim();
+
+
+    if (!phone || !pin) {
+
+      showLoginError(
+        "मोबाइल नंबर और PIN दोनों डालना जरूरी है।"
+      );
+
+      return;
+    }
+
+
+    if (phone !== ADMIN_PHONE) {
+
+      showLoginError(
+        "❌ यह मोबाइल नंबर Admin के लिए authorized नहीं है।"
+      );
+
+      return;
+    }
+
+
+    if (pin !== ADMIN_PIN) {
+
+      showLoginError(
+        "❌ गलत Admin PIN।"
+      );
+
+      return;
+    }
+
+
+    loginError.style.display = "none";
+
+    sessionStorage.setItem(
+      "shriRamAdminAuthenticated",
+      "true"
+    );
+
+    openAdmin();
+
+  });
+
+
+  logoutBtn.addEventListener("click", () => {
+
+    sessionStorage.removeItem(
+      "shriRamAdminAuthenticated"
+    );
+
+    closeAdmin();
+
+  });
+
+
+  /* =====================================================
+     SESSION CHECK
+  ===================================================== */
+
+  if (
+    sessionStorage.getItem(
+      "shriRamAdminAuthenticated"
+    ) === "true"
+  ) {
+
+    openAdmin();
+
+  }
+
+
+  /* =====================================================
+     DATE HELPERS
+  ===================================================== */
+
+  function isToday(value) {
+
+    if (!value) return false;
+
+    const date = new Date(value);
+
+    if (isNaN(date.getTime())) {
+      return false;
+    }
+
+    const now = new Date();
+
+    return (
+      date.getFullYear() === now.getFullYear() &&
+      date.getMonth() === now.getMonth() &&
+      date.getDate() === now.getDate()
+    );
+
+  }
+
+
+  function formatTime(value) {
+
+    if (!value) return "-";
+
+    const date = new Date(value);
+
+    if (isNaN(date.getTime())) {
+      return "-";
+    }
+
+    return date.toLocaleTimeString(
+      "hi-IN",
+      {
+        hour: "2-digit",
+        minute: "2-digit"
+      }
+    );
+
+  }
+
+
+  /* =====================================================
+     ORDER DATA
+     
+     यह function अलग-अलग पुराने order formats
+     को संभालने की कोशिश करेगा।
+  ===================================================== */
+
+  function getOrders() {
+
+    const possibleKeys = [
+      "orders",
+      "shriRamOrders",
+      "nurseryOrders",
+      "plantOrders"
+    ];
+
+
+    for (const key of possibleKeys) {
+
+      try {
+
+        const data =
+          localStorage.getItem(key);
+
+        if (!data) continue;
+
+        const parsed =
+          JSON.parse(data);
+
+        if (Array.isArray(parsed)) {
+          return parsed;
         }
 
-        plants.forEach((plant, index) => {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <strong>${plant.name}</strong>
-            <td>${plant.category || 'General'}</td>
-            <td>₹${plant.price}</td>
-            <td style="color: ${plant.stock === 'In Stock' ? 'green' : 'red'}; font-weight: bold;">${plant.stock || 'In Stock'}</td>
-            <td class="action-btns">
-              <button class="btn btn-danger" data-index="${index}">Delete</button>
-            </td>
+      } catch (error) {
+
+        console.warn(
+          "Orders read error:",
+          error
+        );
+
+      }
+
+    }
+
+
+    return [];
+
+  }
+
+
+  /* =====================================================
+     NORMALIZE ORDER
+  ===================================================== */
+
+  function normalizeOrder(order) {
+
+    const customer =
+      order.customer ||
+      order.customerName ||
+      order.name ||
+      order.userName ||
+      "-";
+
+
+    const phone =
+      order.phone ||
+      order.mobile ||
+      order.customerPhone ||
+      order.customerMobile ||
+      "-";
+
+
+    const plantName =
+      order.plantName ||
+      order.plant ||
+      order.nameOfPlant ||
+      order.productName ||
+      "-";
+
+
+    const variety =
+      order.variety ||
+      order.plantVariety ||
+      "";
+
+
+    const quantity =
+      Number(
+        order.quantity ||
+        order.qty ||
+        order.count ||
+        1
+      );
+
+
+    const payment =
+      (
+        order.paymentMethod ||
+        order.payment ||
+        order.paymentMode ||
+        ""
+      ).toString().toLowerCase();
+
+
+    let paymentMode = "Other";
+
+
+    if (
+      payment.includes("cash")
+    ) {
+
+      paymentMode = "Cash";
+
+    } else if (
+      payment.includes("upi") ||
+      payment.includes("online") ||
+      payment.includes("gpay") ||
+      payment.includes("phonepe") ||
+      payment.includes("paytm")
+    ) {
+
+      paymentMode = "UPI";
+
+    }
+
+
+    const amount =
+      Number(
+        order.total ||
+        order.totalAmount ||
+        order.amount ||
+        order.grandTotal ||
+        0
+      );
+
+
+    const date =
+      order.date ||
+      order.createdAt ||
+      order.created_at ||
+      order.orderDate ||
+      order.timestamp;
+
+
+    return {
+      customer,
+      phone,
+      plantName,
+      variety,
+      quantity: isNaN(quantity) ? 1 : quantity,
+      paymentMode,
+      amount: isNaN(amount) ? 0 : amount,
+      date
+    };
+
+  }
+
+
+  /* =====================================================
+     TODAY ORDERS
+  ===================================================== */
+
+  function getTodayOrders() {
+
+    return getOrders()
+      .map(normalizeOrder)
+      .filter(order => isToday(order.date));
+
+  }
+
+
+  /* =====================================================
+     DASHBOARD
+  ===================================================== */
+
+  function loadDashboard() {
+
+    const orders =
+      getTodayOrders();
+
+
+    let totalPlants = 0;
+    let totalSales = 0;
+
+    let cashSales = 0;
+    let upiSales = 0;
+
+
+    const customers = new Set();
+    const varieties = {};
+
+
+    orders.forEach(order => {
+
+      totalPlants += order.quantity;
+
+      totalSales += order.amount;
+
+
+      if (
+        order.paymentMode === "Cash"
+      ) {
+
+        cashSales += order.amount;
+
+      }
+
+
+      if (
+        order.paymentMode === "UPI"
+      ) {
+
+        upiSales += order.amount;
+
+      }
+
+
+      if (
+        order.phone &&
+        order.phone !== "-"
+      ) {
+
+        customers.add(order.phone);
+
+      }
+
+
+      const key =
+        order.variety ||
+        order.plantName ||
+        "Unknown Plant";
+
+
+      if (!varieties[key]) {
+        varieties[key] = 0;
+      }
+
+      varieties[key] += order.quantity;
+
+    });
+
+
+    document.getElementById(
+      "today-plants"
+    ).textContent =
+      totalPlants;
+
+
+    document.getElementById(
+      "today-orders"
+    ).textContent =
+      orders.length;
+
+
+    document.getElementById(
+      "today-customers"
+    ).textContent =
+      customers.size;
+
+
+    document.getElementById(
+      "today-sales"
+    ).textContent =
+      "₹" + totalSales;
+
+
+    document.getElementById(
+      "cash-sales"
+    ).textContent =
+      "₹" + cashSales;
+
+
+    document.getElementById(
+      "upi-sales"
+    ).textContent =
+      "₹" + upiSales;
+
+
+    renderVarietySales(varieties);
+
+    renderTodayOrders(orders);
+
+  }
+
+
+  /* =====================================================
+     VARIETY SALES
+  ===================================================== */
+
+  function renderVarietySales(varieties) {
+
+    const container =
+      document.getElementById(
+        "variety-sales"
+      );
+
+
+    container.innerHTML = "";
+
+
+    const entries =
+      Object.entries(varieties);
+
+
+    if (entries.length === 0) {
+
+      container.innerHTML =
+        `
+        <div class="empty">
+          आज अभी कोई पौधा नहीं बिका है।
+        </div>
+        `;
+
+      return;
+    }
+
+
+    entries
+      .sort((a, b) => b[1] - a[1])
+      .forEach(([name, count]) => {
+
+        const row =
+          document.createElement("div");
+
+        row.className =
+          "variety-row";
+
+
+        row.innerHTML =
+          `
+          <div class="variety-name">
+            🌿 ${escapeHtml(name)}
+          </div>
+
+          <div class="variety-count">
+            ${count} पौधे
+          </div>
           `;
-          plantsTableBody.appendChild(tr);
-        });
 
-        // डिलीट बटन को एक्टिवेट करना
-        document.querySelectorAll('.btn-danger').forEach(button => {
-          button.addEventListener('click', (e) => {
-            const index = e.target.getAttribute('data-index');
-            const currentPlants = getPlants();
-            currentPlants.splice(index, 1);
-            savePlants(currentPlants);
+
+        container.appendChild(row);
+
+      });
+
+  }
+
+
+  /* =====================================================
+     TODAY ORDER TABLE
+  ===================================================== */
+
+  function renderTodayOrders(orders) {
+
+    const tbody =
+      document.getElementById(
+        "today-orders-list"
+      );
+
+
+    tbody.innerHTML = "";
+
+
+    if (orders.length === 0) {
+
+      tbody.innerHTML =
+        `
+        <tr>
+          <td
+            colspan="7"
+            class="empty"
+          >
+            आज अभी कोई order नहीं मिला।
+          </td>
+        </tr>
+        `;
+
+      return;
+    }
+
+
+    orders
+      .slice()
+      .reverse()
+      .forEach(order => {
+
+        const tr =
+          document.createElement("tr");
+
+
+        const paymentClass =
+          order.paymentMode === "Cash"
+            ? "badge-orange"
+            : order.paymentMode === "UPI"
+              ? "badge-blue"
+              : "badge-green";
+
+
+        tr.innerHTML =
+          `
+          <td>
+            <strong>
+              ${escapeHtml(order.customer)}
+            </strong>
+          </td>
+
+          <td>
+            ${escapeHtml(order.phone)}
+          </td>
+
+          <td>
+            <strong>
+              ${escapeHtml(order.plantName)}
+            </strong>
+
+            ${
+              order.variety
+                ? `<br>
+                   <small>
+                     ${escapeHtml(order.variety)}
+                   </small>`
+                : ""
+            }
+          </td>
+
+          <td>
+            ${order.quantity}
+          </td>
+
+          <td>
+            <span class="badge ${paymentClass}">
+              ${
+                order.paymentMode === "Cash"
+                  ? "💵 Cash"
+                  : order.paymentMode === "UPI"
+                    ? "📲 UPI"
+                    : "💳 Other"
+              }
+            </span>
+          </td>
+
+          <td>
+            ₹${order.amount}
+          </td>
+
+          <td>
+            ${formatTime(order.date)}
+          </td>
+          `;
+
+
+        tbody.appendChild(tr);
+
+      });
+
+  }
+
+
+  /* =====================================================
+     PLANT FORM
+  ===================================================== */
+
+  const plantForm =
+    document.getElementById(
+      "plant-form"
+    );
+
+
+  plantForm.addEventListener(
+    "submit",
+    (event) => {
+
+      event.preventDefault();
+
+
+      const newPlant = {
+
+        id:
+          Date.now().toString(),
+
+        name:
+          document.getElementById(
+            "plant-name"
+          ).value.trim(),
+
+        variety:
+          document.getElementById(
+            "plant-variety"
+          ).value.trim(),
+
+        category:
+          document.getElementById(
+            "plant-category"
+          ).value,
+
+        image:
+          document.getElementById(
+            "plant-image"
+          ).value.trim(),
+
+        tips:
+          document.getElementById(
+            "plant-tips"
+          ).value.trim(),
+
+        stock:
+          "In Stock"
+
+      };
+
+
+      if (!newPlant.name) {
+
+        alert(
+          "पौधे का नाम डालना जरूरी है।"
+        );
+
+        return;
+      }
+
+
+      const currentPlants =
+        getPlants();
+
+
+      currentPlants.push(
+        newPlant
+      );
+
+
+      savePlants(
+        currentPlants
+      );
+
+
+      plantForm.reset();
+
+
+      document.getElementById(
+        "plant-stock"
+      ).value =
+        "In Stock";
+
+
+      renderAdminPlants();
+
+
+      alert(
+        "🌱 पौधा Catalog में सफलतापूर्वक जोड़ दिया गया।"
+      );
+
+    }
+  );
+
+
+  /* =====================================================
+     PLANT TABLE
+  ===================================================== */
+
+  function renderAdminPlants() {
+
+    const tbody =
+      document.getElementById(
+        "admin-plants-list"
+      );
+
+
+    const plants =
+      getPlants();
+
+
+    tbody.innerHTML = "";
+
+
+    if (
+      !plants ||
+      plants.length === 0
+    ) {
+
+      tbody.innerHTML =
+        `
+        <tr>
+          <td
+            colspan="6"
+            class="empty"
+          >
+            अभी कोई पौधा Catalog में नहीं है।
+          </td>
+        </tr>
+        `;
+
+      return;
+    }
+
+
+    plants.forEach(
+      (plant, index) => {
+
+        const tr =
+          document.createElement("tr");
+
+
+        const image =
+          plant.image ||
+          plant.imageUrl ||
+          plant.photo ||
+          "";
+
+
+        const category =
+          getCategoryName(
+            plant.category
+          );
+
+
+        tr.innerHTML =
+          `
+          <td>
+
+            ${
+              image
+                ? `
+                  <img
+                    class="plant-image"
+                    src="${escapeAttribute(image)}"
+                    alt="${escapeAttribute(plant.name || "Plant")}"
+                    onerror="this.style.display='none'"
+                  >
+                `
+                : `
+                  <div class="plant-image">
+                    🌱
+                  </div>
+                `
+            }
+
+          </td>
+
+
+          <td class="plant-name-cell">
+            ${escapeHtml(
+              plant.name || "-"
+            )}
+          </td>
+
+
+          <td>
+            ${escapeHtml(
+              plant.variety || "-"
+            )}
+          </td>
+
+
+          <td>
+            ${escapeHtml(category)}
+          </td>
+
+
+          <td>
+
+            <span class="badge badge-green">
+              🟢 उपलब्ध है
+            </span>
+
+          </td>
+
+
+          <td>
+
+            <button
+              type="button"
+              class="delete-btn"
+              data-index="${index}"
+            >
+              Delete
+            </button>
+
+          </td>
+          `;
+
+
+        tbody.appendChild(tr);
+
+      }
+    );
+
+
+    tbody
+      .querySelectorAll(
+        ".delete-btn"
+      )
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const index =
+              Number(
+                button.dataset.index
+              );
+
+
+            const plants =
+              getPlants();
+
+
+            if (
+              !confirm(
+                "क्या आप इस पौधे को Catalog से हटाना चाहते हैं?"
+              )
+            ) {
+
+              return;
+
+            }
+
+
+            plants.splice(
+              index,
+              1
+            );
+
+
+            savePlants(
+              plants
+            );
+
+
             renderAdminPlants();
-          });
-        });
+
+          }
+        );
+
+      });
+
+  }
+
+
+  /* =====================================================
+     CATEGORY NAME
+  ===================================================== */
+
+  function getCategoryName(category) {
+
+    const categories = {
+
+      Fruit:
+        "🍊 फलदार पौधे",
+
+      Indoor:
+        "🪴 इंडोर प्लांट",
+
+      Outdoor:
+        "🌳 आउटडोर प्लांट",
+
+      Flowering:
+        "🌸 फूलदार पौधे",
+
+      Decorative:
+        "🌿 डेकोरेटिव पौधे",
+
+      Other:
+        "🌱 अन्य"
+
+    };
+
+
+    return (
+      categories[category] ||
+      category ||
+      "🌱 अन्य"
+    );
+
+  }
+
+
+  /* =====================================================
+     SECURITY HELPERS
+  ===================================================== */
+
+  function escapeHtml(value) {
+
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  function escapeAttribute(value) {
+
+    return String(value ?? "")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  /* =====================================================
+     AUTO REFRESH
+     
+     Admin dashboard हर 30 सेकंड में फिर से
+     sales/orders पढ़ेगा।
+  ===================================================== */
+
+  setInterval(
+    () => {
+
+      if (
+        adminApp.style.display !== "none"
+      ) {
+
+        loadDashboard();
+
+        renderAdminPlants();
+
       }
 
-      // नया पौधा सबमिट करने का लॉजिक
-      if(plantForm) {
-        plantForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          const newPlant = {
-            id: Date.now().toString(),
-            name: document.getElementById('plant-name').value,
-            category: document.getElementById('plant-category').value,
-            price: document.getElementById('plant-price').value,
-            stock: document.getElementById('plant-stock').value
-          };
+    },
+    30000
+  );
 
-          const currentPlants = getPlants();
-          currentPlants.push(newPlant);
-          savePlants(currentPlants);
-          plantForm.reset();
-          renderAdminPlants();
-          alert('Plant added successfully to your live website! ✅');
-        });
-      }
+</script>
 
-      // पेज लोड होते ही लिस्ट दिखाओ
-      window.addEventListener('DOMContentLoaded', renderAdminPlants);
-    </script>
-  </body>
+</body>
 </html>
