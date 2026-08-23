@@ -52,3 +52,28 @@ npm notice To update run: npm install -g npm@11.19.0
 npm notice
 OK dist
 --- GIT ---
+[main 6f00c02] release: nursery production build
+ 11 files changed, 3009 insertions(+)
+ create mode 100644 .repair-backup-20260823-080654/package.json
+ create mode 100644 .repair-backup-20260823-080654/vercel.json
+ create mode 100644 .repair-backup-20260823-080654/vite.config.ts
+ create mode 100644 .repair-backup-20260823-080721/package.json
+ create mode 100644 .repair-backup-20260823-080721/vercel.json
+ create mode 100644 .repair-backup-20260823-080721/vite.config.ts
+ create mode 100644 .repair-backup-20260823-080739/package.json
+ create mode 100644 .repair-backup-20260823-080739/vercel.json
+ create mode 100644 .repair-backup-20260823-080739/vite.config.ts
+ create mode 100644 nursery-audit.txt
+ create mode 100644 release-report.txt
+main
+gitsafe-backup	https://github.com (fetch)
+gitsafe-backup	https://github.com (push)
+origin	https://github.com/hriramnursery872-cell/shri-ram-nursery.git (fetch)
+origin	https://github.com/hriramnursery872-cell/shri-ram-nursery.git (push)
+To https://github.com/hriramnursery872-cell/shri-ram-nursery.git
+   f989a21..6f00c02  main -> main
+--- VERCEL ---
+WARN: Vercel CLI not installed
+--- REPORT ---
+ M release-report.txt
+=== RELEASE FINISHED ===
