@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { defineConfig } from 'vite';
 
 const rawPort = process.env.PORT ?? '4173';
@@ -11,8 +12,13 @@ if (Number.isNaN(port) || port <= 0) {
 
 const basePath = process.env.BASE_PATH ?? '/';
 
-const projectRoot = path.resolve(import.meta.dirname);
+// Resolve project root reliably in ESM
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const projectRoot = path.resolve(__dirname);
 const outputRoot = path.resolve(projectRoot, 'dist');
+
+const pages = ['index', 'dashboard', 'plant', 'booking', 'orders', 'admin'];
+
 const staticFiles = [
   'manifest.json',
   'service-worker.js',
@@ -44,8 +50,17 @@ function preserveStaticFoundation() {
       for (const file of staticFiles) {
         const source = path.join(projectRoot, file);
         const destination = path.join(outputRoot, file);
-        fs.mkdirSync(path.dirname(destination), { recursive: true });
-        fs.copyFileSync(source, destination);
+        try {
+          if (fs.existsSync(source)) {
+            fs.mkdirSync(path.dirname(destination), { recursive: true });
+            fs.copyFileSync(source, destination);
+          }
+        } catch (err) {
+          // don't fail the build for missing optional assets
+          // but log for debugging in dev environments
+          // eslint-disable-next-line no-console
+          console.warn('preserve-static-foundation failed copying', file, err && err.message);
+        }
       }
     },
   };
@@ -61,14 +76,7 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: Object.fromEntries(
-        [
-          'index',
-          'dashboard',
-          'plant',
-          'booking',
-          'orders',
-          'admin',
-        ].map((page) => [page, path.join(projectRoot, `${page}.html`)]),
+        pages.map((page) => [page, path.resolve(projectRoot, `${page}.html`)])
       ),
     },
   },
