@@ -1,0 +1,12 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/plant", "destination": "/plant.html" },
+    { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/booking", "destination": "/booking.html" },
+    { "source": "/dashboard", "destination": "/dashboard.html" },
+    { "source": "/orders", "destination": "/orders.html" },
+    { "source": "/((?!images/|css/|js/|data/).*)", "destination": "/index.html" }
+  ]
+}
