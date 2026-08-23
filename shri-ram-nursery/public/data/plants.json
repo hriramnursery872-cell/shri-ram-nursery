@@ -1,0 +1,232 @@
+[
+  {
+    "id": "fruit_hisar_safeda_01",
+    "name": "अमरूद - हिसार सफेदा (Guava Hisar Safeda)",
+    "category": "Fruit Plants",
+    "price": 150,
+    "stock": 40,
+    "image": "images/guava-hisar-safeda.jpg",
+    "guide_link": "qr/guava-hisar-safeda.html",
+    "care_tips": "सप्ताह में 2-3 बार पानी दें"
+  },
+  {
+    "id": "fruit_shan_e_punjab_02",
+    "name": "शान-ए-पंजाब आडू (Peach Shan-e-Punjab)",
+    "category": "Fruit Plants",
+    "price": 200,
+    "stock": 30,
+    "image": "images/peach.jpg",
+    "guide_link": "qr/peach.html",
+    "care_tips": "धूप वाली जगह पर रखें"
+  },
+  {
+    "id": "fruit_blood_red_malta_03",
+    "name": "ब्लोट रेड माल्टा (Blood Red Malta)",
+    "category": "Fruit Plants",
+    "price": 250,
+    "stock": 25,
+    "image": "images/malta.jpg",
+    "guide_link": "qr/malta.html",
+    "care_tips": "उचित जल निकासी वाली मिट्टी आवश्यक है"
+  },
+  {
+    "id": "fruit_kinnow_04",
+    "name": "किन्नू (Kinnow)",
+    "category": "Fruit Plants",
+    "price": 200,
+    "stock": 35,
+    "image": "images/kinnow.jpg",
+    "guide_link": "qr/kinnow.html",
+    "care_tips": "नियमित रूप से खाद दें"
+  },
+  {
+    "id": "fruit_lemon_05",
+    "name": "नींबू (Lemon)",
+    "category": "Fruit Plants",
+    "price": 120,
+    "stock": 50,
+    "image": "images/lemon.jpg",
+    "guide_link": "qr/lemon.html",
+    "care_tips": "पूर्ण धूप में रखें"
+  },
+  {
+    "id": "fruit_golden_apple_06",
+    "name": "गोल्डन डोस्सेट सेब / सेब गोल्डन",
+    "category": "Fruit Plants",
+    "price": 300,
+    "stock": 20,
+    "image": "images/apple.jpg",
+    "guide_link": "qr/apple.html",
+    "care_tips": "ठंडी जलवायु और नमी पसंद है"
+  },
+  {
+    "id": "fruit_nijisiki_pear_07",
+    "name": "नीजिस्की नाशपति (Nijisiki Pear)",
+    "category": "Fruit Plants",
+    "price": 250,
+    "stock": 15,
+    "image": "images/pear.jpg",
+    "guide_link": "qr/pear.html",
+    "care_tips": "नियमित पानी दें"
+  },
+  {
+    "id": "fruit_punjab_nakh_08",
+    "name": "पंजाब नाख नाशपति (Punjab Nakh)",
+    "category": "Fruit Plants",
+    "price": 250,
+    "stock": 18,
+    "image": "images/pear.jpg",
+    "guide_link": "qr/pear.html",
+    "care_tips": "नियमित पानी दें"
+  },
+  {
+    "id": "fruit_punjab_beauty_09",
+    "name": "पंजाब ब्यूटी नाशपति (Punjab Beauty)",
+    "category": "Fruit Plants",
+    "price": 250,
+    "stock": 15,
+    "image": "images/pear.jpg",
+    "guide_link": "qr/pear.html",
+    "care_tips": "नियमित पानी दें"
+  },
+  {
+    "id": "fruit_arunima_mango_10",
+    "name": "अरुणिमा आम (Arunima Mango)",
+    "category": "Fruit Plants",
+    "price": 350,
+    "stock": 20,
+    "image": "images/mango.jpg",
+    "guide_link": "qr/mango.html",
+    "care_tips": "भरपूर धूप और मध्यम पानी"
+  },
+  {
+    "id": "fruit_ambika_mango_11",
+    "name": "अंबिका आम (Ambika Mango)",
+    "category": "Fruit Plants",
+    "price": 350,
+    "stock": 20,
+    "image": "images/mango.jpg",
+    "guide_link": "qr/mango.html",
+    "care_tips": "भरपूर धूप और मध्यम पानी"
+  },
+  {
+    "id": "fruit_grapes_12",
+    "name": "अंगूर (Grapes)",
+    "category": "Fruit Plants",
+    "price": 180,
+    "stock": 30,
+    "image": "images/grapes.jpg",
+    "guide_link": "qr/grapes.html",
+    "care_tips": "सहारा देकर बेल को बढ़ाएं"
+  },
+  {
+    "id": "fruit_mosambi_13",
+    "name": "मौसमी (Mosambi)",
+    "category": "Fruit Plants",
+    "price": 200,
+    "stock": 25,
+    "image": "images/mosambi.jpg",
+    "guide_link": "qr/mosambi.html",
+    "care_tips": "उचित धूप और सिंचाई"
+  },
+  {
+    "id": "fruit_jamun_14",
+    "name": "जामुन (Jamun)",
+    "category": "Fruit Plants",
+    "price": 220,
+    "stock": 22,
+    "image": "images/jamun.jpg",
+    "guide_link": "qr/jamun.html",
+    "care_tips": "खुले स्थान में लगाएं"
+  },
+  {
+    "id": "fruit_anna_apple_15",
+    "name": "सेब अन्ना (Apple Anna)",
+    "category": "Fruit Plants",
+    "price": 300,
+    "stock": 15,
+    "image": "images/apple.jpg",
+    "guide_link": "qr/apple.html",
+    "care_tips": "नियमित खाद और पानी"
+  },
+  {
+    "id": "indoor_green_money_01",
+    "name": "ग्रीन मनी प्लांट (Green Money Plant)",
+    "category": "Indoor Plants",
+    "price": 100,
+    "stock": 60,
+    "image": "images/money-plant.jpg",
+    "guide_link": "qr/money-plant.html",
+    "care_tips": "कम धूप में भी आसानी से चलता है"
+  },
+  {
+    "id": "indoor_golden_pothos_02",
+    "name": "गोल्डन मनी प्लांट (Golden Pothos)",
+    "category": "Indoor Plants",
+    "price": 120,
+    "stock": 50,
+    "image": "images/golden-pothos.jpg",
+    "guide_link": "qr/money-plant.html",
+    "care_tips": "हफ्ते में एक बार पानी दें"
+  },
+  {
+    "id": "indoor_snake_plant_03",
+    "name": "स्नेक प्लांट (Snake Plant - Sansevieria)",
+    "category": "Indoor Plants",
+    "price": 150,
+    "stock": 45,
+    "image": "images/snake-plant.jpg",
+    "guide_link": "qr/snake-plant.html",
+    "care_tips": "कम पानी की आवश्यकता होती है"
+  },
+  {
+    "id": "indoor_table_palm_04",
+    "name": "टेबल पाम (Table Palm)",
+    "category": "Indoor Plants",
+    "price": 200,
+    "stock": 25,
+    "image": "images/palm.jpg",
+    "guide_link": "qr/palm.html",
+    "care_tips": "हल्की छांव वाली जगह पर रखें"
+  },
+  {
+    "id": "dec_song_of_india_01",
+    "name": "सॉन्ग ऑफ़ इंडिया ड्रैकेना (Song of India)",
+    "category": "Decorative Plants",
+    "price": 180,
+    "stock": 30,
+    "image": "images/dracaena.jpg",
+    "guide_link": "qr/dracaena.html",
+    "care_tips": "प्रत्यक्ष तेज धूप से बचाएं"
+  },
+  {
+    "id": "dec_croton_varieties_02",
+    "name": "क्रोटन प्लांट्स (Croton Varieties)",
+    "category": "Decorative Plants",
+    "price": 220,
+    "stock": 35,
+    "image": "images/croton.jpg",
+    "guide_link": "qr/croton.html",
+    "care_tips": "नमी और आंशिक धूप पसंद है"
+  },
+  {
+    "id": "hedge_topiary_01",
+    "name": "टॉपायरी शेप शो-प्लांट्स (Topiary Shape Shrubs)",
+    "category": "Hedge & Topiary",
+    "price": 300,
+    "stock": 15,
+    "image": "images/topiary.jpg",
+    "guide_link": "qr/topiary.html",
+    "care_tips": "समय पर कटाई-छटाई (Pruning) करें"
+  },
+  {
+    "id": "hedge_boundary_02",
+    "name": "हेज बाउंड्री प्लांट्स (Hedge Boundary Plants)",
+    "category": "Hedge & Topiary",
+    "price": 80,
+    "stock": 100,
+    "image": "images/hedge.jpg",
+    "guide_link": "qr/hedge.html",
+    "care_tips": "बाउंड्री की सुंदरता के लिए नियमित छटाई करें"
+  }
+]
