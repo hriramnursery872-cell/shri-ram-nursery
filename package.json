@@ -1,22 +1,19 @@
 {
-  "name": "workspace",
+  "name": "shri-ram-nursery",
   "version": "0.0.0",
+  "packageManager": "pnpm",
   "license": "MIT",
   "private": true,
   "scripts": {
     "preinstall": "sh -c 'rm -f package-lock.json yarn.lock; case \"$npm_config_user_agent\" in pnpm/*) ;; *) echo \"Use pnpm instead\" >&2; exit 1 ;; esac'",
-    "build": "pnpm run typecheck && pnpm -r --if-present run build",
-    "typecheck:libs": "tsc --build",
-    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck",
-    "start": "node -e \"const express = require('express'); const app = express(); app.use(express.static('./artifacts/shri-ram-nursery/dist/public')); app.get('*', (req, res) => res.sendFile('index.html', { root: './artifacts/shri-ram-nursery/dist/public' })); app.listen(8080, () => console.log('🚀 श्री राम नर्सरी सर्वर पोर्ट 8080 पर चालू हो गया है!'));\""
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "dependencies": {
-    "@replit/connectors-sdk": "^0.4.1",
-    "express": "^4.19.2"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "prettier": "^3.9.6",
+    "@vitejs/plugin-react": "^5.0.4",
     "typescript": "~5.9.3",
-    "vite": "catalog:"
+    "vite": "7.3.6"
   }
 }
