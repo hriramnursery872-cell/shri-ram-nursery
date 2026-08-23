@@ -1,13 +1,14 @@
-// ============================================================
-// SHRI RAM NURSERY - CENTRAL PLANT DATA ENGINE
-// Bhuna
-// ============================================================
+/* ============================================================
+   SHRI RAM NURSERY - CENTRAL PLANT DATA ENGINE
+   Bhuna
+   Premium Plant Catalog
+   ============================================================ */
 
 const STORAGE_KEY = "shri_ram_nursery_plants_v2";
 
-// ============================================================
-// MASTER CATEGORIES
-// ============================================================
+/* ============================================================
+   MASTER CATEGORIES
+   ============================================================ */
 
 export const PLANT_CATEGORIES = [
   {
@@ -40,9 +41,19 @@ export const PLANT_CATEGORIES = [
   }
 ];
 
-// ============================================================
-// MASTER PLANT CATALOG
-// ============================================================
+/* ============================================================
+   MASTER PLANT CATALOG
+   ------------------------------------------------------------
+   image:
+   वर्तमान nursery plant की फोटो
+
+   mature_image:
+   बड़ा / mature होने पर पौधे का visual
+
+   NOTE:
+   mature_image की actual files बाद में /images/ folder में
+   रखी जाएंगी।
+   ============================================================ */
 
 const DEFAULT_PLANTS = [
   {
@@ -52,9 +63,11 @@ const DEFAULT_PLANTS = [
     category_hi: "फलदार पौधे",
     variety: "L-49 / Hisar Safeda",
     image: "images/guava-hisar-safeda.jpg",
+    mature_image: "images/mature-guava-hisar-safeda.jpg",
     guide_link: "qr/guava-hisar-safeda.html",
     care_tips: "अमरूद को रोज़ 5-6 घंटे धूप दें और नियमित सिंचाई करें।"
   },
+
   {
     id: "fruit_peach_shan_e_punjab_01",
     name: "आड़ू (Peach)",
@@ -62,9 +75,11 @@ const DEFAULT_PLANTS = [
     category_hi: "फलदार पौधे",
     variety: "Shan-e-Punjab / Alucha",
     image: "images/peach.jpg",
+    mature_image: "images/mature-peach.jpg",
     guide_link: "qr/peach.html",
     care_tips: "पूरी धूप और अच्छी जल निकासी वाली मिट्टी उपयुक्त है।"
   },
+
   {
     id: "fruit_plum_satluj_purple_01",
     name: "प्लम (Plum)",
@@ -72,9 +87,11 @@ const DEFAULT_PLANTS = [
     category_hi: "फलदार पौधे",
     variety: "Satluj Purple / Alucha / Punjab Beauty",
     image: "images/plum.jpg",
+    mature_image: "images/mature-plum.jpg",
     guide_link: "qr/plum.html",
     care_tips: "धूप वाली जगह और नियमित सिंचाई रखें।"
   },
+
   {
     id: "fruit_lemon_jatti_khatti_01",
     name: "नींबू (Lemon)",
@@ -82,9 +99,11 @@ const DEFAULT_PLANTS = [
     category_hi: "फलदार पौधे",
     variety: "Jatti Khatti",
     image: "images/lemon.jpg",
+    mature_image: "images/mature-lemon.jpg",
     guide_link: "qr/lemon.html",
     care_tips: "अच्छी धूप, जल निकासी और नियमित खाद दें।"
   },
+
   {
     id: "fruit_malta_blood_red_01",
     name: "माल्टा (Malta Blood Red)",
@@ -92,9 +111,11 @@ const DEFAULT_PLANTS = [
     category_hi: "फलदार पौधे",
     variety: "Blood Red",
     image: "images/malta.jpg",
+    mature_image: "images/mature-malta.jpg",
     guide_link: "qr/malta.html",
     care_tips: "पूरी धूप और नियमित पानी आवश्यक है।"
   },
+
   {
     id: "fruit_pear_punjab_nakh_01",
     name: "नाशपाती / नाख (Pear)",
@@ -102,9 +123,11 @@ const DEFAULT_PLANTS = [
     category_hi: "फलदार पौधे",
     variety: "Punjab Nakh / Patharnakh / Nijisiki / Kainth Rootstock",
     image: "images/pear.jpg",
+    mature_image: "images/mature-pear.jpg",
     guide_link: "qr/pear.html",
     care_tips: "अच्छी धूप और उपयुक्त जल निकासी वाली मिट्टी रखें।"
   },
+
   {
     id: "fruit_grape_01",
     name: "अंगूर (Grape)",
@@ -112,9 +135,11 @@ const DEFAULT_PLANTS = [
     category_hi: "फलदार पौधे",
     variety: "Grape",
     image: "images/grape.jpg",
+    mature_image: "images/mature-grape.jpg",
     guide_link: "qr/grape.html",
     care_tips: "अंगूर की बेल को सहारा और पर्याप्त धूप दें।"
   },
+
   {
     id: "fruit_kinnow_01",
     name: "किन्नू (Kinnow)",
@@ -122,9 +147,11 @@ const DEFAULT_PLANTS = [
     category_hi: "फलदार पौधे",
     variety: "Kinnow",
     image: "images/kinnow.jpg",
+    mature_image: "images/mature-kinnow.jpg",
     guide_link: "qr/kinnow.html",
     care_tips: "धूप और नियमित सिंचाई के साथ जैविक खाद दें।"
   },
+
   {
     id: "fruit_mosambi_01",
     name: "मौसमी (Mosambi / Sweet Lime)",
@@ -132,9 +159,11 @@ const DEFAULT_PLANTS = [
     category_hi: "फलदार पौधे",
     variety: "Sweet Lime",
     image: "images/mosambi.jpg",
+    mature_image: "images/mature-mosambi.jpg",
     guide_link: "qr/mosambi.html",
     care_tips: "पूरी धूप और अच्छी जल निकासी आवश्यक है।"
   },
+
   {
     id: "fruit_lychee_01",
     name: "लीची (Lychee)",
@@ -142,9 +171,11 @@ const DEFAULT_PLANTS = [
     category_hi: "फलदार पौधे",
     variety: "Lychee",
     image: "images/lychee.jpg",
+    mature_image: "images/mature-lychee.jpg",
     guide_link: "qr/lychee.html",
     care_tips: "नियमित पानी और गर्म मौसम में पर्याप्त नमी रखें।"
   },
+
   {
     id: "fruit_mango_ambika_lalima_01",
     name: "आम (Mango)",
@@ -152,9 +183,11 @@ const DEFAULT_PLANTS = [
     category_hi: "फलदार पौधे",
     variety: "Ambika / Lalima",
     image: "images/mango.jpg",
+    mature_image: "images/mature-mango.jpg",
     guide_link: "qr/mango.html",
     care_tips: "आम के पौधे को खुली धूप और पर्याप्त जगह दें।"
   },
+
   {
     id: "fruit_jamun_01",
     name: "जामुन (Jamun)",
@@ -162,9 +195,11 @@ const DEFAULT_PLANTS = [
     category_hi: "फलदार पौधे",
     variety: "Jamun",
     image: "images/jamun.jpg",
+    mature_image: "images/mature-jamun.jpg",
     guide_link: "qr/jamun.html",
     care_tips: "धूप में रखें और शुरुआती अवस्था में नियमित सिंचाई करें।"
   },
+
   {
     id: "fruit_apple_golden_anna_01",
     name: "सेब (Apple)",
@@ -172,6 +207,7 @@ const DEFAULT_PLANTS = [
     category_hi: "फलदार पौधे",
     variety: "Golden / Anna",
     image: "images/apple.jpg",
+    mature_image: "images/mature-apple.jpg",
     guide_link: "qr/apple.html",
     care_tips: "उपयुक्त जलवायु, धूप और अच्छी जल निकासी वाली मिट्टी रखें।"
   },
@@ -183,9 +219,11 @@ const DEFAULT_PLANTS = [
     category_hi: "इंडोर प्लांट्स",
     variety: "Golden Pothos",
     image: "images/money-plant.jpg",
+    mature_image: "images/mature-money-plant.jpg",
     guide_link: "qr/money-plant.html",
     care_tips: "हल्की रोशनी में रखें और मिट्टी पूरी तरह सूखने न दें।"
   },
+
   {
     id: "indoor_syngonium_01",
     name: "सिंगोनियम (Syngonium)",
@@ -193,9 +231,11 @@ const DEFAULT_PLANTS = [
     category_hi: "इंडोर प्लांट्स",
     variety: "Syngonium",
     image: "images/syngonium.jpg",
+    mature_image: "images/mature-syngonium.jpg",
     guide_link: "qr/syngonium.html",
     care_tips: "तेज़ सीधी धूप से बचाएं और हल्की नमी रखें।"
   },
+
   {
     id: "indoor_snake_plant_01",
     name: "स्नेक प्लांट (Snake Plant)",
@@ -203,9 +243,11 @@ const DEFAULT_PLANTS = [
     category_hi: "इंडोर प्लांट्स",
     variety: "Snake Plant",
     image: "images/snake-plant.jpg",
+    mature_image: "images/mature-snake-plant.jpg",
     guide_link: "qr/snake-plant.html",
     care_tips: "कम पानी में भी अच्छा रहता है। तेज़ सीधी धूप से बचाएं।"
   },
+
   {
     id: "indoor_schefflera_01",
     name: "शेफलेरा (Schefflera)",
@@ -213,9 +255,11 @@ const DEFAULT_PLANTS = [
     category_hi: "इंडोर प्लांट्स",
     variety: "Schefflera",
     image: "images/schefflera.jpg",
+    mature_image: "images/mature-schefflera.jpg",
     guide_link: "qr/schefflera.html",
     care_tips: "ब्राइट इनडायरेक्ट लाइट और मध्यम पानी दें।"
   },
+
   {
     id: "indoor_shade_collection_01",
     name: "अन्य छायादार इंडोर पौधे",
@@ -223,6 +267,7 @@ const DEFAULT_PLANTS = [
     category_hi: "इंडोर प्लांट्स",
     variety: "Shade House Collection",
     image: "images/indoor-collection.jpg",
+    mature_image: "images/mature-indoor-collection.jpg",
     guide_link: "qr/indoor-collection.html",
     care_tips: "शेड-नेट या घर के अंदर पर्याप्त रोशनी वाली जगह रखें।"
   },
@@ -234,9 +279,11 @@ const DEFAULT_PLANTS = [
     category_hi: "आउटडोर प्लांट्स",
     variety: "Tecoma",
     image: "images/tecoma.jpg",
+    mature_image: "images/mature-tecoma.jpg",
     guide_link: "qr/tecoma.html",
     care_tips: "पूरी धूप और नियमित कटाई-छंटाई से अच्छा विकास होता है।"
   },
+
   {
     id: "outdoor_jade_01",
     name: "जेड प्लांट (Jade Plant)",
@@ -244,9 +291,11 @@ const DEFAULT_PLANTS = [
     category_hi: "आउटडोर प्लांट्स",
     variety: "Jade",
     image: "images/jade.jpg",
+    mature_image: "images/mature-jade.jpg",
     guide_link: "qr/jade.html",
     care_tips: "धूप वाली जगह और सीमित पानी रखें।"
   },
+
   {
     id: "outdoor_hedge_collection_01",
     name: "आउटडोर झाड़ियाँ एवं हेज प्लांट्स",
@@ -254,6 +303,7 @@ const DEFAULT_PLANTS = [
     category_hi: "आउटडोर प्लांट्स",
     variety: "Hedge Plant Collection",
     image: "images/hedge-plants.jpg",
+    mature_image: "images/mature-hedge-plants.jpg",
     guide_link: "qr/hedge-plants.html",
     care_tips: "हेज के लिए नियमित सिंचाई और आकार के अनुसार कटाई करें।"
   },
@@ -265,9 +315,11 @@ const DEFAULT_PLANTS = [
     category_hi: "फूलों के पौधे",
     variety: "सफेद एवं अन्य रंग",
     image: "images/hibiscus.jpg",
+    mature_image: "images/mature-hibiscus.jpg",
     guide_link: "qr/hibiscus.html",
     care_tips: "सुबह की धूप और नियमित पानी दें। मुरझाए फूल हटाते रहें।"
   },
+
   {
     id: "flowering_perennial_collection_01",
     name: "बारहमासी फूल वाले पौधे",
@@ -275,9 +327,11 @@ const DEFAULT_PLANTS = [
     category_hi: "फूलों के पौधे",
     variety: "Perennial Collection",
     image: "images/perennial-flowers.jpg",
+    mature_image: "images/mature-perennial-flowers.jpg",
     guide_link: "qr/perennial-flowers.html",
     care_tips: "धूप, खाद और नियमित सिंचाई से अच्छी फूलिंग मिलती है।"
   },
+
   {
     id: "flowering_seasonal_collection_01",
     name: "मौसमी फूल वाले पौधे",
@@ -285,6 +339,7 @@ const DEFAULT_PLANTS = [
     category_hi: "फूलों के पौधे",
     variety: "Seasonal Collection",
     image: "images/seasonal-flowers.jpg",
+    mature_image: "images/mature-seasonal-flowers.jpg",
     guide_link: "qr/seasonal-flowers.html",
     care_tips: "मौसम के अनुसार धूप, पानी और खाद दें।"
   },
@@ -296,9 +351,11 @@ const DEFAULT_PLANTS = [
     category_hi: "डेकोरेटिव एवं फॉलिएज पौधे",
     variety: "Croton",
     image: "images/croton.jpg",
+    mature_image: "images/mature-croton.jpg",
     guide_link: "qr/croton.html",
     care_tips: "ब्राइट लाइट में रखें और मिट्टी में हल्की नमी बनाए रखें।"
   },
+
   {
     id: "decorative_dracaena_01",
     name: "ड्रैकैना (Dracaena)",
@@ -306,9 +363,11 @@ const DEFAULT_PLANTS = [
     category_hi: "डेकोरेटिव एवं फॉलिएज पौधे",
     variety: "Dracaena",
     image: "images/dracaena.jpg",
+    mature_image: "images/mature-dracaena.jpg",
     guide_link: "qr/dracaena.html",
     care_tips: "इनडायरेक्ट लाइट और नियंत्रित पानी उपयुक्त है।"
   },
+
   {
     id: "decorative_rubber_plant_01",
     name: "रबर प्लांट (Rubber Plant)",
@@ -316,9 +375,11 @@ const DEFAULT_PLANTS = [
     category_hi: "डेकोरेटिव एवं फॉलिएज पौधे",
     variety: "Rubber Plant",
     image: "images/rubber-plant.jpg",
+    mature_image: "images/mature-rubber-plant.jpg",
     guide_link: "qr/rubber-plant.html",
     care_tips: "ब्राइट इनडायरेक्ट लाइट और नियमित लेकिन सीमित पानी दें।"
   },
+
   {
     id: "decorative_silver_bush_01",
     name: "सिल्वर बुश (Silver Bush)",
@@ -326,6 +387,7 @@ const DEFAULT_PLANTS = [
     category_hi: "डेकोरेटिव एवं फॉलिएज पौधे",
     variety: "Silver Bush",
     image: "images/silver-bush.jpg",
+    mature_image: "images/mature-silver-bush.jpg",
     guide_link: "qr/silver-bush.html",
     care_tips: "अच्छी रोशनी और उचित जल निकासी रखें।"
   },
@@ -337,9 +399,11 @@ const DEFAULT_PLANTS = [
     category_hi: "लैंडस्केपिंग एवं पाम्स",
     variety: "Areca Palm",
     image: "images/areca-palm.jpg",
+    mature_image: "images/mature-areca-palm.jpg",
     guide_link: "qr/areca-palm.html",
     care_tips: "उज्ज्वल रोशनी और नियमित नमी रखें।"
   },
+
   {
     id: "landscape_foxtail_palm_01",
     name: "फॉक्स टेल पाम (Foxtail Palm)",
@@ -347,9 +411,11 @@ const DEFAULT_PLANTS = [
     category_hi: "लैंडस्केपिंग एवं पाम्स",
     variety: "Foxtail Palm",
     image: "images/foxtail-palm.jpg",
+    mature_image: "images/mature-foxtail-palm.jpg",
     guide_link: "qr/foxtail-palm.html",
     care_tips: "खुली धूप और पर्याप्त जगह में लगाएं।"
   },
+
   {
     id: "landscape_fan_palm_01",
     name: "फैन पाम (Fan Palm)",
@@ -357,9 +423,11 @@ const DEFAULT_PLANTS = [
     category_hi: "लैंडस्केपिंग एवं पाम्स",
     variety: "Fan Palm",
     image: "images/fan-palm.jpg",
+    mature_image: "images/mature-fan-palm.jpg",
     guide_link: "qr/fan-palm.html",
     care_tips: "पूरी धूप और अच्छी जल निकासी वाली मिट्टी रखें।"
   },
+
   {
     id: "landscape_ficus_topiary_01",
     name: "फाइकस टोपियारी (Ficus Topiary)",
@@ -367,9 +435,11 @@ const DEFAULT_PLANTS = [
     category_hi: "लैंडस्केपिंग एवं पाम्स",
     variety: "Topiary / Shaped Ficus",
     image: "images/ficus-topiary.jpg",
+    mature_image: "images/mature-ficus-topiary.jpg",
     guide_link: "qr/ficus-topiary.html",
     care_tips: "आकार बनाए रखने के लिए समय-समय पर pruning करें।"
   },
+
   {
     id: "landscape_thuja_01",
     name: "थूजा / कॉनिफर (Thuja)",
@@ -377,9 +447,11 @@ const DEFAULT_PLANTS = [
     category_hi: "लैंडस्केपिंग एवं कॉनिफर्स",
     variety: "Thuja / Conifers",
     image: "images/thuja.jpg",
+    mature_image: "images/mature-thuja.jpg",
     guide_link: "qr/thuja.html",
     care_tips: "खुली हवा, उचित धूप और अच्छी जल निकासी रखें।"
   },
+
   {
     id: "landscape_christmas_tree_01",
     name: "क्रिसमस ट्री (Christmas Tree)",
@@ -387,9 +459,11 @@ const DEFAULT_PLANTS = [
     category_hi: "लैंडस्केपिंग एवं कॉनिफर्स",
     variety: "Christmas Tree",
     image: "images/christmas-tree.jpg",
+    mature_image: "images/mature-christmas-tree.jpg",
     guide_link: "qr/christmas-tree.html",
     care_tips: "उचित रोशनी और नियंत्रित सिंचाई रखें।"
   },
+
   {
     id: "landscape_saplings_01",
     name: "नर्सरी सैपलिंग्स एवं छोटे पौधे",
@@ -397,6 +471,7 @@ const DEFAULT_PLANTS = [
     category_hi: "नर्सरी सैपलिंग्स",
     variety: "Saplings / Nursery Beds",
     image: "images/saplings.jpg",
+    mature_image: "images/mature-saplings.jpg",
     guide_link: "qr/saplings.html",
     care_tips: "छोटे पौधों को नियमित सिंचाई और धीरे-धीरे धूप की आदत डालें।"
   },
@@ -408,9 +483,11 @@ const DEFAULT_PLANTS = [
     category_hi: "औषधीय एवं अन्य पौधे",
     variety: "Tulsi",
     image: "images/tulsi.jpg",
+    mature_image: "images/mature-tulsi.jpg",
     guide_link: "qr/tulsi.html",
     care_tips: "धूप वाली जगह और नियमित लेकिन नियंत्रित पानी दें।"
   },
+
   {
     id: "medicinal_aloe_vera_01",
     name: "एलोवेरा (Aloe Vera)",
@@ -418,9 +495,11 @@ const DEFAULT_PLANTS = [
     category_hi: "औषधीय एवं अन्य पौधे",
     variety: "Aloe Vera",
     image: "images/aloe-vera.jpg",
+    mature_image: "images/mature-aloe-vera.jpg",
     guide_link: "qr/aloe-vera.html",
     care_tips: "कम पानी दें और जल निकासी अच्छी रखें।"
   },
+
   {
     id: "other_curry_leaf_01",
     name: "करी पत्ता (Curry Leaf)",
@@ -428,9 +507,11 @@ const DEFAULT_PLANTS = [
     category_hi: "औषधीय एवं अन्य पौधे",
     variety: "Curry Leaf",
     image: "images/curry-leaf.jpg",
+    mature_image: "images/mature-curry-leaf.jpg",
     guide_link: "qr/curry-leaf.html",
     care_tips: "धूप और नियमित सिंचाई के साथ जैविक खाद दें।"
   },
+
   {
     id: "other_lemongrass_01",
     name: "लेमन ग्रास (Lemongrass)",
@@ -438,93 +519,179 @@ const DEFAULT_PLANTS = [
     category_hi: "औषधीय एवं अन्य पौधे",
     variety: "Lemongrass",
     image: "images/lemongrass.jpg",
+    mature_image: "images/mature-lemongrass.jpg",
     guide_link: "qr/lemongrass.html",
     care_tips: "धूप और नियमित पानी में तेजी से बढ़ता है।"
   }
 ];
 
-// ============================================================
-// NORMALIZE
-// ============================================================
+/* ============================================================
+   NORMALIZE
+   ============================================================ */
 
 function normalizePlant(plant) {
   return {
-    id: String(plant?.id || `plant-${Date.now()}-${Math.random()}`),
-    name: String(plant?.name || "Unnamed Plant"),
-    category: String(plant?.category || "Other"),
-    category_hi: String(plant?.category_hi || ""),
-    variety: String(plant?.variety || ""),
-    image: String(plant?.image || ""),
-    guide_link: String(plant?.guide_link || ""),
+    id: String(
+      plant?.id ||
+      `plant-${Date.now()}-${Math.random()}`
+    ),
+
+    name: String(
+      plant?.name ||
+      "Unnamed Plant"
+    ),
+
+    category: String(
+      plant?.category ||
+      "Other"
+    ),
+
+    category_hi: String(
+      plant?.category_hi ||
+      ""
+    ),
+
+    variety: String(
+      plant?.variety ||
+      ""
+    ),
+
+    image: String(
+      plant?.image ||
+      ""
+    ),
+
+    mature_image: String(
+      plant?.mature_image ||
+      ""
+    ),
+
+    guide_link: String(
+      plant?.guide_link ||
+      ""
+    ),
+
     care_tips: String(
       plant?.care_tips ||
       "इस पौधे की उचित धूप, पानी और देखभाल करें।"
     ),
+
     stock: true,
-    likes: Number(plant?.likes || 0),
-    shares: Number(plant?.shares || 0)
+
+    likes: Number(
+      plant?.likes ||
+      0
+    ),
+
+    shares: Number(
+      plant?.shares ||
+      0
+    )
   };
 }
 
-// ============================================================
-// LOAD
-// ============================================================
+/* ============================================================
+   LOAD
+   ============================================================ */
 
 export async function loadPlants() {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved =
+      localStorage.getItem(STORAGE_KEY);
 
     if (!saved) {
-      return DEFAULT_PLANTS.map(normalizePlant);
+      return DEFAULT_PLANTS.map(
+        normalizePlant
+      );
     }
 
-    const parsed = JSON.parse(saved);
+    const parsed =
+      JSON.parse(saved);
 
-    if (!Array.isArray(parsed) || parsed.length === 0) {
-      return DEFAULT_PLANTS.map(normalizePlant);
+    if (
+      !Array.isArray(parsed) ||
+      parsed.length === 0
+    ) {
+      return DEFAULT_PLANTS.map(
+        normalizePlant
+      );
     }
 
-    return parsed.map(normalizePlant);
+    return parsed.map(
+      normalizePlant
+    );
+
   } catch (error) {
-    console.error("Unable to load plant catalog:", error);
-    return DEFAULT_PLANTS.map(normalizePlant);
+
+    console.error(
+      "Unable to load plant catalog:",
+      error
+    );
+
+    return DEFAULT_PLANTS.map(
+      normalizePlant
+    );
   }
 }
 
-// ============================================================
-// GET
-// ============================================================
+/* ============================================================
+   GET
+   ============================================================ */
 
 export function getPlants() {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
+
+    const saved =
+      localStorage.getItem(STORAGE_KEY);
 
     if (!saved) {
-      return DEFAULT_PLANTS.map(normalizePlant);
+      return DEFAULT_PLANTS.map(
+        normalizePlant
+      );
     }
 
-    const parsed = JSON.parse(saved);
+    const parsed =
+      JSON.parse(saved);
 
-    if (!Array.isArray(parsed) || parsed.length === 0) {
-      return DEFAULT_PLANTS.map(normalizePlant);
+    if (
+      !Array.isArray(parsed) ||
+      parsed.length === 0
+    ) {
+      return DEFAULT_PLANTS.map(
+        normalizePlant
+      );
     }
 
-    return parsed.map(normalizePlant);
+    return parsed.map(
+      normalizePlant
+    );
+
   } catch (error) {
-    console.error("Unable to read plants:", error);
-    return DEFAULT_PLANTS.map(normalizePlant);
+
+    console.error(
+      "Unable to read plants:",
+      error
+    );
+
+    return DEFAULT_PLANTS.map(
+      normalizePlant
+    );
   }
 }
 
-// ============================================================
-// SAVE
-// ============================================================
+/* ============================================================
+   SAVE
+   ============================================================ */
 
 export function savePlants(plants) {
   try {
-    const cleanPlants = Array.isArray(plants)
-      ? plants.map(normalizePlant)
-      : [];
+
+    const cleanPlants =
+      Array.isArray(plants)
+        ? plants.map(
+            normalizePlant
+          )
+        : [];
 
     localStorage.setItem(
       STORAGE_KEY,
@@ -532,182 +699,268 @@ export function savePlants(plants) {
     );
 
     return cleanPlants;
+
   } catch (error) {
-    console.error("Unable to save plants:", error);
+
+    console.error(
+      "Unable to save plants:",
+      error
+    );
+
     return [];
   }
 }
 
-// ============================================================
-// ADD
-// ============================================================
+/* ============================================================
+   ADD
+   ============================================================ */
 
 export function addPlant(plant) {
-  const plants = getPlants();
 
-  const newPlant = normalizePlant({
-    ...plant,
-    id: plant?.id || `plant-${Date.now()}`
-  });
+  const plants =
+    getPlants();
 
-  plants.push(newPlant);
-  savePlants(plants);
+  const newPlant =
+    normalizePlant({
+      ...plant,
+      id:
+        plant?.id ||
+        `plant-${Date.now()}`
+    });
+
+  plants.push(
+    newPlant
+  );
+
+  savePlants(
+    plants
+  );
 
   return newPlant;
 }
 
-// ============================================================
-// UPDATE
-// ============================================================
+/* ============================================================
+   UPDATE
+   ============================================================ */
 
-export function updatePlant(id, changes = {}) {
-  const plants = getPlants();
+export function updatePlant(
+  id,
+  changes = {}
+) {
 
-  const index = plants.findIndex(
-    plant => String(plant.id) === String(id)
-  );
+  const plants =
+    getPlants();
+
+  const index =
+    plants.findIndex(
+      plant =>
+        String(plant.id) ===
+        String(id)
+    );
 
   if (index === -1) {
     return null;
   }
 
-  plants[index] = normalizePlant({
-    ...plants[index],
-    ...changes,
-    id: plants[index].id
-  });
+  plants[index] =
+    normalizePlant({
+      ...plants[index],
+      ...changes,
+      id:
+        plants[index].id
+    });
 
-  savePlants(plants);
+  savePlants(
+    plants
+  );
 
   return plants[index];
 }
 
-// ============================================================
-// DELETE
-// ============================================================
+/* ============================================================
+   DELETE
+   ============================================================ */
 
 export function deletePlant(id) {
-  const plants = getPlants();
 
-  const updated = plants.filter(
-    plant => String(plant.id) !== String(id)
+  const plants =
+    getPlants();
+
+  const updated =
+    plants.filter(
+      plant =>
+        String(plant.id) !==
+        String(id)
+    );
+
+  savePlants(
+    updated
   );
-
-  savePlants(updated);
 
   return updated;
 }
 
-// ============================================================
-// SINGLE PLANT
-// ============================================================
+/* ============================================================
+   SINGLE PLANT
+   ============================================================ */
 
 export function getPlantById(id) {
-  if (id === null || id === undefined) {
+
+  if (
+    id === null ||
+    id === undefined
+  ) {
     return null;
   }
 
   return (
     getPlants().find(
-      plant => String(plant.id) === String(id)
-    ) || null
+      plant =>
+        String(plant.id) ===
+        String(id)
+    ) ||
+    null
   );
 }
 
-// ============================================================
-// CATEGORY
-// ============================================================
+/* ============================================================
+   CATEGORY
+   ============================================================ */
 
-export function getPlantsByCategory(category) {
-  const plants = getPlants();
+export function getPlantsByCategory(
+  category
+) {
 
-  if (!category || category === "All") {
+  const plants =
+    getPlants();
+
+  if (
+    !category ||
+    category === "All"
+  ) {
     return plants;
   }
 
   return plants.filter(
     plant =>
-      String(plant.category).toLowerCase() ===
-      String(category).toLowerCase()
+      String(
+        plant.category
+      ).toLowerCase() ===
+      String(
+        category
+      ).toLowerCase()
   );
 }
 
-// ============================================================
-// CATEGORY LABEL
-// ============================================================
+/* ============================================================
+   CATEGORY LABEL
+   ============================================================ */
 
-export function getCategoryLabel(category) {
-  const found = PLANT_CATEGORIES.find(
-    item =>
-      String(item.value).toLowerCase() ===
-      String(category).toLowerCase()
-  );
+export function getCategoryLabel(
+  category
+) {
 
-  return found ? found.label : "🌱 अन्य पौधे";
+  const found =
+    PLANT_CATEGORIES.find(
+      item =>
+        String(
+          item.value
+        ).toLowerCase() ===
+        String(
+          category
+        ).toLowerCase()
+    );
+
+  return found
+    ? found.label
+    : "🌱 अन्य पौधे";
 }
 
-// ============================================================
-// AVAILABILITY
-// ============================================================
+/* ============================================================
+   AVAILABILITY
+   ============================================================ */
 
 export function getAvailabilityLabel() {
   return "🟢 उपलब्ध";
 }
 
-// ============================================================
-// SEARCH
-// ============================================================
+/* ============================================================
+   SEARCH
+   ============================================================ */
 
-export function searchPlants(query) {
-  const text = String(query || "")
-    .trim()
-    .toLowerCase();
+export function searchPlants(
+  query
+) {
+
+  const text =
+    String(
+      query || ""
+    )
+      .trim()
+      .toLowerCase();
 
   if (!text) {
     return getPlants();
   }
 
-  return getPlants().filter(plant =>
-    [
-      plant.name,
-      plant.category,
-      plant.category_hi,
-      plant.variety
-    ].some(value =>
-      String(value || "")
-        .toLowerCase()
-        .includes(text)
-    )
+  return getPlants().filter(
+    plant =>
+      [
+        plant.name,
+        plant.category,
+        plant.category_hi,
+        plant.variety
+      ].some(
+        value =>
+          String(
+            value || ""
+          )
+            .toLowerCase()
+            .includes(text)
+      )
   );
 }
 
-// ============================================================
-// LIKE
-// ============================================================
+/* ============================================================
+   LIKE
+   ============================================================ */
 
 export function likePlant(id) {
-  const plants = getPlants();
 
-  const plant = plants.find(
-    item => String(item.id) === String(id)
-  );
+  const plants =
+    getPlants();
+
+  const plant =
+    plants.find(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
 
   if (!plant) {
     return null;
   }
 
-  plant.likes = Number(plant.likes || 0) + 1;
+  plant.likes =
+    Number(
+      plant.likes || 0
+    ) + 1;
 
-  savePlants(plants);
+  savePlants(
+    plants
+  );
 
   return plant.likes;
 }
 
-// ============================================================
-// SHARE
-// ============================================================
+/* ============================================================
+   SHARE
+   ============================================================ */
 
-export async function sharePlant(plant) {
+export async function sharePlant(
+  plant
+) {
+
   if (!plant) {
     return false;
   }
@@ -716,59 +969,97 @@ export async function sharePlant(plant) {
     `${window.location.origin}/plant.html?plantId=${encodeURIComponent(plant.id)}`;
 
   const shareData = {
-    title: plant.name,
+    title:
+      plant.name,
+
     text:
       `${plant.name}\n` +
       `${plant.variety || ""}\n` +
       `🌿 Shri Ram Nursery, Bhuna`,
+
     url
   };
 
   try {
-    if (navigator.share) {
-      await navigator.share(shareData);
 
-      const plants = getPlants();
+    if (
+      navigator.share
+    ) {
 
-      const current = plants.find(
-        item => String(item.id) === String(plant.id)
+      await navigator.share(
+        shareData
       );
 
+      const plants =
+        getPlants();
+
+      const current =
+        plants.find(
+          item =>
+            String(item.id) ===
+            String(plant.id)
+        );
+
       if (current) {
-        current.shares = Number(current.shares || 0) + 1;
-        savePlants(plants);
+
+        current.shares =
+          Number(
+            current.shares || 0
+          ) + 1;
+
+        savePlants(
+          plants
+        );
       }
 
       return true;
     }
 
-    if (navigator.clipboard) {
-      await navigator.clipboard.writeText(url);
+    if (
+      navigator.clipboard
+    ) {
+
+      await navigator.clipboard.writeText(
+        url
+      );
+
       return true;
     }
 
     return false;
+
   } catch (error) {
-    console.log("Share cancelled or unavailable.");
+
+    console.log(
+      "Share cancelled or unavailable."
+    );
+
     return false;
   }
 }
 
-// ============================================================
-// RESET
-// ============================================================
+/* ============================================================
+   RESET
+   ============================================================ */
 
 export function resetPlants() {
-  const freshCatalog =
-    DEFAULT_PLANTS.map(normalizePlant);
 
-  savePlants(freshCatalog);
+  const freshCatalog =
+    DEFAULT_PLANTS.map(
+      normalizePlant
+    );
+
+  savePlants(
+    freshCatalog
+  );
 
   return freshCatalog;
 }
 
-// ============================================================
-// MASTER DATA EXPORT
-// ============================================================
+/* ============================================================
+   MASTER DATA EXPORT
+   ============================================================ */
 
-export { DEFAULT_PLANTS };
+export {
+  DEFAULT_PLANTS
+};
