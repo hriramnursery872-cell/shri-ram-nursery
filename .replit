@@ -1,23 +1,20 @@
-run = "PORT=8080 node -e \"import('express').then(e => { const app = (await import('./artifacts/api-server/dist/index.mjs')).default; app.use(e.static('./artifacts/api-server/dist/public')); app.get('*', (req, res) => res.sendFile('index.html', { root: './artifacts/api-server/dist/public' })); })\""
-modules = ["nodejs-20"]
-
-[[ports]]
-localPort = 3000
-externalPort = 3000
-
-[[ports]]
-localPort = 8080
-externalPort = 8080
-
-[[ports]]
-localPort = 18453
-externalPort = 80
+modules = ["nodejs-24"]
 
 [deployment]
-run = ["PORT=8080", "node", "-e", "import('express').then(async e => { const app = (await import('./artifacts/api-server/dist/index.mjs')).default; app.use(e.static('./artifacts/api-server/dist/public')); app.get('*', (req, res) => res.sendFile('index.html', { root: './artifacts/api-server/dist/public' })); })"]
+router = "application"
+deploymentTarget = "autoscale"
 
-[deployment.healthCheck]
-path = "/"
-port = 8080
-interval = 5
-timeout = 2
+[deployment.postBuild]
+args = ["pnpm", "store", "prune"]
+env = { "CI" = "true" }
+
+[workflows]
+runButton = "Project"
+
+[agent]
+stack = "PNPM_WORKSPACE"
+expertMode = true
+
+[postMerge]
+path = "scripts/post-merge.sh"
+timeoutMs = 20000
