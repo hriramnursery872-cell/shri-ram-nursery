@@ -3,7 +3,7 @@
 const ORDERS_STORAGE_KEY = "shri-ram-nursery-orders";
 
 async function loadOrders() {
-  const response = await fetch("./data/orders.json", { cache: "no-store" });
+  const response = await fetch("/data/orders.json", { cache: "no-store" });
   if (!response.ok) {
     throw new Error("Unable to load orders.");
   }

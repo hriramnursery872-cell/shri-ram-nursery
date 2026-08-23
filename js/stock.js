@@ -3,7 +3,7 @@
 const STOCK_STORAGE_KEY = "shri-ram-nursery-stock";
 
 async function loadStock() {
-  const response = await fetch("./data/stock.json", { cache: "no-store" });
+  const response = await fetch("/data/stock.json", { cache: "no-store" });
   if (!response.ok) {
     throw new Error("Unable to load stock.");
   }

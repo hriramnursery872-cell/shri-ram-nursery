@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#2E7D32">
+    <title>Shri Ram Nursery - Plant Details</title>
+    <!-- स्टैंडर्ड और हमेशा काम करने वाली स्टाइलशीट -->
+    <link rel="stylesheet" href="/css/style.css" onerror="this.onerror=null;this.href='./css/style.css';">
+    <style>
+      .details-container { max-width: 800px; margin: 40px auto; padding: 20px; font-family: sans-serif; background: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+      .plant-meta-badge { display: inline-block; padding: 5px 12px; background: #e8f5e9; color: #2e7d32; font-weight: bold; border-radius: 4px; margin-bottom: 10px; font-size: 14px; }
+      .plant-main-title { font-size: 32px; color: #333; margin: 5px 0 15px 0; }
+      .price-tag { font-size: 24px; color: #2e7d32; font-weight: bold; margin-bottom: 20px; }
+      .care-box { background: #f1f8e9; border: 1px solid #c8e6c9; padding: 20px; border-radius: 8px; margin: 25px 0; }
+      .action-row { display: flex; gap: 15px; margin-top: 30px; }
+      .button { display: inline-block; text-align: center; padding: 12px 25px; text-decoration: none; border-radius: 4px; font-size: 16px; font-weight: bold; flex: 1; }
+      .button-primary { background: #0288d1; color: white; }
+      .button-whatsapp { background: #25d366; color: white; }
+    </style>
+  </head>
+  <body>
+
+    <header class="site-header">
+      <a class="brand" href="./index.html">Shri Ram Nursery <span>Bhuna</span></a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="./index.html">Home</a>
+        <a href="./dashboard.html">Plants</a>
+        <a href="./booking.html">Booking</a>
+        <a href="./orders.html">Orders</a>
+      </nav>
+    </header>
+
+    <main class="details-container">
+      <article id="plant-page" class="page-shell">
+        <header class="page-heading">
+          <span id="plant-category" class="plant-meta-badge">🌿 Loading Details...</span>
+          <h1 id="plant-name" class="plant-main-title">Plant Information</h1>
+          <div id="plant-price" class="price-tag">₹00</div>
+          <p id="plant-desc" class="lead">Fetching availability and live stock status directly from the Bhuna nursery catalog data stream...</p>
+        </header>
+
+        <!-- डायनामिक केयर टिप्स बॉक्स -->
+        <div class="care-box">
+          <h3 style="color: #2e7d32; margin-top: 0; font-size: 18px; display: flex; align-items: center; gap: 8px;">🌱 देखभाल के टिप्स और निर्देश (Care Tips)</h3>
+          <p id="plant-care" style="margin-bottom: 0; color: #333; line-height: 1.6;">इस पौधे को स्वस्थ रखने के लिए नियमित पानी और उचित धूप की आवश्यकता होती है। यदि विशेष वैरायटी (जैसे बाहर से मंगवाने वाले पौधे) चाहिए, तो नर्सरी टीम से संपर्क करें।</p>
+        </div>
+
+        <!-- तुरंत एक्शन बटन्स -->
+        <div class="action-row">
+          <a class="button button-primary" href="tel:+919416316534">📞 Call Now</a>
+          <a class="button button-whatsapp" id="dynamic-whatsapp-share" href="#" target="_blank">💬 WhatsApp Enquiry</a>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer" style="text-align: center; padding: 20px; background: #2E7D32; color: white; margin-top: 40px;">
+      Shri Ram Nursery, Bhuna · <a href="./dashboard.html" style="color: white; text-decoration: underline;">Back to plants</a>
+    </footer>
+
+    <!-- डायनामिक स्क्रिप्ट इंजन: यूआरएल से आईडी पढ़कर सही पौधे की कुंडली स्क्रीन पर लोड करेगा -->
+    <script type="module">
+      import { getPlants, loadPlants } from './js/plants.js';
+
+      async function initializePlantDetails() {
+        // 1. पक्का करें कि डेटाबेस लोडेड है
+        await loadPlants();
+
+        // 2. यूआरएल (URL) से plantId पैरामीटर निकालें
+        const urlParams = new URLSearchParams(window.location.search);
+        const plantId = urlParams.get('plantId');
+        
+        const currentPlants = getPlants();
+        
+        // 3. डेटाबेस में से उस आईडी का पौधा ढूंढें
+        const targetPlant = currentPlants.find(p => p.id === plantId) || currentPlants[0];
+
+        if (targetPlant) {
+          // 4. स्क्रीन के तत्वों को असली डेटा से बदलें
+          document.getElementById('plant-name').innerText = targetPlant.name;
+          document.getElementById('plant-category').innerText = `🌿 ${targetPlant.category || 'General'}`;
+          document.getElementById('plant-price').innerText = `₹${targetPlant.price}`;
+          
+          const isAvailable = targetPlant.stock !== 'Out of Stock';
+          document.getElementById('plant-desc').innerText = `This ${targetPlant.name} is currently ${isAvailable ? 'Available' : 'Out of Stock'} at Shri Ram Nursery, Bhuna. We procure premium breeds across India suitable for Haryana, Punjab, and Rajasthan climates.`;
+
+          // कैटेगरी के हिसाब से डायनामिक केयर टिप्स सेट करना
+          const plantCareText = document.getElementById('plant-care');
+          if (targetPlant.category === 'Indoor') {
+            plantCareText.innerText = "स्नेक प्लांट/इनडोर पौधों को सीधे तेज धूप से बचाएं। इसे घर के अंदर रखें और मिट्टी पूरी सूखने पर ही (हफ्ते में 1-2 बार) पानी दें।";
+          } else if (targetPlant.category === 'Fruit') {
+            plantCareText.innerText = "फलदार पौधों (नींबू, अमरूद) को रोज़ाना 5-6 घंटे की पूरी धूप चाहिए। हर महीने जैविक खाद या वर्मीकंपोस्ट डालें ताकि फल बड़े और मीठे आएं।";
+          } else if (targetPlant.category === 'Flowering') {
+            plantCareText.innerText = "फूल वाले पौधों को सुबह की धूप पसंद होती है। मरे हुए फूलों को काटते रहें (Deadheading) ताकि नए फूल तेजी से कलियाँ छोड़ें।";
+          }
+
+          // 5. व्हाट्सएप बटन में उस विशिष्ट पौधे का नाम इंजेक्ट करना
+          const whatsappBtn = document.getElementById('dynamic-whatsapp-share');
+          const message = `Hello Shri Ram Nursery Bhuna, I am interested in buying *${targetPlant.name}* (Price: ₹${targetPlant.price}). Please tell me its availability at your store.`;
+          whatsappBtn.href = `https://wa.me{encodeURIComponent(message)}`;
+        } else {
+          document.getElementById('plant-name').innerText = "Plant Not Found";
+        }
+      }
+
+      window.addEventListener('DOMContentLoaded', initializePlantDetails);
+    </script>
+  </body>
+</html>

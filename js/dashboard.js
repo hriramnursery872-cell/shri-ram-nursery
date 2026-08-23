@@ -49,7 +49,7 @@ async function loadPlantCatalogue() {
   }
 
   try {
-    const response = await fetch("./data/plants.json", { cache: "no-store" });
+    const response = await fetch("/data/plants.json", { cache: "no-store" });
     if (!response.ok) {
       throw new Error("Plant data request failed.");
     }

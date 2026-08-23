@@ -87,7 +87,7 @@
 
       // डिफ़ॉल्ट व्हाट्सऐप मैसेज सेट करना
       const defaultText = encodeURIComponent("Hello Shri Ram Nursery Bhuna, I want to enquire about plants.");
-      whatsappLink.href = `https://wa.me/919416316534?text=defaultText`;
+      whatsappLink.href = `https://wa.me{defaultText}`;
 
       if (bookingForm) {
         bookingForm.addEventListener('submit', async (e) => {
@@ -118,7 +118,7 @@
 
             // व्हाट्सएप पर सीधे रीयल-टाइम नोटिफिकेशन भेजने के लिए यूआरएल तैयार करें
             const textMessage = `*New Booking Request - Shri Ram Nursery*\n\n👤 *Name:* ${name}\n📞 *Phone:* ${phone}\n🌿 *Category:* ${category}\n📝 *Details:* ${details}`;
-            const secureWhatsAppURL = `https://wa.me/919416316534?text=encodeURIComponent(textMessage)`;
+            const secureWhatsAppURL = `https://wa.me{encodeURIComponent(textMessage)}`;
 
             alert('Your booking request is successfully submitted! Clicking OK will send your details to our team via WhatsApp. ✅');
             

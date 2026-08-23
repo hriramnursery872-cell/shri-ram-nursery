@@ -3,7 +3,7 @@
 const SETTINGS_STORAGE_KEY = "shri-ram-nursery-settings";
 
 async function loadSettings() {
-  const response = await fetch("./data/settings.json", { cache: "no-store" });
+  const response = await fetch("/data/settings.json", { cache: "no-store" });
   if (!response.ok) {
     throw new Error("Unable to load settings.");
   }
