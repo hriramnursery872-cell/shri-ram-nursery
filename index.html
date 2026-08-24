@@ -4,41 +4,67 @@
 <head>
 
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
-  >
-
-  <meta
-    name="theme-color"
-    content="#2E7D32"
-  >
-
-  <meta
-    name="description"
-    content="श्री राम नर्सरी भुना - पौधे एवं नर्सरी प्लांट कैटलॉग"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2E7D32">
+  <meta name="description" content="श्री राम नर्सरी भुना - पौधे एवं नर्सरी प्लांट कैटलॉग">
 
   <title>Shri Ram Nursery - Bhuna</title>
 
-  <meta
-    name="twitter:title"
-    content="Shri Ram Nursery (Bhuna)"
-  >
+  <meta name="twitter:title" content="Shri Ram Nursery (Bhuna)">
+  <meta name="twitter:description" content="Shri Ram Nursery (Bhuna) Plant Catalogue">
 
-  <meta
-    name="twitter:description"
-    content="Shri Ram Nursery (Bhuna) Plant Catalogue"
-  >
-
-  <link
-    rel="stylesheet"
-    href="/css/style.css"
-    onerror="this.onerror=null;this.href='./css/style.css';"
-  >
+  <link rel="stylesheet" href="/css/style.css" onerror="this.onerror=null;this.href='./css/style.css';">
 
   <style>
+    /* ट्रस्ट बैनर स्टाइल */
+    .trust-banner {
+      background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+      border: 1px solid #a5d6a7;
+      color: #1b5e20;
+      padding: 15px 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 15px;
+      line-height: 1.6;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .trust-banner strong {
+      color: #2e7d32;
+    }
+
+    /* सर्च बार स्टाइल */
+    .search-box-container {
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    .search-box-container input {
+      width: 100%;
+      max-width: 500px;
+      padding: 12px 18px;
+      border: 2px solid #a5d6a7;
+      border-radius: 25px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .search-box-container input:focus {
+      border-color: #2e7d32;
+    }
+
+    /* उपलब्धता (Green Tick) और ग्रिड स्टाइल */
+    .availability-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #2e7d32;
+      font-weight: bold;
+      background: #e8f5e9;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 13px;
+      margin-top: 8px;
+    }
 
     .language-selector select {
       padding: 6px 9px;
@@ -48,23 +74,18 @@
       font-size: 14px;
       cursor: pointer;
     }
-
     .language-selector {
       margin-left: 10px;
     }
 
     @media (max-width: 700px) {
-
       .site-header {
         flex-wrap: wrap;
       }
-
       .language-selector {
         margin-left: 0;
       }
-
     }
-
   </style>
 
 </head>
@@ -72,122 +93,47 @@
 <body>
 
 <header class="site-header">
-
-  <a
-    class="brand"
-    href="./index.html"
-  >
+  <a class="brand" href="./index.html">
     Shri Ram Nursery
     <span>Bhuna</span>
   </a>
 
-  <div
-    style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"
-  >
-
-    <nav
-      class="site-nav"
-      aria-label="Primary navigation"
-    >
-
-      <a
-        href="./index.html"
-        aria-current="page"
-      >
-        Home
-      </a>
-
-      <a href="./dashboard.html">
-        Plants
-      </a>
-
-      <a href="./booking.html">
-        Booking
-      </a>
-
-      <a href="./orders.html">
-        Orders
-      </a>
-
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="./index.html" aria-current="page">Home</a>
+      <a href="./dashboard.html">Plants</a>
+      <a href="./booking.html">Booking</a>
+      <a href="./orders.html">Orders</a>
     </nav>
 
     <div class="language-selector">
-
-      <label
-        for="languageSelect"
-        style="position:absolute;left:-9999px;"
-      >
-        Language
-      </label>
-
-      <select
-        id="languageSelect"
-        aria-label="Select language"
-      >
-
-        <option value="hi">
-          हिंदी
-        </option>
-
-        <option value="en">
-          English
-        </option>
-
-        <option value="pa">
-          ਪੰਜਾਬੀ
-        </option>
-
-        <option value="bn">
-          বাংলা
-        </option>
-
-        <option value="mr">
-          मराठी
-        </option>
-
-        <option value="gu">
-          ગુજરાતી
-        </option>
-
-        <option value="ta">
-          தமிழ்
-        </option>
-
-        <option value="te">
-          తెలుగు
-        </option>
-
-        <option value="kn">
-          ಕನ್ನಡ
-        </option>
-
-        <option value="ml">
-          മലയാളം
-        </option>
-
-        <option value="ur">
-          اردو
-        </option>
-
+      <label for="languageSelect" style="position:absolute;left:-9999px;">Language</label>
+      <select id="languageSelect" aria-label="Select language">
+        <option value="hi">हिंदी</option>
+        <option value="en">English</option>
+        <option value="pa">ਪੰਜਾਬੀ</option>
+        <option value="bn">বাংলা</option>
+        <option value="mr">मराठी</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="ta">தமிழ்</option>
+        <option value="te">తెలుగు</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="ml">മലയാളം</option>
+        <option value="ur">اردو</option>
       </select>
-
     </div>
-
   </div>
-
 </header>
 
 <main class="page-shell">
 
-  <section
-    class="hero-card"
-    style="text-align:center;padding:40px 20px;background:#f1f8e9;border-radius:8px;margin-bottom:30px;"
-  >
+  <!-- आपका शानदार ट्रस्ट बैनर -->
+  <div class="trust-banner">
+    🌱 <strong>श्री राम नर्सरी (भुना)</strong> से अब तक हज़ारों स्वस्थ पौधे किसान भाइयों और बागवानों तक पहुँच चुके हैं! आज ही हमारी नर्सरी विजिट करें—चाहे खेत के लिए हो, घर के लिए या अपनी बागवानी के लिए, और अपने पौधे घर ले आएं। आज ही जुड़ें और बहुत जल्द आप भी हमारे इस सफर का हिस्सा बनें!
+  </div>
 
-    <p
-      class="eyebrow"
-      style="color:#2E7D32;font-weight:bold;margin:0;"
-    >
+  <section class="hero-card" style="text-align:center;padding:30px 20px;background:#f1f8e9;border-radius:8px;margin-bottom:20px;">
+    <p class="eyebrow" style="color:#2E7D32;font-weight:bold;margin:0;">
       Shri Ram Nursery · Bhuna
     </p>
 
@@ -196,245 +142,127 @@
     </h1>
 
     <p class="lead">
-      फलदार, इंडोर, आउटडोर, फूलदार और
-      लैंडस्केपिंग पौधों की जानकारी देखें।
+      फलदार, इंडोर, आउटडोर, फूलदार और लैंडस्केपिंग पौधों की जानकारी देखें।
     </p>
 
-    <div
-      class="action-row"
-      style="display:flex;gap:15px;justify-content:center;margin-top:20px;flex-wrap:wrap;"
-    >
+    <!-- स्मार्ट इंस्टेंट सर्च बार -->
+    <div class="search-box-container" style="margin-top: 20px;">
+      <input type="text" id="plantSearchInput" placeholder="🔍 पौधे का नाम खोजें (जैसे: हिसार सफेदा, आड़ू, सेब)...">
+    </div>
 
-      <a
-        class="button button-primary"
-        href="tel:+919416316534"
-        style="background:#2E7D32;color:white;padding:10px 20px;text-decoration:none;border-radius:4px;font-weight:bold;"
-      >
+    <div class="action-row" style="display:flex;gap:15px;justify-content:center;margin-top:15px;flex-wrap:wrap;">
+      <a class="button button-primary" href="tel:+919416316534" style="background:#2E7D32;color:white;padding:10px 20px;text-decoration:none;border-radius:4px;font-weight:bold;">
         📞 Call Now
       </a>
 
-      <a
-        class="button button-whatsapp"
-        id="home-whatsapp-btn"
-        href="#"
-        target="_blank"
-        rel="noopener noreferrer"
-        style="background:#25d366;color:white;padding:10px 20px;text-decoration:none;border-radius:4px;font-weight:bold;"
-      >
+      <a class="button button-whatsapp" id="home-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" style="background:#25d366;color:white;padding:10px 20px;text-decoration:none;border-radius:4px;font-weight:bold;">
         💬 WhatsApp
       </a>
-
     </div>
-
   </section>
 
   <section class="content-section">
-
     <div>
-
-      <p
-        class="eyebrow"
-        style="color:#2E7D32;font-weight:bold;"
-      >
-        Explore
-      </p>
-
-      <h2>
-        Nursery services
-      </h2>
-
+      <p class="eyebrow" style="color:#2E7D32;font-weight:bold;">Explore</p>
+      <h2>Nursery services</h2>
     </div>
 
-    <div
-      class="link-grid"
-      style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:20px;"
-    >
-
-      <a
-        class="link-card"
-        href="./dashboard.html"
-        style="display:block;padding:20px;border:1px solid #ddd;border-radius:6px;text-decoration:none;color:#333;"
-      >
-        <strong>
-          View plants
-        </strong>
-
+    <div class="link-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:20px;">
+      
+      <a class="link-card" href="./dashboard.html" style="display:block;padding:20px;border:1px solid #ddd;border-radius:6px;text-decoration:none;color:#333;background:#fff;">
+        <strong>View plants</strong>
         <br>
-
-        <span>
-          See the current nursery catalogue.
-        </span>
-
+        <span>See the current nursery catalogue.</span>
+        <div class="availability-badge">🟢 उपलब्ध है</div>
       </a>
 
-      <a
-        class="link-card"
-        href="./booking.html"
-        style="display:block;padding:20px;border:1px solid #ddd;border-radius:6px;text-decoration:none;color:#333;"
-      >
-
-        <strong>
-          Book an enquiry
-        </strong>
-
+      <a class="link-card" href="./booking.html" style="display:block;padding:20px;border:1px solid #ddd;border-radius:6px;text-decoration:none;color:#333;background:#fff;">
+        <strong>Book an enquiry</strong>
         <br>
-
-        <span>
-          Contact the nursery about your requirements.
-        </span>
-
+        <span>Contact the nursery about your requirements.</span>
+        <div class="availability-badge">🟢 उपलब्ध है</div>
       </a>
 
-      <a
-        class="link-card"
-        href="./orders.html"
-        style="display:block;padding:20px;border:1px solid #ddd;border-radius:6px;text-decoration:none;color:#333;"
-      >
-
-        <strong>
-          Order support
-        </strong>
-
+      <a class="link-card" href="./orders.html" style="display:block;padding:20px;border:1px solid #ddd;border-radius:6px;text-decoration:none;color:#333;background:#fff;">
+        <strong>Order support</strong>
         <br>
-
-        <span>
-          Speak with the nursery team about an order.
-        </span>
-
+        <span>Speak with the nursery team about an order.</span>
+        <div class="availability-badge">🟢 उपलब्ध है</div>
       </a>
 
     </div>
-
   </section>
 
 </main>
 
-<footer
-  class="site-footer"
-  style="margin-top:40px;padding:20px;border-top:1px solid #eee;font-size:14px;color:#666;"
->
-
+<footer class="site-footer" style="margin-top:40px;padding:20px;border-top:1px solid #eee;font-size:14px;color:#666;">
   Shri Ram Nursery, Bhuna ·
-
-  <a
-    href="tel:+919416316534"
-    style="color:#2E7D32;text-decoration:none;font-weight:bold;"
-  >
+  <a href="tel:+919416316534" style="color:#2E7D32;text-decoration:none;font-weight:bold;">
     +91 94163 16534
   </a>
-
   <span style="float:right;">
-
-    <a
-      href="./admin.html"
-      style="color:#2E7D32;text-decoration:underline;font-weight:600;"
-    >
+    <a href="./admin.html" style="color:#2E7D32;text-decoration:underline;font-weight:600;">
       🔒 Admin Portal
     </a>
-
   </span>
-
 </footer>
 
 <script>
-
   // ==========================================================
   // WHATSAPP
   // ==========================================================
-
-  const whatsappBtn =
-    document.getElementById(
-      "home-whatsapp-btn"
-    );
-
+  const whatsappBtn = document.getElementById("home-whatsapp-btn");
   if (whatsappBtn) {
-
-    const message =
-      "Hello Shri Ram Nursery Bhuna, I want to enquire about plants.";
-
-    whatsappBtn.href =
-      `https://wa.me/919416316534?text=${encodeURIComponent(message)}`;
+    const message = "Hello Shri Ram Nursery Bhuna, I want to enquire about plants.";
+    whatsappBtn.href = `https://wa.me/919416316534?text=${encodeURIComponent(message)}`;
   }
 
+  // ==========================================================
+  // SEARCH FILTER INTERACTION (Redirect to dashboard on search)
+  // ==========================================================
+  const searchInput = document.getElementById("plantSearchInput");
+  if (searchInput) {
+    searchInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        const query = searchInput.value.trim();
+        if (query) {
+          window.location.href = `./dashboard.html?search=${encodeURIComponent(query)}`;
+        }
+      }
+    });
+  }
 
   // ==========================================================
   // LANGUAGE SELECTION
   // ==========================================================
-
-  const languageSelect =
-    document.getElementById(
-      "languageSelect"
-    );
-
-  const savedLanguage =
-    localStorage.getItem(
-      "shri-ram-language"
-    );
+  const languageSelect = document.getElementById("languageSelect");
+  const savedLanguage = localStorage.getItem("shri-ram-language");
 
   if (savedLanguage) {
     languageSelect.value = savedLanguage;
   }
 
-  languageSelect.addEventListener(
-    "change",
-    event => {
+  languageSelect.addEventListener("change", event => {
+    const language = event.target.value;
+    localStorage.setItem("shri-ram-language", language);
 
-      const language =
-        event.target.value;
-
-      localStorage.setItem(
-        "shri-ram-language",
-        language
-      );
-
-      /*
-       * अभी language preference save हो रही है।
-       * अगला step common translation engine लगाना है
-       * ताकि पूरे website के text वास्तव में translate हों।
-       */
-
-      window.dispatchEvent(
-        new CustomEvent(
-          "languageChanged",
-          {
-            detail: { language }
-          }
-        )
-      );
-
-    }
-  );
-
+    window.dispatchEvent(
+      new CustomEvent("languageChanged", {
+        detail: { language }
+      })
+    );
+  });
 
   // ==========================================================
   // SERVICE WORKER
   // ==========================================================
-
-  if (
-    "serviceWorker" in navigator
-  ) {
-
-    window.addEventListener(
-      "load",
-      () => {
-
-        navigator.serviceWorker
-          .register(
-            "./service-worker.js?v=3"
-          )
-          .catch(
-            error =>
-              console.log(
-                "Service worker registration failed:",
-                error
-              )
-          );
-
-      }
-    );
-
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("./service-worker.js?v=3")
+        .catch(error => console.log("Service worker registration failed:", error));
+    });
   }
-
 </script>
 
 </body>

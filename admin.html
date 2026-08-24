@@ -162,6 +162,21 @@
     .payment-card h3 { margin: 0 0 12px; font-size: 16px; }
     .payment-number { font-size: 27px; font-weight: 800; color: #1b5e20; }
 
+    /* BILLING ITEMS BUILDER */
+    .billing-row {
+      display: grid;
+      grid-template-columns: 1.5fr 1.5fr 1fr 1.2fr auto;
+      gap: 10px;
+      align-items: center;
+      background: #f4f8f4;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    @media(max-width: 768px) {
+      .billing-row { grid-template-columns: 1fr; }
+    }
+
     /* TABLE */
     .table-wrapper { width: 100%; overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; min-width: 700px; }
@@ -193,6 +208,7 @@
     .btn-success { background: #2e7d32; color: white; }
     .btn-whatsapp { background: #25d366; color: white; display: inline-flex; align-items: center; gap: 6px; }
     .btn-whatsapp:hover { background: #1ebe57; }
+    .btn-secondary { background: #6c757d; color: white; }
 
     .plant-image { width: 55px; height: 55px; object-fit: cover; border-radius: 9px; background: #edf3ed; }
     .plant-name-cell { font-weight: 800; }
@@ -253,7 +269,7 @@
   <main class="admin-container">
     <div class="page-heading">
       <h1>📊 Admin Dashboard</h1>
-      <p>आज की बिक्री, पौधों की वैराइटी, कस्टमर और पेमेंट का पूरा हिसाब (शाम 5:00 बजे तक ऑटो-अपडेट)</p>
+      <p>आज की बिक्री, पौधों की वैराइटी, कस्टमर और पेमेंट का पूरा हिसाब (रियल-टाइम अपडेट)</p>
     </div>
 
     <!-- SUMMARY CARDS -->
@@ -276,12 +292,12 @@
       </div>
     </section>
 
-    <!-- NEW ORDER ENTRY FORM (MANUAL ENTRY & WHATSAPP BILL) -->
+    <!-- NEW ORDER ENTRY FORM (MULTI-CATEGORY DYNAMIC BILLING) -->
     <section class="section" style="border: 2px dashed #2e7d32; background: #fafdfa;">
       <div class="section-header">
         <div>
-          <h2>➕ नया ऑर्डर / बिक्री मैनुअल दर्ज करें</h2>
-          <div class="section-note">यहाँ से कस्टमर का रिकॉर्ड और पौधों की बिक्री दर्ज करें। WhatsApp बिल भी भेज सकते हैं।</div>
+          <h2>➕ नया ऑर्डर / मल्टी-कैटेगरी बिलिंग</h2>
+          <div class="section-note">एक ही बिल में '+' बटन दबाकर कई कैटेगरी और पौधे जोड़ें।</div>
         </div>
       </div>
 
@@ -295,31 +311,26 @@
             <label>📱 मोबाइल नंबर</label>
             <input type="tel" id="order-phone" placeholder="10 अंकों का मोबाइल नंबर" maxlength="10">
           </div>
-          <div class="form-group">
+          <div class="form-group full-width">
             <label>📍 कस्टमर का पता (Address)</label>
             <input type="text" id="order-address" placeholder="गाँव / शहर का नाम">
           </div>
-          <div class="form-group">
-            <label>🌿 पौधे / वैराइटी चुनें</label>
-            <select id="order-plant-select" required>
-              <option value="">-- पौधा चुनें --</option>
-            </select>
+
+          <!-- DYNAMIC ITEMS BUILDER CONTAINER -->
+          <div class="full-width">
+            <label style="font-weight:700; margin-bottom:8px; display:block;">🌿 खरीदे गए पौधे (कैटेगरी और वैरायटी चुनें):</label>
+            <div id="billing-items-container"></div>
+            <button type="button" class="btn btn-secondary" id="add-billing-row-btn" style="margin-top: 8px; font-size: 13px; padding: 8px 14px;">➕ और पौधा/कैटेगरी जोड़ें</button>
           </div>
-          <div class="form-group">
-            <label>🔢 पौधों की संख्या (Quantity)</label>
-            <input type="number" id="order-qty" value="1" min="1" required>
-          </div>
-          <div class="form-group">
-            <label>💰 कुल राशि (Amount in ₹)</label>
-            <input type="number" id="order-amount" placeholder="जैसे: 1500" min="0" required>
-          </div>
-          <div class="form-group full-width">
+
+          <div class="form-group full-width" style="margin-top: 10px;">
             <label>💳 पेमेंट का तरीका (Payment Mode)</label>
             <select id="order-payment">
               <option value="Cash">💵 Cash (नकद)</option>
               <option value="UPI">📲 UPI (ऑनलाइन / PhonePe / GPay)</option>
             </select>
           </div>
+          
           <div class="full-width" style="display: flex; gap: 10px; flex-wrap: wrap;">
             <button type="submit" class="btn btn-success" style="flex: 1;">💾 रिकॉर्ड सेव करें</button>
             <button type="button" class="btn btn-whatsapp" id="whatsapp-bill-btn" style="flex: 1;">💬 WhatsApp पर बिल भेजें</button>
@@ -361,12 +372,21 @@
       <div id="variety-sales" class="variety-list"></div>
     </section>
 
-    <!-- CUSTOMER ORDERS -->
+    <!-- MASTER CUSTOMER LEDGER & MINI STATEMENT -->
     <section class="section">
       <div class="section-header">
         <div>
-          <h2>👤 आज के Customer Orders</h2>
-          <div class="section-note">कस्टमर का नाम, मोबाइल, पता, पौधा और पेमेंट मोड।</div>
+          <h2>📋 मास्टर कस्टमर लेज़र (Mini Statement Filter)</h2>
+          <div class="section-note">ए टू जेड सभी पुराने और नए ग्राहकों का रिकॉर्ड। बैंक स्टेटमेंट की तरह समय चुनें।</div>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+          <input type="text" id="ledger-search" placeholder="🔍 नाम या मोबाइल से खोजें..." style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 13px;">
+          <select id="ledger-time-filter" style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 13px; background: white;">
+            <option value="7">पिछले 7 दिन</option>
+            <option value="30" selected>पिछले 30 दिन</option>
+            <option value="90">पिछले 90 दिन</option>
+            <option value="all">ए टू जेड (All Time)</option>
+          </select>
         </div>
       </div>
       <div class="table-wrapper">
@@ -375,24 +395,23 @@
             <tr>
               <th>Customer</th>
               <th>Mobile / Address</th>
-              <th>Plant / Variety</th>
-              <th>Qty</th>
+              <th>Plant / Variety / Qty</th>
               <th>Payment</th>
-              <th>Total</th>
-              <th>Time</th>
+              <th>Total Amount</th>
+              <th>Date & Time</th>
             </tr>
           </thead>
-          <tbody id="today-orders-list"></tbody>
+          <tbody id="master-ledger-list"></tbody>
         </table>
       </div>
     </section>
 
-    <!-- ADD PLANT CATALOG -->
+    <!-- ADD PLANT CATALOG (DIRECT FILE UPLOAD) -->
     <section class="section">
       <div class="section-header">
         <div>
-          <h2>➕ नया पौधा Catalog में जोड़ें</h2>
-          <div class="section-note">कस्टमर को कैटलॉग में पौधे की जानकारी दिखेगी।</div>
+          <h2>➕ नया पौधा Catalog में जोड़ें (फाइल अपलोड के साथ)</h2>
+          <div class="section-note">सीधे अपने फोन की गैलरी से फोटो अपलोड करें।</div>
         </div>
       </div>
       <form id="plant-form">
@@ -417,8 +436,8 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Plant Image URL</label>
-            <input type="url" id="plant-image" placeholder="https://...">
+            <label>📷 पौधे की फोटो चुनें (Upload Image)</label>
+            <input type="file" id="plant-image-file" accept="image/*">
           </div>
           <div class="form-group full-width">
             <label>🌱 पौधे की देखभाल की Tips</label>
@@ -435,12 +454,12 @@
       </form>
     </section>
 
-    <!-- PLANT INVENTORY -->
+    <!-- PLANT INVENTORY & EXISTING IMAGE UPDATER -->
     <section class="section">
       <div class="section-header">
         <div>
-          <h2>🌿 Plant Catalog</h2>
-          <div class="section-note">सूची से पौधों का प्रबंधन करें।</div>
+          <h2>🌿 Plant Catalog & Image Manager</h2>
+          <div class="section-note">पुराने पौधों की फोटो यहाँ से कभी भी बदलें या अपडेट करें।</div>
         </div>
       </div>
       <div class="table-wrapper">
@@ -448,10 +467,10 @@
           <thead>
             <tr>
               <th>Photo</th>
-              <th>Name</th>
-              <th>Variety</th>
+              <th>Name & Variety</th>
               <th>Category</th>
               <th>Availability</th>
+              <th>Update Image</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -486,7 +505,7 @@
     adminApp.style.display = "block";
     loadDashboard();
     renderAdminPlants();
-    populatePlantDropdown();
+    initBillingRow();
   }
 
   function closeAdmin() {
@@ -537,24 +556,22 @@
     );
   }
 
-  function formatTime(value) {
+  function formatDateTime(value) {
     if (!value) return "-";
     const date = new Date(value);
     if (isNaN(date.getTime())) return "-";
-    return date.toLocaleTimeString("hi-IN", { hour: "2-digit", minute: "2-digit" });
+    return date.toLocaleString("hi-IN", { day: '2-digit', month: '2-digit', year: 'numeric', hour: "2-digit", minute: "2-digit" });
   }
 
   function getOrders() {
-    const possibleKeys = ["orders", "shriRamOrders", "nurseryOrders", "plantOrders"];
-    for (const key of possibleKeys) {
-      try {
-        const data = localStorage.getItem(key);
-        if (!data) continue;
-        const parsed = JSON.parse(data);
-        if (Array.isArray(parsed)) return parsed;
-      } catch (e) {}
+    try {
+      const data = localStorage.getItem("shriRamOrders");
+      if (!data) return [];
+      const parsed = JSON.parse(data);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      return [];
     }
-    return [];
   }
 
   function saveOrdersList(ordersArray) {
@@ -565,52 +582,55 @@
     const customer = order.customer || order.customerName || order.name || "-";
     const phone = order.phone || order.mobile || "-";
     const address = order.address || order.customerAddress || "";
-    const plantName = order.plantName || order.plant || "-";
-    const variety = order.variety || order.plantVariety || "";
-    const quantity = Number(order.quantity || order.qty || 1);
+    const items = Array.isArray(order.items) ? order.items : [{
+      plantName: order.plantName || "पौधा",
+      variety: order.variety || "",
+      quantity: Number(order.quantity || order.qty || 1),
+      amount: Number(order.total || order.amount || 0)
+    }];
     const payment = (order.paymentMethod || order.payment || order.paymentMode || "").toString().toLowerCase();
     
     let paymentMode = "Other";
     if (payment.includes("cash")) paymentMode = "Cash";
     else if (payment.includes("upi") || payment.includes("online") || payment.includes("gpay") || payment.includes("phonepe") || payment.includes("paytm")) paymentMode = "UPI";
 
-    const amount = Number(order.total || order.totalAmount || order.amount || 0);
+    const totalAmount = items.reduce((sum, i) => sum + Number(i.amount || 0), 0);
     const date = order.date || order.createdAt || order.timestamp || new Date().toISOString();
 
-    return { customer, phone, address, plantName, variety, quantity: isNaN(quantity) ? 1 : quantity, paymentMode, amount: isNaN(amount) ? 0 : amount, date };
-  }
-
-  function getTodayOrders() {
-    return getOrders().map(normalizeOrder).filter(order => isToday(order.date));
+    return { customer, phone, address, items, paymentMode, amount: totalAmount, date };
   }
 
   function loadDashboard() {
-    const orders = getTodayOrders();
+    const rawOrders = getOrders().map(normalizeOrder);
+    const todayOrders = rawOrders.filter(o => isToday(o.date));
+
     let totalPlants = 0, totalSales = 0, cashSales = 0, upiSales = 0;
     const customers = new Set();
     const varieties = {};
 
-    orders.forEach(order => {
-      totalPlants += order.quantity;
-      totalSales += order.amount;
+    todayOrders.forEach(order => {
+      if (order.phone && order.phone !== "-") customers.add(order.phone);
       if (order.paymentMode === "Cash") cashSales += order.amount;
       if (order.paymentMode === "UPI") upiSales += order.amount;
-      if (order.phone && order.phone !== "-") customers.add(order.phone);
+      totalSales += order.amount;
 
-      const key = order.variety ? `${order.plantName} (${order.variety})` : order.plantName;
-      if (!varieties[key]) varieties[key] = 0;
-      varieties[key] += order.quantity;
+      order.items.forEach(item => {
+        totalPlants += Number(item.quantity || 0);
+        const key = item.variety ? `${item.plantName} (${item.variety})` : item.plantName;
+        if (!varieties[key]) varieties[key] = 0;
+        varieties[key] += Number(item.quantity || 0);
+      });
     });
 
     document.getElementById("today-plants").textContent = totalPlants;
-    document.getElementById("today-orders").textContent = orders.length;
+    document.getElementById("today-orders").textContent = todayOrders.length;
     document.getElementById("today-customers").textContent = customers.size;
     document.getElementById("today-sales").textContent = "₹" + totalSales;
     document.getElementById("cash-sales").textContent = "₹" + cashSales;
     document.getElementById("upi-sales").textContent = "₹" + upiSales;
 
     renderVarietySales(varieties);
-    renderTodayOrders(orders);
+    renderMasterLedger(rawOrders);
   }
 
   function renderVarietySales(varieties) {
@@ -629,69 +649,82 @@
     });
   }
 
-  function renderTodayOrders(orders) {
-    const tbody = document.getElementById("today-orders-list");
-    tbody.innerHTML = "";
-    if (orders.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="7" class="empty">आज अभी कोई order नहीं मिला।</td></tr>`;
-      return;
-    }
-    orders.slice().reverse().forEach(order => {
-      const tr = document.createElement("tr");
-      const paymentClass = order.paymentMode === "Cash" ? "badge-orange" : order.paymentMode === "UPI" ? "badge-blue" : "badge-green";
-      tr.innerHTML = `
-        <td><strong>${escapeHtml(order.customer)}</strong></td>
-        <td>${escapeHtml(order.phone)}${order.address ? `<br><small style="color:#666;">${escapeHtml(order.address)}</small>` : ''}</td>
-        <td><strong>${escapeHtml(order.plantName)}</strong>${order.variety ? `<br><small>${escapeHtml(order.variety)}</small>` : ''}</td>
-        <td>${order.quantity}</td>
-        <td><span class="badge ${paymentClass}">${order.paymentMode === "Cash" ? "💵 Cash" : order.paymentMode === "UPI" ? "📲 UPI" : "💳 Other"}</span></td>
-        <td>₹${order.amount}</td>
-        <td>${formatTime(order.date)}</td>
-      `;
-      tbody.appendChild(tr);
-    });
+  // MULTI-CATEGORY DYNAMIC BILLING ROW BUILDER
+  function initBillingRow() {
+    const container = document.getElementById("billing-items-container");
+    container.innerHTML = "";
+    addBillingRow();
   }
 
-  function populatePlantDropdown() {
-    const select = document.getElementById("order-plant-select");
+  function addBillingRow() {
+    const container = document.getElementById("billing-items-container");
+    const rowId = Date.now() + Math.random();
     const plants = getPlants();
-    select.innerHTML = `<option value="">-- पौधा चुनें --</option>`;
+
+    const rowDiv = document.createElement("div");
+    rowDiv.className = "billing-row";
+    rowDiv.dataset.id = rowId;
+
+    let plantOptions = `<option value="">-- पौधा चुनें --</option>`;
     plants.forEach(p => {
-      const opt = document.createElement("option");
-      opt.value = p.name + (p.variety ? `|${p.variety}` : '');
-      opt.textContent = p.name + (p.variety ? ` (${p.variety})` : '');
-      select.appendChild(opt);
+      const val = p.name + (p.variety ? `|${p.variety}` : '');
+      const label = p.name + (p.variety ? ` (${p.variety})` : '');
+      plantOptions += `<option value="${escapeAttribute(val)}">${escapeHtml(label)}</option>`;
+    });
+
+    rowDiv.innerHTML = `
+      <select class="billing-plant" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:8px;">
+        ${plantOptions}
+      </select>
+      <input type="number" class="billing-qty" value="1" min="1" placeholder="मात्रा (Qty)" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:8px;">
+      <input type="number" class="billing-amount" placeholder="अमाउंट (₹)" min="0" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:8px;">
+      <button type="button" class="delete-row-btn" style="background:#ffebee; color:#c62828; border:0; border-radius:8px; padding:10px; cursor:pointer; font-weight:700;">❌ हटाएँ</button>
+    `;
+
+    container.appendChild(rowDiv);
+
+    rowDiv.querySelector(".delete-row-btn").addEventListener("click", () => {
+      if (container.querySelectorAll(".billing-row").length > 1) {
+        rowDiv.remove();
+      } else {
+        alert("कम से कम एक पौधा होना जरूरी है।");
+      }
     });
   }
 
-  // Handle Manual Order Entry
+  document.getElementById("add-billing-row-btn").addEventListener("click", addBillingRow);
+
+  // Handle Manual Order Form Submit
   const orderForm = document.getElementById("order-entry-form");
   orderForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const customer = document.getElementById("order-customer").value.trim();
     const phone = document.getElementById("order-phone").value.trim() || "-";
     const address = document.getElementById("order-address").value.trim();
-    const plantSelection = document.getElementById("order-plant-select").value;
-    const quantity = Number(document.getElementById("order-qty").value) || 1;
-    const amount = Number(document.getElementById("order-amount").value) || 0;
     const paymentMode = document.getElementById("order-payment").value;
 
-    if (!plantSelection) {
-      alert("कृपया पौधा चुनें।");
-      return;
-    }
+    const rows = document.querySelectorAll(".billing-row");
+    const items = [];
 
-    const [plantName, variety = ""] = plantSelection.split("|");
+    for (const row of rows) {
+      const plantSel = row.querySelector(".billing-plant").value;
+      const qty = Number(row.querySelector(".billing-qty").value) || 1;
+      const amt = Number(row.querySelector(".billing-amount").value) || 0;
+
+      if (!plantSel) {
+        alert("कृपया सभी पंक्तियों में पौधा चुनें।");
+        return;
+      }
+      const [plantName, variety = ""] = plantSel.split("|");
+      items.push({ plantName, variety, quantity: qty, amount: amt });
+    }
 
     const newOrder = {
       customer,
       phone,
       address,
-      plantName,
-      variety,
-      quantity,
+      items,
       paymentMode,
-      amount,
       date: new Date().toISOString()
     };
 
@@ -700,62 +733,146 @@
     saveOrdersList(allOrders);
 
     orderForm.reset();
-    document.getElementById("order-qty").value = "1";
+    initBillingRow();
     loadDashboard();
     alert("✅ आर्डर सफलताપूर्वक दर्ज हो गया है!");
   });
 
-  // WhatsApp Bill Generator Button
+  // WhatsApp Bill Generator
   document.getElementById("whatsapp-bill-btn").addEventListener("click", () => {
     const customer = document.getElementById("order-customer").value.trim();
     const phone = document.getElementById("order-phone").value.trim();
-    const plantSelection = document.getElementById("order-plant-select").value;
-    const quantity = document.getElementById("order-qty").value || 1;
-    const amount = document.getElementById("order-amount").value || 0;
     const paymentMode = document.getElementById("order-payment").value;
 
-    if (!customer || !plantSelection || !amount) {
-      alert("कृपया WhatsApp बिल भेजने से पहले कस्टमर का नाम, पौधा और कुल राशि (Amount) जरूर भरें!");
+    const rows = document.querySelectorAll(".billing-row");
+    let itemsText = "";
+    let grandTotal = 0;
+
+    for (const row of rows) {
+      const plantSel = row.querySelector(".billing-plant").value;
+      const qty = Number(row.querySelector(".billing-qty").value) || 1;
+      const amt = Number(row.querySelector(".billing-amount").value) || 0;
+      if (plantSel) {
+        const [pName, pVar = ""] = plantSel.split("|");
+        const fullP = pVar ? `${pName} (${pVar})` : pName;
+        itemsText += `• ${fullP} - ${qty} पौधे - ₹${amt}\n`;
+        grandTotal += amt;
+      }
+    }
+
+    if (!customer || itemsText === "" || grandTotal === 0) {
+      alert("कृपया WhatsApp बिल भेजने से पहले नाम, पौधा और अमाउंट ठीक से भरें!");
       return;
     }
 
-    const [plantName, variety = ""] = plantSelection.split("|");
-    const plantFull = variety ? `${plantName} (${variety})` : plantName;
-
-    const message = `🌿 *श्री राम नर्सरी (भुना)* 🌿\n\nनमस्ते *${customer}* जी,\nहमारी नर्सरी से पौधे खरीदने के लिए आपका बहुत-बहुत धन्यवाद! 🙏\n\n📋 *खरीददारी का विवरण:*\n• पौधा: ${plantFull}\n• मात्रा: ${quantity} पौधे\n• कुल राशि: ₹${amount}\n• भुगतान: ${paymentMode === 'Cash' ? 'Cash (नकद)' : 'UPI (ऑनलाइन)'}\n\n🌱 आपके पौधे स्वस्थ रहें और खूब फलें-फूलें!\n\n📞 संपर्क: 9416316534`;
+    const message = `🌿 *श्री राम नर्सरी (भुना)* 🌿\n\nनमस्ते *${customer}* जी,\nहमारी नर्सरी से पौधे खरीदने के लिए आपका बहुत-बहुत धन्यवाद! 🙏\n\n📋 *खरीददारी का विवरण:*\n${itemsText}\n💰 *कुल राशि: ₹${grandTotal}*\n• भुगतान: ${paymentMode === 'Cash' ? 'Cash (नकद)' : 'UPI (ऑनलाइन)'}\n\n🌱 आपके पौधे स्वस्थ रहें और खूब फलें-फूलें!\n\n📞 संपर्क: 9416316534`;
 
     const encodedMsg = encodeURIComponent(message);
     const whatsappUrl = phone ? `https://wa.me/91${phone}?text=${encodedMsg}` : `https://wa.me/?text=${encodedMsg}`;
     window.open(whatsappUrl, '_blank');
   });
 
-  // Plant Catalog Form
+  // MASTER LEDGER & TIME FILTER
+  function renderMasterLedger(orders) {
+    const tbody = document.getElementById("master-ledger-list");
+    const searchQuery = document.getElementById("ledger-search").value.toLowerCase().trim();
+    const timeFilter = document.getElementById("ledger-time-filter").value;
+
+    tbody.innerHTML = "";
+
+    let filtered = orders.slice().reverse();
+
+    // Time filter logic
+    if (timeFilter !== "all") {
+      const days = Number(timeFilter);
+      const cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - days);
+      filtered = filtered.filter(o => new Date(o.date) >= cutoff);
+    }
+
+    // Search query logic
+    if (searchQuery) {
+      filtered = filtered.filter(o => 
+        o.customer.toLowerCase().includes(searchQuery) || 
+        o.phone.toLowerCase().includes(searchQuery) ||
+        o.address.toLowerCase().includes(searchQuery)
+      );
+    }
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="6" class="empty">कोई रिकॉर्ड नहीं मिला।</td></tr>`;
+      return;
+    }
+
+    filtered.forEach(order => {
+      const tr = document.createElement("tr");
+      const paymentClass = order.paymentMode === "Cash" ? "badge-orange" : order.paymentMode === "UPI" ? "badge-blue" : "badge-green";
+      
+      let itemsListHtml = "";
+      order.items.forEach(i => {
+        itemsListHtml += `<div>• <strong>${escapeHtml(i.plantName)}</strong>${i.variety ? ` (${escapeHtml(i.variety)})` : ''} - <b>${i.quantity} पौधे</b> (₹${i.amount})</div>`;
+      });
+
+      tr.innerHTML = `
+        <td><strong>${escapeHtml(order.customer)}</strong></td>
+        <td>${escapeHtml(order.phone)}${order.address ? `<br><small style="color:#666;">${escapeHtml(order.address)}</small>` : ''}</td>
+        <td>${itemsListHtml}</td>
+        <td><span class="badge ${paymentClass}">${order.paymentMode === "Cash" ? "💵 Cash" : order.paymentMode === "UPI" ? "📲 UPI" : "💳 Other"}</span></td>
+        <td><strong>₹${order.amount}</strong></td>
+        <td>${formatDateTime(order.date)}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  document.getElementById("ledger-search").addEventListener("input", () => loadDashboard());
+  document.getElementById("ledger-time-filter").addEventListener("change", () => loadDashboard());
+
+  // Plant Catalog Form (Direct File Upload Support)
   const plantForm = document.getElementById("plant-form");
   plantForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    const newPlant = {
-      id: Date.now().toString(),
-      name: document.getElementById("plant-name").value.trim(),
-      variety: document.getElementById("plant-variety").value.trim(),
-      category: document.getElementById("plant-category").value,
-      image: document.getElementById("plant-image").value.trim(),
-      tips: document.getElementById("plant-tips").value.trim(),
-      stock: "In Stock"
-    };
+    const name = document.getElementById("plant-name").value.trim();
+    const variety = document.getElementById("plant-variety").value.trim();
+    const category = document.getElementById("plant-category").value;
+    const tips = document.getElementById("plant-tips").value.trim();
+    const imageFile = document.getElementById("plant-image-file").files[0];
 
-    if (!newPlant.name) {
+    if (!name) {
       alert("पौधे का नाम डालना जरूरी है।");
       return;
     }
+
+    if (imageFile) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        saveNewPlantRecord(name, variety, category, e.target.result, tips);
+      };
+      reader.readAsDataURL(imageFile);
+    } else {
+      saveNewPlantRecord(name, variety, category, "", tips);
+    }
+  });
+
+  function saveNewPlantRecord(name, variety, category, image, tips) {
+    const newPlant = {
+      id: Date.now().toString(),
+      name,
+      variety,
+      category,
+      image,
+      imageUrl: image,
+      tips,
+      stock: "In Stock"
+    };
 
     const currentPlants = getPlants();
     currentPlants.push(newPlant);
     savePlants(currentPlants);
     plantForm.reset();
     renderAdminPlants();
-    populatePlantDropdown();
     alert("🌱 पौधा Catalog में सफलतापूर्वक जोड़ दिया गया।");
-  });
+  }
 
   function renderAdminPlants() {
     const tbody = document.getElementById("admin-plants-list");
@@ -771,15 +888,36 @@
       const category = getCategoryName(plant.category);
       tr.innerHTML = `
         <td>${image ? `<img class="plant-image" src="${escapeAttribute(image)}" alt="" onerror="this.style.display='none'">` : `<div class="plant-image">🌱</div>`}</td>
-        <td class="plant-name-cell">${escapeHtml(plant.name || "-")}</td>
-        <td>${escapeHtml(plant.variety || "-")}</td>
+        <td class="plant-name-cell">${escapeHtml(plant.name || "-")}${plant.variety ? `<br><small style="color:#666;">${escapeHtml(plant.variety)}</small>` : ''}</td>
         <td>${escapeHtml(category)}</td>
         <td><span class="badge badge-green">🟢 उपलब्ध है</span></td>
+        <td><input type="file" class="update-img-file" data-index="${index}" accept="image/*" style="font-size:11px; max-width:140px;"></td>
         <td><button type="button" class="delete-btn" data-index="${index}">Delete</button></td>
       `;
       tbody.appendChild(tr);
     });
 
+    // Handle Image Update for existing plants
+    tbody.querySelectorAll(".update-img-file").forEach(input => {
+      input.addEventListener("change", (e) => {
+        const index = Number(e.target.dataset.index);
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const plants = getPlants();
+          plants[index].image = event.target.result;
+          plants[index].imageUrl = event.target.result;
+          savePlants(plants);
+          renderAdminPlants();
+          alert("📸 पौधे की फोटो सफलतापूर्वक अपडेट हो गई है!");
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+
+    // Handle Delete Plant
     tbody.querySelectorAll(".delete-btn").forEach(button => {
       button.addEventListener("click", () => {
         const index = Number(button.dataset.index);
@@ -788,7 +926,6 @@
         plants.splice(index, 1);
         savePlants(plants);
         renderAdminPlants();
-        populatePlantDropdown();
       });
     });
   }

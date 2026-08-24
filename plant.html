@@ -4,37 +4,20 @@
 <head>
 
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
-  >
-
-  <meta
-    name="theme-color"
-    content="#2E7D32"
-  >
-
-  <meta
-    name="description"
-    content="श्री राम नर्सरी भुना - पौधे की जानकारी"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2E7D32">
+  <meta name="description" content="श्री राम नर्सरी भुना - पौधे की विस्तृत जानकारी एवं वैज्ञानिक देखभाल टिप्स">
 
   <title>Shri Ram Nursery - Plant Details</title>
 
-  <link
-    rel="stylesheet"
-    href="/css/style.css"
-    onerror="this.onerror=null;this.href='./css/style.css';"
-  >
+  <link rel="stylesheet" href="/css/style.css" onerror="this.onerror=null;this.href='./css/style.css';">
 
   <style>
-
     .details-container {
-      max-width: 850px;
+      max-width: 900px;
       margin: 40px auto;
       padding: 20px;
-      font-family: sans-serif;
+      font-family: Arial, sans-serif;
     }
 
     .plant-detail-card {
@@ -42,12 +25,14 @@
       border-radius: 14px;
       overflow: hidden;
       box-shadow: 0 4px 18px rgba(0,0,0,.08);
+      border: 1px solid #e0e0e0;
     }
 
     .detail-image-wrap {
       width: 100%;
       height: 400px;
       background: #eef5ee;
+      position: relative;
     }
 
     .detail-image {
@@ -58,7 +43,7 @@
     }
 
     .detail-content {
-      padding: 25px;
+      padding: 30px;
     }
 
     .plant-meta-badge {
@@ -96,29 +81,54 @@
       margin-bottom: 20px;
     }
 
+    /* एडवांस हॉर्टिकल्चर टिप्स सेक्शन */
+    .advanced-care-section {
+      margin-top: 30px;
+    }
+
+    .advanced-care-section h3 {
+      color: #1b5e20;
+      font-size: 22px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #c8e6c9;
+      padding-bottom: 8px;
+    }
+
+    .care-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
     .care-box {
       background: #f1f8e9;
       border: 1px solid #c8e6c9;
       padding: 20px;
       border-radius: 10px;
-      margin: 25px 0;
     }
 
-    .care-box h3 {
+    .care-box h4 {
       color: #2e7d32;
       margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .care-box p {
-      margin-bottom: 0;
+      margin: 0;
       color: #333;
-      line-height: 1.7;
+      line-height: 1.6;
+      font-size: 14px;
     }
 
     .action-row {
       display: flex;
       gap: 12px;
-      margin-top: 25px;
+      margin-top: 30px;
       flex-wrap: wrap;
     }
 
@@ -157,30 +167,23 @@
     }
 
     @media (max-width: 600px) {
-
       .details-container {
-        margin: 20px 10px;
+        margin: 15px 10px;
         padding: 10px;
       }
-
       .detail-image-wrap {
         height: 280px;
       }
-
       .plant-main-title {
         font-size: 26px;
       }
-
       .action-row {
         flex-direction: column;
       }
-
       .button {
         width: 100%;
       }
-
     }
-
   </style>
 
 </head>
@@ -188,170 +191,120 @@
 <body>
 
 <header class="site-header">
-
-  <a
-    class="brand"
-    href="./index.html"
-  >
-    Shri Ram Nursery
-    <span>Bhuna</span>
+  <a class="brand" href="./index.html">
+    Shri Ram Nursery <span>Bhuna</span>
   </a>
 
-  <nav
-    class="site-nav"
-    aria-label="Primary navigation"
-  >
-
-    <a href="./index.html">
-      Home
-    </a>
-
-    <a href="./dashboard.html">
-      Plants
-    </a>
-
-    <a href="./booking.html">
-      Booking
-    </a>
-
-    <a href="./orders.html">
-      Orders
-    </a>
-
+  <nav class="site-nav" aria-label="Primary navigation">
+    <a href="./index.html">Home</a>
+    <a href="./dashboard.html">Plants</a>
+    <a href="./booking.html">Booking</a>
+    <a href="./orders.html">Orders</a>
   </nav>
-
 </header>
 
 <main class="details-container">
 
-  <article
-    id="plant-page"
-    class="plant-detail-card"
-  >
+  <article id="plant-page" class="plant-detail-card">
 
     <div class="detail-image-wrap">
-
-      <img
-        id="plant-image"
-        class="detail-image"
-        src="./images/plant-placeholder.jpg"
-        alt="Plant"
-      >
-
+      <img id="plant-image" class="detail-image" src="./images/plant-placeholder.jpg" alt="Plant">
     </div>
 
     <div class="detail-content">
 
-      <span
-        id="plant-category"
-        class="plant-meta-badge"
-      >
+      <span id="plant-category" class="plant-meta-badge">
         🌿 पौधा
       </span>
 
-      <h1
-        id="plant-name"
-        class="plant-main-title"
-      >
+      <h1 id="plant-name" class="plant-main-title">
         Plant Information
       </h1>
 
-      <p
-        id="plant-variety"
-        class="plant-variety"
-      >
+      <p id="plant-variety" class="plant-variety">
         —
       </p>
 
-      <div
-        id="plant-availability"
-        class="availability"
-      >
+      <div id="plant-availability" class="availability">
         🟢 उपलब्ध
       </div>
 
-      <p id="plant-desc">
+      <p id="plant-desc" style="line-height: 1.7; color: #444; font-size: 16px;">
         पौधे की जानकारी लोड हो रही है...
       </p>
 
-      <div class="care-box">
+      <!-- एडवांस वैज्ञानिक देखभाल और हॉर्टिकल्चर टिप्स सेक्शन -->
+      <div class="advanced-care-section">
+        <h3>🌱 वैज्ञानिक देखभाल एवं हॉर्टिकल्चर गाइड</h3>
 
-        <h3>
-          🌱 देखभाल के टिप्स
-        </h3>
+        <div class="care-grid">
+          
+          <!-- मिट्टी और पीएच टारगेट -->
+          <div class="care-box">
+            <h4>🧪 मिट्टी और pH टार्गेट</h4>
+            <p id="tip-soil">
+              पौधे की मजबूत जड़ों के लिए उपजाऊ, अच्छी जल निकासी वाली दोमट मिट्टी और सही pH संतुलन आवश्यक है।
+            </p>
+          </div>
 
-        <p id="plant-care">
-          जानकारी लोड हो रही है...
-        </p>
+          <!-- डीप वॉटरिंग शेड्यूल -->
+          <div class="care-box">
+            <h4>💧 पानी देने का नियम</h4>
+            <p id="tip-watering">
+              जड़ों के गहरे विकास के लिए मिट्टी की ऊपरी परत सूखने पर ही भरपूर और गहरी सिंचाई करें।
+            </p>
+          </div>
 
+          <!-- सीजनल बदलाव -->
+          <div class="care-box">
+            <h4>☀️ मौसम के अनुसार देखभाल</h4>
+            <p id="tip-seasonal">
+              गर्मी के दिनों में नमी और मल्चिंग का ध्यान रखें, तथा सर्दियों में पौधे की सुप्त अवस्था के अनुसार पानी कम करें।
+            </p>
+          </div>
+
+          <!-- रीपोटिंग टाइमलाइन -->
+          <div class="care-box">
+            <h4>🪴 रीपोटिंग (गमला बदलना)</h4>
+            <p id="tip-repotting">
+              सक्रिय विकास काल या शुरुआती वसंत (Spring) के समय पौधे को आवश्यकतानुसार बड़े गमले में शिफ्ट करें।
+            </p>
+          </div>
+
+        </div>
       </div>
 
       <div class="action-row">
-
-        <a
-          class="button button-call"
-          href="tel:+919416316534"
-        >
+        <a class="button button-call" href="tel:+919416316534">
           📞 Call Now
         </a>
 
-        <a
-          class="button button-whatsapp"
-          id="dynamic-whatsapp-share"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a class="button button-whatsapp" id="dynamic-whatsapp-share" href="#" target="_blank" rel="noopener noreferrer">
           💬 WhatsApp Enquiry
         </a>
 
-        <a
-          class="button button-back"
-          href="./dashboard.html"
-        >
+        <a class="button button-back" href="./dashboard.html">
           🌿 Back to Plants
         </a>
-
       </div>
 
     </div>
 
   </article>
 
-  <article
-    id="plant-error"
-    class="error-box"
-    hidden
-  >
-
-    <h1>
-      पौधा नहीं मिला
-    </h1>
-
-    <p>
-      यह पौधा हमारे catalog में उपलब्ध नहीं है।
-    </p>
-
-    <a
-      class="button button-call"
-      href="./dashboard.html"
-    >
-      सभी पौधे देखें
-    </a>
-
+  <article id="plant-error" class="error-box" hidden>
+    <h1>पौधा नहीं मिला</h1>
+    <p>यह पौधा हमारे catalog में उपलब्ध नहीं है।</p>
+    <a class="button button-call" href="./dashboard.html">सभी पौधे देखें</a>
   </article>
 
 </main>
 
-<footer
-  class="site-footer"
-  style="text-align:center;padding:20px;background:#2E7D32;color:white;margin-top:40px;"
->
-  Shri Ram Nursery, Bhuna
+<footer class="site-footer" style="text-align:center;padding:20px;background:#2E7D32;color:white;margin-top:40px;">
+  Shri Ram Nursery, Bhuna · <a href="https://share.google/bcPylPMsfxgNtetXH" target="_blank" style="color: #a5d6a7; text-decoration: underline;">Shri Ram Nursery and Gardens</a>
 </footer>
 
 <script type="module">
-
   import {
     loadPlants,
     getPlantById,
@@ -360,131 +313,74 @@
   } from "./js/plants.js";
 
   async function initializePlantDetails() {
-
     try {
-
       await loadPlants();
 
-      const params =
-        new URLSearchParams(
-          window.location.search
-        );
-
-      const plantId =
-        params.get("plantId");
+      const params = new URLSearchParams(window.location.search);
+      const plantId = params.get("plantId");
 
       if (!plantId) {
         showPlantError();
         return;
       }
 
-      const plant =
-        getPlantById(plantId);
+      const plant = getPlantById(plantId);
 
       if (!plant) {
         showPlantError();
         return;
       }
 
-      const image =
-        document.getElementById("plant-image");
-
-      image.src =
-        plant.image ||
-        "./images/plant-placeholder.jpg";
-
-      image.alt =
-        plant.name;
-
+      const image = document.getElementById("plant-image");
+      image.src = plant.image || "./images/plant-placeholder.jpg";
+      image.alt = plant.name;
       image.onerror = function () {
         this.onerror = null;
-        this.src =
-          "./images/plant-placeholder.jpg";
+        this.src = "./images/plant-placeholder.jpg";
       };
 
-      document.getElementById(
-        "plant-name"
-      ).textContent =
-        plant.name;
+      document.getElementById("plant-name").textContent = plant.name;
+      document.getElementById("plant-category").textContent = getCategoryLabel(plant.category);
+      document.getElementById("plant-variety").textContent = plant.variety ? `वैरायटी: ${plant.variety}` : "";
+      document.getElementById("plant-availability").textContent = getAvailabilityLabel();
 
-      document.getElementById(
-        "plant-category"
-      ).textContent =
-        getCategoryLabel(
-          plant.category
-        );
+      document.getElementById("plant-desc").textContent = 
+        `${plant.name} श्री राम नर्सरी, भुना के plant catalogue में उपलब्ध है। उच्च गुणवत्ता वाले इस पौधे की उपलब्धता और वर्तमान कीमत के लिए सीधे नर्सरी से संपर्क करें।`;
 
-      document.getElementById(
-        "plant-variety"
-      ).textContent =
-        plant.variety
-          ? `वैरायटी: ${plant.variety}`
-          : "";
+      // डायनेमिक या फिक्स वैज्ञानिक टिप्स सेट करना
+      if (plant.soil_tip) {
+        document.getElementById("tip-soil").textContent = plant.soil_tip;
+      }
+      if (plant.watering_tip) {
+        document.getElementById("tip-watering").textContent = plant.watering_tip;
+      }
+      if (plant.seasonal_tip) {
+        document.getElementById("tip-seasonal").textContent = plant.seasonal_tip;
+      }
+      if (plant.repotting_tip) {
+        document.getElementById("tip-repotting").textContent = plant.repotting_tip;
+      }
 
-      document.getElementById(
-        "plant-availability"
-      ).textContent =
-        getAvailabilityLabel();
-
-      document.getElementById(
-        "plant-desc"
-      ).textContent =
-        `${plant.name} श्री राम नर्सरी, भुना के plant catalogue में उपलब्ध है। उपलब्धता और वर्तमान कीमत के लिए नर्सरी से संपर्क करें।`;
-
-      document.getElementById(
-        "plant-care"
-      ).textContent =
-        plant.care_tips ||
-        "उचित धूप, पानी और अच्छी जल निकासी रखें।";
-
-      const whatsapp =
-        document.getElementById(
-          "dynamic-whatsapp-share"
-        );
-
-      const message =
-        `नमस्ते श्री राम नर्सरी भुना, मुझे ${plant.name} (${plant.variety || "पौधा"}) चाहिए। इसकी उपलब्धता और कीमत की जानकारी दें।`;
-
-      whatsapp.href =
-        `https://wa.me/919416316534?text=${encodeURIComponent(message)}`;
+      const whatsapp = document.getElementById("dynamic-whatsapp-share");
+      const message = `नमस्ते श्री राम नर्सरी भुना, मुझे ${plant.name} (${plant.variety || "पौधा"}) चाहिए। इसकी उपलब्धता और कीमत की जानकारी दें।`;
+      whatsapp.href = `https://wa.me/919416316534?text=${encodeURIComponent(message)}`;
 
     } catch (error) {
-
-      console.error(
-        "Plant details error:",
-        error
-      );
-
+      console.error("Plant details error:", error);
       showPlantError();
     }
   }
 
   function showPlantError() {
-
-    document.getElementById(
-      "plant-page"
-    ).hidden = true;
-
-    document.getElementById(
-      "plant-error"
-    ).hidden = false;
+    document.getElementById("plant-page").hidden = true;
+    document.getElementById("plant-error").hidden = false;
   }
 
-  if (
-    document.readyState === "loading"
-  ) {
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      initializePlantDetails
-    );
-
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializePlantDetails);
   } else {
-
     initializePlantDetails();
-
   }
-
 </script>
 
 </body>
