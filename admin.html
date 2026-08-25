@@ -175,7 +175,6 @@
     const adminApp = document.getElementById("admin-app");
     
     function checkAuth() {
-      // Using localStorage for multi-device persistent session until manual logout
       if (localStorage.getItem("shriRamAdminLoggedIn") === "true") {
         loginScreen.style.display = "none";
         adminApp.style.display = "block";
@@ -207,7 +206,6 @@
 
     window.addEventListener("DOMContentLoaded", checkAuth);
 
-    // Image compression utility
     function compressImage(file, callback) {
       const reader = new FileReader();
       reader.onload = e => {
@@ -248,7 +246,7 @@
         savePlants(plants);
         plantForm.reset();
         loadAdminPlants();
-        alert("✅ पौधा सफलताપूर्वक जोड़ दिया गया है!");
+        alert("✅ पौधा सफलतापूर्वव जोड़ दिया गया है!");
       };
 
       if (fileInput) {

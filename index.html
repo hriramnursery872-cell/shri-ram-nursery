@@ -13,6 +13,36 @@
       background: #f4f7f3;
       color: #202520;
     }
+    /* Top Live Video & Social Ticker Bar */
+    .top-video-ticker {
+      background: #1b5e20;
+      color: white;
+      padding: 8px 15px;
+      font-size: 13px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .top-video-ticker:hover { background: #2e7d32; }
+    .live-dot {
+      height: 8px;
+      width: 8px;
+      background-color: #ff5252;
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
     header {
       background: white;
       border-bottom: 1px solid #e2e7e2;
@@ -174,6 +204,12 @@
   </style>
 </head>
 <body>
+
+  <!-- Top Announcement & Social Video Ticker (Search bar के भी ऊपर प्रीमियम फील के लिए) -->
+  <a href="https://www.youtube.com/@shriramnursery" target="_blank" class="top-video-ticker" id="dynamic-video-ticker">
+    <span class="live-dot"></span>
+    <span>🎥 नया वीडियो अपडेट: श्री राम नर्सरी (भुना) के नए पौधे देखें - टैप करें और जुड़ें!</span>
+  </a>
 
   <header>
     <div class="header-container">
