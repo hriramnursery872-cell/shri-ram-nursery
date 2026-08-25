@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#2E7D32">
   <title>श्री राम नर्सरी (भुना) - Admin Panel</title>
-
   <style>
     * { box-sizing: border-box; }
     body {
@@ -16,7 +15,6 @@
     }
     button, input, select, textarea { font: inherit; }
 
-    /* LOGIN */
     #admin-login {
       min-height: 100vh;
       display: flex;
@@ -27,936 +25,273 @@
     }
     .login-card {
       width: 100%;
-      max-width: 430px;
+      max-width: 420px;
       background: white;
-      border-radius: 18px;
+      border-radius: 16px;
       padding: 30px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
     }
-    .login-logo {
-      text-align: center;
-      font-size: 28px;
-      font-weight: 800;
-      color: #1b5e20;
-      margin-bottom: 8px;
-    }
-    .login-subtitle { text-align: center; color: #666; margin-bottom: 25px; }
-    .security-box {
-      background: #edf7ed;
-      border: 1px solid #c8e6c9;
-      color: #1b5e20;
-      border-radius: 10px;
-      padding: 12px;
-      font-size: 13px;
-      margin-bottom: 20px;
-    }
-    .form-group { margin-bottom: 17px; }
-    .form-group label { display: block; font-weight: 700; margin-bottom: 7px; }
+    .login-logo { text-align: center; font-size: 26px; font-weight: 800; color: #1b5e20; margin-bottom: 5px; }
+    .login-subtitle { text-align: center; color: #666; margin-bottom: 20px; font-size: 14px; }
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; font-weight: 700; margin-bottom: 6px; font-size: 13px; }
     .form-group input, .form-group select, .form-group textarea {
       width: 100%;
-      border: 1px solid #d2d8d2;
-      border-radius: 9px;
-      padding: 12px;
-      outline: none;
-      background: white;
-    }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      border-color: #2e7d32;
-      box-shadow: 0 0 0 3px rgba(46,125,50,.10);
-    }
-    .btn {
-      border: 0;
-      border-radius: 9px;
-      padding: 12px 18px;
-      cursor: pointer;
-      font-weight: 700;
-    }
-    .btn-primary { background: #2e7d32; color: white; width: 100%; }
-    .btn-primary:hover { background: #1b5e20; }
-    .login-error {
-      display: none;
-      margin-top: 15px;
-      padding: 11px;
-      background: #ffebee;
-      color: #c62828;
+      border: 1px solid #ccc;
       border-radius: 8px;
-      font-weight: 600;
-      font-size: 14px;
+      padding: 10px;
+      outline: none;
     }
+    .btn { border: 0; border-radius: 8px; padding: 11px; cursor: pointer; font-weight: 700; width: 100%; }
+    .btn-primary { background: #2e7d32; color: white; }
+    .login-error { display: none; margin-top: 12px; padding: 10px; background: #ffebee; color: #c62828; border-radius: 6px; font-size: 13px; font-weight: 600; }
 
-    /* ADMIN APP */
     #admin-app { display: none; }
     .admin-header {
       background: #1b5e20;
       color: white;
-      padding: 15px 20px;
+      padding: 12px 20px;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 3px 15px rgba(0,0,0,.15);
     }
-    .header-inner {
-      max-width: 1250px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
-    .brand { font-size: 21px; font-weight: 800; }
-    .brand small { display: block; font-size: 12px; opacity: .8; margin-top: 3px; }
-    .logout-btn {
-      background: #ffffff;
-      color: #1b5e20;
-      border: 0;
-      border-radius: 8px;
-      padding: 9px 13px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .admin-container { max-width: 1250px; margin: 0 auto; padding: 25px 18px 50px; }
-    .page-heading { margin-bottom: 25px; }
-    .page-heading h1 { margin: 0 0 7px; font-size: 28px; }
-    .page-heading p { margin: 0; color: #687068; }
-
-    /* SUMMARY CARDS */
-    .summary-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      margin-bottom: 25px;
-    }
-    .summary-card {
-      background: white;
-      border-radius: 14px;
-      padding: 20px;
-      border: 1px solid #e2e7e2;
-      box-shadow: 0 4px 15px rgba(0,0,0,.05);
-    }
-    .summary-title { color: #687068; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
-    .summary-value { color: #1b5e20; font-size: 28px; font-weight: 800; }
-
-    /* SECTIONS */
+    .header-inner { max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
+    .admin-container { max-width: 1200px; margin: auto; padding: 20px; }
+    
     .section {
       background: white;
-      border-radius: 15px;
-      padding: 22px;
-      margin-bottom: 22px;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
       border: 1px solid #e2e7e2;
-      box-shadow: 0 4px 15px rgba(0,0,0,.04);
     }
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-    }
-    .section-header h2 { margin: 0; font-size: 20px; }
-    .section-note { color: #727872; font-size: 13px; margin-top: 4px; }
-
-    /* SALES GRID */
-    .sales-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .payment-card { border: 1px solid #e2e7e2; border-radius: 12px; padding: 18px; }
-    .payment-card h3 { margin: 0 0 12px; font-size: 16px; }
-    .payment-number { font-size: 27px; font-weight: 800; color: #1b5e20; }
-
-    /* BILLING ITEMS BUILDER */
-    .billing-row {
-      display: grid;
-      grid-template-columns: 1.5fr 1.5fr 1fr 1.2fr auto;
-      gap: 10px;
-      align-items: center;
-      background: #f4f8f4;
-      padding: 10px;
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
-    @media(max-width: 768px) {
-      .billing-row { grid-template-columns: 1fr; }
-    }
-
-    /* TABLE */
+    .section h2 { margin-top: 0; font-size: 18px; color: #1b5e20; }
+    
     .table-wrapper { width: 100%; overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; min-width: 700px; }
-    th, td { border-bottom: 1px solid #e5e9e5; padding: 12px 10px; text-align: left; vertical-align: middle; font-size: 14px; }
-    th { background: #f2f7f2; color: #315b34; font-weight: 800; }
-    tr:hover td { background: #fafdfa; }
-    .badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 9px; border-radius: 20px; font-size: 12px; font-weight: 700; }
-    .badge-green { background: #e8f5e9; color: #1b5e20; }
-    .badge-orange { background: #fff3e0; color: #e65100; }
-    .badge-blue { background: #e3f2fd; color: #1565c0; }
-
-    /* VARIETY */
-    .variety-list { display: grid; gap: 10px; }
-    .variety-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      background: #f7faf7;
-      border-radius: 10px;
-      padding: 12px 14px;
-    }
-    .variety-name { font-weight: 700; }
-    .variety-count { background: #2e7d32; color: white; border-radius: 20px; padding: 5px 10px; font-weight: 700; font-size: 12px; }
-
-    /* FORMS GRID */
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    .full-width { grid-column: 1 / -1; }
-    .btn-success { background: #2e7d32; color: white; }
-    .btn-whatsapp { background: #25d366; color: white; display: inline-flex; align-items: center; gap: 6px; }
-    .btn-whatsapp:hover { background: #1ebe57; }
-    .btn-secondary { background: #6c757d; color: white; }
-
-    .plant-image { width: 55px; height: 55px; object-fit: cover; border-radius: 9px; background: #edf3ed; }
-    .plant-name-cell { font-weight: 800; }
-    .delete-btn { background: #ffebee; color: #c62828; border: 0; padding: 7px 10px; border-radius: 7px; cursor: pointer; font-weight: 700; }
-    .empty { text-align: center; padding: 30px; color: #777; }
-
-    @media (max-width: 900px) {
-      .summary-grid { grid-template-columns: repeat(2, 1fr); }
-      .sales-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 650px) {
-      .admin-container { padding: 18px 12px 40px; }
-      .header-inner { align-items: flex-start; }
-      .brand { font-size: 17px; }
-      .summary-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
-      .summary-card { padding: 14px; }
-      .summary-value { font-size: 22px; }
-      .section { padding: 15px; }
-      .form-grid { grid-template-columns: 1fr; }
-      .full-width { grid-column: auto; }
-    }
+    table { width: 100%; border-collapse: collapse; min-width: 600px; }
+    th, td { border-bottom: 1px solid #eee; padding: 10px; text-align: left; font-size: 13px; }
+    th { background: #f9fbf9; color: #315b34; }
+    
+    .plant-img-thumb { width: 45px; height: 45px; object-fit: cover; border-radius: 6px; background: #eee; }
+    .btn-danger { background: #ffebee; color: #c62828; border: 0; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-weight: 700; }
   </style>
 </head>
-
 <body>
 
-<!-- ADMIN LOGIN SECTION -->
-<section id="admin-login">
-  <div class="login-card">
-    <div class="login-logo">🌿 श्री राम नर्सरी (भुना)</div>
-    <div class="login-subtitle">सुरक्षित Admin Panel</div>
-    <div class="security-box">🔐 यह पैनल केवल अधिकृत मोबाइल नंबर और PIN से खुलेगा।</div>
-    <div class="form-group">
-      <label for="login-phone">📱 अधिकृत मोबाइल नंबर</label>
-      <input type="tel" id="login-phone" placeholder="अपना अधिकृत मोबाइल नंबर" maxlength="10" autocomplete="tel">
+  <!-- LOGIN PANEL -->
+  <section id="admin-login">
+    <div class="login-card">
+      <div class="login-logo">🌿 श्री राम नर्सरी</div>
+      <div class="login-subtitle">Secure Admin Portal</div>
+      <div class="form-group">
+        <label>📱 अधिकृत मोबाइल नंबर</label>
+        <input type="tel" id="login-phone" placeholder="मोबाइल नंबर दर्ज करें" maxlength="10">
+      </div>
+      <div class="form-group">
+        <label>🔑 Admin PIN</label>
+        <input type="password" id="login-pin" placeholder="PIN दर्ज करें">
+      </div>
+      <button type="button" class="btn btn-primary" id="login-btn">🔐 लॉगिन करें</button>
+      <div id="login-error" class="login-error"></div>
     </div>
-    <div class="form-group">
-      <label for="login-pin">🔑 Admin PIN</label>
-      <input type="password" id="login-pin" placeholder="Admin PIN डालें" maxlength="8" autocomplete="current-password">
-    </div>
-    <button type="button" class="btn btn-primary" id="login-btn">🔐 Admin Panel खोलें</button>
-    <div id="login-error" class="login-error"></div>
+  </section>
+
+  <!-- ADMIN DASHBOARD -->
+  <div id="admin-app">
+    <header class="admin-header">
+      <div class="header-inner">
+        <div><strong>🌿 श्री राम नर्सरी - Admin Panel</strong></div>
+        <button type="button" id="logout-btn" style="background:white; color:#1b5e20; border:0; padding:6px 12px; border-radius:6px; font-weight:700; cursor:pointer;">Logout</button>
+      </div>
+    </header>
+
+    <main class="admin-container">
+      <!-- ADD PLANT -->
+      <section class="section">
+        <h2>➕ नया पौधा जोड़ें (Catalog Manager)</h2>
+        <form id="plant-form">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-bottom:15px;">
+            <div class="form-group" style="margin:0;">
+              <label>पौधे का नाम</label>
+              <input type="text" id="plant-name" required placeholder="जैसे: अमरूद हिसार सफेदा">
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label>Variety</label>
+              <input type="text" id="plant-variety" placeholder="जैसे: Hisar Safeda">
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-bottom:15px;">
+            <div class="form-group" style="margin:0;">
+              <label>Category</label>
+              <select id="plant-category">
+                <option value="Fruit">🍊 फलदार पौधे</option>
+                <option value="Indoor">🪴 इंडोर प्लांट</option>
+                <option value="Outdoor">🌳 आउटडोर प्लांट</option>
+                <option value="Flowering">🌸 फूलदार पौधे</option>
+                <option value="Decorative">🌿 डेकोरेटिव पौधे</option>
+                <option value="Other">🌱 अन्य</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label>📷 पौधे की फोटो (Image)</label>
+              <input type="file" id="plant-image-file" accept="image/*">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>🌱 देखभाल के टिप्स (Horticulture Tips)</label>
+            <textarea id="plant-tips" rows="2" placeholder="पानी और देखभाल की जानकारी..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">🌱 पौधा सेव करें</button>
+        </form>
+      </section>
+
+      <!-- PLANT INVENTORY LIST -->
+      <section class="section">
+        <h2>📋 पौधे सूची और इमेज मैनेजर</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Photo</th>
+                <th>Name & Variety</th>
+                <th>Category</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-plants-list"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
   </div>
-</section>
 
-<!-- ADMIN APPLICATION -->
-<div id="admin-app">
-  <header class="admin-header">
-    <div class="header-inner">
-      <div class="brand">
-        🌿 श्री राम नर्सरी (भुना)
-        <small>Nursery Management & Sales Dashboard</small>
-      </div>
-      <button type="button" class="logout-btn" id="logout-btn">Logout</button>
-    </div>
-  </header>
+  <script type="module">
+    import { getPlants, savePlants } from './js/plants.js';
 
-  <main class="admin-container">
-    <div class="page-heading">
-      <h1>📊 Admin Dashboard</h1>
-      <p>आज की बिक्री, पौधों की वैराइटी, कस्टमर और पेमेंट का पूरा हिसाब (रियल-टाइम अपडेट)</p>
-    </div>
+    const ADMIN_PHONE = "9416316534";
+    const ADMIN_PIN = "123456";
 
-    <!-- SUMMARY CARDS -->
-    <section class="summary-grid">
-      <div class="summary-card">
-        <div class="summary-title">🌱 आज कुल पौधे बिके</div>
-        <div class="summary-value" id="today-plants">0</div>
-      </div>
-      <div class="summary-card">
-        <div class="summary-title">🧾 आज कुल Orders</div>
-        <div class="summary-value" id="today-orders">0</div>
-      </div>
-      <div class="summary-card">
-        <div class="summary-title">👥 आज के Customers</div>
-        <div class="summary-value" id="today-customers">0</div>
-      </div>
-      <div class="summary-card">
-        <div class="summary-title">💰 आज की कुल बिक्री</div>
-        <div class="summary-value" id="today-sales">₹0</div>
-      </div>
-    </section>
-
-    <!-- NEW ORDER ENTRY FORM (MULTI-CATEGORY DYNAMIC BILLING) -->
-    <section class="section" style="border: 2px dashed #2e7d32; background: #fafdfa;">
-      <div class="section-header">
-        <div>
-          <h2>➕ नया ऑर्डर / मल्टी-कैटेगरी बिलिंग</h2>
-          <div class="section-note">एक ही बिल में '+' बटन दबाकर कई कैटेगरी और पौधे जोड़ें।</div>
-        </div>
-      </div>
-
-      <form id="order-entry-form">
-        <div class="form-grid">
-          <div class="form-group">
-            <label>👤 कस्टमर का नाम</label>
-            <input type="text" id="order-customer" placeholder="जैसे: रमेश कुमार" required>
-          </div>
-          <div class="form-group">
-            <label>📱 मोबाइल नंबर</label>
-            <input type="tel" id="order-phone" placeholder="10 अंकों का मोबाइल नंबर" maxlength="10">
-          </div>
-          <div class="form-group full-width">
-            <label>📍 कस्टमर का पता (Address)</label>
-            <input type="text" id="order-address" placeholder="गाँव / शहर का नाम">
-          </div>
-
-          <!-- DYNAMIC ITEMS BUILDER CONTAINER -->
-          <div class="full-width">
-            <label style="font-weight:700; margin-bottom:8px; display:block;">🌿 खरीदे गए पौधे (कैटेगरी और वैरायटी चुनें):</label>
-            <div id="billing-items-container"></div>
-            <button type="button" class="btn btn-secondary" id="add-billing-row-btn" style="margin-top: 8px; font-size: 13px; padding: 8px 14px;">➕ और पौधा/कैटेगरी जोड़ें</button>
-          </div>
-
-          <div class="form-group full-width" style="margin-top: 10px;">
-            <label>💳 पेमेंट का तरीका (Payment Mode)</label>
-            <select id="order-payment">
-              <option value="Cash">💵 Cash (नकद)</option>
-              <option value="UPI">📲 UPI (ऑनलाइन / PhonePe / GPay)</option>
-            </select>
-          </div>
-          
-          <div class="full-width" style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <button type="submit" class="btn btn-success" style="flex: 1;">💾 रिकॉर्ड सेव करें</button>
-            <button type="button" class="btn btn-whatsapp" id="whatsapp-bill-btn" style="flex: 1;">💬 WhatsApp पर बिल भेजें</button>
-          </div>
-        </div>
-      </form>
-    </section>
-
-    <!-- CASH / UPI -->
-    <section class="section">
-      <div class="section-header">
-        <div>
-          <h2>💳 आज का Payment हिसाब</h2>
-          <div class="section-note">Cash और UPI payment का अलग-अलग विवरण।</div>
-        </div>
-      </div>
-      <div class="sales-grid">
-        <div class="payment-card">
-          <h3>💵 Cash Payment</h3>
-          <div class="payment-number" id="cash-sales">₹0</div>
-          <div class="section-note">Cash से कुल बिक्री</div>
-        </div>
-        <div class="payment-card">
-          <h3>📲 UPI Payment</h3>
-          <div class="payment-number" id="upi-sales">₹0</div>
-          <div class="section-note">UPI से कुल बिक्री</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- VARIETY SALES -->
-    <section class="section">
-      <div class="section-header">
-        <div>
-          <h2>🌿 आज कौन-कौन से पौधे बिके?</h2>
-          <div class="section-note">हर वैराइटी की बिक्री की कुल संख्या।</div>
-        </div>
-      </div>
-      <div id="variety-sales" class="variety-list"></div>
-    </section>
-
-    <!-- MASTER CUSTOMER LEDGER & MINI STATEMENT -->
-    <section class="section">
-      <div class="section-header">
-        <div>
-          <h2>📋 मास्टर कस्टमर लेज़र (Mini Statement Filter)</h2>
-          <div class="section-note">ए टू जेड सभी पुराने और नए ग्राहकों का रिकॉर्ड। बैंक स्टेटमेंट की तरह समय चुनें।</div>
-        </div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-          <input type="text" id="ledger-search" placeholder="🔍 नाम या मोबाइल से खोजें..." style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 13px;">
-          <select id="ledger-time-filter" style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 13px; background: white;">
-            <option value="7">पिछले 7 दिन</option>
-            <option value="30" selected>पिछले 30 दिन</option>
-            <option value="90">पिछले 90 दिन</option>
-            <option value="all">ए टू जेड (All Time)</option>
-          </select>
-        </div>
-      </div>
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Customer</th>
-              <th>Mobile / Address</th>
-              <th>Plant / Variety / Qty</th>
-              <th>Payment</th>
-              <th>Total Amount</th>
-              <th>Date & Time</th>
-            </tr>
-          </thead>
-          <tbody id="master-ledger-list"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ADD PLANT CATALOG (DIRECT FILE UPLOAD) -->
-    <section class="section">
-      <div class="section-header">
-        <div>
-          <h2>➕ नया पौधा Catalog में जोड़ें (फाइल अपलोड के साथ)</h2>
-          <div class="section-note">सीधे अपने फोन की गैलरी से फोटो अपलोड करें।</div>
-        </div>
-      </div>
-      <form id="plant-form">
-        <div class="form-grid">
-          <div class="form-group">
-            <label>पौधे का नाम</label>
-            <input type="text" id="plant-name" required placeholder="जैसे अमरूद हिसार सफेदा">
-          </div>
-          <div class="form-group">
-            <label>Variety</label>
-            <input type="text" id="plant-variety" placeholder="जैसे Hisar Safeda">
-          </div>
-          <div class="form-group">
-            <label>Category</label>
-            <select id="plant-category">
-              <option value="Fruit">🍊 फलदार पौधे</option>
-              <option value="Indoor">🪴 इंडोर प्लांट</option>
-              <option value="Outdoor">🌳 आउटडोर प्लांट</option>
-              <option value="Flowering">🌸 फूलदार पौधे</option>
-              <option value="Decorative">🌿 डेकोरेटिव पौधे</option>
-              <option value="Other">🌱 अन्य</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>📷 पौधे की फोटो चुनें (Upload Image)</label>
-            <input type="file" id="plant-image-file" accept="image/*">
-          </div>
-          <div class="form-group full-width">
-            <label>🌱 पौधे की देखभाल की Tips</label>
-            <textarea id="plant-tips" rows="3" placeholder="जैसे: 3-4 दिन में पानी दें।"></textarea>
-          </div>
-          <div class="form-group full-width">
-            <label>Availability</label>
-            <select id="plant-stock"><option value="In Stock">🟢 उपलब्ध है</option></select>
-          </div>
-          <div class="full-width">
-            <button type="submit" class="btn btn-success">🌱 Save Plant</button>
-          </div>
-        </div>
-      </form>
-    </section>
-
-    <!-- PLANT INVENTORY & EXISTING IMAGE UPDATER -->
-    <section class="section">
-      <div class="section-header">
-        <div>
-          <h2>🌿 Plant Catalog & Image Manager</h2>
-          <div class="section-note">पुराने पौधों की फोटो यहाँ से कभी भी बदलें या अपडेट करें।</div>
-        </div>
-      </div>
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Photo</th>
-              <th>Name & Variety</th>
-              <th>Category</th>
-              <th>Availability</th>
-              <th>Update Image</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="admin-plants-list"></tbody>
-        </table>
-      </div>
-    </section>
-  </main>
-</div>
-
-<script type="module">
-  import { getPlants, savePlants } from './js/plants.js';
-
-  const ADMIN_PHONE = "9416316534";
-  const ADMIN_PIN = "123456";
-
-  const loginScreen = document.getElementById("admin-login");
-  const adminApp = document.getElementById("admin-app");
-  const loginPhone = document.getElementById("login-phone");
-  const loginPin = document.getElementById("login-pin");
-  const loginBtn = document.getElementById("login-btn");
-  const loginError = document.getElementById("login-error");
-  const logoutBtn = document.getElementById("logout-btn");
-
-  function showLoginError(msg) {
-    loginError.textContent = msg;
-    loginError.style.display = "block";
-  }
-
-  function openAdmin() {
-    loginScreen.style.display = "none";
-    adminApp.style.display = "block";
-    loadDashboard();
-    renderAdminPlants();
-    initBillingRow();
-  }
-
-  function closeAdmin() {
-    adminApp.style.display = "none";
-    loginScreen.style.display = "flex";
-    loginPhone.value = "";
-    loginPin.value = "";
-  }
-
-  loginBtn.addEventListener("click", () => {
-    const phone = loginPhone.value.trim();
-    const pin = loginPin.value.trim();
-    if (!phone || !pin) {
-      showLoginError("मोबाइल नंबर और PIN दोनों डालना जरूरी है।");
-      return;
-    }
-    if (phone !== ADMIN_PHONE) {
-      showLoginError("❌ यह मोबाइल नंबर Admin के लिए authorized नहीं है।");
-      return;
-    }
-    if (pin !== ADMIN_PIN) {
-      showLoginError("❌ गलत Admin PIN।");
-      return;
-    }
-    loginError.style.display = "none";
-    sessionStorage.setItem("shriRamAdminAuthenticated", "true");
-    openAdmin();
-  });
-
-  logoutBtn.addEventListener("click", () => {
-    sessionStorage.removeItem("shriRamAdminAuthenticated");
-    closeAdmin();
-  });
-
-  if (sessionStorage.getItem("shriRamAdminAuthenticated") === "true") {
-    openAdmin();
-  }
-
-  function isToday(value) {
-    if (!value) return false;
-    const date = new Date(value);
-    if (isNaN(date.getTime())) return false;
-    const now = new Date();
-    return (
-      date.getFullYear() === now.getFullYear() &&
-      date.getMonth() === now.getMonth() &&
-      date.getDate() === now.getDate()
-    );
-  }
-
-  function formatDateTime(value) {
-    if (!value) return "-";
-    const date = new Date(value);
-    if (isNaN(date.getTime())) return "-";
-    return date.toLocaleString("hi-IN", { day: '2-digit', month: '2-digit', year: 'numeric', hour: "2-digit", minute: "2-digit" });
-  }
-
-  function getOrders() {
-    try {
-      const data = localStorage.getItem("shriRamOrders");
-      if (!data) return [];
-      const parsed = JSON.parse(data);
-      return Array.isArray(parsed) ? parsed : [];
-    } catch (e) {
-      return [];
-    }
-  }
-
-  function saveOrdersList(ordersArray) {
-    localStorage.setItem("shriRamOrders", JSON.stringify(ordersArray));
-  }
-
-  function normalizeOrder(order) {
-    const customer = order.customer || order.customerName || order.name || "-";
-    const phone = order.phone || order.mobile || "-";
-    const address = order.address || order.customerAddress || "";
-    const items = Array.isArray(order.items) ? order.items : [{
-      plantName: order.plantName || "पौधा",
-      variety: order.variety || "",
-      quantity: Number(order.quantity || order.qty || 1),
-      amount: Number(order.total || order.amount || 0)
-    }];
-    const payment = (order.paymentMethod || order.payment || order.paymentMode || "").toString().toLowerCase();
+    const loginScreen = document.getElementById("admin-login");
+    const adminApp = document.getElementById("admin-app");
     
-    let paymentMode = "Other";
-    if (payment.includes("cash")) paymentMode = "Cash";
-    else if (payment.includes("upi") || payment.includes("online") || payment.includes("gpay") || payment.includes("phonepe") || payment.includes("paytm")) paymentMode = "UPI";
-
-    const totalAmount = items.reduce((sum, i) => sum + Number(i.amount || 0), 0);
-    const date = order.date || order.createdAt || order.timestamp || new Date().toISOString();
-
-    return { customer, phone, address, items, paymentMode, amount: totalAmount, date };
-  }
-
-  function loadDashboard() {
-    const rawOrders = getOrders().map(normalizeOrder);
-    const todayOrders = rawOrders.filter(o => isToday(o.date));
-
-    let totalPlants = 0, totalSales = 0, cashSales = 0, upiSales = 0;
-    const customers = new Set();
-    const varieties = {};
-
-    todayOrders.forEach(order => {
-      if (order.phone && order.phone !== "-") customers.add(order.phone);
-      if (order.paymentMode === "Cash") cashSales += order.amount;
-      if (order.paymentMode === "UPI") upiSales += order.amount;
-      totalSales += order.amount;
-
-      order.items.forEach(item => {
-        totalPlants += Number(item.quantity || 0);
-        const key = item.variety ? `${item.plantName} (${item.variety})` : item.plantName;
-        if (!varieties[key]) varieties[key] = 0;
-        varieties[key] += Number(item.quantity || 0);
-      });
-    });
-
-    document.getElementById("today-plants").textContent = totalPlants;
-    document.getElementById("today-orders").textContent = todayOrders.length;
-    document.getElementById("today-customers").textContent = customers.size;
-    document.getElementById("today-sales").textContent = "₹" + totalSales;
-    document.getElementById("cash-sales").textContent = "₹" + cashSales;
-    document.getElementById("upi-sales").textContent = "₹" + upiSales;
-
-    renderVarietySales(varieties);
-    renderMasterLedger(rawOrders);
-  }
-
-  function renderVarietySales(varieties) {
-    const container = document.getElementById("variety-sales");
-    container.innerHTML = "";
-    const entries = Object.entries(varieties);
-    if (entries.length === 0) {
-      container.innerHTML = `<div class="empty">आज अभी कोई पौधा नहीं बिका है।</div>`;
-      return;
+    function checkAuth() {
+      // Using localStorage for multi-device persistent session until manual logout
+      if (localStorage.getItem("shriRamAdminLoggedIn") === "true") {
+        loginScreen.style.display = "none";
+        adminApp.style.display = "block";
+        loadAdminPlants();
+      }
     }
-    entries.sort((a, b) => b[1] - a[1]).forEach(([name, count]) => {
-      const row = document.createElement("div");
-      row.className = "variety-row";
-      row.innerHTML = `<div class="variety-name">🌿 ${escapeHtml(name)}</div><div class="variety-count">${count} पौधे</div>`;
-      container.appendChild(row);
-    });
-  }
 
-  // MULTI-CATEGORY DYNAMIC BILLING ROW BUILDER
-  function initBillingRow() {
-    const container = document.getElementById("billing-items-container");
-    container.innerHTML = "";
-    addBillingRow();
-  }
+    document.getElementById("login-btn").addEventListener("click", () => {
+      const phone = document.getElementById("login-phone").value.trim();
+      const pin = document.getElementById("login-pin").value.trim();
+      const errBox = document.getElementById("login-error");
 
-  function addBillingRow() {
-    const container = document.getElementById("billing-items-container");
-    const rowId = Date.now() + Math.random();
-    const plants = getPlants();
-
-    const rowDiv = document.createElement("div");
-    rowDiv.className = "billing-row";
-    rowDiv.dataset.id = rowId;
-
-    let plantOptions = `<option value="">-- पौधा चुनें --</option>`;
-    plants.forEach(p => {
-      const val = p.name + (p.variety ? `|${p.variety}` : '');
-      const label = p.name + (p.variety ? ` (${p.variety})` : '');
-      plantOptions += `<option value="${escapeAttribute(val)}">${escapeHtml(label)}</option>`;
-    });
-
-    rowDiv.innerHTML = `
-      <select class="billing-plant" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:8px;">
-        ${plantOptions}
-      </select>
-      <input type="number" class="billing-qty" value="1" min="1" placeholder="मात्रा (Qty)" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:8px;">
-      <input type="number" class="billing-amount" placeholder="अमाउंट (₹)" min="0" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:8px;">
-      <button type="button" class="delete-row-btn" style="background:#ffebee; color:#c62828; border:0; border-radius:8px; padding:10px; cursor:pointer; font-weight:700;">❌ हटाएँ</button>
-    `;
-
-    container.appendChild(rowDiv);
-
-    rowDiv.querySelector(".delete-row-btn").addEventListener("click", () => {
-      if (container.querySelectorAll(".billing-row").length > 1) {
-        rowDiv.remove();
+      if (phone === ADMIN_PHONE && pin === ADMIN_PIN) {
+        localStorage.setItem("shriRamAdminLoggedIn", "true");
+        checkAuth();
       } else {
-        alert("कम से कम एक पौधा होना जरूरी है।");
+        errBox.textContent = "❌ गलत मोबाइल नंबर या पिन!";
+        errBox.style.display = "block";
       }
     });
-  }
 
-  document.getElementById("add-billing-row-btn").addEventListener("click", addBillingRow);
+    document.getElementById("logout-btn").addEventListener("click", () => {
+      localStorage.removeItem("shriRamAdminLoggedIn");
+      adminApp.style.display = "none";
+      loginScreen.style.display = "flex";
+      document.getElementById("login-phone").value = "";
+      document.getElementById("login-pin").value = "";
+    });
 
-  // Handle Manual Order Form Submit
-  const orderForm = document.getElementById("order-entry-form");
-  orderForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const customer = document.getElementById("order-customer").value.trim();
-    const phone = document.getElementById("order-phone").value.trim() || "-";
-    const address = document.getElementById("order-address").value.trim();
-    const paymentMode = document.getElementById("order-payment").value;
+    window.addEventListener("DOMContentLoaded", checkAuth);
 
-    const rows = document.querySelectorAll(".billing-row");
-    const items = [];
+    // Image compression utility
+    function compressImage(file, callback) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const MAX = 400;
+          let w = img.width, h = img.height;
+          if (w > h && w > MAX) { h *= MAX/w; w = MAX; }
+          else if (h > MAX) { w *= MAX/h; h = MAX; }
+          canvas.width = w; canvas.height = h;
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+          callback(canvas.toDataURL('image/jpeg', 0.7));
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
 
-    for (const row of rows) {
-      const plantSel = row.querySelector(".billing-plant").value;
-      const qty = Number(row.querySelector(".billing-qty").value) || 1;
-      const amt = Number(row.querySelector(".billing-amount").value) || 0;
+    const plantForm = document.getElementById("plant-form");
+    plantForm.addEventListener("submit", e => {
+      e.preventDefault();
+      const name = document.getElementById("plant-name").value.trim();
+      const variety = document.getElementById("plant-variety").value.trim();
+      const category = document.getElementById("plant-category").value;
+      const tips = document.getElementById("plant-tips").value.trim();
+      const fileInput = document.getElementById("plant-image-file").files[0];
 
-      if (!plantSel) {
-        alert("कृपया सभी पंक्तियों में पौधा चुनें।");
+      const saveRecord = (imgData = "") => {
+        const newPlant = {
+          id: Date.now().toString(),
+          name, variety, category, tips,
+          image: imgData,
+          imageUrl: imgData
+        };
+        const plants = getPlants();
+        plants.push(newPlant);
+        savePlants(plants);
+        plantForm.reset();
+        loadAdminPlants();
+        alert("✅ पौधा सफलताપूर्वक जोड़ दिया गया है!");
+      };
+
+      if (fileInput) {
+        compressImage(fileInput, saveRecord);
+      } else {
+        saveRecord();
+      }
+    });
+
+    function loadAdminPlants() {
+      const tbody = document.getElementById("admin-plants-list");
+      const plants = getPlants();
+      tbody.innerHTML = "";
+
+      if (!plants || plants.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:20px; color:#666;">कोई पौधा नहीं है।</td></tr>`;
         return;
       }
-      const [plantName, variety = ""] = plantSel.split("|");
-      items.push({ plantName, variety, quantity: qty, amount: amt });
-    }
 
-    const newOrder = {
-      customer,
-      phone,
-      address,
-      items,
-      paymentMode,
-      date: new Date().toISOString()
-    };
-
-    const allOrders = getOrders();
-    allOrders.push(newOrder);
-    saveOrdersList(allOrders);
-
-    orderForm.reset();
-    initBillingRow();
-    loadDashboard();
-    alert("✅ आर्डर सफलताપूर्वक दर्ज हो गया है!");
-  });
-
-  // WhatsApp Bill Generator
-  document.getElementById("whatsapp-bill-btn").addEventListener("click", () => {
-    const customer = document.getElementById("order-customer").value.trim();
-    const phone = document.getElementById("order-phone").value.trim();
-    const paymentMode = document.getElementById("order-payment").value;
-
-    const rows = document.querySelectorAll(".billing-row");
-    let itemsText = "";
-    let grandTotal = 0;
-
-    for (const row of rows) {
-      const plantSel = row.querySelector(".billing-plant").value;
-      const qty = Number(row.querySelector(".billing-qty").value) || 1;
-      const amt = Number(row.querySelector(".billing-amount").value) || 0;
-      if (plantSel) {
-        const [pName, pVar = ""] = plantSel.split("|");
-        const fullP = pVar ? `${pName} (${pVar})` : pName;
-        itemsText += `• ${fullP} - ${qty} पौधे - ₹${amt}\n`;
-        grandTotal += amt;
-      }
-    }
-
-    if (!customer || itemsText === "" || grandTotal === 0) {
-      alert("कृपया WhatsApp बिल भेजने से पहले नाम, पौधा और अमाउंट ठीक से भरें!");
-      return;
-    }
-
-    const message = `🌿 *श्री राम नर्सरी (भुना)* 🌿\n\nनमस्ते *${customer}* जी,\nहमारी नर्सरी से पौधे खरीदने के लिए आपका बहुत-बहुत धन्यवाद! 🙏\n\n📋 *खरीददारी का विवरण:*\n${itemsText}\n💰 *कुल राशि: ₹${grandTotal}*\n• भुगतान: ${paymentMode === 'Cash' ? 'Cash (नकद)' : 'UPI (ऑनलाइन)'}\n\n🌱 आपके पौधे स्वस्थ रहें और खूब फलें-फूलें!\n\n📞 संपर्क: 9416316534`;
-
-    const encodedMsg = encodeURIComponent(message);
-    const whatsappUrl = phone ? `https://wa.me/91${phone}?text=${encodedMsg}` : `https://wa.me/?text=${encodedMsg}`;
-    window.open(whatsappUrl, '_blank');
-  });
-
-  // MASTER LEDGER & TIME FILTER
-  function renderMasterLedger(orders) {
-    const tbody = document.getElementById("master-ledger-list");
-    const searchQuery = document.getElementById("ledger-search").value.toLowerCase().trim();
-    const timeFilter = document.getElementById("ledger-time-filter").value;
-
-    tbody.innerHTML = "";
-
-    let filtered = orders.slice().reverse();
-
-    // Time filter logic
-    if (timeFilter !== "all") {
-      const days = Number(timeFilter);
-      const cutoff = new Date();
-      cutoff.setDate(cutoff.getDate() - days);
-      filtered = filtered.filter(o => new Date(o.date) >= cutoff);
-    }
-
-    // Search query logic
-    if (searchQuery) {
-      filtered = filtered.filter(o => 
-        o.customer.toLowerCase().includes(searchQuery) || 
-        o.phone.toLowerCase().includes(searchQuery) ||
-        o.address.toLowerCase().includes(searchQuery)
-      );
-    }
-
-    if (filtered.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="6" class="empty">कोई रिकॉर्ड नहीं मिला।</td></tr>`;
-      return;
-    }
-
-    filtered.forEach(order => {
-      const tr = document.createElement("tr");
-      const paymentClass = order.paymentMode === "Cash" ? "badge-orange" : order.paymentMode === "UPI" ? "badge-blue" : "badge-green";
-      
-      let itemsListHtml = "";
-      order.items.forEach(i => {
-        itemsListHtml += `<div>• <strong>${escapeHtml(i.plantName)}</strong>${i.variety ? ` (${escapeHtml(i.variety)})` : ''} - <b>${i.quantity} पौधे</b> (₹${i.amount})</div>`;
+      plants.forEach((plant, index) => {
+        const tr = document.createElement("tr");
+        const img = plant.image || plant.imageUrl || "";
+        tr.innerHTML = `
+          <td>${img ? `<img src="${img}" class="plant-img-thumb">` : '🌱'}</td>
+          <td><strong>${plant.name}</strong><br><small>${plant.variety || ''}</small></td>
+          <td>${plant.category || 'Other'}</td>
+          <td><button class="btn-danger" data-index="${index}">Delete</button></td>
+        `;
+        tbody.appendChild(tr);
       });
 
-      tr.innerHTML = `
-        <td><strong>${escapeHtml(order.customer)}</strong></td>
-        <td>${escapeHtml(order.phone)}${order.address ? `<br><small style="color:#666;">${escapeHtml(order.address)}</small>` : ''}</td>
-        <td>${itemsListHtml}</td>
-        <td><span class="badge ${paymentClass}">${order.paymentMode === "Cash" ? "💵 Cash" : order.paymentMode === "UPI" ? "📲 UPI" : "💳 Other"}</span></td>
-        <td><strong>₹${order.amount}</strong></td>
-        <td>${formatDateTime(order.date)}</td>
-      `;
-      tbody.appendChild(tr);
-    });
-  }
-
-  document.getElementById("ledger-search").addEventListener("input", () => loadDashboard());
-  document.getElementById("ledger-time-filter").addEventListener("change", () => loadDashboard());
-
-  // Plant Catalog Form (Direct File Upload Support)
-  const plantForm = document.getElementById("plant-form");
-  plantForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const name = document.getElementById("plant-name").value.trim();
-    const variety = document.getElementById("plant-variety").value.trim();
-    const category = document.getElementById("plant-category").value;
-    const tips = document.getElementById("plant-tips").value.trim();
-    const imageFile = document.getElementById("plant-image-file").files[0];
-
-    if (!name) {
-      alert("पौधे का नाम डालना जरूरी है।");
-      return;
-    }
-
-    if (imageFile) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        saveNewPlantRecord(name, variety, category, e.target.result, tips);
-      };
-      reader.readAsDataURL(imageFile);
-    } else {
-      saveNewPlantRecord(name, variety, category, "", tips);
-    }
-  });
-
-  function saveNewPlantRecord(name, variety, category, image, tips) {
-    const newPlant = {
-      id: Date.now().toString(),
-      name,
-      variety,
-      category,
-      image,
-      imageUrl: image,
-      tips,
-      stock: "In Stock"
-    };
-
-    const currentPlants = getPlants();
-    currentPlants.push(newPlant);
-    savePlants(currentPlants);
-    plantForm.reset();
-    renderAdminPlants();
-    alert("🌱 पौधा Catalog में सफलतापूर्वक जोड़ दिया गया।");
-  }
-
-  function renderAdminPlants() {
-    const tbody = document.getElementById("admin-plants-list");
-    const plants = getPlants();
-    tbody.innerHTML = "";
-    if (!plants || plants.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="6" class="empty">अभी कोई पौधा Catalog में नहीं है।</td></tr>`;
-      return;
-    }
-    plants.forEach((plant, index) => {
-      const tr = document.createElement("tr");
-      const image = plant.image || plant.imageUrl || "";
-      const category = getCategoryName(plant.category);
-      tr.innerHTML = `
-        <td>${image ? `<img class="plant-image" src="${escapeAttribute(image)}" alt="" onerror="this.style.display='none'">` : `<div class="plant-image">🌱</div>`}</td>
-        <td class="plant-name-cell">${escapeHtml(plant.name || "-")}${plant.variety ? `<br><small style="color:#666;">${escapeHtml(plant.variety)}</small>` : ''}</td>
-        <td>${escapeHtml(category)}</td>
-        <td><span class="badge badge-green">🟢 उपलब्ध है</span></td>
-        <td><input type="file" class="update-img-file" data-index="${index}" accept="image/*" style="font-size:11px; max-width:140px;"></td>
-        <td><button type="button" class="delete-btn" data-index="${index}">Delete</button></td>
-      `;
-      tbody.appendChild(tr);
-    });
-
-    // Handle Image Update for existing plants
-    tbody.querySelectorAll(".update-img-file").forEach(input => {
-      input.addEventListener("change", (e) => {
-        const index = Number(e.target.dataset.index);
-        const file = e.target.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          const plants = getPlants();
-          plants[index].image = event.target.result;
-          plants[index].imageUrl = event.target.result;
-          savePlants(plants);
-          renderAdminPlants();
-          alert("📸 पौधे की फोटो सफलतापूर्वक अपडेट हो गई है!");
-        };
-        reader.readAsDataURL(file);
+      tbody.querySelectorAll(".btn-danger").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const idx = Number(btn.dataset.index);
+          if (confirm("क्या आप इस पौधे को हटाना चाहते हैं?")) {
+            const plants = getPlants();
+            plants.splice(idx, 1);
+            savePlants(plants);
+            loadAdminPlants();
+          }
+        });
       });
-    });
-
-    // Handle Delete Plant
-    tbody.querySelectorAll(".delete-btn").forEach(button => {
-      button.addEventListener("click", () => {
-        const index = Number(button.dataset.index);
-        const plants = getPlants();
-        if (!confirm("क्या आप इस पौधे को Catalog से हटाना चाहते हैं?")) return;
-        plants.splice(index, 1);
-        savePlants(plants);
-        renderAdminPlants();
-      });
-    });
-  }
-
-  function getCategoryName(category) {
-    const categories = {
-      Fruit: "🍊 फलदार पौधे",
-      Indoor: "🪴 इंडोर प्लांट",
-      Outdoor: "🌳 आउटडोर प्लांट",
-      Flowering: "🌸 फूलदार पौधे",
-      Decorative: "🌿 डेकोरेटिव पौधे",
-      Other: "🌱 अन्य"
-    };
-    return categories[category] || category || "🌱 अन्य";
-  }
-
-  function escapeHtml(value) {
-    return String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-  }
-
-  function escapeAttribute(value) {
-    return String(value ?? "").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-  }
-
-  // Auto refresh dashboard every 30 seconds
-  setInterval(() => {
-    if (adminApp.style.display !== "none") {
-      loadDashboard();
     }
-  }, 30000);
-</script>
-
+  </script>
 </body>
 </html>
