@@ -17,7 +17,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname);
 const outputRoot = path.resolve(projectRoot, 'dist');
 
-const pages = ['index', 'dashboard', 'plant', 'booking', 'orders', 'admin'];
+const pages = ['index', 'dashboard', 'plant', 'orders', 'admin'];
 
 const staticFiles = [
   'manifest.json',
@@ -28,7 +28,6 @@ const staticFiles = [
   'js/auth.js',
   'js/dashboard.js',
   'js/plants.js',
-  'js/booking.js',
   'js/admin.js',
   'js/stock.js',
   'js/ledger.js',

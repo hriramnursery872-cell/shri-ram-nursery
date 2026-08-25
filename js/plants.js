@@ -1,10 +1,18 @@
 /* ============================================================
    SHRI RAM NURSERY - CENTRAL PLANT DATA ENGINE
    Bhuna
-   Premium Plant Catalog
+   ------------------------------------------------------------
+   Central data source for:
+   - Customer Plant Catalog
+   - Plant Detail Page
+   - Admin Plant Management
+   - Order System
+   - Like / Share
+   - Plant Images
+   - Care / Detail Information
    ============================================================ */
 
-const STORAGE_KEY = "shri_ram_nursery_plants_v2";
+const STORAGE_KEY = "shri_ram_nursery_plants_v3";
 
 /* ============================================================
    MASTER CATEGORIES
@@ -44,28 +52,44 @@ export const PLANT_CATEGORIES = [
 /* ============================================================
    MASTER PLANT CATALOG
    ------------------------------------------------------------
-   image:
-   वर्तमान nursery plant की फोटो
-
-   mature_image:
-   बड़ा / mature होने पर पौधे का visual
-
-   NOTE:
-   mature_image की actual files बाद में /images/ folder में
-   रखी जाएंगी।
+   image        = वर्तमान पौधे की मुख्य फोटो
+   images       = अतिरिक्त फोटो
+   mature_image = बड़ा / mature पौधे का visual
    ============================================================ */
 
 const DEFAULT_PLANTS = [
+
   {
     id: "fruit_guava_hisar_safeda_01",
     name: "अमरूद - हिसार सफेदा (Guava Hisar Safeda)",
     category: "Fruit",
     category_hi: "फलदार पौधे",
     variety: "L-49 / Hisar Safeda",
+
     image: "images/guava-hisar-safeda.jpg",
+    images: [],
+
     mature_image: "images/mature-guava-hisar-safeda.jpg",
+
     guide_link: "qr/guava-hisar-safeda.html",
-    care_tips: "अमरूद को रोज़ 5-6 घंटे धूप दें और नियमित सिंचाई करें।"
+
+    short_description:
+      "मीठे फल और अच्छी उत्पादन क्षमता वाला लोकप्रिय अमरूद पौधा।",
+
+    care_tips:
+      "अमरूद को रोज़ 5-6 घंटे धूप दें और नियमित सिंचाई करें।",
+
+    watering:
+      "मिट्टी की नमी के अनुसार नियमित पानी दें।",
+
+    sunlight:
+      "प्रतिदिन लगभग 5-6 घंटे सीधी धूप उपयुक्त है।",
+
+    soil:
+      "अच्छी जल निकासी वाली उपजाऊ मिट्टी बेहतर रहती है।",
+
+    maintenance:
+      "समय-समय पर सूखी और कमजोर शाखाओं की pruning करें।"
   },
 
   {
@@ -74,10 +98,31 @@ const DEFAULT_PLANTS = [
     category: "Fruit",
     category_hi: "फलदार पौधे",
     variety: "Shan-e-Punjab / Alucha",
+
     image: "images/peach.jpg",
+    images: [],
+
     mature_image: "images/mature-peach.jpg",
+
     guide_link: "qr/peach.html",
-    care_tips: "पूरी धूप और अच्छी जल निकासी वाली मिट्टी उपयुक्त है।"
+
+    short_description:
+      "बागवानी के लिए उपयोगी फलदार आड़ू का पौधा।",
+
+    care_tips:
+      "पूरी धूप और अच्छी जल निकासी वाली मिट्टी उपयुक्त है।",
+
+    watering:
+      "गर्म मौसम में नियमित सिंचाई करें।",
+
+    sunlight:
+      "खुली धूप में रखें।",
+
+    soil:
+      "उपजाऊ और अच्छी जल निकासी वाली मिट्टी रखें।",
+
+    maintenance:
+      "पौधे की शाखाओं को समय-समय पर व्यवस्थित करें।"
   },
 
   {
@@ -86,10 +131,31 @@ const DEFAULT_PLANTS = [
     category: "Fruit",
     category_hi: "फलदार पौधे",
     variety: "Satluj Purple / Alucha / Punjab Beauty",
+
     image: "images/plum.jpg",
+    images: [],
+
     mature_image: "images/mature-plum.jpg",
+
     guide_link: "qr/plum.html",
-    care_tips: "धूप वाली जगह और नियमित सिंचाई रखें।"
+
+    short_description:
+      "लोकप्रिय फलदार प्लम पौधा।",
+
+    care_tips:
+      "धूप वाली जगह और नियमित सिंचाई रखें।",
+
+    watering:
+      "मिट्टी सूखने से पहले पानी दें।",
+
+    sunlight:
+      "अच्छी धूप आवश्यक है।",
+
+    soil:
+      "जल निकासी वाली उपजाऊ मिट्टी रखें।",
+
+    maintenance:
+      "सूखी और कमजोर शाखाओं की pruning करें।"
   },
 
   {
@@ -98,10 +164,31 @@ const DEFAULT_PLANTS = [
     category: "Fruit",
     category_hi: "फलदार पौधे",
     variety: "Jatti Khatti",
+
     image: "images/lemon.jpg",
+    images: [],
+
     mature_image: "images/mature-lemon.jpg",
+
     guide_link: "qr/lemon.html",
-    care_tips: "अच्छी धूप, जल निकासी और नियमित खाद दें।"
+
+    short_description:
+      "घर और बाग दोनों के लिए उपयोगी नींबू का पौधा।",
+
+    care_tips:
+      "अच्छी धूप, जल निकासी और नियमित खाद दें।",
+
+    watering:
+      "नियमित लेकिन नियंत्रित सिंचाई करें।",
+
+    sunlight:
+      "5-6 घंटे धूप दें।",
+
+    soil:
+      "हल्की एवं अच्छी जल निकासी वाली मिट्टी उपयुक्त है।",
+
+    maintenance:
+      "समय-समय पर pruning और खाद दें।"
   },
 
   {
@@ -110,10 +197,31 @@ const DEFAULT_PLANTS = [
     category: "Fruit",
     category_hi: "फलदार पौधे",
     variety: "Blood Red",
+
     image: "images/malta.jpg",
+    images: [],
+
     mature_image: "images/mature-malta.jpg",
+
     guide_link: "qr/malta.html",
-    care_tips: "पूरी धूप और नियमित पानी आवश्यक है।"
+
+    short_description:
+      "फलदार बागवानी के लिए लोकप्रिय माल्टा पौधा।",
+
+    care_tips:
+      "पूरी धूप और नियमित पानी आवश्यक है।",
+
+    watering:
+      "मौसम के अनुसार नियमित पानी दें।",
+
+    sunlight:
+      "खुली धूप में रखें।",
+
+    soil:
+      "अच्छी जल निकासी वाली मिट्टी रखें।",
+
+    maintenance:
+      "समय-समय पर खाद और pruning करें।"
   },
 
   {
@@ -122,10 +230,31 @@ const DEFAULT_PLANTS = [
     category: "Fruit",
     category_hi: "फलदार पौधे",
     variety: "Punjab Nakh / Patharnakh / Nijisiki / Kainth Rootstock",
+
     image: "images/pear.jpg",
+    images: [],
+
     mature_image: "images/mature-pear.jpg",
+
     guide_link: "qr/pear.html",
-    care_tips: "अच्छी धूप और उपयुक्त जल निकासी वाली मिट्टी रखें।"
+
+    short_description:
+      "फलदार बाग के लिए नाशपाती की लोकप्रिय किस्मों का पौधा।",
+
+    care_tips:
+      "अच्छी धूप और उपयुक्त जल निकासी वाली मिट्टी रखें।",
+
+    watering:
+      "नियमित सिंचाई करें।",
+
+    sunlight:
+      "अच्छी धूप जरूरी है।",
+
+    soil:
+      "उपजाऊ और अच्छी जल निकासी वाली मिट्टी।",
+
+    maintenance:
+      "पेड़ की संरचना बनाए रखने के लिए pruning करें।"
   },
 
   {
@@ -134,10 +263,31 @@ const DEFAULT_PLANTS = [
     category: "Fruit",
     category_hi: "फलदार पौधे",
     variety: "Grape",
+
     image: "images/grape.jpg",
+    images: [],
+
     mature_image: "images/mature-grape.jpg",
+
     guide_link: "qr/grape.html",
-    care_tips: "अंगूर की बेल को सहारा और पर्याप्त धूप दें।"
+
+    short_description:
+      "बेल के रूप में विकसित होने वाला फलदार पौधा।",
+
+    care_tips:
+      "अंगूर की बेल को सहारा और पर्याप्त धूप दें।",
+
+    watering:
+      "नियमित नियंत्रित सिंचाई करें।",
+
+    sunlight:
+      "खुली धूप में रखें।",
+
+    soil:
+      "अच्छी जल निकासी वाली मिट्टी रखें।",
+
+    maintenance:
+      "बेल को सहारा देकर समय-समय पर pruning करें।"
   },
 
   {
@@ -146,10 +296,31 @@ const DEFAULT_PLANTS = [
     category: "Fruit",
     category_hi: "फलदार पौधे",
     variety: "Kinnow",
+
     image: "images/kinnow.jpg",
+    images: [],
+
     mature_image: "images/mature-kinnow.jpg",
+
     guide_link: "qr/kinnow.html",
-    care_tips: "धूप और नियमित सिंचाई के साथ जैविक खाद दें।"
+
+    short_description:
+      "उत्तर भारत में लोकप्रिय citrus fruit plant।",
+
+    care_tips:
+      "धूप और नियमित सिंचाई के साथ जैविक खाद दें।",
+
+    watering:
+      "नियमित सिंचाई करें।",
+
+    sunlight:
+      "पूरी धूप उपयुक्त है।",
+
+    soil:
+      "अच्छी जल निकासी वाली मिट्टी रखें।",
+
+    maintenance:
+      "खाद एवं pruning समय पर करें।"
   },
 
   {
@@ -158,10 +329,31 @@ const DEFAULT_PLANTS = [
     category: "Fruit",
     category_hi: "फलदार पौधे",
     variety: "Sweet Lime",
+
     image: "images/mosambi.jpg",
+    images: [],
+
     mature_image: "images/mature-mosambi.jpg",
+
     guide_link: "qr/mosambi.html",
-    care_tips: "पूरी धूप और अच्छी जल निकासी आवश्यक है।"
+
+    short_description:
+      "मीठे citrus फल के लिए उपयोगी मौसमी पौधा।",
+
+    care_tips:
+      "पूरी धूप और अच्छी जल निकासी आवश्यक है।",
+
+    watering:
+      "मिट्टी की स्थिति देखकर नियमित पानी दें।",
+
+    sunlight:
+      "5-6 घंटे धूप दें।",
+
+    soil:
+      "उपजाऊ और जल निकासी वाली मिट्टी रखें।",
+
+    maintenance:
+      "समय-समय पर खाद एवं pruning करें।"
   },
 
   {
@@ -170,10 +362,31 @@ const DEFAULT_PLANTS = [
     category: "Fruit",
     category_hi: "फलदार पौधे",
     variety: "Lychee",
+
     image: "images/lychee.jpg",
+    images: [],
+
     mature_image: "images/mature-lychee.jpg",
+
     guide_link: "qr/lychee.html",
-    care_tips: "नियमित पानी और गर्म मौसम में पर्याप्त नमी रखें।"
+
+    short_description:
+      "गर्म मौसम और पर्याप्त नमी पसंद करने वाला फलदार पौधा।",
+
+    care_tips:
+      "नियमित पानी और गर्म मौसम में पर्याप्त नमी रखें।",
+
+    watering:
+      "मिट्टी सूखने न दें।",
+
+    sunlight:
+      "अच्छी रोशनी वाली जगह रखें।",
+
+    soil:
+      "उपजाऊ एवं अच्छी जल निकासी वाली मिट्टी।",
+
+    maintenance:
+      "समय-समय पर खाद और pruning करें।"
   },
 
   {
@@ -182,10 +395,31 @@ const DEFAULT_PLANTS = [
     category: "Fruit",
     category_hi: "फलदार पौधे",
     variety: "Ambika / Lalima",
+
     image: "images/mango.jpg",
+    images: [],
+
     mature_image: "images/mature-mango.jpg",
+
     guide_link: "qr/mango.html",
-    care_tips: "आम के पौधे को खुली धूप और पर्याप्त जगह दें।"
+
+    short_description:
+      "घर और commercial orchard दोनों के लिए लोकप्रिय फलदार पौधा।",
+
+    care_tips:
+      "आम के पौधे को खुली धूप और पर्याप्त जगह दें।",
+
+    watering:
+      "शुरुआती अवस्था में नियमित पानी दें।",
+
+    sunlight:
+      "पूरी धूप उपयुक्त है।",
+
+    soil:
+      "गहरी एवं अच्छी जल निकासी वाली मिट्टी रखें।",
+
+    maintenance:
+      "पेड़ की शाखाओं को सही आकार देने के लिए pruning करें।"
   },
 
   {
@@ -194,10 +428,31 @@ const DEFAULT_PLANTS = [
     category: "Fruit",
     category_hi: "फलदार पौधे",
     variety: "Jamun",
+
     image: "images/jamun.jpg",
+    images: [],
+
     mature_image: "images/mature-jamun.jpg",
+
     guide_link: "qr/jamun.html",
-    care_tips: "धूप में रखें और शुरुआती अवस्था में नियमित सिंचाई करें।"
+
+    short_description:
+      "मजबूत एवं लंबे समय तक रहने वाला फलदार पौधा।",
+
+    care_tips:
+      "धूप में रखें और शुरुआती अवस्था में नियमित सिंचाई करें।",
+
+    watering:
+      "नियमित पानी दें।",
+
+    sunlight:
+      "खुली धूप उपयुक्त है।",
+
+    soil:
+      "अच्छी जल निकासी वाली मिट्टी रखें.",
+
+    maintenance:
+      "शुरुआती वर्षों में आकार के अनुसार pruning करें।"
   },
 
   {
@@ -206,11 +461,36 @@ const DEFAULT_PLANTS = [
     category: "Fruit",
     category_hi: "फलदार पौधे",
     variety: "Golden / Anna",
+
     image: "images/apple.jpg",
+    images: [],
+
     mature_image: "images/mature-apple.jpg",
+
     guide_link: "qr/apple.html",
-    care_tips: "उपयुक्त जलवायु, धूप और अच्छी जल निकासी वाली मिट्टी रखें।"
+
+    short_description:
+      "उपयुक्त क्षेत्र में बागवानी के लिए सेब का पौधा।",
+
+    care_tips:
+      "उपयुक्त जलवायु, धूप और अच्छी जल निकासी वाली मिट्टी रखें।",
+
+    watering:
+      "मौसम और मिट्टी के अनुसार पानी दें।",
+
+    sunlight:
+      "पर्याप्त धूप आवश्यक है।",
+
+    soil:
+      "उपजाऊ और अच्छी जल निकासी वाली मिट्टी।",
+
+    maintenance:
+      "पेड़ की संरचना के लिए नियमित pruning करें।"
   },
+
+  /* ==========================================================
+     INDOOR
+     ========================================================== */
 
   {
     id: "indoor_money_plant_01",
@@ -218,10 +498,31 @@ const DEFAULT_PLANTS = [
     category: "Indoor",
     category_hi: "इंडोर प्लांट्स",
     variety: "Golden Pothos",
+
     image: "images/money-plant.jpg",
+    images: [],
+
     mature_image: "images/mature-money-plant.jpg",
+
     guide_link: "qr/money-plant.html",
-    care_tips: "हल्की रोशनी में रखें और मिट्टी पूरी तरह सूखने न दें।"
+
+    short_description:
+      "घर, ऑफिस और indoor decoration के लिए लोकप्रिय पौधा।",
+
+    care_tips:
+      "हल्की रोशनी में रखें और मिट्टी पूरी तरह सूखने न दें।",
+
+    watering:
+      "कम से मध्यम पानी दें।",
+
+    sunlight:
+      "ब्राइट indirect light बेहतर है।",
+
+    soil:
+      "हल्की एवं अच्छी drainage वाली मिट्टी।",
+
+    maintenance:
+      "लंबी बेल को समय-समय पर trim करें।"
   },
 
   {
@@ -230,10 +531,31 @@ const DEFAULT_PLANTS = [
     category: "Indoor",
     category_hi: "इंडोर प्लांट्स",
     variety: "Syngonium",
+
     image: "images/syngonium.jpg",
+    images: [],
+
     mature_image: "images/mature-syngonium.jpg",
+
     guide_link: "qr/syngonium.html",
-    care_tips: "तेज़ सीधी धूप से बचाएं और हल्की नमी रखें।"
+
+    short_description:
+      "सुंदर पत्तियों वाला indoor foliage plant।",
+
+    care_tips:
+      "तेज़ सीधी धूप से बचाएं और हल्की नमी रखें।",
+
+    watering:
+      "मध्यम पानी दें।",
+
+    sunlight:
+      "Indirect bright light रखें।",
+
+    soil:
+      "हल्की और drainage वाली मिट्टी।",
+
+    maintenance:
+      "पुरानी पत्तियां हटाते रहें।"
   },
 
   {
@@ -242,10 +564,31 @@ const DEFAULT_PLANTS = [
     category: "Indoor",
     category_hi: "इंडोर प्लांट्स",
     variety: "Snake Plant",
+
     image: "images/snake-plant.jpg",
+    images: [],
+
     mature_image: "images/mature-snake-plant.jpg",
+
     guide_link: "qr/snake-plant.html",
-    care_tips: "कम पानी में भी अच्छा रहता है। तेज़ सीधी धूप से बचाएं।"
+
+    short_description:
+      "कम देखभाल में अच्छा रहने वाला लोकप्रिय indoor plant।",
+
+    care_tips:
+      "कम पानी में भी अच्छा रहता है। तेज़ सीधी धूप से बचाएं।",
+
+    watering:
+      "मिट्टी सूखने के बाद ही पानी दें।",
+
+    sunlight:
+      "कम से मध्यम indirect light।",
+
+    soil:
+      "जल निकासी बहुत अच्छी होनी चाहिए।",
+
+    maintenance:
+      "सड़ी या खराब पत्तियां हटा दें।"
   },
 
   {
@@ -254,10 +597,31 @@ const DEFAULT_PLANTS = [
     category: "Indoor",
     category_hi: "इंडोर प्लांट्स",
     variety: "Schefflera",
+
     image: "images/schefflera.jpg",
+    images: [],
+
     mature_image: "images/mature-schefflera.jpg",
+
     guide_link: "qr/schefflera.html",
-    care_tips: "ब्राइट इनडायरेक्ट लाइट और मध्यम पानी दें।"
+
+    short_description:
+      "सुंदर foliage वाला decorative indoor plant।",
+
+    care_tips:
+      "ब्राइट इनडायरेक्ट लाइट और मध्यम पानी दें।",
+
+    watering:
+      "मिट्टी की ऊपरी परत सूखने पर पानी दें।",
+
+    sunlight:
+      "ब्राइट indirect light।",
+
+    soil:
+      "अच्छी drainage वाली potting mix।",
+
+    maintenance:
+      "आकार बनाए रखने के लिए pruning करें।"
   },
 
   {
@@ -266,11 +630,36 @@ const DEFAULT_PLANTS = [
     category: "Indoor",
     category_hi: "इंडोर प्लांट्स",
     variety: "Shade House Collection",
+
     image: "images/indoor-collection.jpg",
+    images: [],
+
     mature_image: "images/mature-indoor-collection.jpg",
+
     guide_link: "qr/indoor-collection.html",
-    care_tips: "शेड-नेट या घर के अंदर पर्याप्त रोशनी वाली जगह रखें।"
+
+    short_description:
+      "कम रोशनी वाली जगहों के लिए nursery indoor collection।",
+
+    care_tips:
+      "शेड-नेट या घर के अंदर पर्याप्त रोशनी वाली जगह रखें।",
+
+    watering:
+      "मध्यम मात्रा में पानी दें।",
+
+    sunlight:
+      "Indirect light उपयुक्त है।",
+
+    soil:
+      "हल्की और drainage वाली मिट्टी।",
+
+    maintenance:
+      "पत्तियों की सफाई और सूखी पत्तियों को हटाते रहें।"
   },
+
+  /* ==========================================================
+     OUTDOOR
+     ========================================================== */
 
   {
     id: "outdoor_tecoma_01",
@@ -278,10 +667,31 @@ const DEFAULT_PLANTS = [
     category: "Outdoor",
     category_hi: "आउटडोर प्लांट्स",
     variety: "Tecoma",
+
     image: "images/tecoma.jpg",
+    images: [],
+
     mature_image: "images/mature-tecoma.jpg",
+
     guide_link: "qr/tecoma.html",
-    care_tips: "पूरी धूप और नियमित कटाई-छंटाई से अच्छा विकास होता है।"
+
+    short_description:
+      "Outdoor landscape और flowering के लिए उपयोगी पौधा।",
+
+    care_tips:
+      "पूरी धूप और नियमित कटाई-छंटाई से अच्छा विकास होता है।",
+
+    watering:
+      "नियमित सिंचाई करें।",
+
+    sunlight:
+      "पूरी धूप।",
+
+    soil:
+      "अच्छी drainage वाली मिट्टी।",
+
+    maintenance:
+      "नियमित pruning करें।"
   },
 
   {
@@ -290,10 +700,31 @@ const DEFAULT_PLANTS = [
     category: "Outdoor",
     category_hi: "आउटडोर प्लांट्स",
     variety: "Jade",
+
     image: "images/jade.jpg",
+    images: [],
+
     mature_image: "images/mature-jade.jpg",
+
     guide_link: "qr/jade.html",
-    care_tips: "धूप वाली जगह और सीमित पानी रखें।"
+
+    short_description:
+      "सुंदर और कम पानी में रहने वाला decorative plant।",
+
+    care_tips:
+      "धूप वाली जगह और सीमित पानी रखें।",
+
+    watering:
+      "मिट्टी सूखने के बाद पानी दें।",
+
+    sunlight:
+      "अच्छी रोशनी।",
+
+    soil:
+      "बहुत अच्छी drainage वाली मिट्टी।",
+
+    maintenance:
+      "अधिक बढ़ी शाखाओं को trim करें।"
   },
 
   {
@@ -302,11 +733,36 @@ const DEFAULT_PLANTS = [
     category: "Outdoor",
     category_hi: "आउटडोर प्लांट्स",
     variety: "Hedge Plant Collection",
+
     image: "images/hedge-plants.jpg",
+    images: [],
+
     mature_image: "images/mature-hedge-plants.jpg",
+
     guide_link: "qr/hedge-plants.html",
-    care_tips: "हेज के लिए नियमित सिंचाई और आकार के अनुसार कटाई करें।"
+
+    short_description:
+      "Garden boundary, hedge और landscaping के लिए पौधों का collection।",
+
+    care_tips:
+      "हेज के लिए नियमित सिंचाई और आकार के अनुसार कटाई करें।",
+
+    watering:
+      "नियमित सिंचाई करें।",
+
+    sunlight:
+      "अधिकांश outdoor varieties के लिए पूरी धूप।",
+
+    soil:
+      "उपजाऊ एवं अच्छी drainage वाली मिट्टी।",
+
+    maintenance:
+      "Shape बनाए रखने के लिए नियमित trimming करें।"
   },
+
+  /* ==========================================================
+     FLOWERING
+     ========================================================== */
 
   {
     id: "flowering_hibiscus_01",
@@ -314,10 +770,31 @@ const DEFAULT_PLANTS = [
     category: "Flowering",
     category_hi: "फूलों के पौधे",
     variety: "सफेद एवं अन्य रंग",
+
     image: "images/hibiscus.jpg",
+    images: [],
+
     mature_image: "images/mature-hibiscus.jpg",
+
     guide_link: "qr/hibiscus.html",
-    care_tips: "सुबह की धूप और नियमित पानी दें। मुरझाए फूल हटाते रहें।"
+
+    short_description:
+      "सुंदर फूलों वाला लोकप्रिय garden plant।",
+
+    care_tips:
+      "सुबह की धूप और नियमित पानी दें। मुरझाए फूल हटाते रहें।",
+
+    watering:
+      "नियमित पानी दें।",
+
+    sunlight:
+      "सुबह की धूप बेहतर है।",
+
+    soil:
+      "उपजाऊ और drainage वाली मिट्टी।",
+
+    maintenance:
+      "सूखे फूल और शाखाएं हटाएं।"
   },
 
   {
@@ -326,10 +803,31 @@ const DEFAULT_PLANTS = [
     category: "Flowering",
     category_hi: "फूलों के पौधे",
     variety: "Perennial Collection",
+
     image: "images/perennial-flowers.jpg",
+    images: [],
+
     mature_image: "images/mature-perennial-flowers.jpg",
+
     guide_link: "qr/perennial-flowers.html",
-    care_tips: "धूप, खाद और नियमित सिंचाई से अच्छी फूलिंग मिलती है।"
+
+    short_description:
+      "लंबे समय तक garden में फूल देने वाला collection।",
+
+    care_tips:
+      "धूप, खाद और नियमित सिंचाई से अच्छी फूलिंग मिलती है।",
+
+    watering:
+      "नियमित सिंचाई।",
+
+    sunlight:
+      "अच्छी धूप।",
+
+    soil:
+      "उपजाऊ soil mix।",
+
+    maintenance:
+      "सूखे फूल हटाते रहें।"
   },
 
   {
@@ -338,11 +836,36 @@ const DEFAULT_PLANTS = [
     category: "Flowering",
     category_hi: "फूलों के पौधे",
     variety: "Seasonal Collection",
+
     image: "images/seasonal-flowers.jpg",
+    images: [],
+
     mature_image: "images/mature-seasonal-flowers.jpg",
+
     guide_link: "qr/seasonal-flowers.html",
-    care_tips: "मौसम के अनुसार धूप, पानी और खाद दें।"
+
+    short_description:
+      "मौसम के अनुसार उपलब्ध आकर्षक flowering plants।",
+
+    care_tips:
+      "मौसम के अनुसार धूप, पानी और खाद दें।",
+
+    watering:
+      "मिट्टी की स्थिति देखकर पानी दें।",
+
+    sunlight:
+      "अधिकांश varieties को अच्छी धूप चाहिए।",
+
+    soil:
+      "उपजाऊ और drainage वाली मिट्टी।",
+
+    maintenance:
+      "सूखे फूल हटाते रहें।"
   },
+
+  /* ==========================================================
+     DECORATIVE
+     ========================================================== */
 
   {
     id: "decorative_croton_01",
@@ -350,10 +873,31 @@ const DEFAULT_PLANTS = [
     category: "Decorative",
     category_hi: "डेकोरेटिव एवं फॉलिएज पौधे",
     variety: "Croton",
+
     image: "images/croton.jpg",
+    images: [],
+
     mature_image: "images/mature-croton.jpg",
+
     guide_link: "qr/croton.html",
-    care_tips: "ब्राइट लाइट में रखें और मिट्टी में हल्की नमी बनाए रखें।"
+
+    short_description:
+      "रंगीन पत्तियों वाला premium decorative foliage plant।",
+
+    care_tips:
+      "ब्राइट लाइट में रखें और मिट्टी में हल्की नमी बनाए रखें।",
+
+    watering:
+      "मध्यम पानी दें।",
+
+    sunlight:
+      "ब्राइट indirect या filtered light।",
+
+    soil:
+      "अच्छी drainage वाली मिट्टी।",
+
+    maintenance:
+      "सूखी पत्तियां हटाते रहें।"
   },
 
   {
@@ -362,10 +906,31 @@ const DEFAULT_PLANTS = [
     category: "Decorative",
     category_hi: "डेकोरेटिव एवं फॉलिएज पौधे",
     variety: "Dracaena",
+
     image: "images/dracaena.jpg",
+    images: [],
+
     mature_image: "images/mature-dracaena.jpg",
+
     guide_link: "qr/dracaena.html",
-    care_tips: "इनडायरेक्ट लाइट और नियंत्रित पानी उपयुक्त है।"
+
+    short_description:
+      "घर और ऑफिस decoration के लिए आकर्षक foliage plant।",
+
+    care_tips:
+      "इनडायरेक्ट लाइट और नियंत्रित पानी उपयुक्त है।",
+
+    watering:
+      "कम से मध्यम पानी।",
+
+    sunlight:
+      "Indirect light।",
+
+    soil:
+      "अच्छी drainage वाली मिट्टी।",
+
+    maintenance:
+      "पीली पत्तियां हटाते रहें।"
   },
 
   {
@@ -374,10 +939,31 @@ const DEFAULT_PLANTS = [
     category: "Decorative",
     category_hi: "डेकोरेटिव एवं फॉलिएज पौधे",
     variety: "Rubber Plant",
+
     image: "images/rubber-plant.jpg",
+    images: [],
+
     mature_image: "images/mature-rubber-plant.jpg",
+
     guide_link: "qr/rubber-plant.html",
-    care_tips: "ब्राइट इनडायरेक्ट लाइट और नियमित लेकिन सीमित पानी दें।"
+
+    short_description:
+      "बड़े चमकदार पत्तों वाला premium decorative plant।",
+
+    care_tips:
+      "ब्राइट इनडायरेक्ट लाइट और नियमित लेकिन सीमित पानी दें।",
+
+    watering:
+      "मिट्टी की ऊपरी परत सूखने पर पानी दें।",
+
+    sunlight:
+      "ब्राइट indirect light।",
+
+    soil:
+      "उपजाऊ और अच्छी drainage वाली मिट्टी।",
+
+    maintenance:
+      "पत्तियों की सफाई करते रहें।"
   },
 
   {
@@ -386,11 +972,36 @@ const DEFAULT_PLANTS = [
     category: "Decorative",
     category_hi: "डेकोरेटिव एवं फॉलिएज पौधे",
     variety: "Silver Bush",
+
     image: "images/silver-bush.jpg",
+    images: [],
+
     mature_image: "images/mature-silver-bush.jpg",
+
     guide_link: "qr/silver-bush.html",
-    care_tips: "अच्छी रोशनी और उचित जल निकासी रखें।"
+
+    short_description:
+      "सुंदर foliage वाला decorative landscaping plant।",
+
+    care_tips:
+      "अच्छी रोशनी और उचित जल निकासी रखें।",
+
+    watering:
+      "मध्यम पानी दें।",
+
+    sunlight:
+      "अच्छी रोशनी।",
+
+    soil:
+      "अच्छी drainage वाली मिट्टी।",
+
+    maintenance:
+      "Shape बनाए रखने के लिए trimming करें।"
   },
+
+  /* ==========================================================
+     LANDSCAPING
+     ========================================================== */
 
   {
     id: "landscape_areca_palm_01",
@@ -398,10 +1009,31 @@ const DEFAULT_PLANTS = [
     category: "Landscaping",
     category_hi: "लैंडस्केपिंग एवं पाम्स",
     variety: "Areca Palm",
+
     image: "images/areca-palm.jpg",
+    images: [],
+
     mature_image: "images/mature-areca-palm.jpg",
+
     guide_link: "qr/areca-palm.html",
-    care_tips: "उज्ज्वल रोशनी और नियमित नमी रखें।"
+
+    short_description:
+      "Indoor और outdoor landscaping के लिए लोकप्रिय palm।",
+
+    care_tips:
+      "उज्ज्वल रोशनी और नियमित नमी रखें।",
+
+    watering:
+      "नियमित लेकिन नियंत्रित पानी दें।",
+
+    sunlight:
+      "Filtered या bright indirect light।",
+
+    soil:
+      "अच्छी drainage वाली soil mix।",
+
+    maintenance:
+      "सूखी पत्तियां हटाते रहें।"
   },
 
   {
@@ -410,10 +1042,31 @@ const DEFAULT_PLANTS = [
     category: "Landscaping",
     category_hi: "लैंडस्केपिंग एवं पाम्स",
     variety: "Foxtail Palm",
+
     image: "images/foxtail-palm.jpg",
+    images: [],
+
     mature_image: "images/mature-foxtail-palm.jpg",
+
     guide_link: "qr/foxtail-palm.html",
-    care_tips: "खुली धूप और पर्याप्त जगह में लगाएं।"
+
+    short_description:
+      "Premium landscaping और open garden के लिए palm।",
+
+    care_tips:
+      "खुली धूप और पर्याप्त जगह में लगाएं।",
+
+    watering:
+      "नियमित सिंचाई करें।",
+
+    sunlight:
+      "पूरी धूप।",
+
+    soil:
+      "अच्छी drainage वाली मिट्टी।",
+
+    maintenance:
+      "सूखी पत्तियों को हटाते रहें।"
   },
 
   {
@@ -422,10 +1075,31 @@ const DEFAULT_PLANTS = [
     category: "Landscaping",
     category_hi: "लैंडस्केपिंग एवं पाम्स",
     variety: "Fan Palm",
+
     image: "images/fan-palm.jpg",
+    images: [],
+
     mature_image: "images/mature-fan-palm.jpg",
+
     guide_link: "qr/fan-palm.html",
-    care_tips: "पूरी धूप और अच्छी जल निकासी वाली मिट्टी रखें।"
+
+    short_description:
+      "Garden और landscaping के लिए आकर्षक palm variety।",
+
+    care_tips:
+      "पूरी धूप और अच्छी जल निकासी वाली मिट्टी रखें।",
+
+    watering:
+      "नियमित पानी दें।",
+
+    sunlight:
+      "पूरी धूप।",
+
+    soil:
+      "अच्छी drainage वाली मिट्टी।",
+
+    maintenance:
+      "पुरानी पत्तियां हटाएं।"
   },
 
   {
@@ -434,10 +1108,31 @@ const DEFAULT_PLANTS = [
     category: "Landscaping",
     category_hi: "लैंडस्केपिंग एवं पाम्स",
     variety: "Topiary / Shaped Ficus",
+
     image: "images/ficus-topiary.jpg",
+    images: [],
+
     mature_image: "images/mature-ficus-topiary.jpg",
+
     guide_link: "qr/ficus-topiary.html",
-    care_tips: "आकार बनाए रखने के लिए समय-समय पर pruning करें।"
+
+    short_description:
+      "Premium landscaping और shape-based garden design के लिए पौधा।",
+
+    care_tips:
+      "आकार बनाए रखने के लिए समय-समय पर pruning करें।",
+
+    watering:
+      "मध्यम पानी दें।",
+
+    sunlight:
+      "अच्छी रोशनी।",
+
+    soil:
+      "उपजाऊ एवं drainage वाली मिट्टी।",
+
+    maintenance:
+      "Regular topiary pruning आवश्यक है।"
   },
 
   {
@@ -446,10 +1141,31 @@ const DEFAULT_PLANTS = [
     category: "Landscaping",
     category_hi: "लैंडस्केपिंग एवं कॉनिफर्स",
     variety: "Thuja / Conifers",
+
     image: "images/thuja.jpg",
+    images: [],
+
     mature_image: "images/mature-thuja.jpg",
+
     guide_link: "qr/thuja.html",
-    care_tips: "खुली हवा, उचित धूप और अच्छी जल निकासी रखें।"
+
+    short_description:
+      "Boundary, garden design और landscaping के लिए उपयोगी conifer।",
+
+    care_tips:
+      "खुली हवा, उचित धूप और अच्छी जल निकासी रखें।",
+
+    watering:
+      "नियमित लेकिन नियंत्रित सिंचाई।",
+
+    sunlight:
+      "अच्छी धूप।",
+
+    soil:
+      "अच्छी drainage वाली मिट्टी।",
+
+    maintenance:
+      "Shape के अनुसार pruning करें।"
   },
 
   {
@@ -458,10 +1174,31 @@ const DEFAULT_PLANTS = [
     category: "Landscaping",
     category_hi: "लैंडस्केपिंग एवं कॉनिफर्स",
     variety: "Christmas Tree",
+
     image: "images/christmas-tree.jpg",
+    images: [],
+
     mature_image: "images/mature-christmas-tree.jpg",
+
     guide_link: "qr/christmas-tree.html",
-    care_tips: "उचित रोशनी और नियंत्रित सिंचाई रखें।"
+
+    short_description:
+      "Decorative landscaping और festive plantation के लिए पौधा।",
+
+    care_tips:
+      "उचित रोशनी और नियंत्रित सिंचाई रखें।",
+
+    watering:
+      "मध्यम पानी दें।",
+
+    sunlight:
+      "उचित प्राकृतिक रोशनी।",
+
+    soil:
+      "अच्छी drainage वाली मिट्टी।",
+
+    maintenance:
+      "सूखी शाखाएं हटाते रहें।"
   },
 
   {
@@ -470,11 +1207,36 @@ const DEFAULT_PLANTS = [
     category: "Landscaping",
     category_hi: "नर्सरी सैपलिंग्स",
     variety: "Saplings / Nursery Beds",
+
     image: "images/saplings.jpg",
+    images: [],
+
     mature_image: "images/mature-saplings.jpg",
+
     guide_link: "qr/saplings.html",
-    care_tips: "छोटे पौधों को नियमित सिंचाई और धीरे-धीरे धूप की आदत डालें।"
+
+    short_description:
+      "छोटे पौधों और nursery saplings का collection।",
+
+    care_tips:
+      "छोटे पौधों को नियमित सिंचाई और धीरे-धीरे धूप की आदत डालें।",
+
+    watering:
+      "मिट्टी सूखने न दें।",
+
+    sunlight:
+      "धीरे-धीरे full sunlight की आदत डालें।",
+
+    soil:
+      "हल्की और पोषक मिट्टी।",
+
+    maintenance:
+      "शुरुआती अवस्था में विशेष देखभाल करें।"
   },
+
+  /* ==========================================================
+     MEDICINAL / OTHER
+     ========================================================== */
 
   {
     id: "medicinal_tulsi_01",
@@ -482,10 +1244,31 @@ const DEFAULT_PLANTS = [
     category: "Medicinal",
     category_hi: "औषधीय एवं अन्य पौधे",
     variety: "Tulsi",
+
     image: "images/tulsi.jpg",
+    images: [],
+
     mature_image: "images/mature-tulsi.jpg",
+
     guide_link: "qr/tulsi.html",
-    care_tips: "धूप वाली जगह और नियमित लेकिन नियंत्रित पानी दें।"
+
+    short_description:
+      "घर और आंगन के लिए लोकप्रिय aromatic plant।",
+
+    care_tips:
+      "धूप वाली जगह और नियमित लेकिन नियंत्रित पानी दें।",
+
+    watering:
+      "नियमित हल्का पानी दें।",
+
+    sunlight:
+      "अच्छी धूप।",
+
+    soil:
+      "उपजाऊ और drainage वाली मिट्टी।",
+
+    maintenance:
+      "ऊपर की बढ़त को समय-समय पर pinch करें।"
   },
 
   {
@@ -494,10 +1277,31 @@ const DEFAULT_PLANTS = [
     category: "Medicinal",
     category_hi: "औषधीय एवं अन्य पौधे",
     variety: "Aloe Vera",
+
     image: "images/aloe-vera.jpg",
+    images: [],
+
     mature_image: "images/mature-aloe-vera.jpg",
+
     guide_link: "qr/aloe-vera.html",
-    care_tips: "कम पानी दें और जल निकासी अच्छी रखें।"
+
+    short_description:
+      "कम देखभाल में आसानी से बढ़ने वाला succulent plant।",
+
+    care_tips:
+      "कम पानी दें और जल निकासी अच्छी रखें।",
+
+    watering:
+      "मिट्टी पूरी तरह सूखने के बाद पानी दें।",
+
+    sunlight:
+      "हल्की से मध्यम धूप।",
+
+    soil:
+      "बहुत अच्छी drainage वाली soil।",
+
+    maintenance:
+      "सड़ी या खराब पत्तियां हटा दें।"
   },
 
   {
@@ -506,10 +1310,31 @@ const DEFAULT_PLANTS = [
     category: "Medicinal",
     category_hi: "औषधीय एवं अन्य पौधे",
     variety: "Curry Leaf",
+
     image: "images/curry-leaf.jpg",
+    images: [],
+
     mature_image: "images/mature-curry-leaf.jpg",
+
     guide_link: "qr/curry-leaf.html",
-    care_tips: "धूप और नियमित सिंचाई के साथ जैविक खाद दें।"
+
+    short_description:
+      "घर के kitchen garden के लिए उपयोगी पौधा।",
+
+    care_tips:
+      "धूप और नियमित सिंचाई के साथ जैविक खाद दें।",
+
+    watering:
+      "नियमित सिंचाई करें।",
+
+    sunlight:
+      "अच्छी धूप।",
+
+    soil:
+      "उपजाऊ और drainage वाली मिट्टी।",
+
+    maintenance:
+      "नई शाखाओं की growth के लिए हल्की pruning करें।"
   },
 
   {
@@ -518,91 +1343,196 @@ const DEFAULT_PLANTS = [
     category: "Medicinal",
     category_hi: "औषधीय एवं अन्य पौधे",
     variety: "Lemongrass",
+
     image: "images/lemongrass.jpg",
+    images: [],
+
     mature_image: "images/mature-lemongrass.jpg",
+
     guide_link: "qr/lemongrass.html",
-    care_tips: "धूप और नियमित पानी में तेजी से बढ़ता है।"
+
+    short_description:
+      "सुगंधित और तेजी से बढ़ने वाला उपयोगी पौधा।",
+
+    care_tips:
+      "धूप और नियमित पानी में तेजी से बढ़ता है।",
+
+    watering:
+      "नियमित पानी दें।",
+
+    sunlight:
+      "पूरी धूप।",
+
+    soil:
+      "अच्छी drainage वाली मिट्टी।",
+
+    maintenance:
+      "पुरानी पत्तियां समय-समय पर काटें।"
   }
+
 ];
 
 /* ============================================================
-   NORMALIZE
+   NORMALIZE PLANT
+   ------------------------------------------------------------
+   पुराने data और नए data दोनों को compatible रखता है।
    ============================================================ */
 
-function normalizePlant(plant) {
+function normalizePlant(plant = {}) {
+
+  const normalizedImages =
+    Array.isArray(plant.images)
+      ? plant.images.filter(Boolean).map(String)
+      : [];
+
+  const primaryImage =
+    String(
+      plant.image ||
+      plant.imageUrl ||
+      normalizedImages[0] ||
+      ""
+    );
+
   return {
+
     id: String(
-      plant?.id ||
-      `plant-${Date.now()}-${Math.random()}`
+      plant.id ||
+      `plant-${Date.now()}-${Math.random()
+        .toString(36)
+        .slice(2, 9)}`
     ),
 
     name: String(
-      plant?.name ||
+      plant.name ||
       "Unnamed Plant"
     ),
 
     category: String(
-      plant?.category ||
-      "Other"
+      plant.category ||
+      "Medicinal"
     ),
 
     category_hi: String(
-      plant?.category_hi ||
+      plant.category_hi ||
       ""
     ),
 
     variety: String(
-      plant?.variety ||
+      plant.variety ||
       ""
     ),
 
-    image: String(
-      plant?.image ||
-      ""
-    ),
+    /* Main image */
+    image: primaryImage,
 
+    /* Additional images */
+    images: normalizedImages,
+
+    /* Mature plant image */
     mature_image: String(
-      plant?.mature_image ||
+      plant.mature_image ||
+      plant.matureImage ||
       ""
     ),
 
+    /* Guide / QR page */
     guide_link: String(
-      plant?.guide_link ||
+      plant.guide_link ||
+      plant.guideLink ||
+      ""
+    ),
+
+    /* Customer-facing details */
+    short_description: String(
+      plant.short_description ||
+      plant.description ||
       ""
     ),
 
     care_tips: String(
-      plant?.care_tips ||
+      plant.care_tips ||
+      plant.tips ||
       "इस पौधे की उचित धूप, पानी और देखभाल करें।"
     ),
 
-    stock: true,
-
-    likes: Number(
-      plant?.likes ||
-      0
+    watering: String(
+      plant.watering ||
+      "मिट्टी की नमी के अनुसार पानी दें।"
     ),
 
-    shares: Number(
-      plant?.shares ||
-      0
-    )
+    sunlight: String(
+      plant.sunlight ||
+      "पौधे की आवश्यकता के अनुसार पर्याप्त रोशनी दें।"
+    ),
+
+    soil: String(
+      plant.soil ||
+      "अच्छी जल निकासी वाली मिट्टी रखें।"
+    ),
+
+    maintenance: String(
+      plant.maintenance ||
+      "समय-समय पर पौधे की सफाई और pruning करें।"
+    ),
+
+    /* Availability */
+    stock:
+      plant.stock !== false,
+
+    /* Optional quantity */
+    quantity:
+      Number.isFinite(Number(plant.quantity))
+        ? Number(plant.quantity)
+        : 0,
+
+    /* Optional price */
+    price:
+      Number.isFinite(Number(plant.price))
+        ? Number(plant.price)
+        : 0,
+
+    /* Social counters */
+    likes:
+      Number(plant.likes || 0),
+
+    shares:
+      Number(plant.shares || 0),
+
+    /* Admin timestamps */
+    createdAt:
+      plant.createdAt ||
+      new Date().toISOString(),
+
+    updatedAt:
+      new Date().toISOString()
   };
 }
 
 /* ============================================================
-   LOAD
+   DEFAULT CATALOG
+   ============================================================ */
+
+function getDefaultCatalog() {
+  return DEFAULT_PLANTS.map(
+    normalizePlant
+  );
+}
+
+/* ============================================================
+   LOAD PLANTS
    ============================================================ */
 
 export async function loadPlants() {
+
   try {
+
     const saved =
-      localStorage.getItem(STORAGE_KEY);
+      localStorage.getItem(
+        STORAGE_KEY
+      );
 
     if (!saved) {
-      return DEFAULT_PLANTS.map(
-        normalizePlant
-      );
+      return getDefaultCatalog();
     }
 
     const parsed =
@@ -612,9 +1542,7 @@ export async function loadPlants() {
       !Array.isArray(parsed) ||
       parsed.length === 0
     ) {
-      return DEFAULT_PLANTS.map(
-        normalizePlant
-      );
+      return getDefaultCatalog();
     }
 
     return parsed.map(
@@ -628,26 +1556,25 @@ export async function loadPlants() {
       error
     );
 
-    return DEFAULT_PLANTS.map(
-      normalizePlant
-    );
+    return getDefaultCatalog();
   }
 }
 
 /* ============================================================
-   GET
+   GET ALL PLANTS
    ============================================================ */
 
 export function getPlants() {
+
   try {
 
     const saved =
-      localStorage.getItem(STORAGE_KEY);
+      localStorage.getItem(
+        STORAGE_KEY
+      );
 
     if (!saved) {
-      return DEFAULT_PLANTS.map(
-        normalizePlant
-      );
+      return getDefaultCatalog();
     }
 
     const parsed =
@@ -657,9 +1584,7 @@ export function getPlants() {
       !Array.isArray(parsed) ||
       parsed.length === 0
     ) {
-      return DEFAULT_PLANTS.map(
-        normalizePlant
-      );
+      return getDefaultCatalog();
     }
 
     return parsed.map(
@@ -673,17 +1598,18 @@ export function getPlants() {
       error
     );
 
-    return DEFAULT_PLANTS.map(
-      normalizePlant
-    );
+    return getDefaultCatalog();
   }
 }
 
 /* ============================================================
-   SAVE
+   SAVE ALL PLANTS
    ============================================================ */
 
-export function savePlants(plants) {
+export function savePlants(
+  plants = []
+) {
+
   try {
 
     const cleanPlants =
@@ -712,10 +1638,12 @@ export function savePlants(plants) {
 }
 
 /* ============================================================
-   ADD
+   ADD PLANT
    ============================================================ */
 
-export function addPlant(plant) {
+export function addPlant(
+  plant = {}
+) {
 
   const plants =
     getPlants();
@@ -723,9 +1651,12 @@ export function addPlant(plant) {
   const newPlant =
     normalizePlant({
       ...plant,
+
       id:
-        plant?.id ||
-        `plant-${Date.now()}`
+        plant.id ||
+        `plant-${Date.now()}-${Math.random()
+          .toString(36)
+          .slice(2, 8)}`
     });
 
   plants.push(
@@ -740,7 +1671,7 @@ export function addPlant(plant) {
 }
 
 /* ============================================================
-   UPDATE
+   UPDATE PLANT
    ============================================================ */
 
 export function updatePlant(
@@ -766,8 +1697,12 @@ export function updatePlant(
     normalizePlant({
       ...plants[index],
       ...changes,
+
       id:
-        plants[index].id
+        plants[index].id,
+
+      createdAt:
+        plants[index].createdAt
     });
 
   savePlants(
@@ -778,10 +1713,12 @@ export function updatePlant(
 }
 
 /* ============================================================
-   DELETE
+   DELETE PLANT
    ============================================================ */
 
-export function deletePlant(id) {
+export function deletePlant(
+  id
+) {
 
   const plants =
     getPlants();
@@ -801,10 +1738,12 @@ export function deletePlant(id) {
 }
 
 /* ============================================================
-   SINGLE PLANT
+   GET SINGLE PLANT
    ============================================================ */
 
-export function getPlantById(id) {
+export function getPlantById(
+  id
+) {
 
   if (
     id === null ||
@@ -824,7 +1763,7 @@ export function getPlantById(id) {
 }
 
 /* ============================================================
-   CATEGORY
+   CATEGORY FILTER
    ============================================================ */
 
 export function getPlantsByCategory(
@@ -836,7 +1775,8 @@ export function getPlantsByCategory(
 
   if (
     !category ||
-    category === "All"
+    category === "All" ||
+    category === "all"
   ) {
     return plants;
   }
@@ -877,10 +1817,29 @@ export function getCategoryLabel(
 }
 
 /* ============================================================
-   AVAILABILITY
+   AVAILABILITY LABEL
    ============================================================ */
 
-export function getAvailabilityLabel() {
+export function getAvailabilityLabel(
+  plant = null
+) {
+
+  if (
+    plant &&
+    plant.stock === false
+  ) {
+    return "🔴 उपलब्ध नहीं";
+  }
+
+  if (
+    plant &&
+    Number(plant.quantity) <= 0 &&
+    plant.quantity !== undefined &&
+    plant.quantity !== null
+  ) {
+    return "🟠 स्टॉक चेक करें";
+  }
+
   return "🟢 उपलब्ध";
 }
 
@@ -909,7 +1868,9 @@ export function searchPlants(
         plant.name,
         plant.category,
         plant.category_hi,
-        plant.variety
+        plant.variety,
+        plant.short_description,
+        plant.care_tips
       ].some(
         value =>
           String(
@@ -922,10 +1883,12 @@ export function searchPlants(
 }
 
 /* ============================================================
-   LIKE
+   LIKE PLANT
    ============================================================ */
 
-export function likePlant(id) {
+export function likePlant(
+  id
+) {
 
   const plants =
     getPlants();
@@ -954,7 +1917,7 @@ export function likePlant(id) {
 }
 
 /* ============================================================
-   SHARE
+   SHARE PLANT
    ============================================================ */
 
 export async function sharePlant(
@@ -966,9 +1929,10 @@ export async function sharePlant(
   }
 
   const url =
-    `${window.location.origin}/plant.html?plantId=${encodeURIComponent(plant.id)}`;
+    `${window.location.origin}${window.location.pathname.replace(/[^/]*$/, "")}plant.html?id=${encodeURIComponent(plant.id)}`;
 
   const shareData = {
+
     title:
       plant.name,
 
@@ -1039,15 +2003,152 @@ export async function sharePlant(
 }
 
 /* ============================================================
-   RESET
+   ADD PLANT IMAGE
+   ------------------------------------------------------------
+   Admin panel इस function का उपयोग करके अतिरिक्त फोटो जोड़
+   सकता है।
+   ============================================================ */
+
+export function addPlantImage(
+  id,
+  imageUrl
+) {
+
+  const plant =
+    getPlantById(id);
+
+  if (
+    !plant ||
+    !imageUrl
+  ) {
+    return null;
+  }
+
+  const images =
+    Array.isArray(plant.images)
+      ? [...plant.images]
+      : [];
+
+  if (
+    !images.includes(imageUrl)
+  ) {
+    images.push(
+      imageUrl
+    );
+  }
+
+  if (!plant.image) {
+    plant.image =
+      imageUrl;
+  }
+
+  return updatePlant(
+    id,
+    {
+      image:
+        plant.image,
+
+      images
+    }
+  );
+}
+
+/* ============================================================
+   REMOVE PLANT IMAGE
+   ============================================================ */
+
+export function removePlantImage(
+  id,
+  imageUrl
+) {
+
+  const plant =
+    getPlantById(id);
+
+  if (!plant) {
+    return null;
+  }
+
+  const images =
+    Array.isArray(plant.images)
+      ? plant.images.filter(
+          image =>
+            image !== imageUrl
+        )
+      : [];
+
+  let mainImage =
+    plant.image;
+
+  if (
+    mainImage === imageUrl
+  ) {
+    mainImage =
+      images[0] || "";
+  }
+
+  return updatePlant(
+    id,
+    {
+      image:
+        mainImage,
+
+      images
+    }
+  );
+}
+
+/* ============================================================
+   SET MAIN IMAGE
+   ============================================================ */
+
+export function setPlantMainImage(
+  id,
+  imageUrl
+) {
+
+  const plant =
+    getPlantById(id);
+
+  if (
+    !plant ||
+    !imageUrl
+  ) {
+    return null;
+  }
+
+  const images =
+    Array.isArray(plant.images)
+      ? [...plant.images]
+      : [];
+
+  if (
+    !images.includes(imageUrl)
+  ) {
+    images.unshift(
+      imageUrl
+    );
+  }
+
+  return updatePlant(
+    id,
+    {
+      image:
+        imageUrl,
+
+      images
+    }
+  );
+}
+
+/* ============================================================
+   RESET CATALOG
    ============================================================ */
 
 export function resetPlants() {
 
   const freshCatalog =
-    DEFAULT_PLANTS.map(
-      normalizePlant
-    );
+    getDefaultCatalog();
 
   savePlants(
     freshCatalog
@@ -1057,7 +2158,7 @@ export function resetPlants() {
 }
 
 /* ============================================================
-   MASTER DATA EXPORT
+   EXPORT MASTER DATA
    ============================================================ */
 
 export {

@@ -4,148 +4,1493 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#2E7D32">
-  <title>पौधे की जानकारी - श्री राम नर्सरी</title>
+
+  <title>पौधे की जानकारी - श्री राम नर्सरी (भुना)</title>
+
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       background: #f4f7f3;
       color: #202520;
     }
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+
     header {
-      background: white;
+      background: #ffffff;
       border-bottom: 1px solid #e2e7e2;
       padding: 12px 20px;
       position: sticky;
       top: 0;
       z-index: 100;
     }
+
     .header-container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 15px;
     }
-    .logo { font-weight: 800; font-size: 18px; color: #1b5e20; text-decoration: none; }
-    
+
+    .logo {
+      font-weight: 800;
+      font-size: 18px;
+      color: #1b5e20;
+      text-decoration: none;
+    }
+
+    .back-btn {
+      color: #333;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      background: #f1f5f1;
+      border: 1px solid #dce5dc;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    .back-btn:hover {
+      background: #e8f5e9;
+      color: #1b5e20;
+    }
+
+    /* =========================================================
+       MAIN
+       ========================================================= */
+
     .container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 30px auto;
       padding: 0 20px;
     }
+
+    /* =========================================================
+       DETAIL CARD
+       ========================================================= */
+
     .plant-detail-card {
-      background: white;
-      border-radius: 16px;
+      background: #ffffff;
+      border-radius: 18px;
       overflow: hidden;
       border: 1px solid #e2e7e2;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
       display: grid;
       grid-template-columns: 1fr 1fr;
     }
-    .plant-img-box {
+
+    /* =========================================================
+       IMAGE AREA
+       ========================================================= */
+
+    .plant-image-section {
       background: #edf3ed;
-      min-height: 300px;
+      min-height: 480px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
     }
-    .plant-img-box img {
+
+    .main-image-box {
+      flex: 1;
+      min-height: 400px;
+      position: relative;
+      overflow: hidden;
+      background: #edf3ed;
+    }
+
+    .main-image-box img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
+
+    .image-placeholder {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 70px;
+      color: #7a987a;
+    }
+
+    .image-label {
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      background: rgba(255, 255, 255, 0.94);
+      color: #1b5e20;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .mature-image-btn {
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+      background: rgba(27, 94, 32, 0.94);
+      color: white;
+      border: 0;
+      border-radius: 9px;
+      padding: 9px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: none;
+    }
+
+    .mature-image-btn:hover {
+      background: #2e7d32;
+    }
+
+    /* =========================================================
+       CONTENT
+       ========================================================= */
+
     .plant-content {
       padding: 30px;
       display: flex;
       flex-direction: column;
     }
-    .plant-title { font-size: 26px; font-weight: 800; color: #1b5e20; margin: 0 0 5px; }
-    .variety-tag { font-size: 14px; color: #666; margin-bottom: 15px; font-weight: 700; }
-    .badge { display: inline-block; background: #e8f5e9; color: #1b5e20; padding: 4px 10px; border-radius: 15px; font-size: 12px; font-weight: 700; margin-bottom: 20px; width: fit-content; }
-    
-    .care-box {
-      background: #f7faf7;
-      border: 1px solid #d8e6d8;
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 20px;
-      font-size: 14px;
-      line-height: 1.6;
+
+    .category-label {
+      display: inline-block;
+      width: fit-content;
+      background: #e8f5e9;
+      color: #1b5e20;
+      border-radius: 20px;
+      padding: 5px 11px;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 13px;
     }
-    .care-box h4 { margin: 0 0 8px; color: #1b5e20; font-size: 15px; }
-    
+
+    .plant-title {
+      font-size: 28px;
+      line-height: 1.25;
+      font-weight: 800;
+      color: #1b5e20;
+      margin: 0 0 8px;
+    }
+
+    .variety-tag {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 14px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .availability {
+      display: inline-block;
+      width: fit-content;
+      background: #e8f5e9;
+      color: #1b5e20;
+      padding: 6px 11px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    /* =========================================================
+       QUICK ACTIONS
+       ========================================================= */
+
+    .quick-actions {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .action-btn {
+      border: 1px solid #d8e4d8;
+      background: #ffffff;
+      color: #333;
+      border-radius: 9px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 800;
+      transition: 0.2s;
+    }
+
+    .action-btn:hover {
+      background: #f0f7f0;
+      border-color: #b9d1b9;
+    }
+
+    .like-btn.liked {
+      background: #e8f5e9;
+      color: #1b5e20;
+      border-color: #a5c8a5;
+    }
+
+    /* =========================================================
+       INFO BOX
+       ========================================================= */
+
+    .info-box {
+      background: #f8faf8;
+      border: 1px solid #dce8dc;
+      border-radius: 11px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .info-box h3 {
+      margin: 0 0 9px;
+      color: #1b5e20;
+      font-size: 15px;
+    }
+
+    .info-box p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.65;
+      color: #444;
+    }
+
+    /* =========================================================
+       PLANT META
+       ========================================================= */
+
+    .plant-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .meta-item {
+      border: 1px solid #e2e7e2;
+      background: #ffffff;
+      border-radius: 9px;
+      padding: 10px;
+    }
+
+    .meta-label {
+      font-size: 10px;
+      color: #777;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .meta-value {
+      font-size: 13px;
+      color: #222;
+      font-weight: 800;
+    }
+
+    /* =========================================================
+       GUIDE BUTTON
+       ========================================================= */
+
+    .guide-btn {
+      display: none;
+      text-decoration: none;
+      text-align: center;
+      padding: 11px;
+      border-radius: 9px;
+      border: 1px solid #cfe0cf;
+      color: #1b5e20;
+      background: #f5faf5;
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .guide-btn:hover {
+      background: #e8f5e9;
+    }
+
+    /* =========================================================
+       WHATSAPP BUTTON
+       ========================================================= */
+
     .btn-whatsapp-order {
       background: #25d366;
       color: white;
       text-decoration: none;
       text-align: center;
-      padding: 12px;
+      padding: 13px;
       border-radius: 10px;
       font-weight: 800;
       display: block;
       margin-top: auto;
+      font-size: 14px;
     }
-    .btn-whatsapp-order:hover { background: #1ebe57; }
 
-    @media(max-width: 768px) {
-      .plant-detail-card { grid-template-columns: 1fr; }
+    .btn-whatsapp-order:hover {
+      background: #1ebe57;
+    }
+
+    /* =========================================================
+       ERROR STATE
+       ========================================================= */
+
+    .error-state {
+      display: none;
+      background: white;
+      border: 1px solid #e2e7e2;
+      border-radius: 16px;
+      padding: 50px 25px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+    }
+
+    .error-state .icon {
+      font-size: 50px;
+      margin-bottom: 10px;
+    }
+
+    .error-state h2 {
+      margin: 0 0 8px;
+      color: #1b5e20;
+    }
+
+    .error-state p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .error-back {
+      display: inline-block;
+      background: #1b5e20;
+      color: white;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    /* =========================================================
+       IMAGE MODAL
+       ========================================================= */
+
+    .image-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .image-modal.open {
+      display: flex;
+    }
+
+    .image-modal img {
+      max-width: 95vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .modal-close {
+      position: fixed;
+      right: 18px;
+      top: 15px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 0;
+      background: white;
+      color: #222;
+      font-size: 22px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    /* =========================================================
+       TOAST
+       ========================================================= */
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 25px;
+      transform: translateX(-50%) translateY(20px);
+      background: #202520;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.25s;
+      z-index: 10000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* =========================================================
+       MOBILE
+       ========================================================= */
+
+    @media (max-width: 768px) {
+
+      header {
+        padding: 10px 14px;
+      }
+
+      .header-container {
+        gap: 8px;
+      }
+
+      .logo {
+        font-size: 15px;
+      }
+
+      .back-btn {
+        font-size: 11px;
+        padding: 7px 9px;
+      }
+
+      .container {
+        margin: 18px auto;
+        padding: 0 12px;
+      }
+
+      .plant-detail-card {
+        grid-template-columns: 1fr;
+        border-radius: 14px;
+      }
+
+      .plant-image-section {
+        min-height: 300px;
+      }
+
+      .main-image-box {
+        min-height: 300px;
+      }
+
+      .image-placeholder {
+        min-height: 300px;
+      }
+
+      .plant-content {
+        padding: 20px;
+      }
+
+      .plant-title {
+        font-size: 23px;
+      }
+
+      .plant-meta-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 420px) {
+
+      .plant-meta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .action-btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
+
 <body>
+
+  <!-- =========================================================
+       HEADER
+       ========================================================= -->
 
   <header>
     <div class="header-container">
-      <a href="dashboard.html" class="logo">← कैटलॉग पर वापस जाएं</a>
+
+      <a href="dashboard.html" class="logo">
+        🌿 Shri Ram Nursery
+        <small style="
+          display:block;
+          font-size:10px;
+          color:#666;
+          font-weight:400;
+        ">
+          Bhuna
+        </small>
+      </a>
+
+      <a href="dashboard.html" class="back-btn">
+        ← कैटलॉग
+      </a>
+
     </div>
   </header>
 
+
+  <!-- =========================================================
+       MAIN
+       ========================================================= -->
+
   <main class="container">
+
+    <!-- ERROR -->
+    <div class="error-state" id="error-state">
+
+      <div class="icon">🌱</div>
+
+      <h2>पौधा नहीं मिला</h2>
+
+      <p>
+        जिस पौधे की जानकारी आप देखना चाहते हैं,
+        वह कैटलॉग में उपलब्ध नहीं है।
+      </p>
+
+      <a href="dashboard.html" class="error-back">
+        ← पौधा कैटलॉग देखें
+      </a>
+
+    </div>
+
+
+    <!-- DETAIL -->
     <div class="plant-detail-card" id="plant-detail-box">
-      <div class="plant-img-box" id="detail-img-container">
-        <div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:48px;">🌱</div>
-      </div>
-      <div class="plant-content">
-        <h1 class="plant-title" id="detail-name">पौधे का नाम</h1>
-        <div class="variety-tag" id="detail-variety">Variety: --</div>
-        <div><span class="badge">🟢 श्री राम नर्सरी (भुना) में उपलब्ध</span></div>
-        
-        <div class="care-box">
-          <h4>🌱 वैज्ञानिक देखभाल एवं हॉर्टिकल्चर गाइड:</h4>
-          <p id="detail-tips">नियमित रूप से मध्यम मात्रा में पानी दें और धूप वाली जगह पर रखें।</p>
+
+      <!-- =====================================================
+           IMAGE
+           ===================================================== -->
+
+      <section class="plant-image-section">
+
+        <div class="main-image-box" id="main-image-box">
+
+          <div class="image-placeholder">
+            🌱
+          </div>
+
+          <span class="image-label">
+            श्री राम नर्सरी
+          </span>
+
+          <button
+            type="button"
+            id="mature-image-btn"
+            class="mature-image-btn"
+          >
+            🌳 बड़ा होने पर देखें
+          </button>
+
         </div>
 
-        <a href="#" id="whatsapp-order-link" class="btn-whatsapp-order" target="_blank">🟢 WhatsApp पर आर्डर बुक करें</a>
-      </div>
+      </section>
+
+
+      <!-- =====================================================
+           CONTENT
+           ===================================================== -->
+
+      <section class="plant-content">
+
+        <div
+          class="category-label"
+          id="detail-category"
+        >
+          🌱 पौधा
+        </div>
+
+
+        <h1
+          class="plant-title"
+          id="detail-name"
+        >
+          पौधे का नाम
+        </h1>
+
+
+        <div
+          class="variety-tag"
+          id="detail-variety"
+        >
+          Variety: --
+        </div>
+
+
+        <div
+          class="availability"
+          id="detail-availability"
+        >
+          🟢 उपलब्ध
+        </div>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="quick-actions">
+
+          <button
+            type="button"
+            class="action-btn like-btn"
+            id="like-btn"
+          >
+            ❤️ पसंद
+            <span id="like-count">0</span>
+          </button>
+
+          <button
+            type="button"
+            class="action-btn"
+            id="share-btn"
+          >
+            📤 शेयर
+            <span id="share-count">0</span>
+          </button>
+
+          <button
+            type="button"
+            class="action-btn"
+            id="photo-btn"
+          >
+            🔍 फोटो देखें
+          </button>
+
+        </div>
+
+
+        <!-- BASIC DETAILS -->
+
+        <div class="plant-meta-grid">
+
+          <div class="meta-item">
+
+            <div class="meta-label">
+              श्रेणी
+            </div>
+
+            <div
+              class="meta-value"
+              id="meta-category"
+            >
+              --
+            </div>
+
+          </div>
+
+
+          <div class="meta-item">
+
+            <div class="meta-label">
+              वैरायटी
+            </div>
+
+            <div
+              class="meta-value"
+              id="meta-variety"
+            >
+              --
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- CARE -->
+
+        <div class="info-box">
+
+          <h3>
+            🌱 पौधे की देखभाल एवं रख-रखाव
+          </h3>
+
+          <p id="detail-tips">
+            इस पौधे की उचित धूप,
+            पानी और देखभाल करें।
+          </p>
+
+        </div>
+
+
+        <!-- GUIDE -->
+
+        <a
+          href="#"
+          id="guide-btn"
+          class="guide-btn"
+          target="_blank"
+          rel="noopener"
+        >
+          📖 पूरी हॉर्टिकल्चर गाइड देखें
+        </a>
+
+
+        <!-- WHATSAPP -->
+
+        <a
+          href="#"
+          id="whatsapp-order-link"
+          class="btn-whatsapp-order"
+          target="_blank"
+          rel="noopener"
+        >
+          🟢 WhatsApp पर आर्डर बुक करें
+        </a>
+
+      </section>
+
     </div>
+
   </main>
 
+
+  <!-- =========================================================
+       IMAGE MODAL
+       ========================================================= -->
+
+  <div
+    class="image-modal"
+    id="image-modal"
+  >
+
+    <button
+      type="button"
+      class="modal-close"
+      id="modal-close"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+    <img
+      id="modal-image"
+      src=""
+      alt="Plant Image"
+    >
+
+  </div>
+
+
+  <!-- =========================================================
+       TOAST
+       ========================================================= -->
+
+  <div
+    class="toast"
+    id="toast"
+  >
+    Done
+  </div>
+
+
+  <!-- =========================================================
+       SCRIPT
+       ========================================================= -->
+
   <script type="module">
-    import { getPlants } from './js/plants.js';
 
-    window.addEventListener("DOMContentLoaded", () => {
-      const params = new URLSearchParams(window.location.search);
-      const id = params.get("id");
-      const plants = getPlants();
-      
-      const plant = plants[id] || plants.find(p => p.id === id) || plants[0];
+    import {
+      getPlants,
+      getPlantById,
+      getCategoryLabel,
+      likePlant,
+      sharePlant
+    } from "./js/plants.js";
 
-      if (plant) {
-        document.getElementById("detail-name").textContent = plant.name || "पौधा";
-        document.getElementById("detail-variety").textContent = plant.variety ? `Variety: ${plant.variety}` : "श्री राम नर्सरी (भुना)";
-        if (plant.tips) {
-          document.getElementById("detail-tips").textContent = plant.tips;
-        }
-        
-        const imgContainer = document.getElementById("detail-img-container");
-        const imgUrl = plant.image || plant.imageUrl;
-        if (imgUrl) {
-          imgContainer.innerHTML = `<img src="${imgUrl}" alt="${plant.name}">`;
-        }
 
-        const msg = encodeURIComponent(`नमस्ते श्री राम नर्सरी (भुना)! 🙏\nमुझे यह पौधा खरीदना है:\n*${plant.name}* ${plant.variety ? `(${plant.variety})` : ''}\nकृपया इसकी उपलब्धता और कीमत की जानकारी दें।`);
-        document.getElementById("whatsapp-order-link").href = `https://wa.me/919416316534?text=${msg}`;
+    /* =========================================================
+       ELEMENTS
+       ========================================================= */
+
+    const detailBox =
+      document.getElementById("plant-detail-box");
+
+    const errorState =
+      document.getElementById("error-state");
+
+    const mainImageBox =
+      document.getElementById("main-image-box");
+
+    const detailName =
+      document.getElementById("detail-name");
+
+    const detailVariety =
+      document.getElementById("detail-variety");
+
+    const detailTips =
+      document.getElementById("detail-tips");
+
+    const detailCategory =
+      document.getElementById("detail-category");
+
+    const detailAvailability =
+      document.getElementById("detail-availability");
+
+    const metaCategory =
+      document.getElementById("meta-category");
+
+    const metaVariety =
+      document.getElementById("meta-variety");
+
+    const likeBtn =
+      document.getElementById("like-btn");
+
+    const likeCount =
+      document.getElementById("like-count");
+
+    const shareBtn =
+      document.getElementById("share-btn");
+
+    const shareCount =
+      document.getElementById("share-count");
+
+    const photoBtn =
+      document.getElementById("photo-btn");
+
+    const matureImageBtn =
+      document.getElementById("mature-image-btn");
+
+    const guideBtn =
+      document.getElementById("guide-btn");
+
+    const whatsappBtn =
+      document.getElementById("whatsapp-order-link");
+
+    const imageModal =
+      document.getElementById("image-modal");
+
+    const modalImage =
+      document.getElementById("modal-image");
+
+    const modalClose =
+      document.getElementById("modal-close");
+
+    const toast =
+      document.getElementById("toast");
+
+
+    /* =========================================================
+       TOAST
+       ========================================================= */
+
+    function showToast(message) {
+
+      toast.textContent = message;
+
+      toast.classList.add("show");
+
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2200);
+    }
+
+
+    /* =========================================================
+       GET PLANT ID
+       Supports:
+       ?id=
+       ?plantId=
+       ========================================================= */
+
+    function getRequestedPlantId() {
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+      return (
+        params.get("id") ||
+        params.get("plantId") ||
+        ""
+      );
+    }
+
+
+    /* =========================================================
+       FIND PLANT
+       ========================================================= */
+
+    function findPlant() {
+
+      const requestedId =
+        getRequestedPlantId();
+
+      if (!requestedId) {
+        return null;
       }
-    });
+
+      return getPlantById(
+        requestedId
+      );
+
+    }
+
+
+    /* =========================================================
+       IMAGE MODAL
+       ========================================================= */
+
+    function openImageModal(url) {
+
+      if (!url) {
+        showToast("इस पौधे की फोटो उपलब्ध नहीं है।");
+        return;
+      }
+
+      modalImage.src = url;
+
+      imageModal.classList.add("open");
+
+      document.body.style.overflow = "hidden";
+    }
+
+
+    function closeImageModal() {
+
+      imageModal.classList.remove("open");
+
+      document.body.style.overflow = "";
+
+      modalImage.src = "";
+    }
+
+
+    photoBtn.addEventListener(
+      "click",
+      () => {
+
+        const image =
+          mainImageBox.querySelector("img");
+
+        if (image && image.src) {
+          openImageModal(
+            image.src
+          );
+        } else {
+          showToast(
+            "इस पौधे की फोटो उपलब्ध नहीं है।"
+          );
+        }
+
+      }
+    );
+
+
+    modalClose.addEventListener(
+      "click",
+      closeImageModal
+    );
+
+
+    imageModal.addEventListener(
+      "click",
+      event => {
+
+        if (
+          event.target === imageModal
+        ) {
+          closeImageModal();
+        }
+
+      }
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Escape"
+        ) {
+          closeImageModal();
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       RENDER PLANT
+       ========================================================= */
+
+    function renderPlant(plant) {
+
+      if (!plant) {
+
+        detailBox.style.display =
+          "none";
+
+        errorState.style.display =
+          "block";
+
+        return;
+      }
+
+
+      detailBox.style.display =
+        "grid";
+
+      errorState.style.display =
+        "none";
+
+
+      /* =======================================================
+         NAME
+         ======================================================= */
+
+      const plantName =
+        plant.name ||
+        "पौधा";
+
+
+      detailName.textContent =
+        plantName;
+
+
+      /* =======================================================
+         VARIETY
+         ======================================================= */
+
+      detailVariety.textContent =
+        plant.variety
+          ? `Variety: ${plant.variety}`
+          : "श्री राम नर्सरी (भुना)";
+
+
+      metaVariety.textContent =
+        plant.variety ||
+        "सामान्य";
+
+
+      /* =======================================================
+         CATEGORY
+         ======================================================= */
+
+      const categoryLabel =
+        plant.category_hi ||
+        getCategoryLabel(
+          plant.category
+        ) ||
+        "🌱 अन्य पौधे";
+
+
+      detailCategory.textContent =
+        categoryLabel;
+
+
+      metaCategory.textContent =
+        plant.category_hi ||
+        plant.category ||
+        "अन्य";
+
+
+      /* =======================================================
+         AVAILABILITY
+         ======================================================= */
+
+      detailAvailability.textContent =
+        plant.stock === false
+          ? "🔴 अभी उपलब्ध नहीं"
+          : "🟢 श्री राम नर्सरी (भुना) में उपलब्ध";
+
+
+      /* =======================================================
+         CARE TIPS
+         ======================================================= */
+
+      detailTips.textContent =
+        plant.care_tips ||
+        plant.tips ||
+        "इस पौधे को उचित धूप, पानी और अच्छी मिट्टी दें।";
+
+
+      /* =======================================================
+         MAIN IMAGE
+         ======================================================= */
+
+      const imageUrl =
+        plant.image ||
+        plant.imageUrl ||
+        "";
+
+
+      if (imageUrl) {
+
+        mainImageBox.innerHTML = `
+
+          <img
+            src="${imageUrl}"
+            alt="${plantName}"
+            loading="eager"
+            onerror="
+              this.style.display='none';
+              this.parentElement.insertAdjacentHTML(
+                'beforeend',
+                '<div class=&quot;image-placeholder&quot;>🌱</div>'
+              );
+            "
+          >
+
+          <span class="image-label">
+            श्री राम नर्सरी
+          </span>
+
+          <button
+            type="button"
+            id="mature-image-btn"
+            class="mature-image-btn"
+          >
+            🌳 बड़ा होने पर देखें
+          </button>
+
+        `;
+
+      } else {
+
+        mainImageBox.innerHTML = `
+
+          <div class="image-placeholder">
+            🌱
+          </div>
+
+          <span class="image-label">
+            फोटो जल्द उपलब्ध होगी
+          </span>
+
+        `;
+
+      }
+
+
+      /* =======================================================
+         MATURE IMAGE
+         ======================================================= */
+
+      const matureImage =
+        plant.mature_image ||
+        plant.matureImage ||
+        "";
+
+
+      const currentMatureButton =
+        document.getElementById(
+          "mature-image-btn"
+        );
+
+
+      if (
+        matureImage &&
+        currentMatureButton
+      ) {
+
+        currentMatureButton.style.display =
+          "block";
+
+        currentMatureButton.addEventListener(
+          "click",
+          event => {
+
+            event.stopPropagation();
+
+            openImageModal(
+              matureImage
+            );
+
+          }
+        );
+
+      }
+
+
+      /* =======================================================
+         PHOTO CLICK
+         ======================================================= */
+
+      const currentMainImage =
+        mainImageBox.querySelector(
+          "img"
+        );
+
+
+      if (currentMainImage) {
+
+        currentMainImage.style.cursor =
+          "zoom-in";
+
+        currentMainImage.addEventListener(
+          "click",
+          () => {
+
+            openImageModal(
+              imageUrl
+            );
+
+          }
+        );
+
+      }
+
+
+      /* =======================================================
+         LIKE COUNT
+         ======================================================= */
+
+      likeCount.textContent =
+        Number(
+          plant.likes || 0
+        );
+
+
+      /* =======================================================
+         SHARE COUNT
+         ======================================================= */
+
+      shareCount.textContent =
+        Number(
+          plant.shares || 0
+        );
+
+
+      /* =======================================================
+         LIKE BUTTON
+         ======================================================= */
+
+      likeBtn.onclick = () => {
+
+        const alreadyLiked =
+          localStorage.getItem(
+            `liked_${plant.id}`
+          );
+
+
+        if (alreadyLiked) {
+
+          showToast(
+            "आप इस पौधे को पहले ही पसंद कर चुके हैं ❤️"
+          );
+
+          return;
+        }
+
+
+        const newCount =
+          likePlant(
+            plant.id
+          );
+
+
+        if (
+          newCount !== null
+        ) {
+
+          likeCount.textContent =
+            newCount;
+
+          localStorage.setItem(
+            `liked_${plant.id}`,
+            "1"
+          );
+
+          likeBtn.classList.add(
+            "liked"
+          );
+
+          showToast(
+            "पौधा पसंद किया गया ❤️"
+          );
+
+        }
+
+      };
+
+
+      if (
+        localStorage.getItem(
+          `liked_${plant.id}`
+        )
+      ) {
+
+        likeBtn.classList.add(
+          "liked"
+        );
+
+      }
+
+
+      /* =======================================================
+         SHARE
+         ======================================================= */
+
+      shareBtn.onclick = async () => {
+
+        const result =
+          await sharePlant(
+            plant
+          );
+
+
+        if (result) {
+
+          const freshPlants =
+            getPlants();
+
+          const freshPlant =
+            freshPlants.find(
+              item =>
+                String(item.id) ===
+                String(plant.id)
+            );
+
+
+          if (freshPlant) {
+
+            shareCount.textContent =
+              Number(
+                freshPlant.shares || 0
+              );
+
+          }
+
+
+          showToast(
+            "पौधे की जानकारी शेयर कर दी गई 📤"
+          );
+
+        } else {
+
+          showToast(
+            "शेयर उपलब्ध नहीं है।"
+          );
+
+        }
+
+      };
+
+
+      /* =======================================================
+         GUIDE LINK
+         ======================================================= */
+
+      if (
+        plant.guide_link
+      ) {
+
+        guideBtn.href =
+          plant.guide_link;
+
+        guideBtn.style.display =
+          "block";
+
+      } else {
+
+        guideBtn.style.display =
+          "none";
+
+      }
+
+
+      /* =======================================================
+         WHATSAPP ORDER
+         ======================================================= */
+
+      const phone =
+        "919416316534";
+
+
+      const message =
+        `नमस्ते श्री राम नर्सरी (भुना)! 🙏
+
+मुझे यह पौधा खरीदना है:
+
+🌱 पौधा: ${plantName}
+${plant.variety ? `🌿 वैरायटी: ${plant.variety}` : ""}
+${plant.category_hi ? `📂 श्रेणी: ${plant.category_hi}` : ""}
+
+कृपया इसकी उपलब्धता और कीमत की जानकारी दें।`;
+
+
+      whatsappBtn.href =
+        `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+
+      if (
+        plant.stock === false
+      ) {
+
+        whatsappBtn.textContent =
+          "📞 उपलब्धता के लिए WhatsApp करें";
+
+      } else {
+
+        whatsappBtn.textContent =
+          "🟢 WhatsApp पर आर्डर बुक करें";
+
+      }
+
+    }
+
+
+    /* =========================================================
+       INITIAL LOAD
+       ========================================================= */
+
+    window.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        try {
+
+          const plant =
+            findPlant();
+
+          renderPlant(
+            plant
+          );
+
+        } catch (error) {
+
+          console.error(
+            "Plant detail error:",
+            error
+          );
+
+          detailBox.style.display =
+            "none";
+
+          errorState.style.display =
+            "block";
+
+        }
+
+      }
+    );
+
   </script>
+
 </body>
 </html>
