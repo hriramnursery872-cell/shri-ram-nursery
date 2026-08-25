@@ -2,1286 +2,184 @@
 <html lang="hi">
 
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
-  >
-
-  <meta
-    name="theme-color"
-    content="#2E7D32"
-  >
-
-  <meta
-    name="description"
-    content="श्री राम नर्सरी भुना - फलदार, इंडोर, आउटडोर, फूलदार, डेकोरेटिव एवं लैंडस्केपिंग पौधे।"
-  >
-
-  <title>
-    श्री राम नर्सरी (भुना) - Plants & Nursery Services
-  </title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2E7D32">
+  <meta name="description" content="श्री राम नर्सरी भुना - फलदार, इंडोर, आउटडोर, फूलदार, डेकोरेटिव एवं लैंडस्केपिंग पौधे।">
+  <title>श्री राम नर्सरी (भुना) - Plants & Nursery Services</title>
 
   <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #f4f7f3; color: #202520; }
 
-    * {
-      box-sizing: border-box;
-    }
-
-
-    body {
-
-      margin: 0;
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-      background:
-        #f4f7f3;
-
-      color:
-        #202520;
-
-    }
-
-
-    /* =========================================================
-       TOP VIDEO TICKER
-       ========================================================= */
-
+    /* Top Video Ticker */
     .top-video-ticker {
-
-      background:
-        #1b5e20;
-
-      color:
-        white;
-
-      padding:
-        8px 15px;
-
-      font-size:
-        13px;
-
-      text-align:
-        center;
-
-      display:
-        flex;
-
-      justify-content:
-        center;
-
-      align-items:
-        center;
-
-      gap:
-        10px;
-
-      font-weight:
-        600;
-
-      cursor:
-        pointer;
-
-      text-decoration:
-        none;
-
+      background: #1b5e20; color: white; padding: 8px 15px; font-size: 13px; text-align: center;
+      display: flex; justify-content: center; align-items: center; gap: 10px; font-weight: 600; cursor: pointer; text-decoration: none;
     }
-
-
-    .top-video-ticker:hover {
-
-      background:
-        #2e7d32;
-
-    }
-
-
-    .live-dot {
-
-      height:
-        8px;
-
-      width:
-        8px;
-
-      background-color:
-        #ff5252;
-
-      border-radius:
-        50%;
-
-      display:
-        inline-block;
-
-      animation:
-        pulse 1.5s infinite;
-
-      flex-shrink:
-        0;
-
-    }
-
-
-    @keyframes pulse {
-
-      0% {
-
-        transform:
-          scale(.95);
-
-        opacity:
-          .8;
-
-      }
-
-      50% {
-
-        transform:
-          scale(1.2);
-
-        opacity:
-          1;
-
-      }
-
-      100% {
-
-        transform:
-          scale(.95);
-
-        opacity:
-          .8;
-
-      }
-
-    }
-
-
-    /* =========================================================
-       HEADER
-       ========================================================= */
-
-    header {
-
-      background:
-        white;
-
-      border-bottom:
-        1px solid #e2e7e2;
-
-      padding:
-        12px 20px;
-
-      position:
-        sticky;
-
-      top:
-        0;
-
-      z-index:
-        100;
-
-    }
-
-
-    .header-container {
-
-      max-width:
-        1200px;
-
-      margin:
-        auto;
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        space-between;
-
-      gap:
-        20px;
-
-    }
-
-
-    .logo {
-
-      font-weight:
-        800;
-
-      font-size:
-        18px;
-
-      color:
-        #1b5e20;
-
-      text-decoration:
-        none;
-
-      line-height:
-        1.15;
-
-    }
-
-
-    .logo small {
-
-      font-weight:
-        400;
-
-      font-size:
-        11px;
-
-      display:
-        block;
-
-      color:
-        #666;
-
-      margin-top:
-        2px;
-
-    }
-
-
-    .nav-links {
-
-      display:
-        flex;
-
-      gap:
-        15px;
-
-      align-items:
-        center;
-
-      font-size:
-        14px;
-
-      font-weight:
-        700;
-
-    }
-
-
-    .nav-links a {
-
-      color:
-        #333;
-
-      text-decoration:
-        none;
-
-    }
-
-
-    .nav-links a:hover {
-
-      color:
-        #2e7d32;
-
-    }
-
-
-    .nav-order {
-
-      background:
-        #25d366;
-
-      color:
-        white !important;
-
-      padding:
-        7px 11px;
-
-      border-radius:
-        7px;
-
-    }
-
-
-    /* =========================================================
-       HERO
-       ========================================================= */
-
-    .hero {
-
-      background:
-        linear-gradient(
-          135deg,
-          #e8f5e9,
-          #c8e6c9
-        );
-
-      padding:
-        40px 20px;
-
-      text-align:
-        center;
-
-    }
-
-
-    .hero-inner {
-
-      max-width:
-        800px;
-
-      margin:
-        auto;
-
-    }
-
-
-    .announcement {
-
-      background:
-        rgba(255,255,255,.8);
-
-      border:
-        1px solid #a5d6a7;
-
-      padding:
-        10px 15px;
-
-      border-radius:
-        8px;
-
-      font-size:
-        13px;
-
-      color:
-        #1b5e20;
-
-      margin-bottom:
-        20px;
-
-      font-weight:
-        600;
-
-      line-height:
-        1.5;
-
-    }
-
-
-    .hero h1 {
-
-      font-size:
-        36px;
-
-      color:
-        #1b5e20;
-
-      margin:
-        0 0 15px;
-
-    }
-
-
-    .hero p {
-
-      color:
-        #4f5d4f;
-
-      font-size:
-        16px;
-
-      margin:
-        0 0 25px;
-
-      line-height:
-        1.6;
-
-    }
-
-
-    /* =========================================================
-       SEARCH
-       ========================================================= */
-
-    .search-box {
-
-      display:
-        flex;
-
-      max-width:
-        500px;
-
-      margin:
-        0 auto 20px;
-
-      background:
-        white;
-
-      border-radius:
-        30px;
-
-      padding:
-        5px 15px;
-
-      box-shadow:
-        0 4px 15px rgba(0,0,0,.08);
-
-      border:
-        1px solid #c8e6c9;
-
-    }
-
-
-    .search-box input {
-
-      flex:
-        1;
-
-      border:
-        0;
-
-      outline:
-        none;
-
-      padding:
-        10px;
-
-      font-size:
-        14px;
-
-      background:
-        transparent;
-
-    }
-
-
-    .search-box button {
-
-      border:
-        0;
-
-      background:
-        #2e7d32;
-
-      color:
-        white;
-
-      border-radius:
-        20px;
-
-      padding:
-        7px 13px;
-
-      cursor:
-        pointer;
-
-      font-weight:
-        700;
-
-    }
-
-
-    /* =========================================================
-       HERO BUTTONS
-       ========================================================= */
-
-    .hero-btns {
-
-      display:
-        flex;
-
-      gap:
-        10px;
-
-      justify-content:
-        center;
-
-      margin-top:
-        20px;
-
-      flex-wrap:
-        wrap;
-
-    }
-
-
-    .btn {
-
-      padding:
-        10px 20px;
-
-      border-radius:
-        8px;
-
-      font-weight:
-        700;
-
-      text-decoration:
-        none;
-
-      display:
-        inline-flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      gap:
-        6px;
-
-      font-size:
-        14px;
-
-    }
-
-
-    .btn-call {
-
-      background:
-        #1b5e20;
-
-      color:
-        white;
-
-    }
-
-
-    .btn-whatsapp {
-
-      background:
-        #25d366;
-
-      color:
-        white;
-
-    }
-
-
-    /* =========================================================
-       MAIN
-       ========================================================= */
-
-    .container {
-
-      max-width:
-        1200px;
-
-      margin:
-        30px auto;
-
-      padding:
-        0 20px;
-
-    }
-
-
-    .section-title {
-
-      font-size:
-        12px;
-
-      text-transform:
-        uppercase;
-
-      letter-spacing:
-        1px;
-
-      color:
-        #687068;
-
-      font-weight:
-        800;
-
-      margin-bottom:
-        15px;
-
-    }
-
-
-    .services-grid {
-
-      display:
-        grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap:
-        20px;
-
-    }
-
-
-    .service-card {
-
-      background:
-        white;
-
-      border-radius:
-        12px;
-
-      padding:
-        20px;
-
-      border:
-        1px solid #e2e7e2;
-
-      box-shadow:
-        0 4px 10px rgba(0,0,0,.03);
-
-      text-decoration:
-        none;
-
-      color:
-        inherit;
-
-      display:
-        block;
-
-      transition:
-        transform .15s ease,
-        box-shadow .15s ease;
-
-    }
-
-
-    .service-card:hover {
-
-      transform:
-        translateY(-2px);
-
-      box-shadow:
-        0 7px 18px rgba(0,0,0,.07);
-
-    }
-
-
-    .service-card h3 {
-
-      margin:
-        0 0 8px;
-
-      font-size:
-        16px;
-
-      color:
-        #1b5e20;
-
-    }
-
-
-    .service-card p {
-
-      margin:
-        0 0 15px;
-
-      font-size:
-        13px;
-
-      color:
-        #666;
-
-      line-height:
-        1.5;
-
-    }
-
-
-    .status-badge {
-
-      display:
-        inline-block;
-
-      background:
-        #e8f5e9;
-
-      color:
-        #1b5e20;
-
-      padding:
-        3px 8px;
-
-      border-radius:
-        12px;
-
-      font-size:
-        11px;
-
-      font-weight:
-        700;
-
-    }
-
-
-    /* =========================================================
-       ORDER INFO
-       ========================================================= */
-
-    .order-info {
-
-      margin-top:
-        25px;
-
-      background:
-        white;
-
-      border:
-        1px solid #d8e6d8;
-
-      border-radius:
-        12px;
-
-      padding:
-        20px;
-
-      text-align:
-        center;
-
-    }
-
-
-    .order-info h2 {
-
-      margin:
-        0 0 8px;
-
-      color:
-        #1b5e20;
-
-      font-size:
-        20px;
-
-    }
-
-
-    .order-info p {
-
-      color:
-        #666;
-
-      font-size:
-        14px;
-
-      line-height:
-        1.6;
-
-      margin:
-        0 0 15px;
-
-    }
-
-
-    /* =========================================================
-       FOOTER
-       ========================================================= */
-
-    footer {
-
-      text-align:
-        center;
-
-      padding:
-        25px;
-
-      background:
-        white;
-
-      border-top:
-        1px solid #e2e7e2;
-
-      margin-top:
-        50px;
-
-      font-size:
-        13px;
-
-      color:
-        #666;
-
-      display:
-        flex;
-
-      justify-content:
-        center;
-
-      align-items:
-        center;
-
-      gap:
-        20px;
-
-      flex-wrap:
-        wrap;
-
-    }
-
-
-    footer a {
-
-      color:
-        #1b5e20;
-
-      text-decoration:
-        none;
-
-      font-weight:
-        700;
-
-    }
-
-
-    /* =========================================================
-       MOBILE
-       ========================================================= */
-
+    .top-video-ticker:hover { background: #2e7d32; }
+    .live-dot { height: 8px; width: 8px; background-color: #ff5252; border-radius: 50%; display: inline-block; animation: pulse 1.5s infinite; flex-shrink: 0; }
+    @keyframes pulse { 0% { transform: scale(.95); opacity: .8; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(.95); opacity: .8; } }
+
+    /* Header */
+    header { background: white; border-bottom: 1px solid #e2e7e2; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+    .header-container { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { font-weight: 800; font-size: 18px; color: #1b5e20; text-decoration: none; line-height: 1.15; }
+    .logo small { font-weight: 400; font-size: 11px; display: block; color: #666; margin-top: 2px; }
+    .nav-links { display: flex; gap: 15px; align-items: center; font-size: 14px; font-weight: 700; }
+    .nav-links a { color: #333; text-decoration: none; }
+    .nav-links a:hover { color: #2e7d32; }
+    .nav-order { background: #25d366; color: white !important; padding: 7px 11px; border-radius: 7px; }
+
+    /* Hero */
+    .hero { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); padding: 40px 20px; text-align: center; }
+    .hero-inner { max-width: 800px; margin: auto; }
+    .announcement { background: rgba(255,255,255,.8); border: 1px solid #a5d6a7; padding: 10px 15px; border-radius: 8px; font-size: 13px; color: #1b5e20; margin-bottom: 20px; font-weight: 600; line-height: 1.5; }
+    .hero h1 { font-size: 36px; color: #1b5e20; margin: 0 0 15px; }
+    .hero p { color: #4f5d4f; font-size: 16px; margin: 0 0 25px; line-height: 1.6; }
+
+    /* Search */
+    .search-box { display: flex; max-width: 500px; margin: 0 auto 20px; background: white; border-radius: 30px; padding: 5px 15px; box-shadow: 0 4px 15px rgba(0,0,0,.08); border: 1px solid #c8e6c9; }
+    .search-box input { flex: 1; border: 0; outline: none; padding: 10px; font-size: 14px; background: transparent; }
+    .search-box button { border: 0; background: #2e7d32; color: white; border-radius: 20px; padding: 7px 13px; cursor: pointer; font-weight: 700; }
+
+    /* Hero Buttons */
+    .hero-btns { display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+    .btn { padding: 10px 20px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px; }
+    .btn-call { background: #1b5e20; color: white; }
+    .btn-whatsapp { background: #25d366; color: white; }
+
+    /* Main Container */
+    .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+    .section-title { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #687068; font-weight: 800; margin-bottom: 15px; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .service-card { background: white; border-radius: 12px; padding: 20px; border: 1px solid #e2e7e2; box-shadow: 0 4px 10px rgba(0,0,0,.03); text-decoration: none; color: inherit; display: block; transition: transform .15s ease, box-shadow .15s ease; }
+    .service-card:hover { transform: translateY(-2px); box-shadow: 0 7px 18px rgba(0,0,0,.07); }
+    .service-card h3 { margin: 0 0 8px; font-size: 16px; color: #1b5e20; }
+    .service-card p { margin: 0 0 15px; font-size: 13px; color: #666; line-height: 1.5; }
+    .status-badge { display: inline-block; background: #e8f5e9; color: #1b5e20; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+
+    /* Order Info */
+    .order-info { margin-top: 25px; background: white; border: 1px solid #d8e6d8; border-radius: 12px; padding: 20px; text-align: center; }
+    .order-info h2 { margin: 0 0 8px; color: #1b5e20; font-size: 20px; }
+    .order-info p { color: #666; font-size: 14px; line-height: 1.6; margin: 0 0 15px; }
+
+    /* Footer */
+    footer { text-align: center; padding: 25px; background: white; border-top: 1px solid #e2e7e2; margin-top: 50px; font-size: 13px; color: #666; display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; }
+    footer a { color: #1b5e20; text-decoration: none; font-weight: 700; }
+
+    /* Mobile Responsive */
     @media(max-width:768px) {
-
-      .services-grid {
-
-        grid-template-columns:
-          1fr;
-
-      }
-
-
-      .hero h1 {
-
-        font-size:
-          28px;
-
-      }
-
-
-      .hero {
-
-        padding:
-          30px 15px;
-
-      }
-
-
-      .container {
-
-        padding:
-          0 15px;
-
-      }
-
-
-      .header-container {
-
-        align-items:
-          flex-start;
-
-      }
-
-
-      .nav-links {
-
-        gap:
-          8px;
-
-        font-size:
-          12px;
-
-        flex-wrap:
-          wrap;
-
-        justify-content:
-          flex-end;
-
-      }
-
-
-      .nav-links a {
-
-        display:
-          none;
-
-      }
-
-
-      .nav-links .nav-order {
-
-        display:
-          inline-flex;
-
-      }
-
+      .services-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 28px; }
+      .hero { padding: 30px 15px; }
+      .container { padding: 0 15px; }
+      .nav-links gap { gap: 8px; }
+      .nav-links a:not(.nav-order) { display: none; }
     }
-
   </style>
-
 </head>
-
 
 <body>
 
-
-  <!-- =========================================================
-       TOP VIDEO TICKER
-       ========================================================= -->
-
-  <a
-    href="https://www.youtube.com/@shriramnursery"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="top-video-ticker"
-    id="dynamic-video-ticker"
-  >
-
+  <!-- Top Video Ticker -->
+  <a href="https://www.youtube.com/@shriramnursery" target="_blank" rel="noopener noreferrer" class="top-video-ticker" id="dynamic-video-ticker">
     <span class="live-dot"></span>
-
-    <span>
-      🎥 नया वीडियो अपडेट: श्री राम नर्सरी (भुना) के नए पौधे देखें -
-      टैप करें और जुड़ें!
-    </span>
-
+    <span>🎥 नया वीडियो अपडेट: श्री राम नर्सरी (भुना) के नए पौधे देखें - टैप करें और जुड़ें!</span>
   </a>
 
-
-  <!-- =========================================================
-       HEADER
-       ========================================================= -->
-
+  <!-- Header -->
   <header>
-
     <div class="header-container">
-
-      <a
-        href="index.html"
-        class="logo"
-      >
-
+      <a href="index.html" class="logo">
         Shri Ram Nursery
-
-        <small>
-          Bhuna
-        </small>
-
+        <small>Bhuna</small>
       </a>
-
-
-      <nav
-        class="nav-links"
-        aria-label="Primary navigation"
-      >
-
-        <a href="index.html">
-          Home
-        </a>
-
-        <a href="dashboard.html">
-          🌱 Plants
-        </a>
-
-        <!-- Booking को पूरी तरह हटाया गया है -->
-
-        <a
-          href="orders.html"
-          class="nav-order"
-        >
-          🛒 Orders
-        </a>
-
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">🌱 Plants</a>
+        <a href="orders.html" class="nav-order">🛒 Orders</a>
       </nav>
-
     </div>
-
   </header>
 
-
-  <!-- =========================================================
-       HERO
-       ========================================================= -->
-
+  <!-- Hero Section -->
   <section class="hero">
-
     <div class="hero-inner">
-
       <div class="announcement">
-
-        🌿 श्री राम नर्सरी (भुना) से अब तक हजारों स्वस्थ पौधे
-        किसान भाइयों और बागवानों तक पहुँच चुके हैं।
-        आज ही हमारी नर्सरी विजिट करें!
-
+        🌿 श्री राम नर्सरी (भुना) से अब तक हजारों स्वस्थ पौधे किसान भाइयों और बागवानों तक पहुँच चुके हैं। आज ही हमारी नर्सरी विजिट करें!
       </div>
+      <h1>Plants for every growing space.</h1>
+      <p>फलदार, इंडोर, आउटडोर, फूलदार, डेकोरेटिव और लैंडस्केपिंग पौधों की जानकारी देखें।</p>
 
-
-      <h1>
-        Plants for every growing space.
-      </h1>
-
-
-      <p>
-        फलदार, इंडोर, आउटडोर, फूलदार, डेकोरेटिव और
-        लैंडस्केपिंग पौधों की जानकारी देखें।
-      </p>
-
-
-      <!-- =====================================================
-           SEARCH
-           ===================================================== -->
-
-      <form
-        class="search-box"
-        id="global-search-form"
-      >
-
-        <input
-          type="text"
-          id="global-search-input"
-          placeholder="🔍 पौधे का नाम खोजें (जैसे: हिसार सफेदा, आड़ू, सेब)..."
-          autocomplete="off"
-        >
-
-        <button
-          type="submit"
-        >
-          खोजें
-        </button>
-
+      <!-- Search Form -->
+      <form class="search-box" id="global-search-form">
+        <input type="text" id="global-search-input" placeholder="🔍 पौधे का नाम खोजें (जैसे: हिसार सफेदा, आड़ू, सेब)..." autocomplete="off">
+        <button type="submit">खोजें</button>
       </form>
 
-
-      <!-- =====================================================
-           CONTACT BUTTONS
-           ===================================================== -->
-
+      <!-- Contact Buttons -->
       <div class="hero-btns">
-
-        <a
-          href="tel:9416316534"
-          class="btn btn-call"
-        >
-          📞 Call Now
-        </a>
-
-
-        <a
-          href="https://wa.me/919416316534?text=नमस्ते%20श्री%20राम%20नर्सरी%20भुना!%20मुझे%20पौधों%20की%20जानकारी%20चाहिए।"
-          class="btn btn-whatsapp"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          🟢 WhatsApp
-        </a>
-
+        <a href="tel:9416316534" class="btn btn-call">📞 Call Now</a>
+        <a href="https://wa.me/919416316534?text=नमस्ते%20श्री%20राम%20नर्सरी%20भुना!%20मुझे%20पौधों%20की%20जानकारी%20चाहिए।" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">🟢 WhatsApp</a>
       </div>
-
     </div>
-
   </section>
 
-
-  <!-- =========================================================
-       SERVICES / MAIN FLOW
-       ========================================================= -->
-
+  <!-- Main Content -->
   <main class="container">
-
-    <div class="section-title">
-      Explore
-    </div>
-
-
-    <h2
-      style="
-        margin-top:0;
-        font-size:22px;
-        color:#1b5e20;
-      "
-    >
-      Nursery services
-    </h2>
-
+    <div class="section-title">Explore</div>
+    <h2 style="margin-top:0; font-size:22px; color:#1b5e20;">Nursery services</h2>
 
     <div class="services-grid">
-
-
-      <!-- PLANTS -->
-
-      <a
-        href="dashboard.html"
-        class="service-card"
-      >
-
-        <h3>
-          🌱 View Plants
-        </h3>
-
-        <p>
-          नर्सरी में उपलब्ध फलदार, इंडोर, आउटडोर,
-          फूलदार और अन्य पौधों का पूरा Catalog देखें।
-        </p>
-
-        <span class="status-badge">
-          🟢 Catalog उपलब्ध
-        </span>
-
+      <a href="dashboard.html" class="service-card">
+        <h3>🌱 View Plants</h3>
+        <p>नर्सरी में उपलब्ध फलदार, इंडोर, आउटडोर, फूलदार और अन्य पौधों का पूरा Catalog देखें।</p>
+        <span class="status-badge">🟢 Catalog उपलब्ध</span>
       </a>
 
-
-      <!-- ORDER -->
-
-      <a
-        href="dashboard.html"
-        class="service-card"
-      >
-
-        <h3>
-          🛒 Plant Order करें
-        </h3>
-
-        <p>
-          अपनी पसंद का पौधा चुनें और उसी पौधे के
-          पेज से सीधे WhatsApp पर Order भेजें।
-        </p>
-
-        <span class="status-badge">
-          🟢 Order उपलब्ध
-        </span>
-
+      <a href="dashboard.html" class="service-card">
+        <h3>🛒 Plant Order करें</h3>
+        <p>अपनी पसंद का पौधा चुनें और उसी पौधे के पेज से सीधे WhatsApp पर Order भेजें।</p>
+        <span class="status-badge">🟢 Order उपलब्ध</span>
       </a>
 
-
-      <!-- ORDER SUPPORT -->
-
-      <a
-        href="orders.html"
-        class="service-card"
-      >
-
-        <h3>
-          📦 Order Support
-        </h3>
-
-        <p>
-          पहले से किए गए Order या उपलब्धता और कीमत
-          से संबंधित जानकारी के लिए Nursery Team से संपर्क करें।
-        </p>
-
-        <span class="status-badge">
-          🟢 Support उपलब्ध
-        </span>
-
+      <a href="orders.html" class="service-card">
+        <h3>📦 Order Support</h3>
+        <p>पहले से किए गए Order या उपलब्धता और कीमत से संबंधित जानकारी के लिए Nursery Team से संपर्क करें।</p>
+        <span class="status-badge">🟢 Support उपलब्ध</span>
       </a>
-
-
     </div>
 
-
-    <!-- =======================================================
-         ORDER FLOW INFO
-         ======================================================= -->
-
     <section class="order-info">
-
-      <h2>
-        🛒 पौधा Order करने का आसान तरीका
-      </h2>
-
-      <p>
-        Plants खोलें → अपना पौधा चुनें →
-        पौधे की पूरी जानकारी देखें →
-        <strong>WhatsApp पर Order बुक करें</strong>।
-      </p>
-
-
-      <a
-        href="dashboard.html"
-        class="btn btn-call"
-      >
-        🌱 पौधों का Catalog देखें
-      </a>
-
+      <h2>🛒 पौधा Order करने का आसान तरीका</h2>
+      <p>Plants खोलें → अपना पौधा चुनें → पौधे की पूरी जानकारी देखें → <strong>WhatsApp पर Order बुक करें</strong>।</p>
+      <a href="dashboard.html" class="btn btn-call">🌱 पौधों का Catalog देखें</a>
     </section>
-
   </main>
 
-
-  <!-- =========================================================
-       FOOTER
-       ========================================================= -->
-
+  <!-- Footer -->
   <footer>
-
-    <span>
-      Shri Ram Nursery, Bhuna
-    </span>
-
-
-    <a href="admin.html">
-      🔒 Admin Portal
-    </a>
-
+    <span>Shri Ram Nursery, Bhuna</span>
+    <a href="admin.html">🔒 Admin Portal</a>
   </footer>
 
-
-  <!-- =========================================================
-       SEARCH SCRIPT
-       ========================================================= -->
-
+  <!-- Search Script -->
   <script>
-
-    const searchForm =
-      document.getElementById(
-        "global-search-form"
-      );
-
-
-    const searchInput =
-      document.getElementById(
-        "global-search-input"
-      );
-
-
+    const searchForm = document.getElementById("global-search-form");
+    const searchInput = document.getElementById("global-search-input");
     if (searchForm && searchInput) {
-
-      searchForm.addEventListener(
-        "submit",
-        function(event) {
-
-          event.preventDefault();
-
-
-          const query =
-            searchInput.value.trim();
-
-
-          if (!query) {
-
-            window.location.href =
-              "dashboard.html";
-
-            return;
-
-          }
-
-
-          window.location.href =
-            "dashboard.html?search=" +
-            encodeURIComponent(
-              query
-            );
-
+      searchForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const query = searchInput.value.trim();
+        if (!query) {
+          window.location.href = "dashboard.html";
+          return;
         }
-      );
-
+        window.location.href = "dashboard.html?search=" + encodeURIComponent(query);
+      });
     }
-
   </script>
 
-
 </body>
-
 </html>
