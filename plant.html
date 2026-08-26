@@ -1,222 +1,172 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>श्री राम नर्सरी - स्टॉक एवं कैटलॉग मैनेजर (Admin)</title>
-    
-    <!-- Supabase JS Library -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>श्री राम नर्सरी - Admin Panel</title>
     <script src="https://jsdelivr.net"></script>
-    
     <style>
-        * { box-sizing: border-box; }
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f7f5; padding: 20px; }
-        
-        .manager-container { max-width: 1100px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; border: 1px solid #e2e7e2; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #1b5e20; text-decoration: none; font-weight: 700; }
-        
-        h1, h2 { color: #1b5e20; margin-top: 0; font-weight: 800; }
-        
-        /* फॉर्म स्टाइल */
-        .add-form { background: #e8f5e9; padding: 20px; border-radius: 8px; border: 1px solid #c8e6c9; margin-bottom: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; align-items: flex-end; }
-        .form-group { display: flex; flex-direction: column; text-align: left; }
-        .form-group label { font-size: 13px; font-weight: 700; color: #333; margin-bottom: 5px; }
-        .form-group input, .form-group select { padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; background: white; }
-        .btn-submit { background: #1b5e20; color: white; border: none; padding: 11px; border-radius: 6px; font-weight: 700; cursor: pointer; }
-        
-        /* डेटा टेबल स्टाइल */
-        .stock-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; text-align: left; }
-        .stock-table th, .stock-table td { padding: 12px; border-bottom: 1px solid #e2e7e2; }
-        .stock-table th { background: #1b5e20; color: white; font-weight: 700; }
-        .stock-table tr:hover { background: #f9f9f9; }
-        
-        .thumb-img { width: 50px; height: 50px; object-fit: cover; border-radius: 6px; background: #eee; }
-        .btn-delete { background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; padding: 6px 12px; border-radius: 4px; font-weight: 700; cursor: pointer; }
-        .btn-delete:hover { background: #c62828; color: white; }
-        
-        @media (max-width: 768px) {
-            .add-form { grid-template-columns: 1fr; }
-            .stock-table { display: block; overflow-x: auto; }
-        }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f7f5; margin: 0; padding: 0; }
+        .header { background: #1b5e20; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .header h2 { margin: 0; font-size: 18px; display: flex; align-items: center; gap: 8px; }
+        .logout-btn { background: #d32f2f; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 13px; }
+        .container { max-width: 1100px; margin: 20px auto; padding: 25px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); box-sizing: border-box; }
+        h3 { color: #1b5e20; margin-top: 0; border-bottom: 2px solid #e8f5e9; padding-bottom: 8px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group label { font-weight: bold; margin-bottom: 6px; font-size: 13px; color: #333; }
+        .form-group input, .form-group select, .form-group textarea { padding: 11px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; box-sizing: border-box; background: #fafafa; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #2e7d32; outline: none; background: #fff; }
+        .full-width { grid-column: 1 / -1; }
+        .btn-submit { background: #2e7d32; color: white; border: none; padding: 14px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 16px; margin-top: 15px; width: 100%; transition: background 0.2s; }
+        .btn-submit:hover { background: #1b5e20; }
+        table { width: 100%; border-collapse: collapse; margin-top: 25px; font-size: 13px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        th, td { border: 1px solid #eee; padding: 12px; text-align: left; vertical-align: middle; }
+        th { background-color: #f1f8e9; color: #1b5e20; font-weight: bold; }
+        .thumb { width: 55px; height: 55px; object-fit: cover; border-radius: 4px; border: 1px solid #ddd; background: #f0f0f0; }
+        .btn-delete { background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: all 0.2s; }
+        .btn-delete:hover { background: #d32f2f; color: white; }
+        .badge-inbuilt { background: #e0f2f1; color: #004d40; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+        @media(max-width: 768px) { .form-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <div class="manager-container">
-        <a href="dashboard.html" class="back-link">← एडमिन डैशबोर्ड पर वापस जाएं</a>
-        <h1>🌿 स्टॉक एवं कैटलॉग मैनेजर (Admin Mode)</h1>
-        <p style="color: #666; margin-bottom: 30px;">यहाँ से आप ग्राहकों के कैटलॉग में दिखने वाले पौधों को लाइव कंट्रोल कर सकते हैं।</p>
+<div class="header">
+    <h2>🌿 श्री राम नर्सरी - Admin Panel (Catalog & Image Manager)</h2>
+    <a href="admin.html" class="logout-btn" onclick="localStorage.removeItem('isAdminLoggedIn')">🚪 Logout Panel</a>
+</div>
 
-        <!-- नया पौधा जोड़ने का फॉर्म -->
-        <h2>➕ नया पौधा कैटलॉग में जोड़ें</h2>
-        <form class="add-form" onsubmit="addNewPlant(event)">
+<div class="container">
+    <h3>➕ नया पौधा जोड़ें / पौधा अपडेट करें</h3>
+    <form id="addPlantForm" onsubmit="savePlantToSystem(event)">
+        <div class="form-grid">
             <div class="form-group">
-                <label>🌱 पौधे का नाम</label>
-                <input type="text" id="plantName" placeholder="जैसे: अमरूद, आम" required>
+                <label>पौधे का नाम (Name)</label>
+                <input type="text" id="pName" placeholder="जैसे: अमरूद - हिसार सफेदा" required>
             </div>
             <div class="form-group">
-                <label>✨ वैरायटी / किस्म</label>
-                <input type="text" id="plantVariety" placeholder="जैसे: हिसार सफेदा, चौसा">
+                <label>वैरायटी (Variety / Sub-name)</label>
+                <input type="text" id="pVariety" placeholder="जैसे: Guava Hisar Safeda / L-49">
             </div>
             <div class="form-group">
-                <label>📁 कैटेगरी चुनें</label>
-                <select id="plantCategory" required>
-                    <option value="Fruit">फलदार पौधे</option>
-                    <option value="Indoor">इनडोर प्लांट</option>
-                    <option value="Outdoor">आउटडोर प्लांट</option>
-                    <option value="Flowering">फूलदार पौधे</option>
-                    <option value="Decorative">डेकोरेटिव पौधे</option>
-                    <option value="Landscaping">लैंडस्केपिंग</option>
+                <label>Category (श्रेणी)</label>
+                <select id="pCategory">
+                    <option value="फलदार पौधे">🍊 फलदार पौधे</option>
+                    <option value="इंडोर收藏"।>🏡 इंडोर प्लांट्स</option>
+                    <option value="आउटडोर प्लांट्स">🌳 आउटडोर प्लांट्स</option>
+                    <option value="फूलों के पौधे">🌺 फूलों के पौधे</option>
+                    <option value="डेकोरेटिव">✨ डेकोरेटिव</option>
+                    <option value="लैंडस्केपिंग">🌴 लैंडस्केपिंग</option>
+                    <option value="औषधीय एवं अन्य">🌿 औषधीय एवं अन्य</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>📸 फोटो URL लिंक</label>
-                <input type="url" id="plantImgUrl" placeholder="https://...">
+                <label>पौधे की फोटो (Image URL Link)</label>
+                <input type="url" id="pImg" placeholder="https://unsplash.com...">
             </div>
-            <div class="form-group">
-                <label>💡 रखरखाव टिप्स</label>
-                <input type="text" id="plantTips" placeholder="धूप और पानी का नियम">
+            <div class="form-group full-width">
+                <label>📋 पौधे की देखभाल की Tips (Horticulture Guide)</label>
+                <textarea id="pTips" rows="3" placeholder="जैसे: पौधे को रोज 5-6 घंटे धूप दें और मिट्टी सूखने पर नियंत्रित सिंचाई करें..."></textarea>
             </div>
-            <button type="submit" class="btn-submit">💾 स्टॉक में जोड़ें</button>
-        </form>
+        </div>
+        <button type="submit" class="btn-submit">⚡ पौधा कैटलॉग में सेव करें</button>
+    </form>
 
-        <!-- लाइव स्टॉक टेबल -->
-        <h2>📦 वर्तमान लाइव स्टॉक की सूची</h2>
-        <table class="stock-table">
+    <br><hr style="border:0; border-top:1px solid #eee; margin:20px 0;"><br>
+
+    <h3>📋 Live Plant Catalog & Image Manager</h3>
+    <div style="overflow-x: auto;">
+        <table>
             <thead>
                 <tr>
                     <th>Photo</th>
-                    <th>नाम (पौधा)</th>
-                    <th>वैरायटी</th>
-                    <th>कैटेगरी</th>
-                    <th>कार्रवाई</th>
+                    <th>Name & Variety</th>
+                    <th>Category</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody id="stockTableBody">
-                <tr>
-                    <td colspan="5" style="text-align: center; color: #666;">स्टॉक सूची लोड हो रही है...</td>
-                </tr>
+                <tr><td colspan="4" style="text-align:center; color:#666;">कैटलॉग लोड किया जा रहा है...</td></tr>
             </tbody>
         </table>
     </div>
+</div>
 
-    <script>
-        // 🔒 अधिकृत सुपबेस कनेक्शन चाबी (हार्डकोडेड)
-        const supabase = supabase.createClient("https://supabase.co", "sb_publishable_YUi1f1Q2sHxEFiYoBJ7ZUw_TzZga11K");
+<script>
+// लॉगिन सिक्योरिटी चेक
+if (localStorage.getItem("isAdminLoggedIn") !== "true") {
+    window.location.href = "admin.html";
+}
 
-        // सुरक्षा जांच: सुनिश्चित करें कि लॉगिन है
-        if (localStorage.getItem('isAdminLoggedIn') !== 'true') {
-            window.location.href = "admin.html";
+// डिफ़ॉल्ट भारतीय पौधों की इनबिल्ट बैकअप सूची ताकि ऐप कभी क्रैश न हो
+const defaultPlantsList = [
+    { name: "अमरूद - हिसार सफेदा", variety: "Guava Hisar Safeda / L-49", category: "फलदार पौधे", img: "https://unsplash.com1534655882117-f9ef340d174e" },
+    { name: "आडू", variety: "Peach (Shan-e-Punjab / Alucha)", category: "फलदार पौधे", img: "https://unsplash.com1611080626919-7cf5a9dbab5b" },
+    { name: "पल्म (आलू बुखारा)", variety: "Plum (Satluj Purple / Punjab Beauty)", category: "फलदार पौधे", img: "https://unsplash.com1595116773229-bc4af4d909c2" },
+    { name: "नींबू", variety: "Lemon (Jatti Khatti)", category: "फलदार पौधे", img: "https://unsplash.com1590502593747-42a996133562" },
+    { name: "मनी Plant", variety: "Money Plant (Golden Pothos)", category: "इंडोर प्लांट्स", img: "https://unsplash.com1485955900006-10f4d324d411" },
+    { name: "स्नेक प्लांट", variety: "Snake Plant (Sansevieria)", category: "इंडोर प्लांट्स", img: "https://unsplash.com1599599810769-bcde5a160d32" },
+    { name: "गुड़हल", variety: "Hibiscus (Red / Yellow)", category: "फूलों के पौधे", img: "https://unsplash.com1550950158-d0d960dff51b" }
+];
+
+const supabaseUrl = "https://supabase.co";
+const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6aHlxdXV5dnV5YnNocmltIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU4OTMwMDAsImV4cCI6MjAyMTQ3MTAwMH0.example";
+const _supabase = supabase.createClient(supabaseUrl, supabaseAnonKey);
+
+document.addEventListener("DOMContentLoaded", renderStockTable);
+
+async function renderStockTable() {
+    const tbody = document.getElementById("stockTableBody");
+    tbody.innerHTML = "";
+
+    let dbData = [];
+    try {
+        const { data } = await _supabase.from("plants").select("*");
+        if(data) dbData = data;
+    } catch(e) {
+        console.log("Supabase connection offline or sync delayed.");
+    }
+
+    // 1. डेटाबेस से लोड हुए लाइव पौधे दिखाएं
+    dbData.forEach(p => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td><img src="${p.image_url || 'https://placeholder.com'}" class="thumb" onerror="this.src='https://placeholder.com'"></td>
+            <td><b>${p.name}</b><br><span style="color:#666; font-size:11px;">${p.variety || '-'}</span></td>
+            <td><span style="color:#2e7d32; font-weight:bold;">${p.category}</span></td>
+            <td><button class="btn-delete" onclick="deletePlant('${p.id}')">❌ Delete</button></td>
+        `;
+        tbody.appendChild(tr);
+    });
+
+    // 2. इनबिल्ट बैकअप पौधे दिखाएं (यदि वे डेटाबेस में पहले से मौजूद नहीं हैं)
+    defaultPlantsList.forEach((p) => {
+        if (!dbData.some(d => d.name.toLowerCase() === p.name.toLowerCase())) {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td><img src="${p.img}" class="thumb"></td>
+                <td><b>${p.name}</b><br><span style="color:#666; font-size:11px;">${p.variety}</span></td>
+                <td><span style="color:#ff9800; font-weight:bold;">${p.category}</span></td>
+                <td><span class="badge-inbuilt">⚙️ Inbuilt Production Stock</span></td>
+            `;
+            tbody.appendChild(tr);
         }
+    });
 
-        const DEFAULT_IMG = "https://unsplash.com";
+    if(tbody.innerHTML === "") {
+        tbody.innerHTML = "<tr><td colspan='4' style='text-align:center; color:#999;'>कोई भी डेटा उपलब्ध नहीं है।</td></tr>";
+    }
+}
 
-        document.addEventListener("DOMContentLoaded", () => {
-            loadStockTable();
-        });
+async function savePlantToSystem(e) {
+    e.preventDefault();
+    const name = document.getElementById("pName").value.trim();
+    const variety = document.getElementById("pVariety").value.trim();
+    const category = document.getElementById("pCategory").value;
+    const image_url = document.getElementById("pImg").value.trim();
+    const description = document.getElementById("pTips").value.trim();
 
-        // 1. सुपबेस से स्टॉक टेबल डेटा लोड करना
-        async function loadStockTable() {
-            const tbody = document.getElementById('stockTableBody');
-            tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #666;">डेटा लोड हो रहा है...</td></tr>`;
-
-            try {
-                const { data, error } = await supabase
-                    .from('Plants')
-                    .select('*')
-                    .order('id', { ascending: true });
-
-                if (error) throw error;
-
-                tbody.innerHTML = "";
-                if (!data || data.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #666;">स्टॉक में कोई पौधा उपलब्ध नहीं है।</td></tr>`;
-                    return;
-                }
-
-                data.forEach(plant => {
-                    const img = plant.image_url ? plant.image_url : DEFAULT_IMG;
-                    tbody.innerHTML += `
-                        <tr>
-                            <td><img src="${img}" class="thumb-img" onerror="this.src='${DEFAULT_IMG}'"></td>
-                            <td><b>${plant.name}</b></td>
-                            <td>${plant.variety || '-'}</td>
-                            <td>${translateCategory(plant.category)}</td>
-                            <td><button class="btn-delete" onclick="deletePlantItem(${plant.id})">❌ Delete</button></td>
-                        </tr>
-                    `;
-                });
-
-            } catch (err) {
-                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">⚠️ सूची लोड करने में त्रुटि आई।</td></tr>`;
-            }
-        }
-
-        // 2. नया पौधा डेटाबेस में जोड़ना
-        async function addNewPlant(event) {
-            event.preventDefault();
-
-            const name = document.getElementById('plantName').value.trim();
-            const variety = document.getElementById('plantVariety').value.trim();
-            const category = document.getElementById('plantCategory').value;
-            const imgUrl = document.getElementById('plantImgUrl').value.trim();
-            const tips = document.getElementById('plantTips').value.trim();
-
-            try {
-                const { error } = await supabase
-                    .from('Plants')
-                    .insert([{
-                        name: name,
-                        variety: variety,
-                        category: category,
-                        image_url: imgUrl ? imgUrl : null,
-                        tips: tips ? tips : null,
-                        availability: "उपलब्ध"
-                    }]);
-
-                if (error) throw error;
-
-                alert("✅ नया पौधा सफलतापूर्वक कैटलॉग में जुड़ गया है!");
-                document.querySelector('.add-form').reset();
-                loadStockTable(); // टेबल रिफ्रेश करें
-
-            } catch (err) {
-                alert("❌ डेटाबेस में पौधा नहीं जोड़ा जा सका।");
-            }
-        }
-
-        // 3. डेटाबेस से पौधा डिलीट करना
-        async function deletePlantItem(plantId) {
-            if (!confirm("क्या आप वाकई इस पौधे को स्टॉक से हमेशा के लिए हटाना चाहते हैं?")) return;
-
-            try {
-                const { error } = await supabase
-                    .from('Plants')
-                    .delete()
-                    .eq('id', parseInt(plantId));
-
-                if (error) throw error;
-
-                alert("🗑️ पौधा स्टॉक से सफलतापूर्वक हटा दिया गया है।");
-                loadStockTable(); // टेबल रिफ्रेश करें
-
-            } catch (err) {
-                alert("❌ पौधा डिलीट करने में समस्या आई।");
-            }
-        }
-
-        // कैटेगरी का हिंदी नाम अनुवाद
-        function translateCategory(engCat) {
-            const mapping = {
-                'Fruit': 'फलदार पौधे',
-                'Indoor': 'इनडोर प्लांट',
-                'Outdoor': 'आउटडोर प्लांट',
-                'Flowering': 'फूलदार पौधे',
-                'Decorative': 'डेकोरेटिव पौधे',
-                'Landscaping': 'लैंडस्केपिंग'
-            };
-            return mapping[engCat] || engCat;
-        }
-    </script>
-</body>
-</html>
+    try {
+        const { error } = await _supabase.from("plants").insert([{ name, variety, category, image_url, description }]);
+        if (error) throw error;

@@ -1,193 +1,127 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>श्री राम नर्सरी - उपलब्ध पौधों की सूची</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>श्री राम नर्सरी - पौधे देखें</title>
+    <script src="https://jsdelivr.net"></script>
     <style>
-        * { box-sizing: border-box; }
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f7f5; color: #202520; }
-        HEADER { background: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
-        .header-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-        .logo-section { font-weight: 800; font-size: 22px; color: #1b5e20; text-decoration: none; }
-        .nav-links { display: flex; gap: 15px; align-items: center; font-size: 14px; font-weight: 700; }
-        .nav-links a { color: #333; text-decoration: none; cursor: pointer; }
-        .nav-links a.active { color: #1b5e20; border-bottom: 2px solid #1b5e20; }
-        .CONTAINER { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .search-box { width: 100%; padding: 12px 15px; border: 1px solid #cccccc; border-radius: 8px; margin-bottom: 15px; font-size: 15px; }
-        .filter-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
-        .filter-btn { background: #f0fdf4; color: #1b5e20; border: 1px solid #c8e6c9; padding: 8px 16px; border-radius: 20px; font-weight: 700; cursor: pointer; }
-        .filter-btn.active { background: #1b5e20; color: white; }
-        .my-garden-section { background: #fffde7; border: 1px solid #fff59d; padding: 20px; border-radius: 12px; margin-bottom: 25px; display: none; }
-        .warning-text { background: #fff3e0; color: #e65100; border: 1px solid #ffe0b2; padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 700; margin-bottom: 15px; }
-        .plant-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .plant-card { background: white; border-radius: 12px; border: 1px solid #e2e7e2; overflow: hidden; display: flex; flex-direction: column; }
-        .plant-img { width: 100%; height: 200px; object-fit: cover; background: #eaedf0; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f7f5; margin: 0; padding: 0; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; background: white; padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .navbar a { text-decoration: none; color: #1b5e20; font-weight: bold; margin-left: 15px; font-size: 14px; }
+        .brand { color: #2e7d32 !important; font-size: 20px !important; }
+        .header-section { text-align: center; padding: 30px 20px; background: #e8f5e9; }
+        .header-section h1 { color: #1b5e20; margin: 0 0 10px 0; font-size: 26px; }
+        .main-container { max-width: 1200px; margin: 20px auto; padding: 0 20px; box-sizing: border-box; }
+        .controls-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 20px; display: flex; gap: 15px; flex-wrap: wrap; }
+        .search-input { flex: 2; min-width: 250px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px; }
+        .category-select { flex: 1; min-width: 180px; padding: 12px; border: 1px solid #2e7d32; border-radius: 6px; font-size: 15px; font-weight: bold; color: #1b5e20; background: white; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .plant-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid #e0e0e0; display: flex; flex-direction: column; }
+        .img-box { width: 100%; height: 200px; background: #e8f5e9; position: relative; }
+        .plant-img { width: 100%; height: 100%; object-fit: cover; }
+        .status-tag { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.9); color: #2e7d32; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; border: 1px solid #2e7d32; }
         .plant-info { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; }
-        .plant-name { font-size: 18px; font-weight: 800; color: #1b5e20; margin: 0 0 5px 0; }
-        .card-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: auto; }
-        .act-btn { border: 1px solid #cccccc; padding: 10px 5px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; background: white; text-align: center; }
-        .act-btn.liked { background: #ffebee; color: #c62828; border-color: #ffcdd2; }
-        .btn-send-nursery { background: #1b5e20; color: white; padding: 10px 20px; border-radius: 6px; font-weight: 700; border: none; cursor: pointer; }
-        .btn-send-self { background: #0288d1; color: white; padding: 10px 20px; border-radius: 6px; font-weight: 700; border: none; cursor: pointer; }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1000; }
-        .modal-content { background: white; padding: 25px; border-radius: 16px; max-width: 500px; width: 100%; position: relative; margin: 20px; }
+        .cat-badge { color: #ff9800; font-size: 11px; font-weight: bold; margin-bottom: 5px; text-transform: uppercase; }
+        .plant-name { margin: 0 0 5px 0; color: #222; font-size: 18px; font-weight: bold; }
+        .plant-variety { color: #666; font-size: 13px; margin-bottom: 10px; font-style: italic; }
+        .tips-text { background: #f1f8e9; border-left: 4px solid #7cb342; padding: 8px; border-radius: 4px; font-size: 12px; color: #33691e; margin-bottom: 15px; }
+        .btn-order-now { background: #2e7d32; color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; text-align: center; text-decoration: none; font-size: 14px; margin-top: auto; display: block; }
     </style>
 </head>
 <body>
-    <HEADER>
-        <div class="header-container">
-            <a class="logo-section" href="index.html">🌿 श्री राम नर्सरी</a>
-            <div class="nav-links">
-                <a href="index.html">होम</a>
-                <a onclick="showSection('catalog')" id="navCatalog" class="active">पौधे देखें</a>
-                <a onclick="showSection('garden')" id="navGarden">❤️ My Garden (<span id="savedCount">0</span>)</a>
-            </div>
-        </div>
-    </HEADER>
 
-    <main class="CONTAINER">
-        <div id="myGardenSection" class="my-garden-section">
-            <h3>❤️ आपकी पसंदीदा पौधों की सूची (Saved List)</h3>
-            <div class="warning-text">
-                ⚠️ ध्यान दें: यदि आप अगले 24 घंटे के अंदर श्री राम नर्सरी विजिट कर रहे हैं, तभी इस लिस्ट को हमारे मुख्य नंबर पर भेजें। अन्यथा इसे नीचे दिए बटन से अपने WhatsApp पर सुरक्षित रख लें।
-            </div>
-            <div id="gardenContainerList" style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px;"></div>
-            <button class="btn-send-nursery" onclick="shareListWithNursery()">🟢 24 घंटे में आना है (नर्सरी को भेजें)</button>
-            <button class="btn-send-self" onclick="shareListWithSelf()">🔵 अपने WhatsApp पर सेव करें</button>
-        </div>
+<div class="navbar">
+    <a href="index.html" class="brand">🌱 श्री राम नर्सरी</a>
+    <div>
+        <a href="index.html">होम</a>
+        <a href="dashboard.html" style="color: #2e7d32;">पौधों की सूची</a>
+        <a href="orders.html">प्लांट ऑर्डर करें 🛒</a>
+    </div>
+</div>
 
-        <div id="catalogSection">
-            <input type="text" id="searchBar" class="search-box" placeholder="पौधे का नाम या वैरायटी खोजें...">
-            <div class="filter-buttons">
-                <button class="filter-btn active" onclick="filterCategory('all', event)">सभी पौधे</button>
-                <button class="filter-btn" onclick="filterCategory('Fruit', event)">फलदार</button>
-                <button class="filter-btn" onclick="filterCategory('Indoor', event)">इनडोर</button>
-                <button class="filter-btn" onclick="filterCategory('Outdoor', event)">आउटडोर</button>
-                <button class="filter-btn" onclick="filterCategory('Flowering', event)">फूलदार</button>
-            </div>
-            <div class="plant-grid" id="plantGrid">डेटा लोड हो रहा है...</div>
-        </div>
-    </main>
+<div class="header-section">
+    <h1>हमारे पौधों का कैटलॉग देखें</h1>
+    <p>ड्रॉपडाउन से अपनी मनपसंद कैटेगरी चुनें और पौधों की वैरायटी एवं देखभाल की टिप्स देखें।</p>
+</div>
 
-    <div class="modal" id="detailsModal">
-        <div class="modal-content">
-            <span style="position:absolute; right:15px; top:15px; cursor:pointer; font-size:24px;" onclick="closeDetailsModal()">&times;</span>
-            <h2 id="modalPlantName" style="color:#1b5e20;"></h2>
-            <p id="modalPlantVariety"></p>
-            <h4>💡 पौधों के रखरखाव की टिप्स:</h4>
-            <p id="modalPlantTips" style="background:#e8f5e9; padding:10px; border-radius:8px;"></p>
-        </div>
+<div class="main-container">
+    <div class="controls-card">
+        <input type="text" id="searchBar" class="search-input" placeholder="पौधे का नाम या वैरायटी खोजें...">
+        
+        <!-- ऑल कैटेगरी ड्रॉपडाउन मेनू -->
+        <select id="categoryDropdown" class="category-select" onchange="applyFilters()">
+            <option value="All">🌳 ऑल कैटेगरी (सभी पौधे)</option>
+            <option value="फलदार पौधे">🍊 फलदार पौधे</option>
+            <option value="इंडोर प्लांट्स">🏡 इंडोर प्लांट्स</option>
+            <option value="आउटडोर प्लांट्स">🌲 आउटडोर प्लांट्स</option>
+            <option value="फूलों के पौधे">🌺 फूलों के पौधे</option>
+            <option value="डेकोरेटिव">✨ डेकोरेटिव</option>
+            <option value="लैंडस्केपिंग">🌴 लैंडस्केपिंग</option>
+            <option value="औषधीय एवं अन्य">🌿 औषधीय एवं अन्य</option>
+        </select>
     </div>
 
-    <script>
-        const supabase = window.supabase.createClient("https://supabase.co", "sb_publishable_YUi1f1Q2sHxEFiYoBJ7ZUw_TzZga11K");
-        let allPlantsData = [];
-        let likedPlants = JSON.parse(localStorage.getItem('likedPlants')) || [];
-        let currentCategory = 'all';
+    <div class="grid-container" id="catalogGrid"></div>
+</div>
 
-        document.addEventListener("DOMContentLoaded", async () => {
-            updateSavedCount();
-            await fetchPlants();
-            document.getElementById('searchBar').addEventListener('input', renderPlants);
-        });
+<script>
+// इनबिल्ट 30+ पौधों का डेटाबेस बैकअप
+const plantDatabase = [
+    { name: "अमरूद - हिसार सफेदा", variety: "Guava Hisar Safeda / L-49", category: "फलदार पौधे", tips: "अमरूद को रोज 5-6 घंटे धूप दें और नियमित सिंचाई करें।", img: "https://unsplash.com" },
+    { name: "आडू", variety: "Peach (Shan-e-Punjab / Alucha)", category: "फलदार पौधे", tips: "पूरी धूप और अच्छी जल निकासी वाली मिट्टी उपयुक्त है।", img: "https://unsplash.com" },
+    { name: "पल्म (आलू बुखारा)", variety: "Plum (Satluj Purple / Punjab Beauty)", category: "फलदार पौधे", tips: "धूप वाली जगह और नियमित सिंचाई रखें।", img: "https://unsplash.com" },
+    { name: "नींबू", variety: "Lemon (Jatti Khatti)", category: "फलदार पौधे", tips: "अच्छी धूप, जल निकासी और नियमित खाद दें।", img: "https://unsplash.com" },
+    { name: "मनी प्लांट", variety: "Money Plant (Golden Pothos)", category: "इंडोर प्लांट्स", tips: "अप्रत्यक्ष प्रकाश (Indirect Light) और कम पानी दें।", img: "https://unsplash.com" },
+    { name: "स्नेक प्लांट", variety: "Snake Plant (Sansevieria)", category: "इंडोर प्लांट्स", tips: "बहुत कम पानी की आवश्यकता, हवा शुद्ध करता है।", img: "https://unsplash.com" },
+    { name: "गुड़हल", variety: "Hibiscus (Red / Yellow)", category: "फूलों के पौधे", tips: "सुबह की तेज धूप और नियमित पानी दें।", img: "https://unsplash.com" },
+    { name: "बारहमासी फूल", variety: "Perennial Flower (Sadabahar)", category: "फूलों के पौधे", tips: "तेज धूप, खाद और नियंत्रित सिंचाई से खिलते हैं।", img: "https://unsplash.com" },
+    { name: "थूजा (मोरपंखी)", variety: "Thuja / Conifer", category: "लैंडस्केपिंग", tips: "खुली हवा, उचित धूप और सामान्य नमी।", img: "https://unsplash.com" },
+    { name: "तुलसी", variety: "Tulsi (Holy Basil)", category: "औषधीय एवं अन्य", tips: "रोज सुबह जल चढ़ाएं और धूप वाली जगह रखें।", img: "https://unsplash.com" }
+];
 
-        async function fetchPlants() {
-            const { data } = await supabase.from('Plants').select('*').order('id', { ascending: true });
-            if (data) { allPlantsData = data; renderPlants(); }
-        }
+document.addEventListener("DOMContentLoaded", () => {
+    applyFilters();
+    document.getElementById("searchBar").addEventListener("input", applyFilters);
+});
 
-        function renderPlants() {
-            const grid = document.getElementById('plantGrid');
-            const txt = document.getElementById('searchBar').value.toLowerCase();
-            grid.innerHTML = "";
-            const filtered = allPlantsData.filter(p => (currentCategory === 'all' || p.category === currentCategory) && ((p.name||'').toLowerCase().includes(txt) || (p.variety||'').toLowerCase().includes(txt)));
+function applyFilters() {
+    const grid = document.getElementById("catalogGrid");
+    const searchVal = document.getElementById("searchBar").value.toLowerCase();
+    const selectedCat = document.getElementById("categoryDropdown").value;
+    
+    grid.innerHTML = "";
 
-            filtered.forEach(p => {
-                const isLiked = likedPlants.includes(p.id);
-                grid.innerHTML += `
-                    <div class="plant-card">
-                        <img class="plant-img" src="${p.image_url || 'https://unsplash.com'}" alt="${p.name}">
-                        <div class="plant-info">
-                            <h3 class="plant-name">${p.name}</h3>
-                            <p style="margin:0 0 15px 0; color:#666;">${p.variety || ''}</p>
-                            <div class="card-actions">
-                                <button class="act-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike(${p.id})">${isLiked ? '❤️ Liked' : '🤍 Like'}</button>
-                                <button class="act-btn" onclick="openDetailsModal('${p.name}', '${p.variety||''}', '${p.tips||''}')">📝 Details</button>
-                                <button class="act-btn" onclick="shareSingle('${p.name}')">🔗 Share</button>
-                            </div>
-                        </div>
-                    </div>`;
-            });
-        }
+    const filtered = plantDatabase.filter(p => {
+        const matchesCategory = selectedCat === "All" || p.category === selectedCat;
+        const matchesSearch = p.name.toLowerCase().includes(searchVal) || p.variety.toLowerCase().includes(searchVal);
+        return matchesCategory && matchesSearch;
+    });
 
-        function toggleLike(id) {
-            likedPlants = likedPlants.includes(id) ? likedPlants.filter(i => i !== id) : [...likedPlants, id];
-            localStorage.setItem('likedPlants', JSON.stringify(likedPlants));
-            updateSavedCount(); renderPlants(); renderGardenList();
-        }
-        function updateSavedCount() { document.getElementById('savedCount').innerText = likedPlants.length; }
-        
-        function showSection(type) {
-            document.getElementById('myGardenSection').style.display = type === 'garden' ? 'block' : 'none';
-            document.getElementById('navGarden').classList.toggle('active', type === 'garden');
-            document.getElementById('navCatalog').classList.toggle('active', type === 'catalog');
-            if(type === 'garden') renderGardenList();
-        }
+    if(filtered.length === 0) {
+        grid.innerHTML = "<p style='grid-column:1/-1; text-align:center; color:#777; padding:20px;'>कोई पौधा नहीं मिला। कृपया दूसरी कैटेगरी चुनें।</p>";
+        return;
+    }
 
-        function renderGardenList() {
-            const listDiv = document.getElementById('gardenContainerList');
-            listDiv.innerHTML = "";
-            const saved = allPlantsData.filter(p => likedPlants.includes(p.id));
-            if(saved.length === 0) { listDiv.innerHTML = "सूची खाली है।"; return; }
-            saved.forEach((p, i) => { listDiv.innerHTML += `<div>${i+1}. ${p.name} <span style="color:red; cursor:pointer;" onclick="toggleLike(${p.id})">❌</span></div>`; });
-        }
-
-        function generateText() {
-            const saved = allPlantsData.filter(p => likedPlants.includes(p.id));
-            let t = `🌱 *श्री राम नर्सरी (भुना) - पसंदीदा लिस्ट* 🌱\n\n`;
-            saved.forEach((p, index) => {
-                t += `${index + 1}. *${p.name}* (${p.variety || 'सामान्य वैरायटी'})\n`;
-            });
-            t += `\nकुल पौधे: ${saved.length}\nकृपया उपलब्धता की पुष्टि करें।`;
-            return encodeURIComponent(t);
-        }
-
-        function shareListWithNursery() {
-            if (likedPlants.length === 0) { alert('कृपया पहले कुछ पौधे अपनी लिस्ट में जोड़ें!'); return; }
-            const text = generateText();
-            window.open(`https://wa.me/919416316534?text=${text}`, '_blank');
-        }
-
-        function shareListWithSelf() {
-            if (likedPlants.length === 0) { alert('कृपया पहले कुछ पौधे अपनी लिस्ट में जोड़ें!'); return; }
-            const text = generateText();
-            window.open(`https://wa.me/?text=${text}`, '_blank');
-        }
-
-        function shareSingle(plantName) {
-            const text = encodeURIComponent(`🌱 श्री राम नर्सरी (भुना) से यह पौधा मुझे पसंद आया: *${plantName}*`);
-            window.open(`https://wa.me/?text=${text}`, '_blank');
-        }
-
-        function filterCategory(cat, event) {
-            currentCategory = cat;
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            if(event && event.target) event.target.classList.add('active');
-            renderPlants();
-        }
-
-        function openDetailsModal(name, variety, tips) {
-            document.getElementById('modalPlantName').innerText = name;
-            document.getElementById('modalPlantVariety').innerText = variety ? `वैरायटी: ${variety}` : '';
-            document.getElementById('modalPlantTips').innerText = tips || 'इस पौधे को नियमित पानी दें और धूप में रखें।';
-            document.getElementById('detailsModal').style.display = 'flex';
-        }
-
-        function closeDetailsModal() {
-            document.getElementById('detailsModal').style.display = 'none';
-        }
-    </script>
+    filtered.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "plant-card";
+        card.innerHTML = `
+            <div class="img-box">
+                <img src="${p.img}" class="plant-img" alt="${p.name}">
+                <div class="status-tag">✓ स्टॉक में उपलब्ध</div>
+            </div>
+            <div class="plant-info">
+                <span class="cat-badge">${p.category}</span>
+                <h3 class="plant-name">${p.name}</h3>
+                <div class="plant-variety">Variety: ${p.variety}</div>
+                <div class="tips-text">💡 <b>टिप:</b> ${p.tips}</div>
+                <a href="orders.html" class="btn-order-now">🛒 इस पौधे का ऑर्डर जोड़ें</a>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+</script>
 </body>
 </html>

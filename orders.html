@@ -1,144 +1,175 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#2E7D32">
-    <title>आर्डर सपोर्ट - श्री राम नर्सरी (भुना)</title>
-    
-    <!-- Supabase JS Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
+    <title>श्री राम नर्सरी - प्लांट ऑर्डर बुकिंग</title>
     <style>
-        * { box-sizing: border-box; }
-        body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #f4f7f3; color: #202520; }
-        header { background: white; border-bottom: 1px solid #e2e7e2; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
-        .header-container { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-        .logo { font-weight: 800; font-size: 18px; color: #1b5e20; text-decoration: none; line-height: 1.15; }
-        .logo small { font-weight: 400; font-size: 11px; display: block; color: #666; margin-top: 2px; }
-        .nav-links { display: flex; gap: 15px; align-items: center; font-size: 14px; font-weight: 700; }
-        .nav-links a { color: #333; text-decoration: none; }
-        .nav-order { background: #25d366; color: white !important; padding: 7px 11px; border-radius: 7px; }
-        .container { max-width: 800px; margin: 30px auto; padding: 0 20px; }
-        .support-card { background: white; border-radius: 12px; padding: 30px; border: 1px solid #e2e7e2; box-shadow: 0 4px 10px rgba(0,0,0,.03); text-align: center; margin-bottom: 25px; }
-        .support-card h2 { color: #1b5e20; margin-top: 0; font-size: 24px; }
-        .support-card p { color: #666; font-size: 15px; line-height: 1.6; margin-bottom: 25px; }
-        .warning-strip { background: #fff3e0; color: #e65100; border: 1px solid #ffe0b2; padding: 15px; border-radius: 8px; font-size: 14px; font-weight: 700; text-align: left; line-height: 1.5; margin-bottom: 20px; }
-        .summary-box { background: #ffffff; border: 1px solid #ddd; border-radius: 8px; padding: 15px; text-align: left; margin-bottom: 25px; max-height: 250px; overflow-y: auto; }
-        .summary-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 15px; font-weight: 600; display: flex; justify-content: space-between; }
-        .support-actions { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-        .btn { padding: 12px 24px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 15px; border: none; cursor: pointer; }
-        .btn-whatsapp { background: #25d366; color: white; }
-        .btn-call { background: #1b5e20; color: white; }
-        footer { text-align: center; padding: 25px; background: white; border-top: 1px solid #e2e7e2; margin-top: 50px; font-size: 13px; color: #666; display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; }
-        footer a { color: #1b5e20; text-decoration: none; font-weight: 700; }
-        @media (max-width: 600px) { .header-container { flex-direction: column; gap: 10px; } .support-actions { flex-direction: column; width: 100%; } .btn { width: 100%; justify-content: center; } }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f7f5; margin: 0; padding: 0; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; background: white; padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .navbar a { text-decoration: none; color: #1b5e20; font-weight: bold; margin-left: 15px; font-size: 14px; }
+        .order-container { max-width: 750px; margin: 25px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        h2 { color: #1b5e20; border-bottom: 2px solid #e8f5e9; padding-bottom: 10px; margin-top: 0; }
+        .section-title { font-size: 15px; font-weight: bold; color: #2e7d32; margin: 15px 0 8px 0; }
+        .form-control { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; box-sizing: border-box; margin-bottom: 12px; }
+        .flex-row { display: flex; gap: 10px; }
+        .btn-add-list { background: #1b5e20; color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; font-size: 15px; }
+        .list-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }
+        .list-table th, .list-table td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        .list-table th { background: #f1f8e9; color: #1b5e20; }
+        .btn-remove { background: #ffebee; color: #c62828; border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer; }
+        .action-box { margin-top: 25px; padding: 15px; background: #e8f5e9; border-radius: 6px; border: 1px solid #c8e6c9; }
+        .btn-whatsapp-send { display: block; width: 100%; background: #25d366; color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; text-align: center; text-decoration: none; font-weight: bold; font-size: 16px; box-sizing: border-box; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="header-container">
-            <a href="index.html" class="logo">
-                Shri Ram Nursery
-                <small>Bhuna</small>
-            </a>
-            <nav class="nav-links" aria-label="Primary navigation">
-                <a href="index.html">Home</a>
-                <a href="dashboard.html">🌱 Plants</a>
-                <a href="orders.html" class="nav-order" style="color:white;">🛒 Orders</a>
-            </nav>
-        </div>
-    </header>
+<div class="navbar">
+    <a href="index.html" style="color: #2e7d32; font-size: 18px; font-weight: bold; text-decoration: none;">🌱 श्री राम नर्सरी</a>
+    <div>
+        <a href="index.html">होम</a>
+        <a href="dashboard.html">पौधे देखें</a>
+    </div>
+</div>
 
-    <main class="container">
-        <div class="support-card">
-            <h2>📦 आर्डर और सहायता (Order Support)</h2>
-            <p>
-                यदि आपने श्री राम नर्सरी (भुना) से कोई पौधा आर्डर किया है या पौधों की उपलब्धता, थोक मूल्य व होम डिलीवरी की जानकारी चाहते हैं, तो आप सीधे हमारी टीम से संपर्क कर सकते हैं।
-            </p>
-            
-            <div class="warning-strip">
-                ⚠️ महत्वपूर्ण सूचना: यदि आप अगले 24 घंटे के अंदर हमारी नर्सरी विजिट करने वाले हैं, तभी नीचे दी गई अपनी पसंदीदा सूची (Saved List) को नर्सरी के नंबर पर भेजें। अन्यथा इसे अपने पास सेव रखें और नर्सरी आने पर हमें दिखा दें।
-            </div>
+<div class="order-container">
+    <h2>🛒 डिजिटल प्लांट ऑर्डर मेकर</h2>
+    
+    <!-- ग्राहक का बुनियादी विवरण -->
+    <div class="section-title">👤 ग्राहक का विवरण (Customer Information)</div>
+    <input type="text" id="custName" class="form-control" placeholder="अपना पूरा नाम लिखें..." required>
+    <input type="tel" id="custPhone" class="form-control" placeholder="अपना मोबाइल नंबर लिखें..." required>
+    <input type="text" id="custAddress" class="form-control" placeholder="अपना पूरा पता/गांव का नाम लिखें..." required>
 
-            <h4 style="text-align: left; color: #1b5e20; margin: 0 0 10px 0;">📋 आपकी पसंदीदा पौधों की सूची:</h4>
-            <div class="summary-box" id="orderSummaryBox">
-                सूची लोड की जा रही है...
-            </div>
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
 
-            <div class="support-actions">
-                <button class="btn btn-whatsapp" onclick="sendOrderListToNursery()">🟢 WhatsApp पर सूची भेजें</button>
-                <a href="tel:9416316534" class="btn btn-call">📞 डायरेक्ट कॉल करें</a>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        <span>Shri Ram Nursery, Bhuna</span>
-        <a href="admin.html">🔐 Admin Portal</a>
-    </footer>
-
-    <script>
-        const supabase = window.supabase.createClient("https://supabase.co", "sb_publishable_YUi1f1Q2sHxEFiYoBJ7ZUw_TzZga11K");
+    <!-- प्लांट सेलेक्टर टूल -->
+    <div class="section-title">🌱 पौधा चुनें और लिस्ट तैयार करें</div>
+    <div class="flex-row">
+        <select id="itemCategory" class="form-control" style="flex: 1;">
+            <option value="" disabled selected>📁 कैटेगरी चुनें...</option>
+            <option value="फलदार पौधे">🍊 फलदार पौधे</option>
+            <option value="इंडोर प्लांट्स">🏡 इंडोर प्लांट्स</option>
+            <option value="आउटडोर प्लांट्स">🌲 आउटडोर प्लांट्स</option>
+            <option value="फूलों के पौधे">🌺 फूलों के पौधे</option>
+            <option value="डेकोरेटिव">✨ डेकोरेटिव</option>
+            <option value="लैंडस्केपिंग">🌴 लैंडस्केपिंग</option>
+            <option value="औषधीय एवं अन्य">🌿 औषधीय एवं अन्य</option>
+        </select>
         
-        let allPlants = [];
-        let likedIds = JSON.parse(localStorage.getItem('likedPlants')) || [];
+        <input type="text" id="itemPlantName" class="form-control" style="flex: 1;" placeholder="पौधे / वैरायटी का नाम लिखें...">
+        <input type="number" id="itemQty" class="form-control" style="width: 100px;" value="1" min="1" placeholder="मात्रा">
+    </div>
+    
+    <!-- लिस्ट में प्लस करने का बटन -->
+    <button class="btn-add-list" onclick="addPlantToCurrentList()">➕ पौधा लिस्ट में जोड़ें (Plus Item)</button>
 
-        document.addEventListener("DOMContentLoaded", async () => {
-            await fetchAllPlants();
-        });
+    <!-- लाइव कस्टमाइज्ड ऑर्डर सूची -->
+    <div class="section-title" style="margin-top: 25px;">📋 आपकी तैयार सूची (Your Live Plant List)</div>
+    <table class="list-table">
+        <thead>
+            <tr>
+                <th>क्र.सं.</th>
+                <th>कैटेगरी</th>
+                <th>पौधे का नाम</th>
+                <th>मात्रा (Qty)</th>
+                <th>हटाएं</th>
+            </tr>
+        </thead>
+        <tbody id="orderTableBody">
+            <tr>
+                <td colspan="5" style="text-align: center; color: #888;">आपकी सूची अभी खाली है। ऊपर से पौधे जोड़ें!</td>
+            </tr>
+        </tbody>
+    </table>
 
-        async function fetchAllPlants() {
-            try {
-                const { data } = await supabase.from('Plants').select('*');
-                if (data) {
-                    allPlants = data;
-                    renderSummaryList();
-                }
-            } catch (err) {
-                document.getElementById('orderSummaryBox').innerText = "सूची लोड करने में समस्या आई।";
-            }
-        }
+    <!-- फाइनल सहेजने और भेजने के विकल्प -->
+    <div class="action-box">
+        <div class="section-title" style="margin-top: 0; color: #1b5e20;">🚀 ऑर्डर सहेजें और WhatsApp शेयर करें</div>
+        <p style="font-size: 13px; color: #555; margin: 0 0 15px 0;">
+            📍 <b>नियम:</b> यदि आप अगले 24 घंटे के अंदर नर्सरी आ रहे हैं, तो सीधे नर्सरी के नंबर पर भेजें। अन्यथा रिकॉर्ड रखने के लिए इसे अपने खुद के नंबर पर सहेजें।
+        </p>
+        
+        <button class="btn-whatsapp-send" onclick="processWhatsAppSharing(true)">🏪 विकल्प 1: सीधे श्री राम नर्सरी WhatsApp पर भेजें (24 घंटे में विजिट)</button>
+        <button class="btn-whatsapp-send" style="background: #0288d1;" onclick="processWhatsAppSharing(false)">📱 विकल्प 2: अपने खुद के WhatsApp पर सुरक्षित सहेजें</button>
+    </div>
+</div>
 
-        function renderSummaryList() {
-            const box = document.getElementById('orderSummaryBox');
-            box.innerHTML = "";
-            const savedItems = allPlants.filter(p => likedIds.includes(p.id));
-            
-            if (savedItems.length === 0) {
-                box.innerHTML = `<p style="color:#666; margin:0; text-align:center;">आपकी पसंदीदा सूची अभी खाली है। 🌱</p>`;
-                return;
-            }
+<script>
+let customerPlantList = [];
 
-            savedItems.forEach((p, idx) => {
-                box.innerHTML += `
-                    <div class="summary-item">
-                        <span>🌱 ${idx + 1}. ${p.name}</span>
-                        <span style="color:#666; font-size:13px;">(${p.variety || 'सामान्य वैरायटी'})</span>
-                    </div>`;
-            });
-        }
+function addPlantToCurrentList() {
+    const category = document.getElementById("itemCategory").value;
+    const plantName = document.getElementById("itemPlantName").value.trim();
+    const qty = parseInt(document.getElementById("itemQty").value);
 
-        function sendOrderListToNursery() {
-            const savedItems = allPlants.filter(p => likedIds.includes(p.id));
-            if (savedItems.length === 0) {
-                alert("आपकी सूची खाली है, कृपया पहले पौधे लाइक करें!");
-                return;
-            }
+    if(!category) { alert("कृपया ड्रॉपडाउन से कैटेगरी अवश्य चुनें!"); return; }
+    if(!plantName) { alert("कृपया पौधे का नाम अवश्य लिखें!"); return; }
+    if(isNaN(qty) || qty < 1) { alert("कृपया सही मात्रा (Quantity) दर्ज करें!"); return; }
 
-            let textMessage = `*🌱 श्री राम नर्सरी (भुना) - आर्डर सहायता सूची * 🌱\n`;
-            textMessage += `----------------------------------------\n`;
-            savedItems.forEach((p, idx) => {
-                textMessage += `${idx + 1}. *पौधा:* ${p.name} (${p.variety || 'सामान्य'})\n`;
-            });
-            textMessage += `----------------------------------------\n`;
-            textMessage += `🕒 *विजिट टाइम नोट:* मैं अगले 24 घंटे के अंदर नर्सरी आ रहा हूँ। कृपया ये पौधे तैयार रखें।`;
+    // लिस्ट में आइटम पुश करना
+    customerPlantList.push({ category, plantName, qty });
+    
+    // फॉर्म रीसेट करना (नाम और मात्रा)
+    document.getElementById("itemPlantName").value = "";
+    document.getElementById("itemQty").value = "1";
+    
+    refreshOrderTableUI();
+}
 
-            const nurseryNumber = "9416316534";
-            const encodedUrl = `https://wa.me/${nurseryNumber}?text=${encodeURIComponent(textMessage)}`;
-            window.open(encodedUrl, '_blank');
-        }
-    </script>
+function removePlantFromList(index) {
+    customerPlantList.splice(index, 1);
+    refreshOrderTableUI();
+}
+
+function refreshOrderTableUI() {
+    const tbody = document.getElementById("orderTableBody");
+    tbody.innerHTML = "";
+
+    if(customerPlantList.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #888;">आपकी सूची अभी खाली है। ऊपर से पौधे जोड़ें!</td></tr>`;
+        return;
+    }
+
+    customerPlantList.forEach((item, idx) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${idx + 1}</td>
+            <td><b>${item.category}</b></td>
+            <td>${item.plantName}</td>
+            <td><b>${item.qty} पीस</b></td>
+            <td><button class="btn-remove" onclick="removePlantFromList(${idx})">❌</button></td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function processWhatsAppSharing(sendToNurseryDirectly) {
+    const name = document.getElementById("custName").value.trim();
+    const phone = document.getElementById("custPhone").value.trim();
+    const address = document.getElementById("custAddress").value.trim();
+
+    if(!name || !phone || !address) { alert("कृपया ग्राहक विवरण (नाम, फोन नंबर और पता) पूरा भरें!"); return; }
+    if(customerPlantList.length === 0) { alert("आपकी सूची खाली है! पहले पौधे प्लस (+) करें।"); return; }
+
+    let message = `*🌱 श्री राम नर्सरी (भुना) - प्लांट ऑर्डर सूची * \n\n`;
+    message += `👤 *ग्राहक का नाम:* ${name}\n`;
+    message += `📞 *मोबाइल नंबर:* ${phone}\n`;
+    message += `📍 *पता:* ${address}\n\n`;
+    message += `📋 *ऑर्डर किए गए पौधों की लिस्ट:* \n`;
+    
+    customerPlantList.forEach((item, idx) => {
+        message += `${idx + 1}. [${item.category}] ${item.plantName} → *${item.qty} पीस*\n`;
+    });
+
+    if(sendToNurseryDirectly) {
+        message += `\n🏪 *स्टेटस:* ग्राहक अगले 24 घंटे के भीतर नर्सरी का दौरा (Visit) कर रहा है। कृपया स्टॉक तैयार रखें।`;
+        window.open(`https://wa.me{encodeURIComponent(message)}`);
+    } else {
+        message += `\n📱 *स्टेटस:* व्यक्तिगत रिकॉर्ड हेतु ग्राहक के निजी वॉट्सऐप पर सुरक्षित सहेजा गया।`;
+        window.open(`https://wa.me{encodeURIComponent(message)}`);
+    }
+}
+</script>
 </body>
 </html>
