@@ -1,97 +1,52 @@
 <!doctype html>
 <html lang="hi">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#2E7D32">
-  <title>एडमिन पोर्टल - श्री राम नर्सरी (भुना)</title>
-
-  <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #f4f7f3; color: #202520; }
-
-    /* Header */
-    header { background: white; border-bottom: 1px solid #e2e7e2; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
-    .header-container { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .logo { font-weight: 800; font-size: 18px; color: #1b5e20; text-decoration: none; line-height: 1.15; }
-    .logo small { font-weight: 400; font-size: 11px; display: block; color: #666; margin-top: 2px; }
-    .nav-links { display: flex; gap: 15px; align-items: center; font-size: 14px; font-weight: 700; }
-    .nav-links a { color: #333; text-decoration: none; }
-    .nav-links a:hover { color: #2e7d32; }
-
-    /* Container */
-    .container { max-width: 600px; margin: 40px auto; padding: 0 20px; }
-    
-    .admin-card { background: white; border-radius: 12px; padding: 30px; border: 1px solid #e2e7e2; box-shadow: 0 4px 10px rgba(0,0,0,.03); }
-    .admin-card h2 { color: #1b5e20; margin-top: 0; font-size: 22px; margin-bottom: 15px; text-align: center; }
-    
-    .form-group { margin-bottom: 20px; }
-    .form-group label { display: block; font-size: 14px; font-weight: 700; color: #333; margin-bottom: 8px; }
-    .form-group input { width: 100%; padding: 12px 15px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; outline: none; }
-    .form-group input:focus { border-color: #2e7d32; }
-
-    .btn-login { background: #1b5e20; color: white; border: 0; width: 100%; padding: 12px; border-radius: 8px; font-weight: 700; font-size: 15px; cursor: pointer; }
-    .btn-login:hover { background: #2e7d32; }
-
-    .back-link { display: block; text-align: center; margin-top: 20px; color: #666; text-decoration: none; font-size: 14px; font-weight: 600; }
-    .back-link:hover { color: #1b5e20; }
-
-    /* Footer */
-    footer { text-align: center; padding: 25px; background: white; border-top: 1px solid #e2e7e2; margin-top: 50px; font-size: 13px; color: #666; display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; }
-    footer a { color: #1b5e20; text-decoration: none; font-weight: 700; }
-  </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>श्री राम नर्सरी - सुरक्षित एडमिन पोर्टल</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #2E7D32; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+        .login-card { background: #ffffff; border-radius: 16px; padding: 35px 25px; width: 100%; max-width: 420px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); text-align: center; }
+        .logo-text { font-size: 24px; font-weight: 800; color: #1b5e20; margin: 0 0 5px 0; }
+        .form-group { text-align: left; margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 700; color: #333; margin-bottom: 8px; }
+        .form-group input { width: 100%; padding: 12px 15px; border: 1px solid #cccccc; border-radius: 8px; font-size: 16px; }
+        .btn-login { width: 100%; background: #1b5e20; color: white; border: none; padding: 14px; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; }
+        .error-box { background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 600; margin-top: 20px; display: none; text-align: left; }
+    </style>
 </head>
-
 <body>
-
-  <!-- Header -->
-  <header>
-    <div class="header-container">
-      <a href="index.html" class="logo">
-        Shri Ram Nursery
-        <small>Bhuna</small>
-      </a>
-      <nav class="nav-links" aria-label="Primary navigation">
-        <a href="index.html">Home</a>
-        <a href="dashboard.html">🌱 Plants</a>
-      </nav>
+    <div class="login-card">
+        <h1 class="logo-text">🌿 श्री राम नर्सरी (भुना)</h1>
+        <p style="color:#555; font-weight:600; margin-bottom:20px;">सुरक्षित Admin Panel</p>
+        <form onsubmit="handleAdminLogin(event)">
+            <div class="form-group">
+                <label>📱 अधिकृत मोबाइल नंबर</label>
+                <input type="tel" id="adminPhone" placeholder="9416316534" required>
+            </div>
+            <div class="form-group">
+                <label>🔑 Admin PIN (6 अंक)</label>
+                <input type="password" id="adminPin" placeholder="अपना 6-अंकी PIN दर्ज करें" required>
+            </div>
+            <button type="submit" class="btn-login">🔒 Admin Panel खोलें</button>
+        </form>
+        <div class="error-box" id="errorBox">❌ मोबाइल नंबर या PIN अधिकृत नहीं है!</div>
     </div>
-  </header>
-
-  <!-- Main Container -->
-  <main class="container">
-    <div class="admin-card">
-      <h2>🔒 Admin Portal Login</h2>
-      <form onsubmit="handleAdminLogin(event)">
-        <div class="form-group">
-          <label for="admin-pass">पासवर्ड दर्ज करें</label>
-          <input type="password" id="admin-pass" placeholder="Admin Password..." required>
-        </div>
-        <button type="submit" class="btn-login">लॉगिन करें</button>
-      </form>
-      <a href="index.html" class="back-link">← होमपेज पर वापस जाएं</a>
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <span>Shri Ram Nursery, Bhuna</span>
-  </footer>
-
-  <!-- Simple Script -->
-  <script>
-    function handleAdminLogin(e) {
-      e.preventDefault();
-      const pass = document.getElementById('admin-pass').value;
-      if (pass === 'admin123' || pass === 'shriram') {
-        alert('लॉगिन सफल रहा! (डेटा मैनेजमेंट पैनल जल्द सक्रिय होगा)');
-      } else {
-        alert('गलत पासवर्ड! कृपया सही पासवर्ड दर्ज करें।');
-      }
-    }
-  </script>
-
+    <script>
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            const phone = document.getElementById('adminPhone').value.trim();
+            const pin = document.getElementById('adminPin').value.trim();
+            const errorBox = document.getElementById('errorBox');
+            
+            if (phone === "9416316534" && pin === "941631") {
+                localStorage.setItem('isAdminLoggedIn', 'true');
+                window.location.href = "dashboard.html"; 
+            } else {
+                errorBox.style.display = 'block';
+            }
+        }
+    </script>
 </body>
-
 </html>

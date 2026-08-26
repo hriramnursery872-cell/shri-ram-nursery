@@ -1,86 +1,144 @@
 <!doctype html>
 <html lang="hi">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#2E7D32">
-  <title>आर्डर सपोर्ट - श्री राम नर्सरी (भुना)</title>
-
-  <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #f4f7f3; color: #202520; }
-
-    /* Header */
-    header { background: white; border-bottom: 1px solid #e2e7e2; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
-    .header-container { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .logo { font-weight: 800; font-size: 18px; color: #1b5e20; text-decoration: none; line-height: 1.15; }
-    .logo small { font-weight: 400; font-size: 11px; display: block; color: #666; margin-top: 2px; }
-    .nav-links { display: flex; gap: 15px; align-items: center; font-size: 14px; font-weight: 700; }
-    .nav-links a { color: #333; text-decoration: none; }
-    .nav-links a:hover { color: #2e7d32; }
-    .nav-order { background: #25d366; color: white !important; padding: 7px 11px; border-radius: 7px; }
-
-    /* Container */
-    .container { max-width: 800px; margin: 30px auto; padding: 0 20px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2E7D32">
+    <title>आर्डर सपोर्ट - श्री राम नर्सरी (भुना)</title>
     
-    .support-card { background: white; border-radius: 12px; padding: 30px; border: 1px solid #e2e7e2; box-shadow: 0 4px 10px rgba(0,0,0,.03); text-align: center; }
-    .support-card h2 { color: #1b5e20; margin-top: 0; font-size: 24px; }
-    .support-card p { color: #666; font-size: 15px; line-height: 1.6; margin-bottom: 25px; }
-
-    .support-actions { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-    .btn { padding: 12px 24px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 15px; }
-    .btn-whatsapp { background: #25d366; color: white; }
-    .btn-call { background: #1b5e20; color: white; }
-
-    /* Footer */
-    footer { text-align: center; padding: 25px; background: white; border-top: 1px solid #e2e7e2; margin-top: 50px; font-size: 13px; color: #666; display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; }
-    footer a { color: #1b5e20; text-decoration: none; font-weight: 700; }
-  </style>
+    <!-- Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #f4f7f3; color: #202520; }
+        header { background: white; border-bottom: 1px solid #e2e7e2; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-container { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+        .logo { font-weight: 800; font-size: 18px; color: #1b5e20; text-decoration: none; line-height: 1.15; }
+        .logo small { font-weight: 400; font-size: 11px; display: block; color: #666; margin-top: 2px; }
+        .nav-links { display: flex; gap: 15px; align-items: center; font-size: 14px; font-weight: 700; }
+        .nav-links a { color: #333; text-decoration: none; }
+        .nav-order { background: #25d366; color: white !important; padding: 7px 11px; border-radius: 7px; }
+        .container { max-width: 800px; margin: 30px auto; padding: 0 20px; }
+        .support-card { background: white; border-radius: 12px; padding: 30px; border: 1px solid #e2e7e2; box-shadow: 0 4px 10px rgba(0,0,0,.03); text-align: center; margin-bottom: 25px; }
+        .support-card h2 { color: #1b5e20; margin-top: 0; font-size: 24px; }
+        .support-card p { color: #666; font-size: 15px; line-height: 1.6; margin-bottom: 25px; }
+        .warning-strip { background: #fff3e0; color: #e65100; border: 1px solid #ffe0b2; padding: 15px; border-radius: 8px; font-size: 14px; font-weight: 700; text-align: left; line-height: 1.5; margin-bottom: 20px; }
+        .summary-box { background: #ffffff; border: 1px solid #ddd; border-radius: 8px; padding: 15px; text-align: left; margin-bottom: 25px; max-height: 250px; overflow-y: auto; }
+        .summary-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 15px; font-weight: 600; display: flex; justify-content: space-between; }
+        .support-actions { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 12px 24px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 15px; border: none; cursor: pointer; }
+        .btn-whatsapp { background: #25d366; color: white; }
+        .btn-call { background: #1b5e20; color: white; }
+        footer { text-align: center; padding: 25px; background: white; border-top: 1px solid #e2e7e2; margin-top: 50px; font-size: 13px; color: #666; display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; }
+        footer a { color: #1b5e20; text-decoration: none; font-weight: 700; }
+        @media (max-width: 600px) { .header-container { flex-direction: column; gap: 10px; } .support-actions { flex-direction: column; width: 100%; } .btn { width: 100%; justify-content: center; } }
+    </style>
 </head>
-
 <body>
 
-  <!-- Header -->
-  <header>
-    <div class="header-container">
-      <a href="index.html" class="logo">
-        Shri Ram Nursery
-        <small>Bhuna</small>
-      </a>
-      <nav class="nav-links" aria-label="Primary navigation">
-        <a href="index.html">Home</a>
-        <a href="dashboard.html">🌱 Plants</a>
-        <a href="orders.html" class="nav-order" style="color:white;">🛒 Orders</a>
-      </nav>
-    </div>
-  </header>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                Shri Ram Nursery
+                <small>Bhuna</small>
+            </a>
+            <nav class="nav-links" aria-label="Primary navigation">
+                <a href="index.html">Home</a>
+                <a href="dashboard.html">🌱 Plants</a>
+                <a href="orders.html" class="nav-order" style="color:white;">🛒 Orders</a>
+            </nav>
+        </div>
+    </header>
 
-  <!-- Main Container -->
-  <main class="container">
-    <div class="support-card">
-      <h2>📦 आर्डर और सहायता (Order Support)</h2>
-      <p>
-        यदि आपने श्री राम नर्सरी (भुना) से कोई पौधा आर्डर किया है या पौधों की उपलब्धता, थोक मूल्य (Wholesale Price) व होम डिलीवरी की जानकारी चाहते हैं, तो आप सीधे हमारी टीम से संपर्क कर सकते हैं।
-      </p>
+    <main class="container">
+        <div class="support-card">
+            <h2>📦 आर्डर और सहायता (Order Support)</h2>
+            <p>
+                यदि आपने श्री राम नर्सरी (भुना) से कोई पौधा आर्डर किया है या पौधों की उपलब्धता, थोक मूल्य व होम डिलीवरी की जानकारी चाहते हैं, तो आप सीधे हमारी टीम से संपर्क कर सकते हैं।
+            </p>
+            
+            <div class="warning-strip">
+                ⚠️ महत्वपूर्ण सूचना: यदि आप अगले 24 घंटे के अंदर हमारी नर्सरी विजिट करने वाले हैं, तभी नीचे दी गई अपनी पसंदीदा सूची (Saved List) को नर्सरी के नंबर पर भेजें। अन्यथा इसे अपने पास सेव रखें और नर्सरी आने पर हमें दिखा दें।
+            </div>
 
-      <div class="support-actions">
-        <a href="https://wa.me/919416316534?text=नमस्ते%20श्री%20राम%20नर्सरी!%20मुझे%20मेरे%20आर्डर%20या%20पौधों%20के%20बारे%20में%20जानकारी%20चाहिए।" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
-          🟢 WhatsApp पर चैट करें
-        </a>
-        <a href="tel:9416316534" class="btn btn-call">
-          📞 डायरेक्ट कॉल करें
-        </a>
-      </div>
-    </div>
-  </main>
+            <h4 style="text-align: left; color: #1b5e20; margin: 0 0 10px 0;">📋 आपकी पसंदीदा पौधों की सूची:</h4>
+            <div class="summary-box" id="orderSummaryBox">
+                सूची लोड की जा रही है...
+            </div>
 
-  <!-- Footer -->
-  <footer>
-    <span>Shri Ram Nursery, Bhuna</span>
-    <a href="admin.html">🔒 Admin Portal</a>
-  </footer>
+            <div class="support-actions">
+                <button class="btn btn-whatsapp" onclick="sendOrderListToNursery()">🟢 WhatsApp पर सूची भेजें</button>
+                <a href="tel:9416316534" class="btn btn-call">📞 डायरेक्ट कॉल करें</a>
+            </div>
+        </div>
+    </main>
 
+    <footer>
+        <span>Shri Ram Nursery, Bhuna</span>
+        <a href="admin.html">🔐 Admin Portal</a>
+    </footer>
+
+    <script>
+        const supabase = window.supabase.createClient("https://supabase.co", "sb_publishable_YUi1f1Q2sHxEFiYoBJ7ZUw_TzZga11K");
+        
+        let allPlants = [];
+        let likedIds = JSON.parse(localStorage.getItem('likedPlants')) || [];
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            await fetchAllPlants();
+        });
+
+        async function fetchAllPlants() {
+            try {
+                const { data } = await supabase.from('Plants').select('*');
+                if (data) {
+                    allPlants = data;
+                    renderSummaryList();
+                }
+            } catch (err) {
+                document.getElementById('orderSummaryBox').innerText = "सूची लोड करने में समस्या आई।";
+            }
+        }
+
+        function renderSummaryList() {
+            const box = document.getElementById('orderSummaryBox');
+            box.innerHTML = "";
+            const savedItems = allPlants.filter(p => likedIds.includes(p.id));
+            
+            if (savedItems.length === 0) {
+                box.innerHTML = `<p style="color:#666; margin:0; text-align:center;">आपकी पसंदीदा सूची अभी खाली है। 🌱</p>`;
+                return;
+            }
+
+            savedItems.forEach((p, idx) => {
+                box.innerHTML += `
+                    <div class="summary-item">
+                        <span>🌱 ${idx + 1}. ${p.name}</span>
+                        <span style="color:#666; font-size:13px;">(${p.variety || 'सामान्य वैरायटी'})</span>
+                    </div>`;
+            });
+        }
+
+        function sendOrderListToNursery() {
+            const savedItems = allPlants.filter(p => likedIds.includes(p.id));
+            if (savedItems.length === 0) {
+                alert("आपकी सूची खाली है, कृपया पहले पौधे लाइक करें!");
+                return;
+            }
+
+            let textMessage = `*🌱 श्री राम नर्सरी (भुना) - आर्डर सहायता सूची * 🌱\n`;
+            textMessage += `----------------------------------------\n`;
+            savedItems.forEach((p, idx) => {
+                textMessage += `${idx + 1}. *पौधा:* ${p.name} (${p.variety || 'सामान्य'})\n`;
+            });
+            textMessage += `----------------------------------------\n`;
+            textMessage += `🕒 *विजिट टाइम नोट:* मैं अगले 24 घंटे के अंदर नर्सरी आ रहा हूँ। कृपया ये पौधे तैयार रखें।`;
+
+            const nurseryNumber = "9416316534";
+            const encodedUrl = `https://wa.me/${nurseryNumber}?text=${encodeURIComponent(textMessage)}`;
+            window.open(encodedUrl, '_blank');
+        }
+    </script>
 </body>
-
 </html>
