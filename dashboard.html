@@ -1,22 +1,112 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>श्री राम नर्सरी - डैशबोर्ड</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plants Catalog - Shri Ram Nursery</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin:0; background:#f4f7f3; font-family:Arial, sans-serif; color:#202520; }
+    header { background:white; padding:12px 20px; border-bottom:1px solid #e2e7e2; display:flex; justify-content:space-between; align-items:center; }
+    .logo { font-weight:bold; color:#1b5e20; text-decoration:none; }
+    .container { max-width:1200px; margin:20px auto; padding:0 20px; }
+    .filter-bar { display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+    .filter-bar input, .filter-bar select { padding:10px; border:1px solid #ccc; border-radius:8px; font-size:14px; background:white; }
+    .filter-bar input { flex:1; min-width:220px; }
+    .plants-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:20px; }
+    .plant-card { background:white; border-radius:12px; border:1px solid #e2e7e2; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 3px 8px rgba(0,0,0,0.03); }
+    .img-box { height:180px; background:#eef4ee; display:flex; align-items:center; justify-content:center; color:#777; overflow:hidden; }
+    .img-box img { width:100%; height:100%; object-fit:cover; }
+    .plant-body { padding:15px; flex:1; display:flex; flex-direction:column; gap:8px; }
+    .plant-title { font-size:18px; font-weight:bold; color:#1b5e20; margin:0; }
+    .badge { display:inline-block; background:#e8f5e9; color:#1b5e20; padding:3px 8px; border-radius:10px; font-size:11px; font-weight:bold; }
+    .tips-box { background:#f9fbf9; padding:10px; border-radius:8px; font-size:13px; color:#444; border-left:3px solid #2e7d32; line-height:1.4; }
+    .guide-box { background:#eef7ee; padding:10px; border-radius:8px; font-size:13px; color:#1b5e20; border-left:3px solid #1b5e20; line-height:1.4; white-space: pre-line; }
+    .btn-wa { background:#25d366; color:white; text-decoration:none; padding:10px; text-align:center; font-weight:bold; border-radius:8px; display:block; margin-top:10px; }
+  </style>
 </head>
-<body style="font-family: sans-serif; padding: 30px; background: #f9f9f9;">
-  <div style="max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-    <h2>📊 श्री राम नर्सरी - मैनेजमेंट डैशबोर्ड</h2>
-    <ul style="line-height: 2.5; font-size: 18px; margin-top: 20px;">
-      <li><a href="plant.html" style="color: green; text-decoration: none;">🌱 प्लांट कैटलॉग और जानकारी</a></li>
-      <li><a href="orders.html" style="color: green; text-decoration: none;">🛒 ऑर्डर और व्हाट्सएप बिलिंग</a></li>
-      <li><a href="admin.html" style="color: green; text-decoration: none;">🔐 एडमिनिस्ट्रेटर पोर्टल</a></li>
-    </ul>
-    <div style="margin-top: 30px;">
-      <a href="index.html" style="color: #555; text-decoration: none;">← होमपेज पर वापस जाएं</a>
+<body>
+  <header>
+    <a href="index.html" class="logo">🌱 Shri Ram Nursery</a>
+    <select id="global-lang" style="padding:5px; border-radius:5px;">
+      <option value="hi">हिंदी</option>
+      <option value="en">English</option>
+      <option value="pa">ਪੰਜਾਬੀ</option>
+    </select>
+  </header>
+
+  <main class="container">
+    <div class="filter-bar">
+      <input type="text" id="search" placeholder="🔍 पौधे का नाम खोजें...">
+      <select id="cat-filter">
+        <option value="all">सभी Categories</option>
+        <option value="Fruit">🍎 फलदार पौधे</option>
+        <option value="Indoor">🪴 इंडोर प्लांट्स</option>
+        <option value="Outdoor">🌳 आउटडोर प्लांट्स</option>
+        <option value="Flowering">🌺 फूलों के पौधे</option>
+      </select>
     </div>
-  </div>
+
+    <div class="plants-grid" id="grid"></div>
+  </main>
+
+  <script type="module">
+    import { getPlants, getCurrentLang, setLang } from "./js/plants.js";
+    const langSelect = document.getElementById("global-lang");
+    const currentLang = getCurrentLang();
+    langSelect.value = currentLang;
+
+    langSelect.addEventListener("change", (e) => {
+      setLang(e.target.value);
+      location.reload();
+    });
+
+    const grid = document.getElementById("grid");
+    const searchInput = document.getElementById("search");
+    const catFilter = document.getElementById("cat-filter");
+
+    function render() {
+      const q = searchInput.value.toLowerCase();
+      const cat = catFilter.value;
+      let plants = getPlants();
+
+      if (q) plants = plants.filter(p => (p.name + " " + (p.variety || "")).toLowerCase().includes(q));
+      if (cat !== "all") plants = plants.filter(p => p.category === cat);
+
+      grid.innerHTML = "";
+      if (plants.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:30px; background:white; border-radius:10px;">कोई पौधा नहीं मिला।</div>`;
+        return;
+      }
+
+      plants.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "plant-card";
+        const imgHtml = p.image ? `<img src="${p.image}" alt="${p.name}">` : `<span>🌱 फोटो उपलब्ध नहीं</span>`;
+        const waText = encodeURIComponent(`नमस्ते श्री राम नर्सरी! मुझे यह पौधा चाहिए:\n🌱 ${p.name} (${p.variety || ''})`);
+
+        card.innerHTML = `
+          <div class="img-box">${imgHtml}</div>
+          <div class="plant-body">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h3 class="plant-title">${p.name}</h3>
+              <span class="badge">${p.category_hi || p.category}</span>
+            </div>
+            <div style="font-size:12px; color:#666;">Variety: ${p.variety || 'Standard'}</div>
+            
+            <div class="tips-box"><strong>💡 देखभाल:</strong> ${p.care_tips || 'नियमित पानी दें।'}</div>
+            <div class="guide-box"><strong>🌱 लगाने की विधि:</strong><br>${p.planting_guide || 'गड्ढा खोदकर पौधा लगाएं।'}</div>
+
+            <a href="https://wa.me/919416316534?text=${waText}" class="btn-wa" target="_blank">🟢 WhatsApp पर Order करें</a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    searchInput.addEventListener("input", render);
+    catFilter.addEventListener("change", render);
+    window.addEventListener("DOMContentLoaded", render);
+  </script>
 </body>
 </html>
