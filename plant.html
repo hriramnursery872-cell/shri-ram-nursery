@@ -1,25 +1,46 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>श्री राम नर्सरी - पौधे और जानकारी</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>श्री राम नर्सरी - पौधे एवं जानकारी</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container" style="padding: 20px; font-family: sans-serif;">
-        <h2>🌿 श्री राम नर्सरी - पौधों की सूची</h2>
-        <div style="margin: 20px 0;">
-            <label for="pCategory"><strong>कैटेगरी चुनें:</strong></label><br><br>
-            <select id="pCategory" style="padding: 10px; width: 100%; max-width: 300px; font-size: 16px;">
-                <option value="Fruit Plants">🍊 फलदार पौधे</option>
-                <option value="Indoor Plants">🏠 इन्डोर पौधे</option>
-                <option value="Outdoor Plants">🌳 आउटडोर पौधे</option>
-                <option value="Flower Plants">🌺 फूलों के पौधे</option>
-            </select>
-        </div>
-        <p>यहाँ पौधों की पूरी सूची और विवरण दिखाई देगा।</p>
-        <a href="admin.html" style="color: green; text-decoration: none; font-weight: bold;">👉 एडमिन पैनल पर जाएं</a>
+  <div class="container" style="padding: 20px; font-family: sans-serif;">
+    <h2>🌱 श्री राम नर्सरी - पौधों की सूची</h2>
+    <div style="margin: 20px 0;">
+      <label for="plantCat">श्रेणी चुनें:</label>
+      <select id="plantCat" style="padding: 10px; width: 100%; max-width: 300px; font-size: 16px;">
+        <option value="all">🌟 सभी पौधे</option>
+        <option value="Fruit">🍎 फलदार पौधे</option>
+        <option value="Indoor">🪴 इंडोर प्लांट्स</option>
+        <option value="Outdoor">🌳 आउटडोर प्लांट्स</option>
+        <option value="Flowering">🌺 फूलों के पौधे</option>
+      </select>
     </div>
+    <div id="plantCatalogGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px;"></div>
+  </div>
+  <div style="padding: 20px;">
+    <a href="admin.html" style="color: green; font-weight: bold; text-decoration: none;">👉 एडमिनिस्ट्रेटर पैनल पर जाएं</a>
+  </div>
+
+  <script type="module">
+    import { getPlants, getAvailabilityLabel } from './plants.js';
+    
+    function renderCatalog() {
+      const grid = document.getElementById('plantCatalogGrid');
+      const plants = getPlants();
+      grid.innerHTML = plants.map(p => `
+        <div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: #fff;">
+          <img src="${p.image || 'images/default.jpg'}" alt="${p.name}" style="width: 100%; height: 150px; object-fit: cover; border-radius: 5px;">
+          <h3 style="font-size: 18px; margin: 10px 0 5px 0;">${p.name}</h3>
+          <p style="margin: 5px 0; color: #555;"><b>किस्म:</b> ${p.variety || 'सामान्य'}</p>
+          <p style="color: green; font-weight: bold; margin: 5px 0;">${getAvailabilityLabel(p)}</p>
+        </div>
+      `).join('');
+    }
+    renderCatalog();
+  </script>
 </body>
 </html>

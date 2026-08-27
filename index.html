@@ -1,69 +1,19 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>श्री राम नर्सरी (भुना) - प्रोग्रेसिव ऐप</title>
-    
-    <!-- PWA Manifest और Service Worker रजिस्टर करने का कोड -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then(reg => console.log('Service Worker registered!'))
-                    .catch(err => console.log('Service Worker error: ', err));
-            });
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>श्री राम नर्सरी - भुना</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
-    <!-- ऑनलाइन/ऑफलाइन और PWA स्टेटस दिखाने वाला छोटा बटन (ड्रॉपडाउन स्टाइल) -->
-    <div id="pwa-status-container" style="position: fixed; top: 10px; right: 10px; z-index: 9999; font-family: sans-serif;">
-        <button id="network-status-badge" onclick="togglePwaMenu()" style="background-color: #2e7d32; color: white; border: none; padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">
-            🟢 Online (Live)
-        </button>
-        
-        <!-- छोटा ड्रॉपडाउन मेनू -->
-        <div id="pwa-dropdown-menu" style="display: none; position: absolute; right: 0; top: 40px; background: white; color: black; border: 1px solid #ccc; border-radius: 8px; width: 180px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); padding: 8px; text-align: left;">
-            <p style="margin: 0 0 8px 0; font-size: 11px; color: #555; border-bottom: 1px solid #eee; padding-bottom: 4px;"><b>श्री राम ऐप स्टेटस</b></p>
-            <a href="index.html" style="display: block; padding: 5px; text-decoration: none; color: #333; font-size: 12px;">🌐 वर्सल लाइव लिंक</a>
-            <a href="#" onclick="alert('आप अभी ऑफलाइन प्रोग्रेसिव ऐप मोड में हैं!'); return false;" style="display: block; padding: 5px; text-decoration: none; color: #333; font-size: 12px;">📱 ऑफलाइन PWA ऐप</a>
-        </div>
+<body style="font-family: sans-serif; text-align: center; padding: 50px; background: #f9f9f9;">
+  <div style="max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h1 style="color: green;">🌿 श्री राम नर्सरी, भुना 🌿</h1>
+    <p style="color: #666; font-size: 16px;">उत्कृष्ट गुणवत्ता के फलदार, इंडोर और आउटडोर पौधे उपलब्ध हैं।</p>
+    <div style="margin-top: 30px;">
+      <a href="plant.html" style="background: green; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; margin-right: 10px; font-weight: bold; display: inline-block;">पौधों की सूची देखें</a>
+      <a href="dashboard.html" style="background: #007bff; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">डैशबोर्ड</a>
     </div>
-
-    <script>
-        // नेटवर्क चेक करने का लॉजिक और बटन बदलना
-        function updateOnlineStatus() {
-            const badge = document.getElementById('network-status-badge');
-            if (navigator.onLine) {
-                badge.style.backgroundColor = '#2e7d32'; // हरा रंग - ऑनलाइन
-                badge.innerHTML = '🟢 Online (Live)';
-            } else {
-                badge.style.backgroundColor = '#d32f2f'; // लाल रंग - ऑफलाइन
-                badge.innerHTML = '🔴 Offline Mode';
-            }
-        }
-
-        function togglePwaMenu() {
-            const menu = document.getElementById('pwa-dropdown-menu');
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        }
-
-        window.addEventListener('online', updateOnlineStatus);
-        window.addEventListener('offline', updateOnlineStatus);
-        
-        // पेज लोड होते ही चेक करें
-        updateOnlineStatus();
-    </script>
-
-    <!-- आपका बाकी पुराना सारा कोड यहाँ सुरक्षित है -->
-    <div class="CONTAINER">
-        <div class="स्वागत-कार्ड">
-            <h1>नमस्कार दोस्तों! आपका श्री राम नर्सरी (भुना) में आपका हार्दिक स्वागत है। 🌱</h1>
-            <p>🙏 श्री राम नर्सरी (भूना) में जब तक हमारे स्वास्थ्य उपचार, विचार और कलाचार्य तक पहुंच चुके हैं। आज ही हमारी उपयोगिताएँ!</p>
-        </div>
-    </div>
-
+  </div>
 </body>
 </html>
