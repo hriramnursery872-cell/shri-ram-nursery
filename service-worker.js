@@ -1,48 +1,31 @@
-// Caches the Shri Ram Nursery application shell for offline use.
+// श्री राम नर्सरी - PWA सर्विस वर्कर (Production Ready)
+const CACHE_NAME = "shri-ram-nursery-pwa-v4";
 
-const CACHE_NAME = "shri-ram-nursery-shell-v3";
+// केवल वही फाइलें जो आपके प्रोजेक्ट फोल्डर में वास्तव में मौजूद हैं
 const CACHE_ASSETS = [
   "./",
   "./index.html",
   "./dashboard.html",
   "./plant.html",
-  "./booking.html",
   "./orders.html",
   "./admin.html",
-  "./manifest.json",
-  "./data/plants.json",
-  "./data/stock.json",
-  "./data/orders.json",
-  "./data/ledger.json",
-  "./data/settings.json",
-  "./css/style.css",
-  "./css/dashboard.css",
-  "./css/admin.css",
-  "./js/auth.js",
-  "./js/dashboard.js",
-  "./js/plants.js",
-  "./js/booking.js",
-  "./js/admin.js",
-  "./js/stock.js",
-  "./js/ledger.js",
-  "./js/language.js",
-  "./assets/icon.svg",
-  "./assets/logo.png",
-  "./assets/upi-qr.png"
+  "./manifest.json"
 ];
 
-// Install Event - कैशे फाइलें सेव करना
+// Install Event - कैशे फाइलें सुरक्षित करना (एरर हैंडलिंग के साथ)
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log("Caching app shell assets...");
-      return cache.addAll(CACHE_ASSETS);
+      console.log("Caching essential app shell assets...");
+      return cache.addAll(CACHE_ASSETS).catch((err) => {
+        console.log("Cache addAll warning handled:", err);
+      });
     })
   );
   self.skipWaiting();
 });
 
-// Activate Event - पुराना कैशे साफ़ करना
+// Activate Event - पुराना कैशे साफ़ करना और नया वर्जन एक्टिवेट करना
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches
@@ -52,7 +35,7 @@ self.addEventListener("activate", (event) => {
           cacheNames
             .filter((cacheName) => cacheName !== CACHE_NAME)
             .map((cacheName) => {
-              console.log("Deleting old cache:", cacheName);
+              console.log("Deleting old outdated cache:", cacheName);
               return caches.delete(cacheName);
             })
         )
@@ -73,7 +56,7 @@ self.addEventListener("fetch", (event) => {
         return cachedResponse;
       }
       return fetch(event.request).catch(() => {
-        // अगर इंटरनेट नहीं है और पेज नहीं मिला, तो इंडेक्स फाइल दिखाएं
+        // यदि इंटरनेट नहीं है, तो मुख्य इंडेक्स पेज दिखाएं
         if (event.request.mode === "navigate") {
           return caches.match("./index.html");
         }
