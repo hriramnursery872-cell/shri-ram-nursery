@@ -1,8 +1,5 @@
-// Supabase & App Smart Configuration
+// Supabase Safe Configuration
 window.SUPABASE_CONFIG = {
-  publishableKey: "sb_publishable_YUi1f1Q2sHxEFiYoBJ7ZUw_TzZga11K"
-};
-window.APP_SETTINGS = {
-  ocrEnabled: true,
-  autoDropdowns: true
+  publishableKey: "sb_publishable_YUi1f1Q2sHxEFiYoBJ7ZUw_TzZga11K",
+  url: "https://your-supabase-project.supabase.co"
 };
