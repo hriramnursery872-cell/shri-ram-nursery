@@ -1,4 +1,3 @@
-// js/admin.js
 const supabase = supabase.createClient("https://supabase.co", "sb_publishable_YUi1f1Q2sHxEFiYoBJ7ZUw_TzZga11K");
 
 let dailyCashTotal = 0;
@@ -15,7 +14,6 @@ function checkAdminAuth() {
     }
 }
 
-// 🧾 प्रीमियम WhatsApp बिलिंग एवं डेटाबेस सेविंग
 async function recordAndSendBill(event) {
     if(event) event.preventDefault();
 
@@ -67,7 +65,6 @@ function sendPremiumWhatsAppBill(name, phone, cat, qty, total, mode) {
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(textMessage)}`, '_blank');
 }
 
-// ⏰ शाम 5:00 बजे दैनिक हिसाब ऑटो-रीसेट लॉजिक
 function setupDailyLedgerTimer() {
     setInterval(() => {
         const now = new Date();

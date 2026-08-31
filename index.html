@@ -3,91 +3,27 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#2E7D32">
-    <title>श्री राम नर्सरी (भुना) - पौधे एवं नर्सरी सर्विसेज</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <title>श्री राम नर्सरी - भुना (फतेहाबाद)</title>
     <style>
-        * { box-sizing: border-box; }
-        body { margin: 0; font-family: 'Segoe UI', Helvetica, sans-serif; background: #f4f7f5; color: #202520; }
-        .top-video-banner { background: #1b5e20; color: white; text-align: center; display: block; padding: 10px; font-size: 14px; font-weight: 600; text-decoration: none; }
-        .top-video-banner a { color: #ffd700; text-decoration: none; font-weight: bold; }
-        HEADER { background: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
-        .header-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-        .logo-section { font-weight: 800; font-size: 22px; color: #1b5e20; text-decoration: none; display: flex; align-items: center; gap: 5px; }
-        .nav-links { display: flex; gap: 15px; align-items: center; font-size: 14px; font-weight: 700; }
-        .nav-links a { color: #333; text-decoration: none; }
-        .CONTAINER { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .welcome-container { background: linear-gradient(135deg, #1b5e20, #2e7d32); color: white; padding: 30px 20px; text-align: center; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .golden-text { font-size: 26px; font-weight: 800; color: #ffd700; margin: 0 0 10px 0; }
-        .trust-line { font-size: 15px; color: #f0fdf4; margin: 0; font-weight: 500; }
-        .section-title { font-size: 22px; text-align: center; background-color: #edf7ed; font-weight: 800; padding: 10px; border-radius: 8px; margin-bottom: 15px; color: #1b5e20; }
-        .btn-call { background: #1b5e20; color: white; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: bold; margin-right: 10px; display: inline-block; }
-        .btn-whatsapp { background: #25d366; color: white; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
-        .service-card { background: white; border-radius: 12px; padding: 20px; border: 1px solid #e2e7e2; text-decoration: none; color: inherit; box-shadow: 0 4px 6px rgba(0,0,0,0.03); }
-        .service-card h3 { margin: 0 0 8px 0; color: #1b5e20; }
-        .status-button { display: inline-block; background: #e8f5e9; color: #1b5e20; border-radius: 12px; font-size: 11px; font-weight: 700; padding: 4px 10px; }
-        FOOTER { text-align: center; padding: 25px; background: #e2e7e2; margin-top: 50px; font-size: 13px; color: #666; }
-        FOOTER a { color: #1b5e20; text-decoration: none; font-weight: 700; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f7f5; color: #202520; }
+        header { background: #1b5e20; color: white; padding: 20px; text-align: center; }
+        .ticker { background: #fffde7; color: #f57f17; padding: 10px; font-weight: bold; text-align: center; border-bottom: 1px solid #fff9c4; }
+        .main-content { max-width: 800px; margin: 40px auto; padding: 20px; background: white; border-radius: 12px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .btn { display: inline-block; background: #1b5e20; color: white; padding: 12px 25px; margin: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="top-video-banner" id="liveBanner">
-        🔴 <a href="https://youtube.com" id="bannerLink" target="_blank" rel="noopener noreferrer">नया वीडियो अपडेट: श्री राम नर्सरी (भुना) के नए पौधे देखें - टैप करें और जुड़ें!</a>
+    <div class="ticker" id="liveTicker">📢 श्री राम नर्सरी, भुना में उत्तम किस्म के फलदार और छायादार पौधे उपलब्ध हैं! संपर्क करें।</div>
+    <header>
+        <h1>🌿 श्री राम नर्सरी (भुना)</h1>
+        <p>फतेहाबाद, हरियाणा - शुद्धता और विश्वास का प्रतीक</p>
+    </header>
+    <div class="main-content">
+        <h2>स्वागत है आपका!</h2>
+        <p>हमारे पास सभी प्रकार के फलदार, फूलदार, इनडोर और आउटडोर पौधे उपलब्ध हैं।</p>
+        <a href="plant.html" class="btn">पौधे देखें (Catalog)</a>
+        <a href="order.html" class="btn" style="background: #0288d1;">स्मार्ट ऑर्डर फॉर्म</a>
+        <a href="admin.html" class="btn" style="background: #e65100;">एडमिन पैनल</a>
     </div>
-
-    <HEADER>
-        <div class="header-container">
-            <a class="logo-section" href="index.html">🌿 श्री राम नर्सरी <span style="font-size:12px; color:#666;">भुना</span></a>
-            <div class="nav-links">
-                <a href="index.html" style="color:#1b5e20;">होम</a>
-                <a href="dashboard.html">पौधे देखें</a>
-            </div>
-        </div>
-    </HEADER>
-
-    <main class="CONTAINER">
-        <div class="welcome-container">
-            <h1 class="golden-text">नमस्कार दोस्तों! आपकी अपनी श्री राम नर्सरी (भुना) में आपका स्वागत है! 🌱</h1>
-            <p class="trust-line">🤝 श्री राम नर्सरी (भुना) से अब तक हजारों स्वस्थ पौधे किसान भाइयों तक पहुंच चुके हैं।</p>
-        </div>
-
-        <div class="section-title">1000+ वैरायटी के लिए उपयुक्त पौधे</div>
-
-        <div style="text-align: center; margin-bottom: 35px;">
-            <a href="tel:9416316534" class="btn-call">📞 अभी कॉल करें</a>
-            <a href="https://wa.me/9416316534?text=नमस्ते%20श्री%20राम%20नर्सरी%20भुना।" target="_blank" class="btn-whatsapp">💬 WhatsApp</a>
-        </div>
-
-        <div class="services-grid">
-            <a href="dashboard.html" class="service-card">
-                <h3>🌱 View Plants</h3>
-                <p>नर्सरी में उपलब्ध फलदार, इंडोर, आउटडोर और अन्य प्रमाणित पौधों का पूरा कैटलॉग देखें।</p>
-                <span class="status-button">🟢 कैटलॉग उपलब्ध</span>
-            </a>
-            <a href="dashboard.html" class="service-card">
-                <h3>🛒 Plant Order करें</h3>
-                <p>पसंद का पौधा चुनें, लाइक करें और अपनी लिस्ट WhatsApp पर सेव करें।</p>
-                <span class="status-button">🟢 ऑर्डर उपलब्ध</span>
-            </a>
-        </div>
-    </main>
-
-    <FOOTER>
-        <p>© श्री राम नर्सरी, भुना (फतेहाबाद)</p>
-        <a href="admin.html">🔐 एडमिन पोर्टल</a>
-    </FOOTER>
-
-    <script>
-        const supabase = supabase.createClient("https://supabase.co", "sb_publishable_YUi1f1Q2sHxEFiYoBJ7ZUw_TzZga11K");
-        document.addEventListener("DOMContentLoaded", async () => {
-            try {
-                const { data } = await supabase.from('Admin_Data').select('dynamic_banner_link').eq('id', 1).single();
-                if (data && data.dynamic_banner_link) {
-                    document.getElementById('bannerLink').href = data.dynamic_banner_link;
-                }
-            } catch (err) { console.log(err); }
-        });
-    </script>
 </body>
 </html>

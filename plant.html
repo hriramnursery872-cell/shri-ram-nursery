@@ -3,24 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>श्री राम नर्सरी - उपलब्ध पौधों की सूची</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <title>श्री राम नर्सरी - पौधे देखें</title>
     <style>
         * { box-sizing: border-box; }
         body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f7f5; color: #202520; }
         HEADER { background: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
         .header-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
         .logo-section { font-weight: 800; font-size: 22px; color: #1b5e20; text-decoration: none; }
-        .nav-links { display: flex; gap: 15px; align-items: center; font-size: 14px; font-weight: 700; }
-        .nav-links a { color: #333; text-decoration: none; cursor: pointer; }
-        .nav-links a.active { color: #1b5e20; border-bottom: 2px solid #1b5e20; }
         .CONTAINER { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .search-box { width: 100%; padding: 12px 15px; border: 1px solid #cccccc; border-radius: 8px; margin-bottom: 15px; font-size: 15px; }
-        .filter-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
-        .filter-btn { background: #f0fdf4; color: #1b5e20; border: 1px solid #c8e6c9; padding: 8px 16px; border-radius: 20px; font-weight: 700; cursor: pointer; }
-        .filter-btn.active { background: #1b5e20; color: white; }
-        .my-garden-section { background: #fffde7; border: 1px solid #fff59d; padding: 20px; border-radius: 12px; margin-bottom: 25px; display: none; }
-        .warning-text { background: #fff3e0; color: #e65100; border: 1px solid #ffe0b2; padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 700; margin-bottom: 15px; }
         .plant-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
         .plant-card { background: white; border-radius: 12px; border: 1px solid #e2e7e2; overflow: hidden; display: flex; flex-direction: column; }
         .plant-img { width: 100%; height: 200px; object-fit: cover; background: #eaedf0; }
@@ -29,158 +20,64 @@
         .card-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: auto; }
         .act-btn { border: 1px solid #cccccc; padding: 10px 5px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; background: white; text-align: center; }
         .act-btn.liked { background: #ffebee; color: #c62828; border-color: #ffcdd2; }
-        .btn-send-nursery { background: #1b5e20; color: white; padding: 10px 20px; border-radius: 6px; font-weight: 700; border: none; cursor: pointer; }
-        .btn-send-self { background: #0288d1; color: white; padding: 10px 20px; border-radius: 6px; font-weight: 700; border: none; cursor: pointer; }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1000; }
-        .modal-content { background: white; padding: 25px; border-radius: 16px; max-width: 500px; width: 100%; position: relative; margin: 20px; }
     </style>
 </head>
 <body>
     <HEADER>
         <div class="header-container">
             <a class="logo-section" href="index.html">🌿 श्री राम नर्सरी</a>
-            <div class="nav-links">
-                <a href="index.html">होम</a>
-                <a onclick="showSection('catalog')" id="navCatalog" class="active">पौधे देखें</a>
-                <a onclick="showSection('garden')" id="navGarden">❤️ My Garden (<span id="savedCount">0</span>)</a>
+            <div id="langSelectorDiv">
+                <select id="appLangSelect" onchange="changeAppLang(this.value)" style="padding:6px; border-radius:6px; font-weight:bold;">
+                    <option value="hi">हिंदी</option>
+                    <option value="en">English</option>
+                    <option value="pa">ਪੰਜਾਬੀ</option>
+                    <option value="gu">ગુજરાતી</option>
+                    <option value="mr">मराठी</option>
+                    <option value="bn">বাংলা</option>
+                    <option value="ta">தமிழ்</option>
+                    <option value="te">తెలుగు</option>
+                    <option value="kn">ಕನ್ನಡ</option>
+                    <option value="ml">മലയാളം</option>
+                </select>
             </div>
         </div>
     </HEADER>
 
     <main class="CONTAINER">
-        <div id="myGardenSection" class="my-garden-section">
-            <h3>❤️ आपकी पसंदीदा पौधों की सूची (Saved List)</h3>
-            <div class="warning-text">
-                ⚠️ ध्यान दें: यदि आप अगले 24 घंटे के अंदर श्री राम नर्सरी विजिट कर रहे हैं, तभी इस लिस्ट को हमारे मुख्य नंबर पर भेजें। अन्यथा इसे नीचे दिए बटन से अपने WhatsApp पर सुरक्षित रख लें।
-            </div>
-            <div id="gardenContainerList" style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px;"></div>
-            <button class="btn-send-nursery" onclick="shareListWithNursery()">🟢 24 घंटे में आना है (नर्सरी को भेजें)</button>
-            <button class="btn-send-self" onclick="shareListWithSelf()">🔵 अपने WhatsApp पर सेव करें</button>
-        </div>
-
-        <div id="catalogSection">
-            <input type="text" id="searchBar" class="search-box" placeholder="पौधे का नाम या वैरायटी खोजें...">
-            <div class="filter-buttons">
-                <button class="filter-btn active" onclick="filterCategory('all')">सभी पौधे</button>
-                <button class="filter-btn" onclick="filterCategory('Fruit')">फलदार</button>
-                <button class="filter-btn" onclick="filterCategory('Indoor')">इनडोर</button>
-                <button class="filter-btn" onclick="filterCategory('Outdoor')">आउटडोर</button>
-                <button class="filter-btn" onclick="filterCategory('Flowering')">फूलदार</button>
-            </div>
-            <div class="plant-grid" id="plantGrid">डेटा लोड हो रहा है...</div>
-        </div>
+        <input type="text" id="searchBar" class="search-box" placeholder="🔍 पौधे का नाम या वैरायटी खोजें...">
+        <div class="plant-grid" id="plantGrid">डेटा लोड हो रहा है...</div>
     </main>
 
-    <div class="modal" id="detailsModal">
-        <div class="modal-content">
-            <span style="position:absolute; right:15px; top:15px; cursor:pointer; font-size:24px;" onclick="closeDetailsModal()">&times;</span>
-            <h2 id="modalPlantName" style="color:#1b5e20;"></h2>
-            <p id="modalPlantVariety"></p>
-            <h4>💡 पौधों के रखरखाव की टिप्स:</h4>
-            <p id="modalPlantTips" style="background:#e8f5e9; padding:10px; border-radius:8px;"></p>
-        </div>
-    </div>
-
-    <script>
-        const supabase = supabase.createClient("https://supabase.co", "sb_publishable_YUi1f1Q2sHxEFiYoBJ7ZUw_TzZga11K");
-        let allPlantsData = [];
-        let likedPlants = JSON.parse(localStorage.getItem('likedPlants')) || [];
-        let currentCategory = 'all';
-
-        document.addEventListener("DOMContentLoaded", async () => {
-            updateSavedCount();
-            await fetchPlants();
-            document.getElementById('searchBar').addEventListener('input', renderPlants);
+    <script type="module">
+        import { getPlants, setLang, getCurrentLang } from './js/plants.js';
+        document.addEventListener('DOMContentLoaded', () => {
+            const current = getCurrentLang();
+            if(document.getElementById('appLangSelect')) document.getElementById('appLangSelect').value = current;
+            renderGrid();
         });
-
-        async function fetchPlants() {
-            const { data } = await supabase.from('Plants').select('*').order('id', { ascending: true });
-            if (data) { allPlantsData = data; renderPlants(); }
-        }
-
-        function filterCategory(cat) {
-            currentCategory = cat;
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
-            renderPlants();
-        }
-
-        function renderPlants() {
+        window.changeAppLang = function(lang) {
+            setLang(lang);
+            location.reload();
+        };
+        function renderGrid() {
             const grid = document.getElementById('plantGrid');
-            const txt = document.getElementById('searchBar').value.toLowerCase();
+            const data = getPlants();
             grid.innerHTML = "";
-            const filtered = allPlantsData.filter(p => (currentCategory === 'all' || p.category === currentCategory) && ((p.name||'').toLowerCase().includes(txt) || (p.variety||'').toLowerCase().includes(txt)));
-
-            if(filtered.length === 0) { grid.innerHTML = "<p>कोई पौधा नहीं मिला।</p>"; return; }
-
-            filtered.forEach(p => {
-                const isLiked = likedPlants.includes(p.id);
+            data.forEach(p => {
                 grid.innerHTML += `
                     <div class="plant-card">
-                        <img class="plant-img" src="${p.image_url || 'https://images.unsplash.com/photo-1592417817098-8f3d6920495f?w=400'}" alt="${p.name}">
+                        <img class="plant-img" src="${p.image}" alt="${p.name}">
                         <div class="plant-info">
                             <h3 class="plant-name">${p.name}</h3>
-                            <p style="margin:0 0 15px 0; color:#666;">${p.variety || ''}</p>
+                            <p style="color:#666; margin:0 0 15px 0;">${p.variety || ''}</p>
                             <div class="card-actions">
-                                <button class="act-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike(${p.id})">${isLiked ? '❤️ Liked' : '🤍 Like'}</button>
-                                <button class="act-btn" onclick="openDetailsModal('${p.name}', '${p.variety||''}', '${p.tips||''}')">📝 Details</button>
-                                <button class="act-btn" onclick="shareSingle('${p.name}')">🔗 Share</button>
+                                <button class="act-btn">🤍 Like</button>
+                                <button class="act-btn">📝 Details</button>
+                                <button class="act-btn">🔗 Share</button>
                             </div>
                         </div>
                     </div>`;
             });
-        }
-
-        function toggleLike(id) {
-            likedPlants = likedPlants.includes(id) ? likedPlants.filter(i => i !== id) : [...likedPlants, id];
-            localStorage.setItem('likedPlants', JSON.stringify(likedPlants));
-            updateSavedCount(); renderPlants(); renderGardenList();
-        }
-        function updateSavedCount() { document.getElementById('savedCount').innerText = likedPlants.length; }
-        
-        function showSection(type) {
-            document.getElementById('myGardenSection').style.display = type === 'garden' ? 'block' : 'none';
-            document.getElementById('navGarden').classList.toggle('active', type === 'garden');
-            document.getElementById('navCatalog').classList.toggle('active', type === 'catalog');
-            if(type === 'garden') renderGardenList();
-        }
-
-        function renderGardenList() {
-            const listDiv = document.getElementById('gardenContainerList');
-            listDiv.innerHTML = "";
-            const saved = allPlantsData.filter(p => likedPlants.includes(p.id));
-            if(saved.length === 0) { listDiv.innerHTML = "सूची खाली है।"; return; }
-            saved.forEach((p, i) => { listDiv.innerHTML += `<div>${i+1}. ${p.name} <span style="color:red; cursor:pointer;" onclick="toggleLike(${p.id})">❌</span></div>`; });
-        }
-
-        function openDetailsModal(name, variety, tips) {
-            document.getElementById('modalPlantName').innerText = name;
-            document.getElementById('modalPlantVariety').innerText = variety;
-            document.getElementById('modalPlantTips').innerText = tips || 'साधारण पानी और धूप दें।';
-            document.getElementById('detailsModal').style.display = 'flex';
-        }
-
-        function closeDetailsModal() {
-            document.getElementById('detailsModal').style.display = 'none';
-        }
-
-        function shareSingle(name) {
-            const text = `🌱 श्री राम नर्सरी (भुना) से पौधा देखें: ${name}`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-        }
-
-        function shareListWithNursery() {
-            const saved = allPlantsData.filter(p => likedPlants.includes(p.id));
-            let text = `🌱 *श्री राम नर्सरी (भुना) - आर्डर लिस्ट* 🌱\n\n`;
-            saved.forEach((p, i) => { text += `${i+1}. ${p.name} (${p.variety || ''})\n`; });
-            window.open(`https://wa.me/9416316534?text=${encodeURIComponent(text)}`, '_blank');
-        }
-
-        function shareListWithSelf() {
-            const saved = allPlantsData.filter(p => likedPlants.includes(p.id));
-            let text = `🌱 *मेरी पसंदीदा पौधों की सूची* 🌱\n\n`;
-            saved.forEach((p, i) => { text += `${i+1}. ${p.name} (${p.variety || ''})\n`; });
-            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
         }
     </script>
 </body>

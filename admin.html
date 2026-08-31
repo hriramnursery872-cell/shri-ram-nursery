@@ -1,158 +1,78 @@
 <!doctype html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin Dashboard - Shri Ram Nursery</title>
-  <style>
-    body { margin:0; background:#f4f7f3; font-family:Arial, sans-serif; color:#202520; }
-    header { background:#1b5e20; color:white; padding:15px 20px; display:flex; justify-content:space-between; align-items:center; }
-    .container { max-width:900px; margin:20px auto; padding:0 20px; }
-    .form-box { background:white; padding:20px; border-radius:12px; border:1px solid #e2e7e2; margin-bottom:20px; box-shadow:0 3px 8px rgba(0,0,0,0.03); }
-    .form-group { margin-bottom:15px; }
-    label { display:block; font-weight:bold; margin-bottom:5px; color:#1b5e20; font-size:14px; }
-    input, select, textarea { width:100%; padding:10px; border:1px solid #ccc; border-radius:8px; font-size:14px; background:#fff; box-sizing:border-box; }
-    textarea { resize:vertical; height:70px; }
-    .btn-save { background:#1b5e20; color:white; border:0; padding:12px 20px; font-weight:bold; border-radius:8px; cursor:pointer; width:100%; font-size:16px; }
-    .btn-save:hover { background:#2e7d32; }
-    table { width:100%; border-collapse:collapse; background:white; border-radius:10px; overflow:hidden; margin-top:20px; }
-    th, td { padding:12px; border-bottom:1px solid #eee; text-align:left; font-size:13px; }
-    th { background:#e8f5e9; color:#1b5e20; }
-    .btn-del { background:#ffebee; color:#c62828; border:0; padding:6px 12px; border-radius:6px; cursor:pointer; font-weight:bold; }
-  </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>श्री राम नर्सरी - एडमिन पैनल</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f7f5; color: #202520; }
+        .admin-header { background: #1b5e20; color: white; padding: 15px 20px; font-size: 20px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
+        .container { max-width: 900px; margin: 20px auto; padding: 20px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: 700; margin-bottom: 5px; color: #1b5e20; }
+        .form-control { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px; }
+        .btn-primary { background: #1b5e20; color: white; padding: 12px 20px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; width: 100%; }
+        .ledger-box { background: #e8f5e9; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid #c8e6c9; }
+    </style>
 </head>
 <body>
-  <header>
-    <h2>🔒 Admin Panel - Shri Ram Nursery</h2>
-    <a href="index.html" style="color:white; text-decoration:none; font-weight:bold;">Home 🏠</a>
-  </header>
-
-  <main class="container">
-    <div class="form-box">
-      <h3>➕ नया पौधा Catalog में जोड़ें</h3>
-      <form id="add-plant-form">
-        <div style="display:flex; gap:15px; flex-wrap:wrap;">
-          <div class="form-group" style="flex:1; min-width:250px;">
-            <label>पौधे का नाम (हिंदी में)</label>
-            <input type="text" id="p-name" placeholder="जैसे: अमरूद हिसार सफेदा" required>
-          </div>
-          <div class="form-group" style="flex:1; min-width:250px;">
-            <label>Variety (English)</label>
-            <input type="text" id="p-variety" placeholder="जैसे: Hisar Safeda">
-          </div>
-        </div>
-
-        <div style="display:flex; gap:15px; flex-wrap:wrap;">
-          <div class="form-group" style="flex:1; min-width:250px;">
-            <label>Category</label>
-            <select id="p-category">
-              <option value="Fruit">🍎 फलदार पौधे</option>
-              <option value="Indoor">🪴 इंडोर प्लांट्स</option>
-              <option value="Outdoor">🌳 आउटडोर प्लांट्स</option>
-              <option value="Flowering">🌺 फूलों के पौधे</option>
-              <option value="Decorative">🌿 डेकोरेटिव</option>
-              <option value="Landscaping">🌴 लैंडस्केपिंग</option>
-              <option value="Medicinal">🌱 औषधीय</option>
-            </select>
-          </div>
-          <div class="form-group" style="flex:1; min-width:250px;">
-            <label>Plant Image URL (Optional)</label>
-            <input type="url" id="p-image" placeholder="https://images.unsplash.com/...">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>💡 पौधे की देखभाल की Tips (Care Tips)</label>
-          <textarea id="p-tips" placeholder="जैसे: धूप वाली जगह पर रखें, 3 दिन में पानी दें।"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>🌱 पौधे लगाने की विधि (Planting Guide)</label>
-          <textarea id="p-guide" placeholder="जैसे: 1. दो फीट का गड्ढा खोदें। 2. गोबर की खाद मिलाएं। 3. पौधा लगाएं।"></textarea>
-        </div>
-
-        <button type="submit" class="btn-save">💾 पौधा सेव करें</button>
-      </form>
+    <div class="admin-header">
+        <span>🌿 श्री राम नर्सरी - एडमिन डैशबोर्ड</span>
+        <a href="index.html" style="color:white; text-decoration:none; font-size:14px;">होम पर जाएं</a>
     </div>
 
-    <h3>📋 मौजूदा पौधों की लिस्ट</h3>
-    <div style="overflow-x:auto;">
-      <table id="plants-table">
-        <thead>
-          <tr>
-            <th>नाम</th>
-            <th>Variety</th>
-            <th>Category</th>
-            <th>देखभाल एवं लगाने की विधि</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="admin-table-body"></tbody>
-      </table>
-    </div>
-  </main>
+    <main class="container">
+        <h2>नया पौधा जोड़ें या बिलिंग करें</h2>
+        <form id="billingForm" onsubmit="recordAndSendBill(event)">
+            <div class="form-group">
+                <label>ग्राहक का नाम</label>
+                <input type="text" id="customerName" class="form-control" required placeholder="नाम दर्ज करें">
+            </div>
+            <div class="form-group">
+                <label>मोबाइल नंबर (WhatsApp)</label>
+                <input type="text" id="customerPhone" class="form-control" placeholder="91xxxxxxxxxx">
+            </div>
+            <div class="form-group">
+                <label>पता / गाँव</label>
+                <input type="text" id="customerAddress" class="form-control" placeholder="गाँव/शहर">
+            </div>
+            <div class="form-group">
+                <label>पौधे की श्रेणी</label>
+                <select id="billCategory" class="form-control">
+                    <option value="Fruit">फलदार पौधे</option>
+                    <option value="Indoor">इनडोर प्लांट्स</option>
+                    <option value="Outdoor">आउटडोर प्लांट्स</option>
+                    <option value="Flowering">फूल वाले पौधे</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>मात्रा (Quantity)</label>
+                <input type="number" id="billQuantity" class="form-control" value="1" min="1">
+            </div>
+            <div class="form-group">
+                <label>प्रति पौधा मूल्य (₹)</label>
+                <input type="number" id="billAmount" class="form-control" required placeholder="राशि दर्ज करें">
+            </div>
+            <div class="form-group">
+                <label>भुगतान का तरीका</label>
+                <select id="paymentMode" class="form-control">
+                    <option value="Cash">Cash (नकद)</option>
+                    <option value="UPI">UPI (ऑनलाइन)</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-primary">बिल सुरक्षित करें और WhatsApp भेजें</button>
+        </form>
 
-  <script type="module">
-    import { getPlants, addPlant, deletePlant } from "./js/plants.js";
+        <div class="ledger-box">
+            <h3>📊 दैनिक बिक्री हिसाब (Daily Sales Ledger)</h3>
+            <p>नकद (Cash Total): <strong id="cashCounter">₹0</strong></p>
+            <p>यूपीआई (UPI Total): <strong id="upiCounter">₹0</strong></p>
+            <small style="color: #666;">नोट: शाम 5:00 बजे यह हिसाब स्वतः डेटाबेस में क्लोज हो जाता है।</small>
+        </div>
+    </main>
 
-    const form = document.getElementById("add-plant-form");
-    const tbody = document.getElementById("admin-table-body");
-
-    function loadTable() {
-      const plants = getPlants();
-      tbody.innerHTML = "";
-      plants.forEach(p => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td><strong>${p.name}</strong></td>
-          <td>${p.variety || '-'}</td>
-          <td>${p.category}</td>
-          <td><small><b>Tips:</b> ${p.care_tips || '-'}<br><b>Guide:</b> ${p.planting_guide || '-'}</small></td>
-          <td><button class="btn-del" data-id="${p.id}">Delete</button></td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const catMap = {
-        "Fruit": "🍎 फलदार पौधे",
-        "Indoor": "🪴 इंडोर प्लांट्स",
-        "Outdoor": "🌳 आउटडोर प्लांट्स",
-        "Flowering": "🌺 फूलों के पौधे",
-        "Decorative": "🌿 डेकोरेटिव",
-        "Landscaping": "🌴 लैंडस्केपिंग",
-        "Medicinal": "🌱 औषधीय"
-      };
-
-      const newP = {
-        name: document.getElementById("p-name").value.trim(),
-        variety: document.getElementById("p-variety").value.trim(),
-        category: document.getElementById("p-category").value,
-        category_hi: catMap[document.getElementById("p-category").value],
-        image: document.getElementById("p-image").value.trim(),
-        care_tips: document.getElementById("p-tips").value.trim(),
-        planting_guide: document.getElementById("p-guide").value.trim(),
-        stock: true
-      };
-
-      addPlant(newP);
-      form.reset();
-      loadTable();
-      alert("पौधा सफलतापर्वक जोड़ दिया गया है!");
-    });
-
-    tbody.addEventListener("click", (e) => {
-      if (e.target.classList.contains("btn-del")) {
-        if (confirm("क्या आप इस पौधे को हटाना चाहते हैं?")) {
-          deletePlant(e.target.getAttribute("data-id"));
-          loadTable();
-        }
-      }
-    });
-
-    window.addEventListener("DOMContentLoaded", loadTable);
-  </script>
+    <script src="js/admin.js"></script>
 </body>
 </html>
