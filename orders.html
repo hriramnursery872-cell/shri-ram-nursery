@@ -1,45 +1,112 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>श्री राम नर्सरी - स्मार्ट आर्डर फॉर्म</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>डिजिटल प्लांट ऑर्डर मेकर - श्री राम नर्सरी</title>
     <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f7f5; color: #202520; }
-        .container { max-width: 600px; margin: 30px auto; padding: 25px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .form-group { margin-bottom: 15px; }
-        .form-control { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px; }
-        .btn-order { background: #2e7d32; color: white; width: 100%; padding: 12px; border: none; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background-color: #f4f6f4; color: #333; }
+        nav { background: #fff; display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; border-bottom: 1px solid #ddd; }
+        .logo { font-weight: bold; color: #1b5e20; text-decoration: none; font-size: 16px; }
+        .nav-links a { text-decoration: none; color: #1b5e20; font-weight: bold; font-size: 14px; margin-left: 10px; }
+
+        .container { max-width: 750px; margin: 20px auto; padding: 0 10px; }
+        .card { background: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        
+        .page-title { color: #1b5e20; font-size: 18px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        
+        .section-title { color: #2e7d32; font-size: 13px; font-weight: bold; margin: 15px 0 8px 0; display: flex; align-items: center; gap: 5px; }
+        
+        .form-group { margin-bottom: 10px; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; outline: none; }
+        input:focus, select:focus { border-color: #2e7d32; }
+
+        .row-inputs { display: grid; grid-template-columns: 2fr 3fr 1fr; gap: 8px; margin-bottom: 10px; }
+        
+        .btn-add { width: 100%; background: #1b5e20; color: white; border: none; padding: 10px; border-radius: 4px; font-weight: bold; font-size: 13px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 5px; }
+
+        .table-container { margin-top: 15px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        th { background: #e8f5e9; color: #1b5e20; text-align: left; padding: 8px; border: 1px solid #c8e6c9; }
+        td { padding: 8px; border: 1px solid #eee; }
+        .empty-msg { text-align: center; color: #888; padding: 15px !important; }
+
+        .share-box { background: #e8f5e9; border: 1px dashed #a5d6a7; border-radius: 6px; padding: 15px; margin-top: 20px; }
+        .share-title { font-weight: bold; color: #1b5e20; font-size: 13px; margin-bottom: 5px; display: flex; align-items: center; gap: 5px; }
+        .share-note { font-size: 11px; color: #555; margin-bottom: 12px; line-height: 1.4; }
+
+        .btn-save-self { width: 100%; background: #0088cc; color: white; border: none; padding: 12px; border-radius: 5px; font-weight: bold; font-size: 13px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; text-decoration: none; }
     </style>
 </head>
 <body>
+
+    <nav>
+        <a href="index.html" class="logo">🌱 श्री राम नर्सरी</a>
+        <div class="nav-links">
+            <a href="index.html">होम</a>
+            <a href="plant.html">पौधे देखें</a>
+        </div>
+    </nav>
+
     <div class="container">
-        <h2>🌿 पौधे बुक करने या मंगाने का फॉर्म</h2>
-        <form onsubmit="submitOrder(event)">
+        <div class="card">
+            <h2 class="page-title">🛒 डिजिटल प्लांट ऑर्डर मेकर</h2>
+
+            <div class="section-title">👤 ग्राहक का विवरण (Customer Information)</div>
             <div class="form-group">
-                <label>आपका नाम</label>
-                <input type="text" id="ordName" class="form-control" required placeholder="पूरा नाम">
+                <input type="text" id="custName" placeholder="अपना पूरा नाम लिखें...">
             </div>
             <div class="form-group">
-                <label>मोबाइल नंबर</label>
-                <input type="text" id="ordPhone" class="form-control" required placeholder="WhatsApp नंबर">
+                <input type="tel" id="custPhone" placeholder="अपना मोबाइल नंबर लिखें...">
             </div>
             <div class="form-group">
-                <label>पत्ता / डिलीवरी लोकेशन</label>
-                <textarea id="ordAddress" class="form-control" placeholder="गाँव या शहर का नाम"></textarea>
+                <input type="text" id="custAddress" placeholder="अपना पूरा पता/गांव का नाम लिखें...">
             </div>
-            <button type="submit" class="btn-order">🟢 WhatsApp पर आर्डर भेजें</button>
-        </form>
+
+            <div class="section-title">🌱 पौधा चुनें और लिस्ट तैयार करें</div>
+            <div class="row-inputs">
+                <select id="catSelect">
+                    <option value="">📁 कैटेगरी चुनें...</option>
+                    <option value="फलदार">फलदार</option>
+                    <option value="इंडोर">इंडोर</option>
+                    <option value="आउटडोर">आउटडोर</option>
+                    <option value="फूलदार">फूलदार</option>
+                </select>
+                <input type="text" id="plantName" placeholder="पौधे / वैरायटी का नाम लिखें...">
+                <input type="number" id="plantQty" value="1" min="1">
+            </div>
+            
+            <button class="btn-add" id="btnAddItem">📌 पौधा लिस्ट में जोड़ें (Plus Item)</button>
+
+            <div class="section-title">📋 आपकी तैयार सूची (Your Live Plant List)</div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>क्र.सं.</th>
+                            <th>कैटेगरी</th>
+                            <th>पौधे का नाम</th>
+                            <th>मात्रा (Qty)</th>
+                            <th>हटाएं</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listBody">
+                        <tr>
+                            <td colspan="5" class="empty-msg">आपकी सूची अभी खाली है। ऊपर से पौधे जोड़ें!</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="share-box">
+                <div class="share-title">📌 ऑर्डर सहेजें और रिकॉर्ड रखें</div>
+                <p class="share-note">नोट: यह सूची आपकी व्यक्तिगत खरीदारी की सूची बनाने के लिए है। इसे रिकॉर्ड रखने के लिए सीधे अपने स्वयं के WhatsApp नंबर पर सहेजें।</p>
+                
+                <button class="btn-save-self" id="btnSaveSelf">📱 अपने खुद के WhatsApp पर सुरक्षित सहेजें</button>
+            </div>
+        </div>
     </div>
-    <script>
-        function submitOrder(e) {
-            e.preventDefault();
-            const name = document.getElementById('ordName').value;
-            const phone = document.getElementById('ordPhone').value;
-            const address = document.getElementById('ordAddress').value;
-            const text = `🌿 *नया प्लांट आर्डर - श्री राम नर्सरी* 🌿\nनाम: ${name}\nमोबाइल: ${phone}\nपता: ${address}`;
-            window.open(`https://wa.me/9416316534?text=${encodeURIComponent(text)}`, '_blank');
-        }
-    </script>
+
 </body>
 </html>

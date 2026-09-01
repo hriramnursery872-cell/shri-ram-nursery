@@ -1,29 +1,109 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>श्री राम नर्सरी - भुना (फतेहाबाद)</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>श्री राम नर्सरी (भुना)</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f7f5; color: #202520; }
-        header { background: #1b5e20; color: white; padding: 20px; text-align: center; }
-        .ticker { background: #fffde7; color: #f57f17; padding: 10px; font-weight: bold; text-align: center; border-bottom: 1px solid #fff9c4; }
-        .main-content { max-width: 800px; margin: 40px auto; padding: 20px; background: white; border-radius: 12px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .btn { display: inline-block; background: #1b5e20; color: white; padding: 12px 25px; margin: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background-color: #f4f6f4; color: #333; }
+        .top-banner { background-color: #1b5e20; color: #ffeb3b; text-align: center; padding: 6px; font-size: 13px; font-weight: bold; }
+        .top-banner a { color: #ffeb3b; text-decoration: underline; }
+        
+        nav { background: #fff; display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; border-bottom: 1px solid #ddd; }
+        .nav-links { display: flex; gap: 15px; align-items: center; }
+        .nav-links a { text-decoration: none; color: #1b5e20; font-weight: bold; font-size: 14px; }
+        .btn-order-nav { background: #1b5e20; color: #fff !important; padding: 5px 12px; border-radius: 4px; }
+        .lang-select { padding: 4px 8px; border-radius: 4px; border: 1px solid #1b5e20; font-weight: bold; color: #1b5e20; background: #fff; cursor: pointer; }
+
+        .container { max-width: 800px; margin: 15px auto; padding: 0 10px; }
+        
+        .hero-card { background: #e8f5e9; border-left: 5px solid #2e7d32; padding: 20px; text-align: center; border-radius: 6px; margin-bottom: 15px; }
+        .hero-card h2 { color: #1b5e20; font-size: 20px; margin-bottom: 8px; }
+        .hero-card p { color: #444; font-size: 13px; margin-bottom: 15px; }
+        
+        .sub-hero { text-align: center; margin: 20px 0; }
+        .sub-hero h3 { color: #1b5e20; font-size: 18px; }
+        .sub-hero p { color: #666; font-size: 12px; margin-top: 4px; }
+        
+        .action-btns { display: flex; justify-content: center; gap: 12px; margin: 15px 0; }
+        .btn-call { background: #004d40; color: white; border: none; padding: 10px 18px; border-radius: 20px; font-weight: bold; display: flex; align-items: center; gap: 6px; text-decoration: none; font-size: 13px; }
+        .btn-whatsapp { background: #25d366; color: white; border: none; padding: 10px 18px; border-radius: 20px; font-weight: bold; display: flex; align-items: center; gap: 6px; text-decoration: none; font-size: 13px; }
+
+        .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+        .card { background: white; border: 1px solid #c8e6c9; border-radius: 6px; padding: 15px; text-align: left; }
+        .card h4 { color: #1b5e20; font-size: 15px; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+        .card p { color: #555; font-size: 11px; margin-bottom: 12px; line-height: 1.4; }
+        .btn-card { background: #2e7d32; color: white; border: none; padding: 7px 12px; border-radius: 15px; font-size: 12px; font-weight: bold; cursor: pointer; display: inline-block; text-decoration: none; }
+
+        footer { background: #1b5e20; color: white; text-align: center; padding: 15px; margin-top: 30px; font-size: 12px; }
+        footer a { color: #ffeb3b; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="ticker" id="liveTicker">📢 श्री राम नर्सरी, भुना में उत्तम किस्म के फलदार और छायादार पौधे उपलब्ध हैं! संपर्क करें।</div>
-    <header>
-        <h1>🌿 श्री राम नर्सरी (भुना)</h1>
-        <p>फतेहाबाद, हरियाणा - शुद्धता और विश्वास का प्रतीक</p>
-    </header>
-    <div class="main-content">
-        <h2>स्वागत है आपका!</h2>
-        <p>हमारे पास सभी प्रकार के फलदार, फूलदार, इनडोर और आउटडोर पौधे उपलब्ध हैं।</p>
-        <a href="plant.html" class="btn">पौधे देखें (Catalog)</a>
-        <a href="order.html" class="btn" style="background: #0288d1;">स्मार्ट ऑर्डर फॉर्म</a>
-        <a href="admin.html" class="btn" style="background: #e65100;">एडमिन पैनल</a>
+
+    <div class="top-banner">
+        🔴 नया वीडियो अपडेट: श्री राम नर्सरी (भुना) के नए पौधे देखो - <a href="#">टैप करें और जुड़ें!</a>
     </div>
+
+    <nav>
+        <div class="nav-links">
+            <a href="index.html">होम</a>
+            <a href="plant.html">पौधे देखें</a>
+            <a href="orders.html" class="btn-order-nav">ऑर्डर देखें</a>
+        </div>
+        <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
+            <option value="hi">हिंदी</option>
+            <option value="en">English</option>
+        </select>
+    </nav>
+
+    <div class="container">
+        <div class="hero-card">
+            <h2>नमस्कार दोस्तों! आपकी अपनी श्री राम नर्सरी (भुना) में आपका हार्दिक स्वागत है! 🌱</h2>
+            <p>❤ श्री राम नर्सरी (भुना) से अब तक हजारों स्वस्थ पौधे किसान भाइयों और बागबानों तक पहुँच चुके हैं। आज ही हमारी नर्सरी विजिट करें!</p>
+        </div>
+
+        <div class="sub-hero">
+            <h3>1000+ से भी अधिक वैरायटीओं के लिए उपयुक्त पौधे</h3>
+            <p>फलदार, इंडोर, आउटडोर, फूलदार, डेकोरेटिव और लैंडस्केपिंग आर्किटेक्चर की जानकारी देखें।</p>
+            
+            <div class="action-btns">
+                <a href="tel:" class="btn-call">📞 अभी कॉल करें</a>
+                <a href="https://wa.me/" class="btn-whatsapp">💬 WhatsApp</a>
+            </div>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <h4>🌱 View Plants</h4>
+                <p>नर्सरी में उपलब्ध फलदार, इंडोर, आउटडोर, फूलदार और अन्य प्रमाणित पौधों का पूरा कैटलॉग देखें।</p>
+                <a href="plant.html" class="btn-card">🌱 कैटलॉग उपलब्ध</a>
+            </div>
+
+            <div class="card">
+                <h4>🛒 Plant Order करें</h4>
+                <p>अपनी पसंद का पौधा चुनें, उसे लाइक करें और सीधे अपनी लिस्ट WhatsApp पर शेयर करें।</p>
+                <a href="orders.html" class="btn-card">🛒 ऑर्डर उपलब्ध</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© श्री राम नर्सरी, भुना (फतेहाबाद)</p>
+        <p style="margin-top: 5px;"><a href="admin.html">👉 एडमिन पोर्टल</a></p>
+    </footer>
+
+    <script>
+        function changeLanguage(lang) {
+            localStorage.setItem("nursery_lang", lang);
+            // Language logic will be connected in final script step
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedLang = localStorage.getItem("nursery_lang") || "hi";
+            document.getElementById("langSelect").value = savedLang;
+        });
+    </script>
 </body>
 </html>

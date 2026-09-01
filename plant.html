@@ -1,84 +1,348 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>श्री राम नर्सरी - पौधे देखें</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>श्री राम नर्सरी (भुना) - Plants Catalog</title>
     <style>
-        * { box-sizing: border-box; }
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f7f5; color: #202520; }
-        HEADER { background: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
-        .header-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-        .logo-section { font-weight: 800; font-size: 22px; color: #1b5e20; text-decoration: none; }
-        .CONTAINER { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .search-box { width: 100%; padding: 12px 15px; border: 1px solid #cccccc; border-radius: 8px; margin-bottom: 15px; font-size: 15px; }
-        .plant-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .plant-card { background: white; border-radius: 12px; border: 1px solid #e2e7e2; overflow: hidden; display: flex; flex-direction: column; }
-        .plant-img { width: 100%; height: 200px; object-fit: cover; background: #eaedf0; }
-        .plant-info { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; }
-        .plant-name { font-size: 18px; font-weight: 800; color: #1b5e20; margin: 0 0 5px 0; }
-        .card-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: auto; }
-        .act-btn { border: 1px solid #cccccc; padding: 10px 5px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; background: white; text-align: center; }
-        .act-btn.liked { background: #ffebee; color: #c62828; border-color: #ffcdd2; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: #f4f6f4; color: #333; }
+        header { background: #1b5e20; color: white; padding: 12px 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        header div { font-size: 16px; }
+        .nav-link { color: white; text-decoration: none; font-size: 12px; background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 4px; }
+        
+        .container { max-width: 900px; margin: 15px auto; padding: 0 10px; }
+        
+        .cat-title { font-size: 18px; font-weight: bold; color: #1b5e20; margin: 20px 0 10px 0; border-bottom: 2px solid #2e7d32; padding-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+        .card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border: 1px solid #e0e0e0; display: flex; flex-direction: column; }
+        .card-img { width: 100%; height: 160px; background: #e8f5e9; display: flex; align-items: center; justify-content: center; color: #2e7d32; font-size: 40px; }
+        .card-body { padding: 12px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .card-title { font-size: 15px; font-weight: bold; color: #111; margin-bottom: 4px; }
+        .card-subtitle { font-size: 11px; color: #666; margin-bottom: 8px; }
+        .badge { background: #e8f5e9; color: #2e7d32; font-size: 10px; font-weight: bold; padding: 3px 6px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
+        .btn-care { background: #0288d1; color: white; border: none; padding: 8px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; width: 100%; }
     </style>
 </head>
 <body>
-    <HEADER>
-        <div class="header-container">
-            <a class="logo-section" href="index.html">🌿 श्री राम नर्सरी</a>
-            <div id="langSelectorDiv">
-                <select id="appLangSelect" onchange="changeAppLang(this.value)" style="padding:6px; border-radius:6px; font-weight:bold;">
-                    <option value="hi">हिंदी</option>
-                    <option value="en">English</option>
-                    <option value="pa">ਪੰਜਾਬੀ</option>
-                    <option value="gu">ગુજરાતી</option>
-                    <option value="mr">मराठी</option>
-                    <option value="bn">বাংলা</option>
-                    <option value="ta">தமிழ்</option>
-                    <option value="te">తెలుగు</option>
-                    <option value="kn">ಕನ್ನಡ</option>
-                    <option value="ml">മലയാളം</option>
-                </select>
+
+    <header>
+        <div>🌿 श्री RAM नर्सरी (भुना)</div>
+        <a href="admin.html" class="nav-link">Admin Dashboard</a>
+    </header>
+
+    <div class="container">
+
+        <!-- 1. फलदार पौधे -->
+        <div class="cat-title">🍎 फलदार पौधे (Fruit Plants)</div>
+        <div class="grid">
+            <div class="card">
+                <div class="card-img">🌳</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">L-49 / Hisar Safeda</span>
+                        <div class="card-title">अमरूद - हिसार सफेदा (Guava)</div>
+                        <div class="card-subtitle">उत्कृष्ट गुणवत्ता और मीठे फल देने वाली किस्म।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">🍑</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Shan-e-Punjab / Alucha</span>
+                        <div class="card-title">आडू (Peach)</div>
+                        <div class="card-subtitle">शुरुआती सीजन में फल देने वाली बेहतरीन वैरायटी।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">Plum</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Satluj Purple / Alucha</span>
+                        <div class="card-title">प्लम (Plum)</div>
+                        <div class="card-subtitle">पंजाब ब्यूटी और सतलुज पर्पल की वैरायटी।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">🍋</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Jatti Khatti</span>
+                        <div class="card-title">नींबू (Lemon)</div>
+                        <div class="card-subtitle">जट्टी खट्टी रूटस्टॉक पर तैयार पौधा।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">🍊</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Blood Red</span>
+                        <div class="card-title">माल्टा (Malta Blood Red)</div>
+                        <div class="card-subtitle">रसदार और गहरे रंग वाले माल्टा फल।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">🍐</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Patharnakh / Nijisiki / Kainth</span>
+                        <div class="card-title">नाशपाती / नाख (Pear)</div>
+                        <div class="card-subtitle">कैंथ रूटस्टॉक पर तैयार मजबूत पौधे।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">🍇</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Grape Variety</span>
+                        <div class="card-title">अंगूर (Grape)</div>
+                        <div class="card-subtitle">बेल वाले अंगूर के स्वस्थ पौधे।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">🍊</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Kinnow Variety</span>
+                        <div class="card-title">किन्नू (Kinnow)</div>
+                        <div class="card-subtitle">क्षेत्रीय जलवायु के लिए सबसे उपयुक्त।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">🍊</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Sweet Lime</span>
+                        <div class="card-title">मौसमी (Mosambi)</div>
+                        <div class="card-subtitle">मीठी मौसमी के तैयार पौधे।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">🍒</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Lychee Variety</span>
+                        <div class="card-title">लीची (Lychee)</div>
+                        <div class="card-subtitle">मीठे व बड़े फल देने वाली किस्में।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">🥭</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Ambika / Lalima</span>
+                        <div class="card-title">आम (Mango)</div>
+                        <div class="card-subtitle">अंबिका व ललिमा किस्म के आम पौधे।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">🫐</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Jamun Variety</span>
+                        <div class="card-title">जामुन (Jamun)</div>
+                        <div class="card-subtitle">बड़े फल देने वाले ग्राफ्टेड जामुन पौधे।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">🍎</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Golden / Anna</span>
+                        <div class="card-title">सेब (Apple)</div>
+                        <div class="card-subtitle">कम ठंड वाले मैदानी क्षेत्रों के लिए सेब।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
             </div>
         </div>
-    </HEADER>
 
-    <main class="CONTAINER">
-        <input type="text" id="searchBar" class="search-box" placeholder="🔍 पौधे का नाम या वैरायटी खोजें...">
-        <div class="plant-grid" id="plantGrid">डेटा लोड हो रहा है...</div>
-    </main>
+        <!-- 2. इंडोर प्लांट -->
+        <div class="cat-title">🪴 इंडोर प्लांट (Indoor Plants)</div>
+        <div class="grid">
+            <div class="card">
+                <div class="card-img">🪴</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Golden Pothos</span>
+                        <div class="card-title">मनी प्लांट (Money Plant)</div>
+                        <div class="card-subtitle">घर और ऑफिस की हवा को शुद्ध करने वाला पौधा।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
 
-    <script type="module">
-        import { getPlants, setLang, getCurrentLang } from './js/plants.js';
-        document.addEventListener('DOMContentLoaded', () => {
-            const current = getCurrentLang();
-            if(document.getElementById('appLangSelect')) document.getElementById('appLangSelect').value = current;
-            renderGrid();
-        });
-        window.changeAppLang = function(lang) {
-            setLang(lang);
-            location.reload();
-        };
-        function renderGrid() {
-            const grid = document.getElementById('plantGrid');
-            const data = getPlants();
-            grid.innerHTML = "";
-            data.forEach(p => {
-                grid.innerHTML += `
-                    <div class="plant-card">
-                        <img class="plant-img" src="${p.image}" alt="${p.name}">
-                        <div class="plant-info">
-                            <h3 class="plant-name">${p.name}</h3>
-                            <p style="color:#666; margin:0 0 15px 0;">${p.variety || ''}</p>
-                            <div class="card-actions">
-                                <button class="act-btn">🤍 Like</button>
-                                <button class="act-btn">📝 Details</button>
-                                <button class="act-btn">🔗 Share</button>
-                            </div>
-                        </div>
-                    </div>`;
-            });
-        }
-    </script>
+            <div class="card">
+                <div class="card-img">🌿</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Syngonium</span>
+                        <div class="card-title">सिगोनियम (Syngonium)</div>
+                        <div class="card-subtitle">कम धूप में भी आसानी से चलने वाला इनडोर प्लांट।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">🌵</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Snake Plant</span>
+                        <div class="card-title">स्नेक प्लांट (Snake Plant)</div>
+                        <div class="card-subtitle">कम पानी और रखरखाव वाला एयर प्यूरीफायर।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">🪴</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Schefflera</span>
+                        <div class="card-title">शेफलेरा (Schefflera)</div>
+                        <div class="card-subtitle">सुंदर पत्तियों वाला डेकोरेटिव इंडोर प्लांट।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. आउटडोर प्लांट -->
+        <div class="cat-title">🌳 आउटडोर प्लांट (Outdoor Plants)</div>
+        <div class="grid">
+            <div class="card">
+                <div class="card-img">🌸</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Tecoma</span>
+                        <div class="card-title">टिकोमा (Tecoma)</div>
+                        <div class="card-subtitle">पीले फूलों से सजने वाला आउटडोर प्लांट।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">🪴</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Jade</span>
+                        <div class="card-title">जेड प्लांट (Jade Plant)</div>
+                        <div class="card-subtitle">शुभ माना जाने वाला रसीला (Succulent) पौधा।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. फूलदार पौधे -->
+        <div class="cat-title">🌺 फूलदार पौधे (Flowering Plants)</div>
+        <div class="grid">
+            <div class="card">
+                <div class="card-img">🌺</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Hibiscus</span>
+                        <div class="card-title">गुड़हल (Hibiscus)</div>
+                        <div class="card-subtitle">सफेद, लाल और अन्य सुंदर रंगों में उपलब्ध।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">🌸</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Perennial</span>
+                        <div class="card-title">बारहमासी फूल वाले पौधे</div>
+                        <div class="card-subtitle">पूरे साल फूल देने वाले पौधों की कलेक्शन।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. डेकोरेटिव & लैंडस्केपिंग -->
+        <div class="cat-title">🌴 डेकोरेटिव एवं लैंडस्केपिंग (Decorative & Landscaping)</div>
+        <div class="grid">
+            <div class="card">
+                <div class="card-img">🌴</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Areca Palm</span>
+                        <div class="card-title">अरेका पाम (Areca Palm)</div>
+                        <div class="card-subtitle">लैंडस्केपिंग और सजावट का पसंदीदा पाम।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">🌿</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Croton</span>
+                        <div class="card-title">क्रोटन (Croton)</div>
+                        <div class="card-subtitle">रंग-बिरंगी और आकर्षक पत्तियों वाला पौधा।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">🪴</div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Rubber Plant</span>
+                        <div class="card-title">रबर प्लांट (Rubber Plant)</div>
+                        <div class="card-subtitle">चमकदार पत्तियों वाला प्रसिद्ध शो-प्लांट।</div>
+                    </div>
+                    <button class="btn-care">ℹ️ देखभाल व केयर टिप देखें</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </body>
 </html>
