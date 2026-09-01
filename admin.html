@@ -35,7 +35,7 @@
         .btn { background: #2e7d32; color: white; border: none; padding: 9px 15px; border-radius: 4px; font-weight: bold; font-size: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 5px; flex: 1; text-decoration: none; }
         .btn-whatsapp { background: #25d366; }
         .btn-blue { background: #0288d1; }
-        .btn-danger { background: #d32f2f; padding: 4px 8px; font-size: 10px; border-radius: 3px; color: white; border: none; }
+        .btn-danger { background: #d32f2f; padding: 4px 8px; font-size: 10px; border-radius: 3px; color: white; border: none; cursor: pointer; }
         .payment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .pay-box { background: #fafafa; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px; }
         .pay-box .title { font-size: 12px; font-weight: bold; color: #333; display: flex; align-items: center; gap: 4px; }
@@ -46,10 +46,7 @@
         th, td { padding: 8px 10px; border-bottom: 1px solid #eee; }
         th { background: #f9f9f9; color: #444; font-weight: bold; }
         .img-thumb { width: 36px; height: 36px; object-fit: cover; border-radius: 4px; background: #eee; }
-        @media (max-width: 600px) {
-            .stats-grid { grid-template-columns: 1fr 1fr; }
-            .form-row { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 600px) { .stats-grid { grid-template-columns: 1fr 1fr; } .form-row { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -59,17 +56,16 @@
             🌿 श्री राम नर्सरी (भुना)
             <p>Nursery Management & Sales Dashboard</p>
         </div>
-        <a href="index.html" class="btn-logout">Logout</a>
+        <button class="btn-logout" id="btnLogout">Logout</button>
     </header>
 
     <div class="container">
 
         <div class="dash-head">
             <h2>📊 Admin Dashboard</h2>
-            <p>आज की बिक्री, पौधों की varieties, customer और payment का पूरा हिसाब (शाम 5:00 बजे तक ऑटो-अपडेट)</p>
+            <p>आज की बिक्री, पौधों की varieties, customer और payment का पूरा हिसाब</p>
         </div>
 
-        <!-- Dashboard Stats Grid -->
         <div class="stats-grid">
             <div class="stat-box">
                 <div class="title">🌱 आज कुल पौधे बिके</div>
@@ -89,30 +85,19 @@
             </div>
         </div>
 
-        <!-- 1. Live Engagement Counters -->
+        <!-- 1. Live Engagement -->
         <div class="card">
             <div class="card-title">📈 ऐप यूज़र एक्टिविटीज (App Live Analytics)</div>
-            <div class="card-subtitle">वेबसाइट पर विजिटर्स, लाइक्स और शेयर की लाइव संख्या:</div>
             <div class="engagement-stats">
-                <div class="eng-box">
-                    <div class="num" id="countViews">0</div>
-                    <div class="label">👁️ Total Views</div>
-                </div>
-                <div class="eng-box">
-                    <div class="num" id="countLikes">0</div>
-                    <div class="label">♡ Total Likes</div>
-                </div>
-                <div class="eng-box">
-                    <div class="num" id="countShares">0</div>
-                    <div class="label">🔗 Total Shares</div>
-                </div>
+                <div class="eng-box"><div class="num" id="countViews">124</div><div class="label">👁️ Total Views</div></div>
+                <div class="eng-box"><div class="num" id="countLikes">45</div><div class="label">♡ Total Likes</div></div>
+                <div class="eng-box"><div class="num" id="countShares">18</div><div class="label">🔗 Total Shares</div></div>
             </div>
         </div>
 
-        <!-- 2. Video / Blog URL Manager Section -->
+        <!-- 2. Video URL Manager -->
         <div class="card">
-            <div class="card-title">🎥 वीडियो लिंक व ब्लॉग यूआरएल अपडेट (Video / Blog URL Manager)</div>
-            <div class="card-subtitle">होम पेज की लाल पट्टी पर नया वीडियो संदेश और यूट्यूब / ब्लॉग लिंक अपडेट करें:</div>
+            <div class="card-title">🎥 वीडियो लिंक व ब्लॉग यूआरएल अपडेट</div>
             <div class="form-group">
                 <label>बैनर संदेश (Banner Text):</label>
                 <input type="text" id="blogTitleText" value="🔴 नया वीडियो अपडेट: श्री राम नर्सरी (भुना) के नए पौधे देखो">
@@ -124,10 +109,9 @@
             <button class="btn btn-blue" id="btnSaveBlogUrl">💾 नया वीडियो यूआरएल सहेजें</button>
         </div>
 
-        <!-- 3. New Order Entry Form (Backend Connected) -->
+        <!-- 3. New Order Entry Form -->
         <div class="card">
-            <div class="card-title">➕ नया ऑर्डर / बिक्री दर्ज करें (Backend & Ledger Sync)</div>
-            <div class="card-subtitle">यहाँ से कस्टमर रिकॉर्ड बैकएंड में सेव होगा और WhatsApp बिल भेजा जा सकेगा।</div>
+            <div class="card-title">➕ नया ऑर्डर / बिक्री दर्ज करें</div>
 
             <div class="form-row">
                 <div class="form-group">
@@ -146,75 +130,46 @@
                     <input type="text" id="custAddress" placeholder="गाँव / शहर का नाम">
                 </div>
                 <div class="form-group">
-                    <label>🌱 पौधे / वैरायटी चुनें</label>
-                    <select id="custPlant">
-                        <option value="">-- पौधा चुनें --</option>
-                        <optgroup label="फलदार पौधे">
-                            <option value="अमरूद - हिसार सफेदा (Guava Hisar Safeda)">अमरूद - हिसार सफेदा (Guava Hisar Safeda)</option>
-                            <option value="आडू (Peach)">आडू (Peach)</option>
-                            <option value="प्लम (Plum)">प्लम (Plum)</option>
-                            <option value="नींबू (Lemon)">नींबू (Lemon)</option>
-                            <option value="माल्टा (Malta Blood Red)">माल्टा (Malta Blood Red)</option>
-                            <option value="नाशपाती / नाख (Pear)">नाशपाती / नाख (Pear)</option>
-                            <option value="अंगूर (Grape)">अंगूर (Grape)</option>
-                            <option value="किन्नू (Kinnow)">किन्नू (Kinnow)</option>
-                            <option value="मौसमी (Mosambi / Sweet Lime)">मौसमी (Mosambi / Sweet Lime)</option>
-                            <option value="लीची (Lychee)">लीची (Lychee)</option>
-                            <option value="आम (Mango)">आम (Mango)</option>
-                            <option value="जामुन (Jamun)">जामुन (Jamun)</option>
-                            <option value="सेब (Apple)">सेब (Apple)</option>
-                        </optgroup>
-                        <optgroup label="इंडोर प्लांट">
-                            <option value="मनी प्लांट (Money Plant)">मनी प्लांट (Money Plant)</option>
-                            <option value="सिगोनियम (Syngonium)">सिगोनियम (Syngonium)</option>
-                            <option value="स्नेक प्लांट (Snake Plant)">स्नेक प्लांट (Snake Plant)</option>
-                            <option value="शेफलेरा (Schefflera)">शेफलेरा (Schefflera)</option>
-                            <option value="अन्य छायादार इंडोर पौधे">अन्य छायादार इंडोर पौधे</option>
-                        </optgroup>
-                        <optgroup label="आउटडोर प्लांट">
-                            <option value="टिकोमा (Tecoma)">टिकोमा (Tecoma)</option>
-                            <option value="जेड प्लांट (Jade Plant)">जेड प्लांट (Jade Plant)</option>
-                            <option value="आउटडोर झाड़ियाँ एवं हेज प्लांट्स">आउटडोर झाड़ियाँ एवं हेज प्लांट्स</option>
-                        </optgroup>
-                        <optgroup label="फूलदार पौधे">
-                            <option value="गुड़हल (Hibiscus)">गुड़हल (Hibiscus)</option>
-                            <option value="बारहमासी फूल वाले पौधे">बारहमासी फूल वाले पौधे</option>
-                            <option value="मौसमी फूल वाले पौधे">मौसमी फूल वाले पौधे</option>
-                        </optgroup>
-                        <optgroup label="डेकोरेटिव पौधे">
-                            <option value="क्रोटन (Croton)">क्रोटन (Croton)</option>
-                            <option value="ड्रैसीना (Dracaena)">ड्रैसीना (Dracaena)</option>
-                            <option value="रबर प्लांट (Rubber Plant)">रबर प्लांट (Rubber Plant)</option>
-                            <option value="सिल्वर बुश (Silver Bush)">सिल्वर बुश (Silver Bush)</option>
-                        </optgroup>
-                        <optgroup label="लैंडस्केपिंग">
-                            <option value="अरेका पाम (Areca Palm)">अरेका पाम (Areca Palm)</option>
-                        </optgroup>
+                    <label>🌱 1. पौधे की Category चुनें</label>
+                    <select id="custPlantCat">
+                        <option value="">-- कैटेगरी चुनें --</option>
+                        <option value="fruit">🍎 फलदार पौधे</option>
+                        <option value="indoor">🪴 इंडोर प्लांट</option>
+                        <option value="outdoor">🌳 आउटडोर प्लांट</option>
+                        <option value="flower">🌺 फूलदार पौधे</option>
                     </select>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
+                    <label>🌱 2. पौधा चुनें</label>
+                    <select id="custPlant">
+                        <option value="">-- सबसे पहले कैटेगरी चुनें --</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>🔢 पौधों की संख्या (Quantity)</label>
                     <input type="number" id="custQty" value="1" min="1">
                 </div>
+            </div>
+
+            <div class="form-row">
                 <div class="form-group">
                     <label>💰 कुल राशि (Amount in ₹)</label>
                     <input type="number" id="custAmount" placeholder="जैसे: 1500">
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label>💳 पेमेंट का तरीका (Payment Mode)</label>
-                <select id="custPaymentMode">
-                    <option value="Cash (नकद)">💵 Cash (नकद)</option>
-                    <option value="UPI (ऑनलाइन)">📲 UPI (ऑनलाइन)</option>
-                </select>
+                <div class="form-group">
+                    <label>💳 पेमेंट का तरीका</label>
+                    <select id="custPaymentMode">
+                        <option value="Cash">💵 Cash (नकद)</option>
+                        <option value="UPI">📲 UPI (ऑनलाइन)</option>
+                    </select>
+                </div>
             </div>
 
             <div class="btn-row">
-                <button class="btn" id="btnSaveRecord">💾 बैकएंड में सेव करें</button>
+                <button class="btn" id="btnSaveRecord">💾 लेजर में सेव करें</button>
                 <button class="btn btn-whatsapp" id="btnSendWhatsapp">💬 WhatsApp पर बिल भेजें</button>
             </div>
         </div>
@@ -222,144 +177,53 @@
         <!-- 4. Payment Ledger Summary -->
         <div class="card">
             <div class="card-title">💳 आज का Payment हिसाब</div>
-            <div class="card-subtitle">Cash और UPI payment अलग-अलग दिखाई जाएगी।</div>
-            
             <div class="payment-grid">
                 <div class="pay-box">
                     <div class="title">💵 Cash Payment</div>
                     <div class="num" id="totalCash">₹0</div>
-                    <div class="sub">Cash से हुई बिक्री</div>
                 </div>
                 <div class="pay-box">
                     <div class="title">📲 UPI Payment</div>
                     <div class="num" id="totalUpi">₹0</div>
-                    <div class="sub">UPI से हुई बिक्री</div>
                 </div>
             </div>
         </div>
 
-        <!-- 5. Simplified Plant Manager Form (Dropdown Based with All 30 Plants) -->
+        <!-- 5. New Plant Manager Form -->
         <div class="card">
-            <div class="card-title">🌱 नया पौधा Catalog में जोड़ें (Dropdown Selection)</div>
-            <div class="card-subtitle">कैटेगरी और पौधे का नाम ड्रॉपडाउन से चुनें, फोटो अपलोड करें और देखभाल की जानकारी भरें:</div>
-
+            <div class="card-title">🌱 नया पौधा Catalog में जोड़ें</div>
             <div class="form-row">
                 <div class="form-group">
-                    <label>1. Category चुनें (Dropdown)</label>
+                    <label>Category चुनें</label>
                     <select id="newPlantCat">
-                        <option value="">-- Category चुनें --</option>
                         <option value="फलदार पौधे">🍎 फलदार पौधे</option>
                         <option value="इंडोर प्लांट">🪴 इंडोर प्लांट</option>
                         <option value="आउटडोर प्लांट">🌳 आउटडोर प्लांट</option>
                         <option value="फूलदार पौधे">🌺 फूलदार पौधे</option>
-                        <option value="डेकोरेटिव पौधे">🌿 डेकोरेटिव पौधे</option>
-                        <option value="लैंडस्केपिंग">🌴 लैंडस्केपिंग</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>2. पौधे का नाम चुनें (Plant Name Dropdown)</label>
-                    <select id="newPlantNameSelect">
-                        <option value="">-- पौधा चुनें --</option>
-                        <optgroup label="फलदार पौधे">
-                            <option value="अमरूद - हिसार सफेदा (Guava Hisar Safeda)">अमरूद - हिसार सफेदा</option>
-                            <option value="आडू (Peach)">आडू (Peach)</option>
-                            <option value="प्लम (Plum)">प्लम (Plum)</option>
-                            <option value="नींबू (Lemon)">नींबू (Lemon)</option>
-                            <option value="माल्टा (Malta Blood Red)">माल्टा (Malta Blood Red)</option>
-                            <option value="नाशपाती / नाख (Pear)">नाशपाती / नाख (Pear)</option>
-                            <option value="अंगूर (Grape)">अंगूर (Grape)</option>
-                            <option value="किन्नू (Kinnow)">किन्नू (Kinnow)</option>
-                            <option value="मौसमी (Mosambi / Sweet Lime)">मौसमी (Mosambi)</option>
-                            <option value="लीची (Lychee)">लीची (Lychee)</option>
-                            <option value="आम (Mango)">आम (Mango)</option>
-                            <option value="जामुन (Jamun)">जामुन (Jamun)</option>
-                            <option value="सेब (Apple)">सेब (Apple)</option>
-                        </optgroup>
-                        <optgroup label="इंडोर प्लांट">
-                            <option value="मनी प्लांट (Money Plant)">मनी प्लांट (Money Plant)</option>
-                            <option value="सिगोनियम (Syngonium)">सिगोनियम (Syngonium)</option>
-                            <option value="स्नेक प्लांट (Snake Plant)">स्नेक प्लांट (Snake Plant)</option>
-                            <option value="शेफलेरा (Schefflera)">शेफलेरा (Schefflera)</option>
-                            <option value="अन्य छायादार इंडोर पौधे">अन्य छायादार इंडोर पौधे</option>
-                        </optgroup>
-                        <optgroup label="आउटडोर प्लांट">
-                            <option value="टिकोमा (Tecoma)">टिकोमा (Tecoma)</option>
-                            <option value="जेड प्लांट (Jade Plant)">जेड प्लांट (Jade Plant)</option>
-                            <option value="आउटडोर झाड़ियाँ एवं हेज प्लांट्स">आउटडोर झाड़ियाँ एवं हेज प्लांट्स</option>
-                        </optgroup>
-                        <optgroup label="फूलदार पौधे">
-                            <option value="गुड़हल (Hibiscus)">गुड़हल (Hibiscus)</option>
-                            <option value="बारहमासी फूल वाले पौधे">बारहमासी फूल वाले पौधे</option>
-                            <option value="मौसमी फूल वाले पौधे">मौसमी फूल वाले पौधे</option>
-                        </optgroup>
-                        <optgroup label="डेकोरेटिव पौधे">
-                            <option value="क्रोटन (Croton)">क्रोटन (Croton)</option>
-                            <option value="ड्रैसीना (Dracaena)">ड्रैसीना (Dracaena)</option>
-                            <option value="रबर प्लांट (Rubber Plant)">रबर प्लांट (Rubber Plant)</option>
-                            <option value="सिल्वर बुश (Silver Bush)">सिल्वर बुश (Silver Bush)</option>
-                        </optgroup>
-                        <optgroup label="लैंडस्केपिंग">
-                            <option value="अरेका पाम (Areca Palm)">अरेका पाम (Areca Palm)</option>
-                        </optgroup>
-                    </select>
+                    <label>पौधे का नाम व किस्म</label>
+                    <input type="text" id="newPlantName" placeholder="जैसे: अमरूद - हिसार सफेदा">
                 </div>
             </div>
-
-            <div class="form-group">
-                <label>3. पौधे की फोटो अपलोड करें (Upload Plant Image)</label>
-                <input type="file" id="newPlantImgFile" accept="image/*">
-            </div>
-
-            <div class="form-group">
-                <label>4. पौधे की देखभाल व रखरखाव की गहरी जानकारी (Deep Care Tips)</label>
-                <textarea id="newPlantCare" rows="3" placeholder="पौधे को गमले में रखना है या जमीन में, धूप देनी है या छांव में, सिंचाई का तरीका और पूरी रखरखाव टिप दर्ज करें..."></textarea>
-            </div>
-
             <button class="btn" id="btnSaveNewPlant">🌱 Save Plant Details</button>
         </div>
 
-        <!-- 6. Plant Catalog & Image Manager Table -->
+        <!-- 6. Plant Catalog Table -->
         <div class="card">
             <div class="card-title">🌿 Plant Catalog & Image Manager</div>
-            <div class="card-subtitle">सभी 30 पौधों की सूची और फोटो बदलने/अपडेट करने की तालिका:</div>
-
             <div class="table-responsive">
                 <table>
                     <thead>
                         <tr>
-                            <th>Photo</th>
                             <th>Name & Variety</th>
                             <th>Category</th>
                             <th>Availability</th>
-                            <th>Update Image</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td><div class="img-thumb"></div></td>
-                            <td><b>अमरूद - हिसार सफेदा</b><br><span style="color:#777;">L-49 / Hisar Safeda</span></td>
-                            <td>🍎 फलदार पौधे</td>
-                            <td><span style="color:#2e7d32; font-weight:bold;">🟢 उपलब्ध है</span></td>
-                            <td><input type="file" style="font-size:10px;"></td>
-                            <td><button class="btn btn-danger">Delete</button></td>
-                        </tr>
-                        <tr>
-                            <td><div class="img-thumb"></div></td>
-                            <td><b>आडू (Peach)</b><br><span style="color:#777;">Shan-e-Punjab / Alucha</span></td>
-                            <td>🍎 फलदार पौधे</td>
-                            <td><span style="color:#2e7d32; font-weight:bold;">🟢 उपलब्ध है</span></td>
-                            <td><input type="file" style="font-size:10px;"></td>
-                            <td><button class="btn btn-danger">Delete</button></td>
-                        </tr>
-                        <tr>
-                            <td><div class="img-thumb"></div></td>
-                            <td><b>प्लम (Plum)</b><br><span style="color:#777;">Satluj Purple / Alucha</span></td>
-                            <td>🍎 फलदार पौधे</td>
-                            <td><span style="color:#2e7d32; font-weight:bold;">🟢 उपलब्ध है</span></td>
-                            <td><input type="file" style="font-size:10px;"></td>
-                            <td><button class="btn btn-danger">Delete</button></td>
-                        </tr>
+                    <tbody id="plantTableBody">
                     </tbody>
                 </table>
             </div>
@@ -367,5 +231,164 @@
 
     </div>
 
+    <script>
+        // 🔒 1. HARDCODED SECURITY & PIN AUTH CHECK
+        const ADMIN_MOBILE = "9812345678"; // Change as needed
+        const ADMIN_PIN = "123456";         // Change as needed
+
+        if (localStorage.getItem("adminLoggedIn") !== "true") {
+            const enteredPhone = prompt("🔒 श्री राम नर्सरी - Admin Login\nअपना 10-अंकों का रजिस्टर्ड मोबाइल नंबर दर्ज करें:");
+            const enteredPin = prompt("6-अंकों का सेक्योर PIN दर्ज करें:");
+
+            if (enteredPin === ADMIN_PIN) {
+                localStorage.setItem("adminLoggedIn", "true");
+                alert("✅ लॉगिन सफल हुआ!");
+            } else {
+                alert("❌ गलत PIN या नंबर! एक्सेस अस्वीकृत।");
+                window.location.href = "index.html";
+            }
+        }
+
+        document.getElementById("btnLogout").addEventListener("click", () => {
+            localStorage.removeItem("adminLoggedIn");
+            window.location.href = "index.html";
+        });
+
+        // 🌿 Plant Category Mapping for Bill Entry
+        const plantOptions = {
+            fruit: ["अमरूद - हिसार सफेदा", "आडू (Peach)", "प्लम (Plum)", "नींबू (Lemon)", "माल्टा (Malta)", "नाशपाती (Pear)", "आम (Mango)", "सेब (Apple)"],
+            indoor: ["मनी प्लांट (Money Plant)", "सिगोनियम (Syngonium)", "स्नेक प्लांट (Snake Plant)", "शेफलेरा (Schefflera)"],
+            outdoor: ["टिकोमा (Tecoma)", "जेड प्लांट (Jade Plant)"],
+            flower: ["गुड़हल (Hibiscus)", "बारहमासी फूल"]
+        };
+
+        const custPlantCatSelect = document.getElementById("custPlantCat");
+        const custPlantSelect = document.getElementById("custPlant");
+
+        custPlantCatSelect.addEventListener("change", function() {
+            const cat = this.value;
+            custPlantSelect.innerHTML = '<option value="">-- पौधा चुनें --</option>';
+            if (plantOptions[cat]) {
+                plantOptions[cat].forEach(plant => {
+                    const opt = document.createElement("option");
+                    opt.value = plant;
+                    opt.textContent = plant;
+                    custPlantSelect.appendChild(opt);
+                });
+            }
+        });
+
+        // 💾 Local Storage State Management
+        let sales = JSON.parse(localStorage.getItem("nurserySales") || "[]");
+        let plantsList = JSON.parse(localStorage.getItem("nurseryPlants") || "[]");
+
+        if (plantsList.length === 0) {
+            plantsList = [
+                { name: "अमरूद - हिसार सफेदा", cat: "फलदार पौधे" },
+                { name: "आडू (Peach)", cat: "फलदार पौधे" },
+                { name: "मनी प्लांट (Money Plant)", cat: "इंडोर प्लांट" }
+            ];
+            localStorage.setItem("nurseryPlants", JSON.stringify(plantsList));
+        }
+
+        function updateDashboardStats() {
+            let totalQty = 0, totalSales = 0, cash = 0, upi = 0;
+            sales.forEach(s => {
+                totalQty += parseInt(s.qty || 0);
+                totalSales += parseInt(s.amount || 0);
+                if (s.mode === "Cash") cash += parseInt(s.amount || 0);
+                if (s.mode === "UPI") upi += parseInt(s.amount || 0);
+            });
+
+            document.getElementById("statPlants").textContent = totalQty;
+            document.getElementById("statOrders").textContent = sales.length;
+            document.getElementById("statCustomers").textContent = sales.length;
+            document.getElementById("statSales").textContent = "₹" + totalSales;
+            document.getElementById("totalCash").textContent = "₹" + cash;
+            document.getElementById("totalUpi").textContent = "₹" + upi;
+        }
+
+        function renderPlantsTable() {
+            const tbody = document.getElementById("plantTableBody");
+            tbody.innerHTML = "";
+            plantsList.forEach((plant, index) => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td><b>${plant.name}</b></td>
+                    <td>${plant.cat}</td>
+                    <td><span style="color:#2e7d32; font-weight:bold;">🟢 उपलब्ध है</span></td>
+                    <td><button class="btn-danger" onclick="deletePlant(${index})">Delete</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        window.deletePlant = function(index) {
+            plantsList.splice(index, 1);
+            localStorage.setItem("nurseryPlants", JSON.stringify(plantsList));
+            renderPlantsTable();
+        };
+
+        // 📲 WhatsApp Bill & Record Save Functionality
+        document.getElementById("btnSaveRecord").addEventListener("click", () => saveOrder(false));
+        document.getElementById("btnSendWhatsapp").addEventListener("click", () => saveOrder(true));
+
+        function saveOrder(sendWhatsApp) {
+            const name = document.getElementById("custName").value.trim();
+            const mobile = document.getElementById("custMobile").value.trim();
+            const address = document.getElementById("custAddress").value.trim();
+            const plant = document.getElementById("custPlant").value;
+            const qty = document.getElementById("custQty").value;
+            const amount = document.getElementById("custAmount").value;
+            const mode = document.getElementById("custPaymentMode").value;
+
+            if (!name || !mobile || !plant || !amount) {
+                alert("⚠️ कृपया कस्टमर का नाम, मोबाइल नंबर, पौधा और राशि दर्ज करें!");
+                return;
+            }
+
+            const newOrder = { name, mobile, address, plant, qty, amount, mode, date: new Date().toLocaleDateString() };
+            sales.push(newOrder);
+            localStorage.setItem("nurserySales", JSON.stringify(sales));
+            updateDashboardStats();
+
+            alert("✅ रिकॉर्ड लेजर में सफलतापूर्वक सुरक्षित कर लिया गया!");
+
+            if (sendWhatsApp) {
+                const billMsg = `🌿 *श्री राम नर्सरी (भुना) - बिल* 🌿%0A%0A👤 *नाम:* ${name}%0A📱 *मोबाइल:* ${mobile}%0A📍 *पता:* ${address}%0A🌱 *पौधा:* ${plant}%0A🔢 *मात्रा:* ${qty}%0A💰 *कुल राशि:* ₹${amount}%0A💳 *पेमेंट मोड:* ${mode}%0A%0Aखरीदारी के लिए धन्यवाद! 🌸`;
+                window.open(`https://wa.me/91${mobile}?text=${billMsg}`, '_blank');
+            }
+        }
+
+        // 🎥 Save Video URL
+        document.getElementById("btnSaveBlogUrl").addEventListener("click", () => {
+            const title = document.getElementById("blogTitleText").value;
+            const url = document.getElementById("blogVideoUrl").value;
+            localStorage.setItem("nurseryBlogTitle", title);
+            localStorage.setItem("nurseryBlogUrl", url);
+            alert("✅ वीडियो लिंक व बैनर संदेश अपडेट कर दिया गया है!");
+        });
+
+        // 🌱 Add Plant
+        document.getElementById("btnSaveNewPlant").addEventListener("click", () => {
+            const name = document.getElementById("newPlantName").value.trim();
+            const cat = document.getElementById("newPlantCat").value;
+
+            if (!name) {
+                alert("⚠️ पौधे का नाम दर्ज करें!");
+                return;
+            }
+
+            plantsList.push({ name, cat });
+            localStorage.setItem("nurseryPlants", JSON.stringify(plantsList));
+            renderPlantsTable();
+            document.getElementById("newPlantName").value = "";
+            alert("✅ नया पौधा सफलतापूर्वक कैटलॉग में जोड़ा गया!");
+        });
+
+        // Initial Load
+        updateDashboardStats();
+        renderPlantsTable();
+    </script>
 </body>
 </html>
