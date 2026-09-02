@@ -190,3 +190,52 @@ function shareCartToMyWhatsApp() {
     const whatsappUrl = `https://whatsapp.com{encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
 }
+
+// --- PREMIUM SMART VOICE SEARCH MODULE ---
+function startVoiceSearch() {
+    // ब्राउज़र की स्पीच रिकग्निशन API चेक करना
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        alert("🎤 क्षमा करें, आपके ब्राउज़र में वॉइस सर्च सपोर्ट नहीं करता है।");
+        return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'hi-IN'; // हिंदी और हिंग्लिश सपोर्ट के लिए
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    // माइक शुरू होने पर यूजर को फीडबैक देना
+    const searchInput = document.getElementById('plant-search-input') || document.querySelector('.search-bar-input');
+    if (searchInput) searchInput.placeholder = "🎤 सुन रहा हूँ... बोलिए...";
+
+    recognition.start();
+
+    recognition.onresult = (event) => {
+        const speechToText = event.results[0][0].transcript.toLowerCase().trim();
+        console.log("Customer Spoke:", speechToText);
+        
+        if (searchInput) {
+            searchInput.value = speechToText;
+            searchInput.placeholder = "पौधे खोजें...";
+            // अगर आपके प्रोजेक्ट में पहले से filterPlants या searchPlants नाम का फंक्शन है, तो उसे यहाँ ट्रिगर करें
+            if (typeof filterPlants === 'function') {
+                filterPlants(speechToText);
+            } else if (typeof loadPlants === 'function') {
+                loadPlants(speechToText);
+            }
+        }
+        alert(`🔍 आपने बोला: "${speechToText}"`);
+    };
+
+    recognition.onerror = (event) => {
+        if (searchInput) searchInput.placeholder = "पौधे खोजें...";
+        console.error("माइक एरर:", event.error);
+    };
+
+    recognition.onend = () => {
+        if (searchInput && searchInput.placeholder === "🎤 सुन रहा हूँ... बोलिए...") {
+            searchInput.placeholder = "पौधे खोजें...";
+        }
+    };
+}
