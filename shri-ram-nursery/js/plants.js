@@ -136,3 +136,57 @@ window.addEventListener('beforeinstallprompt', (e) => {
         }
     }, 3000); // होम पेज पर आने के 3 सेकंड बाद पॉप-अप दिखेगा
 });
+
+// --- CUSTOMER WHATSAPP CART/LIST MODULE ---
+let customerCart = [];
+
+function addPlantToCartList(plantName, quantity) {
+    if (!plantName) return alert("कृपया पौधा चुनें!");
+    
+    // अगर पौधा पहले से कार्ट में है तो मात्रा बढ़ाएं
+    const existingItem = customerCart.find(item => item.name === plantName);
+    if (existingItem) {
+        existingItem.qty += parseInt(quantity);
+    } else {
+        customerCart.push({ name: plantName, qty: parseInt(quantity) });
+    }
+    alert(`✅ ${plantName} (${quantity} मात्रा) आपकी लिस्ट में जुड़ गया है!`);
+    renderCustomerCartUI();
+}
+
+function renderCustomerCartUI() {
+    const cartContainer = document.getElementById('customer-cart-list-preview');
+    if (!cartContainer) return;
+    
+    if (customerCart.length === 0) {
+        cartContainer.innerHTML = "<p style='color:gray; font-size:13px;'>आपकी लिस्ट अभी खाली है।</p>";
+        return;
+    }
+    
+    let html = '<ul style="list-style:none; padding:0; font-size:14px;">';
+    customerCart.forEach((item, index) => {
+        html += `<li style="margin-bottom:8px; border-bottom:1px dashed #ccc; padding-bottom:4px;">
+            🍀 <b>${item.name}</b> - मात्रा: ${item.qty} पीस
+            <button onclick="customerCart.splice(${index},1); renderCustomerCartUI();" style="background:none; border:none; color:red; float:right; cursor:pointer;">❌</button>
+        </li>`;
+    });
+    html += '</ul>';
+    cartContainer.innerHTML = html;
+}
+
+function shareCartToMyWhatsApp() {
+    if (customerCart.length === 0) {
+        alert("WhatsApp पर शेयर करने के लिए पहले लिस्ट में पौधे जोड़ें!");
+        return;
+    }
+    
+    let message = "🌱 *श्री राम नर्सरी (भुना) - मेरी पसंदीदा पौधों की लिस्ट* 🌱\n\n";
+    customerCart.forEach((item, i) => {
+        message += `${i + 1}. ${item.name} → *${item.qty} पीस*\n`;
+    });
+    message += "\n📍 याद रखने के लिए सुरक्षित सहेजें!";
+    
+    // बिना किसी का नंबर फिक्स किए, सीधे WhatsApp चैट ओपन करने का लिंक (ताकि यूजर खुद को या किसी को भी भेज सके)
+    const whatsappUrl = `https://whatsapp.com{encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+}
