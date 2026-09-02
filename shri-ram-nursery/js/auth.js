@@ -1,26 +1,26 @@
-// Defines the authentication boundary for future secure auth integration.
-// TODO: Connect these functions to the production authentication provider.
+// एडमिन लॉगिन ऑथेंटिकेशन स्क्रिप्ट
+function handleAdminLogin(enteredPhone, enteredPin) {
+    const officialPhone = "9416316534";
+    const correctPin = "941631";
 
-/**
- * Starts an authentication flow.
- * Authentication must be connected to a trusted provider before use.
- */
-async function login() {
-  throw new Error("Authentication provider is not configured.");
+    if (enteredPhone.trim() === officialPhone && enteredPin.trim() === correctPin) {
+        localStorage.setItem('isAdminAuthenticated', 'true');
+        localStorage.setItem('adminPhone', officialPhone);
+        alert('लॉगिन सफल! एडमिन डैशबोर्ड पर भेजा जा रहा है।');
+        window.location.href = 'dashboard.html';
+    } else {
+        alert('त्रुटि: गलत आधिकारिक मोबाइल नंबर या सुरक्षा पिन!');
+    }
 }
 
-/**
- * Ends the current authenticated session.
- * This is intentionally a no-op until the auth provider is connected.
- */
-async function logout() {
-  return false;
+function checkAdminRouteProtection() {
+    const isAuthenticated = localStorage.getItem('isAdminAuthenticated');
+    if (isAuthenticated !== 'true' && window.location.pathname.includes('dashboard.html')) {
+        alert('सुरक्षा जांच: कृपया पहले लॉगिन करें!');
+        window.location.href = 'admin.html';
+    }
 }
-
-/**
- * Checks whether the current session is valid.
- * A real implementation must validate the session with the auth provider.
- */
-async function sessionCheck() {
-  return false;
+// पेज लोड होने पर रूट प्रोटेक्शन चालू रखें
+if (window.location.pathname.includes('dashboard.html')) {
+    checkAdminRouteProtection();
 }
