@@ -1,28 +1,25 @@
 {
   "version": 2,
   "outputDirectory": "dist",
-  "routes": [
+  "rewrites": [
     {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/admin",
+      "source": "/admin",
       "destination": "/admin.html"
     },
     {
-      "src": "/dashboard",
+      "source": "/dashboard",
       "destination": "/dashboard.html"
     },
     {
-      "src": "/orders",
+      "source": "/orders",
       "destination": "/orders.html"
     },
     {
-      "src": "/plant",
+      "source": "/plant",
       "destination": "/plant.html"
     },
     {
-      "src": "/(.*)",
+      "source": "/((?!admin|dashboard|orders|plant).*)",
       "destination": "/index.html"
     }
   ]
