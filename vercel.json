@@ -3,23 +3,7 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
-      "source": "/admin",
-      "destination": "/admin.html"
-    },
-    {
-      "source": "/dashboard",
-      "destination": "/dashboard.html"
-    },
-    {
-      "source": "/orders",
-      "destination": "/orders.html"
-    },
-    {
-      "source": "/plant",
-      "destination": "/plant.html"
-    },
-    {
-      "source": "/((?!admin|dashboard|orders|plant).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
